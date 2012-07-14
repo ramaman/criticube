@@ -1,30 +1,16 @@
-# PostgreSQL. Versions 8.2 and up are supported.
-#
-# Install the pg driver:
-#   gem install pg
-# On Mac OS X with macports:
-#   gem install pg -- --with-pg-config=/opt/local/lib/postgresql84/bin/pg_config
-# On Windows:
-#   gem install pg
-#       Choose the win32 build.
-#       Install PostgreSQL and put its /bin directory on your path.
-#
-# Configure Using Gemfile
-# gem 'pg'
-#
 development:
   adapter: postgresql
   encoding: unicode
-  database: criticube_development
+  database: ccube_development
   pool: 5
-  username: criticube
+  username: postgres
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
   # domain sockets, so uncomment these lines.
-  #host: localhost
-  #port: 5432
+  host: localhost
+  port: 5432
 
   # Schema search path. The server defaults to $user,public
   #schema_search_path: myapp,sharedapp,public
@@ -41,15 +27,13 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: criticube_test
+  database: ccube_test
   pool: 5
-  username: criticube
+  username: postgres
   password:
+  host: localhost
+  port: 5432  
 
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: criticube_production
-  pool: 5
-  username: criticube
-  password:
+
+staging:
+  
