@@ -8,8 +8,9 @@ $black: #000000
 $grayDarker: #222222
 $grayDark: #333333
 $grayLighter: #EEEEEE
+$graySuperLight: #F7F7F7
 $white: #FFFFFF
-$bg: #F7F7F7
+$bg: $white
 
 $textColor: $grayDark
 $linkColor: #336699
@@ -21,9 +22,19 @@ $navbarLinkColor: $textColor
 $navbarLinkColorHover: $textColor
 $navbarLinkColorActive: $textColor
 $navbarLinkBackgroundHover: $grayLighter
-$navbarBackgroundHighlight: $bg
-$navbarBackground: $white
+$navbarBackgroundHighlight: $graySuperLight
+$navbarBackground: $graySuperLight
 $bodyBackground: $bg
+$navbarTextTopPad: 18px
+$navbarTextBottomPad: 14px
+
 
 .navbar li
-  font-size: 14px !important 
+  font-size: 14px !important
+  a.text
+    padding-top: $navbarTextTopPad !important
+    padding-bottom: $navbarTextBottomPad !important
+    text-shadow: none !important
+
+.navbar-inner > .container
+  width: 940px !important  
