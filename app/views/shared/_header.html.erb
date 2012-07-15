@@ -1,11 +1,17 @@
-<div class ="navbar">
-  <div class ="navbar-inner">
-    <div class ="container">
-      <div class ="row">
-        <div class ="span12">
-          <%= Rails.env %>
-        </div>
-      </div>
-    </div>
+<div class="container">
+<div class="navbar">
+
+<div class="navbar-inner">
+  
+    <%= link_to image_tag('logo_navbar.png'), root_path, :class => 'brand' %>
+    <div class="nav-collapse collapse">
+      <ul class="nav">
+        <li>
+          <%= link_to Rails.env, root_path %>
+        </li>
+      </ul>  
+    </div>  
   </div>
+</div>
+
 </div>
