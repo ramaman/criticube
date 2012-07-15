@@ -66,6 +66,16 @@ module Criticube
     config.assets.version = '1.0'
 
     # SASS
-    config.sass.preferred_syntax = :sass    
+    config.sass.preferred_syntax = :sass   
+    
+    # Generators
+    config.generators do |g|
+      g.orm                 :active_record
+      g.template_engine     :haml
+      # g.test_framework      nil, :fixture_replacement => :fabrication      
+      # g.fixture_replacement :fabrication, :dir => "test/fabricators"      
+      # g.test_framework :mini_test, :spec => true, :fixture => true
+      # g.integration_tool :mini_test
+    end        
   end
 end
