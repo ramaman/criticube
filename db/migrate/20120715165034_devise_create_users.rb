@@ -33,22 +33,23 @@ class DeviseCreateUsers < ActiveRecord::Migration
       ## Token authenticatable
       # t.string :authentication_token
 
-      ## Profile
-      t.string :user_name, :null => false
+      ## User Details
       t.string :first_name, :null => false
       t.string :last_name, :null => false
       t.string :middle_names, :null => false
       t.string :gender
       t.datetime :date_of_birth
 
+      ## Profile
+      t.text :bio
+
       t.timestamps
     end
 
     add_index :users, :email,                :unique => true
     add_index :users, :reset_password_token, :unique => true
-    add_index :users, :user_name,            :unique => true
     add_index :users, :first_name
-    add_index :users, :last_name1
+    add_index :users, :last_name
     add_index :users, :middle_names
     add_index :users, :gender
     add_index :users, :date_of_birth
