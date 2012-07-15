@@ -6,7 +6,7 @@ gem 'pg'
 gem 'thin'
 
 # Authentication
-
+gem 'devise', '~> 2.1.2'
 
 # Front end
   gem 'bootstrap-sass', '~> 2.0.4.0'
