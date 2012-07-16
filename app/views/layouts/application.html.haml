@@ -9,4 +9,12 @@
   %body
     = render 'shared/header'
     .container
+      - if notice
+        .alert.alert-info
+          %button.close{:type => 'button', 'data-dismiss' => 'notice'} &times;
+          = notice
+      - if alert
+        .alert.alert-error
+          %button.close{:type => 'button', 'data-dismiss' => 'alert'} &times;
+          = alert
       = yield :content

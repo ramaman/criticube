@@ -8,7 +8,10 @@ Criticube::Application.routes.draw do
     :sign_up => 'signup',
   } do  
     post '/users' => 'registrations#create', :as => 'user_registration'   
-  end  
+  end
+
+  resources :users
+
 
   get "/:id" => "vanities#show", :as => 'vanity'
 

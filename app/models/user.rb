@@ -20,10 +20,12 @@ class User < ActiveRecord::Base
                   :first_name,
                   :middle_names,
                   :last_name,
-                  :page_name
+                  :page_name,
+                  :vanity
 
   validates :email,
             :presence => { :message => "Please enter your email address" },
+            :uniqueness => { :message => "has already been taken" },
             :format => { :with => /\A[^@]+@[^@]+\z/ }
   validates :first_name, 
             :presence => { :message => "Please enter your first name" },
@@ -38,9 +40,15 @@ class User < ActiveRecord::Base
             :format => { :with => /^[^0-9`!@#\$%\^&*+_=]+$/, :message => 'Contains invalid characters' }
   validates :bio,
             :length => {:maximum => 200, :allow_nil => true, :allow_blank => true }
+  validates_presence_of :vanity
 
   def page_name
     self.vanity.name
   end
+
+  def find_through_vanity(id)
+    owner = Vanity.find(id).owner
+    owner.class == User ? owner : nil
+  end  
 
 end
