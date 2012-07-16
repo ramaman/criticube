@@ -1,18 +1,46 @@
 - provide :content do
-  %h2 Sign up
-  = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
-    = devise_error_messages!
-    %div
-      = f.label :email
-      %br/
-      = f.email_field :email
-    %div
-      = f.label :password
-      %br/
-      = f.password_field :password
-    %div
-      = f.label :password_confirmation
-      %br/
-      = f.password_field :password_confirmation
-    %div= f.submit "Sign up"
-  = render "devise/shared/links"
+
+  .row
+    .well.span4.offset3
+      .page-header
+        %h3 Create your personal account
+      = simple_form_for resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'form-vertical'}, :validate => true do |f|
+        = devise_error_messages!
+        .control-group
+          = f.fields_for [resource, Vanity.new] do |v|
+            = v.label 'page_name', :class => 'control-label core'
+            .controls{:style => "margin-bottom: 18px"}
+              .input-prepend
+                %span.add-on.span3{:style => "width: 116px"}
+                  = 'http://criticube.com/'
+                = v.text_field :name, :class => 'prependedInput', :style => "width: 164px", :data => {:validate => true}
+        .control-group
+          = f.label :email, :class => 'control-label core'
+          .controls
+            = f.email_field :email, :class => 'span4'
+        .control-group
+          = f.label :password, :class => 'control-label core'
+          .controls
+            = f.password_field :password, :class => 'span4'
+        .control-group
+          = f.label :password_confirmation, :class => 'control-label core'
+          .controls
+            = f.password_field :password_confirmation, :class => 'span4'
+        .control-group
+          = f.label :first_name, :class => 'control-label core'
+          .controls
+            = f.text_field :first_name, :class => 'span4'
+        .control-group
+          = f.label :last_name, :class => 'control-label core'
+          .controls
+            = f.text_field :last_name, :class => 'span4'
+        .control-group
+          = f.label 'Please prove that you are human'
+          .controls
+            %p
+              - if Rails.env.development?
+                = recaptcha_tags(:display => {'theme' => 'white'})
+              - else
+                = recaptcha_tags(:display => {'theme' => 'white'}, :ssl => true)            
+        .control-group
+          = f.submit "Create account", :class => ['btn', 'btn-success', 'core']

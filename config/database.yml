@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: ccube_development
+  database: criticube_development
   pool: 5
   username: postgres
   password:
@@ -27,7 +27,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: ccube_test
+  database: criticube_test
   pool: 5
   username: postgres
   password:

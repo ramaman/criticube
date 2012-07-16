@@ -6,11 +6,10 @@ Criticube::Application.routes.draw do
     :sign_in => 'login', 
     :sign_out => 'logout', 
     :sign_up => 'signup',
-  }
+  } do  
+    post '/users' => 'registrations#create', :as => 'user_registration'   
+  end  
 
   get "/:id" => "vanities#show", :as => 'vanity'
-
-
-
 
 end

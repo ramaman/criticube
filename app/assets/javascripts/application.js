@@ -16,4 +16,5 @@
 //= require bootstrap-scrollspy
 //= require bootstrap-modal
 //= require bootstrap-dropdown
+//= require rails.validations
 //= require_tree .

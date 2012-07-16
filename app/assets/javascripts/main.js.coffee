@@ -1,0 +1,2 @@
+RecaptchaOptions =
+  theme : 'clean'

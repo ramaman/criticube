@@ -37,8 +37,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :first_name, :null => false
       t.string :last_name, :null => false
       t.string :middle_names, :null => false
-      t.string :gender
-      t.datetime :date_of_birth
 
       ## Profile
       t.text :bio
@@ -51,8 +49,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
     add_index :users, :first_name
     add_index :users, :last_name
     add_index :users, :middle_names
-    add_index :users, :gender
-    add_index :users, :date_of_birth
     # add_index :users, :confirmation_token,   :unique => true
     # add_index :users, :unlock_token,         :unique => true
     # add_index :users, :authentication_token, :unique => true
