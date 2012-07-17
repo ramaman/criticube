@@ -42,6 +42,28 @@ class User < ActiveRecord::Base
             :length => {:maximum => 200, :allow_nil => true, :allow_blank => true }
   validates_presence_of :vanity
 
+  default_scope joins(:vanity) 
+
+  def to_param
+    self.vanity.name
+  end  
+
+  def permalink
+    Rails.application.routes.url_helpers.profile_path(self.page_name)
+  end
+
+  def name
+    if self.middle_names
+      "#{self.first_name} #{self.middle_names} #{self.last_name}"
+    else
+      "#{self.first_name} #{self.last_name}"  
+    end
+  end
+
+  def fast_name
+    "#{self.first_name} #{self.last_name}"  
+  end    
+  
   def page_name
     self.vanity.name
   end

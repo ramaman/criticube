@@ -12,7 +12,6 @@ Criticube::Application.routes.draw do
 
   resources :users
 
-
-  get "/:id" => "vanities#show", :as => 'vanity'
+  get "/:id" => "vanities#show", :as => 'profile'
 
 end

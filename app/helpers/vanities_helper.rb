@@ -1,0 +1,2 @@
+module VanitiesHelper
+end
