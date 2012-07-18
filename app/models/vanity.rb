@@ -4,7 +4,7 @@ class Vanity < ActiveRecord::Base
 
   friendly_id :name
 
-  attr_accessible nil
+  attr_accessible :name
 
   belongs_to :owner, :polymorphic => true   
 

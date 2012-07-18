@@ -20,30 +20,28 @@ class RegistrationsController < Devise::RegistrationsController
        #   render_with_scope :new
        # end
 
-      if !verify_recaptcha
+      @user = User.new(user_params)
+      @user.build_vanity
+      @user.vanity = Vanity.new_from_name(params[:user][:vanity_attributes][:name])
+      @user.valid?
+
+      if !verify_recaptcha#(:model => @user) # Recaptcha validation fails
+        
         flash.delete :recaptcha_error
-
-        @user = User.new(user_params)
-        @user.build_vanity
-        @user.vanity = Vanity.new_from_name(params[:user][:vanity][:name])
-        @user.valid?
         @user.errors.add(:base, "There was an error with the recaptcha code below. Please re-enter the code.")
-
         clean_up_passwords(@user)
-        respond_with_navigational(@user) { render :new }
+        respond_with_navigational(@user) { render_with_scope :new }
         session[:omniauth] = nil unless @user.new_record? #OmniAuth
-      else
-        @user = User.new(user_params)
-        @user.build_vanity
-        @user.vanity = Vanity.new_from_name(params[:user][:vanity][:name])
-        @user.valid?
-        @user.errors.add(:base, "There was an error with the recaptcha code below. Please re-enter the code.")
 
+      else
+
+        # @user.errors.add(:base, "There was an error with the recaptcha code below. Please re-enter the code.")
         session[:user_return_to] = nil
         flash.delete :recaptcha_error
         @user.save
         sign_in(@user)
         redirect_to after_sign_in_path_for(@user)
+
       end
 
     else

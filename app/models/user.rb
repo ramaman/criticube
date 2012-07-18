@@ -26,7 +26,8 @@ class User < ActiveRecord::Base
                   :middle_names,
                   :last_name,
                   :page_name,
-                  :vanity
+                  :vanity,
+                  :vanity_attributes
 
   validates :email,
             :presence => { :message => "Please enter your email address" },
@@ -46,10 +47,12 @@ class User < ActiveRecord::Base
   validates :bio,
             :length => {:maximum => 200, :allow_nil => true, :allow_blank => true }
   validates :vanity,
-            :presence => true #,
+            :presence => true#,
             # :vanity_name_uniqueness => true
 
   default_scope includes(:vanity)
+
+  after_initialize :automake_vanity
 
   def permalink
     Rails.application.routes.url_helpers.profile_path(self.page_name)
@@ -74,6 +77,12 @@ class User < ActiveRecord::Base
   def find_through_vanity(id)
     owner = Vanity.find(id).owner
     owner.class == User ? owner : nil
+  end
+
+  private
+
+  def automake_vanity
+    self.build_vanity unless self.vanity
   end
 
 end
