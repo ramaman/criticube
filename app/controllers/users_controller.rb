@@ -9,6 +9,10 @@ class UsersController < ApplicationController
     # DO NOT MASS ASSIGN!!!
   end
 
+  def destroy
+
+  end
+
 
   private
 

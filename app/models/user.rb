@@ -1,8 +1,13 @@
 class User < ActiveRecord::Base
 
+  extend FriendlyId
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
+
+  attr_reader :page_name
+  friendly_id :page_name
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
@@ -40,13 +45,11 @@ class User < ActiveRecord::Base
             :format => { :with => /^[^0-9`!@#\$%\^&*+_=]+$/, :message => 'Contains invalid characters' }
   validates :bio,
             :length => {:maximum => 200, :allow_nil => true, :allow_blank => true }
-  validates_presence_of :vanity
+  validates :vanity,
+            :presence => true #,
+            # :vanity_name_uniqueness => true
 
-  default_scope joins(:vanity) 
-
-  def to_param
-    self.vanity.name
-  end  
+  default_scope includes(:vanity)
 
   def permalink
     Rails.application.routes.url_helpers.profile_path(self.page_name)
@@ -71,6 +74,6 @@ class User < ActiveRecord::Base
   def find_through_vanity(id)
     owner = Vanity.find(id).owner
     owner.class == User ? owner : nil
-  end  
+  end
 
 end

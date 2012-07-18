@@ -2,6 +2,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def new
     @user = User.new
+    @user.build_vanity
     respond_to do |format|
       format.html
     end    
@@ -21,19 +22,23 @@ class RegistrationsController < Devise::RegistrationsController
 
       if !verify_recaptcha
         flash.delete :recaptcha_error
+
         @user = User.new(user_params)
+        @user.build_vanity
         @user.vanity = Vanity.new_from_name(params[:user][:vanity][:name])
-        @vanity = @user.vanity
         @user.valid?
         @user.errors.add(:base, "There was an error with the recaptcha code below. Please re-enter the code.")
+
         clean_up_passwords(@user)
         respond_with_navigational(@user) { render :new }
         session[:omniauth] = nil unless @user.new_record? #OmniAuth
       else
         @user = User.new(user_params)
+        @user.build_vanity
         @user.vanity = Vanity.new_from_name(params[:user][:vanity][:name])
         @user.valid?
         @user.errors.add(:base, "There was an error with the recaptcha code below. Please re-enter the code.")
+
         session[:user_return_to] = nil
         flash.delete :recaptcha_error
         @user.save
