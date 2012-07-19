@@ -46,6 +46,8 @@ RESERVED_WORDS = [
   'logs',
   'map',
   'maps',
+  'message',
+  'messages',    
   'news',
   'oauth',
   'oauth_clients',
