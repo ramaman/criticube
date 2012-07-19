@@ -20,6 +20,7 @@ gem 'client_side_validations-simple_form', "~> 2.0.0.beta.1"
 gem 'pg'
 gem 'friendly_id', '~> 4.0.7'
 gem 'squeel', '~> 1.0.7'
+gem "pg_search", '~> 0.5'
 
 # Misc
 gem 'nokogiri', '~> 1.5.5'

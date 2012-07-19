@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
   extend FriendlyId
+  include PgSearch
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -54,6 +55,9 @@ class User < ActiveRecord::Base
 
   after_initialize :automake_vanity
 
+  pg_search_scope :search, 
+                  :against => [:first_name, :middle_names, :last_name]
+                  
   def permalink
     Rails.application.routes.url_helpers.profile_path(self.page_name)
   end
