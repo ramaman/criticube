@@ -80,9 +80,9 @@ class User < ActiveRecord::Base
     self.vanity.name
   end
 
-  def find_through_vanity(id)
-    owner = Vanity.find(id).owner
-    owner.class == User ? owner : nil
+  def self.find_through_vanity(id)
+    owner = Vanity.find(id).owner rescue nil
+    owner && owner.class == User ? owner : nil 
   end
 
   ## Omniauth related
@@ -114,11 +114,15 @@ class User < ActiveRecord::Base
     auth.uid = session['uid']
     auth.token = session['token']
     auth.token_expires_at = session['token_expires_at']
-    self.authentications << auth
     ActiveRecord::Base.transaction do    
       self.save!
+      auth.user = self
       auth.save!
     end
+  end
+
+  def facebook_auth
+    self.authentications.where{:provider == 'facebook'}.first rescue nil
   end
 
   private
