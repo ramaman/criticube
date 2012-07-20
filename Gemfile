@@ -7,8 +7,11 @@ gem 'thin'
 # Authentication
 gem 'devise', '~> 2.1.2'
 gem 'recaptcha', '~> 0.3.4'
+gem "omniauth", "~> 1.1.0"
+gem "omniauth-facebook", "~> 1.4.1"
 
 # Front end
+gem 'jquery-rails'
 gem 'haml-rails'
 gem 'simple_form', '~> 2.0.2'
 gem 'bootstrap-sass', '~> 2.0.4.0'
@@ -30,5 +33,3 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
 end
-
-gem 'jquery-rails'

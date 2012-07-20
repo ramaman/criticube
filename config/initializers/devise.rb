@@ -207,6 +207,25 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
 
+  default_scope = 'email'
+
+  if Rails.env.production?
+    config.omniauth :facebook, '171274556257581', 'c29ec262345c83e000e22cc1015989c6', :iframe => true,
+    :scope => 'email, user_birthday'#, user_likes, friends_likes'
+    # config.omniauth :twitter, "ESUdUQBn7DlhtV1Ef3Kt8Q", "OQydB0DTPAxcS4IXouilszWZU2clw7rt4exhfDwo"
+
+  elsif Rails.env.staging?
+    config.omniauth :facebook, '174221455964328', 'e596163ed914fc7402bf41a95a2af702', :iframe => true,
+    :scope => 'email, user_birthday'#, user_likes, friends_likes'
+    # config.omniauth :twitter, "f19hsXCK2vuDm9f6xxoGhw", "Jaf0k3EdIYCWi6TEVQMAyxVGi9LYs433QbuiBZX0"
+
+  else
+    config.omniauth :facebook, '219593544829191', '4e18b44496b26e82074a7a8e899aeb62', :iframe => true,
+    :scope => 'email, user_birthday'#, user_likes, friends_likes'
+    # config.omniauth :twitter, "VwfyTfdwhB01ohITRa2LlQ", "qACtD7NSoWqqd9k3SZYJ5ynSQHpOJDiHGNAcSEmXR4"
+
+  end  
+
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

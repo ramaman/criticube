@@ -18,6 +18,8 @@
 
         - else
           %li
+            = link_to 'Use Facebook', user_omniauth_authorize_path(:facebook), :class => 'text core'
+          %li
             = link_to 'Login', new_user_session_path, :class => 'text core'
           %li
             = link_to 'Signup', new_user_registration_path, :class => 'text core'

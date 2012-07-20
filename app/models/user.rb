@@ -5,15 +5,17 @@ class User < ActiveRecord::Base
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
+  # :lockable, :timeoutable
 
   attr_reader :page_name
   friendly_id :page_name
 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable
 
-  has_one :vanity, :as => :owner, :dependent => :destroy         
+  has_one :vanity, :as => :owner, :dependent => :destroy
+  has_many :authentications, :dependent => :destroy      
 
   accepts_nested_attributes_for :vanity, 
                                 :allow_destroy => false, 
@@ -81,6 +83,42 @@ class User < ActiveRecord::Base
   def find_through_vanity(id)
     owner = Vanity.find(id).owner
     owner.class == User ? owner : nil
+  end
+
+  ## Omniauth related
+
+  def self.from_facebook(auth_hash)
+    existing_auth = Authentication.where(auth_hash.slice(:provider, :uid)).first rescue nil
+    if existing_auth
+      return existing_auth.user
+    else
+      new_user = User.new
+      new_user.email = auth_hash['extra']['raw_info']['email']
+      new_user.first_name = auth_hash['info']['first_name']
+      new_user.last_name = auth_hash['info']['last_name']
+      return new_user
+    end    
+  end
+
+  def self.new_with_facebook_session(session)
+    user = User.new
+    user.email = session['email']
+    user.first_name = session['first_name']
+    user.last_name = session['last_name']
+    return user
+  end
+
+  def save_with_facebook_session(session)
+    auth = Authentication.new
+    auth.provider = 'facebook'
+    auth.uid = session['uid']
+    auth.token = session['token']
+    auth.token_expires_at = session['token_expires_at']
+    self.authentications << auth
+    ActiveRecord::Base.transaction do    
+      self.save!
+      auth.save!
+    end
   end
 
   private

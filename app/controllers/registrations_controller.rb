@@ -3,22 +3,25 @@ class RegistrationsController < Devise::RegistrationsController
   def new
     @user = User.new
     @user.build_vanity
+
     respond_to do |format|
       format.html
-    end    
+    end
+  end
+
+  def new_from_facebook
+    if session["devise.omniauth_attributes"]
+      @user = User.new_with_facebook_session(session["devise.omniauth_attributes"])
+      respond_to do |format|
+        format.html
+      end
+    else
+      redirect_to user_omniauth_authorize_path(:facebook)
+    end
   end
 
   def create
-    if session[:omniauth] == nil #OmniAuth
-       # if verify_recaptcha(:model => @user)
-       #   super
-       #   session[:omniauth] = nil unless @user.new_record? #OmniAuth
-       # else
-       #   build_resource
-       #   clean_up_passwords(resource)
-       #   flash[:alert] = "There was an error with the recaptcha code below. Please re-enter the code and click submit."
-       #   render_with_scope :new
-       # end
+    if !session["devise.omniauth_attributes"] #OmniAuth
 
       @user = User.new(user_params)
       @user.build_vanity
@@ -45,8 +48,19 @@ class RegistrationsController < Devise::RegistrationsController
       end
 
     else
-      super
-      session[:omniauth] = nil unless @user.new_record? #OmniAuth
+
+      raise 'error'
+
+      @user = User.new(user_params)
+      @user.build_vanity
+      @user.vanity = Vanity.new_from_name(params[:user][:vanity_attributes][:name])
+      if @user.valid? == true
+        @user.save_with_facebook_session(session["devise.omniauth_attributes"])
+        sign_in_and_redirect @user, after_sign_in_path_for(@user)
+
+      else
+        respond_with_navigational(@user) { render_with_scope :new_from_facebook }
+      end
     end
   end
 

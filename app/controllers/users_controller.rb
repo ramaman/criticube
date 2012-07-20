@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 
+  before_filter :correct_user, :except => [:show]
+
   def show
     redirect_to profile_path(params[:id])  
   end
