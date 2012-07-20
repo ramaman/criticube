@@ -1,3 +1,7 @@
 - provide :content do
-  %h3
-    = Rails.env
+  - if user_signed_in?
+    %h3
+      = 'Inside area'
+  - else
+    %h3
+    = 'Outside area'      
