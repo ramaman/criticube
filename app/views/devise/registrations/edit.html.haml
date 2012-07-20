@@ -6,7 +6,16 @@
     .page-header
       %h3
         Social
-    
+    - if current_user.facebook_auth
+      %h4
+        = 'Connected to Facebook'
+      %span.minor.blend
+        = link_to 'Disconnect', destroy_authentication_path(:facebook) , :method => :delete, :confirm  => 'Are you sure?'
+    - else
+      %h4
+        = link_to 'Connect to Facebook', user_omniauth_authorize_path(:facebook)
+      %span.minor
+        = 'This will enable you to login with your Facebook account'
         
   .well
     .page-header

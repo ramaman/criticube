@@ -46,7 +46,6 @@ class RegistrationsController < Devise::RegistrationsController
   def create_with_omniauth
 
     if session["devise.omniauth_attributes"]
-
       @user = User.new(user_params)
       @user.build_vanity
       @user.vanity = Vanity.new_from_name(params[:user][:vanity_attributes][:name])

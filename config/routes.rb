@@ -8,7 +8,6 @@ Criticube::Application.routes.draw do
     :sign_up => 'signup'#,
     # :registration => 'account'
     }, :controllers => { :omniauth_callbacks => "omniauth_callbacks" } do  
-    # get '/settings' => 'registrations#edit', :as => 'user_registration'
     # put '/settings' => 'registrations#update', :as => 'user_registration'
     # delete '/settings' => 'registrations#destroy', :as => 'user_registration'
     # put '/:id' => 'registrations#update'
@@ -18,6 +17,8 @@ Criticube::Application.routes.draw do
   end
 
   resources :users
+
+  delete "/authentications/:provider" => 'authentications#destroy', :as => 'destroy_authentication'
   get "/:id" => "vanities#show", :as => 'profile'
 
 end

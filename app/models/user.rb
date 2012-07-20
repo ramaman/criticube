@@ -125,6 +125,21 @@ class User < ActiveRecord::Base
     self.authentications.where{:provider == 'facebook'}.first rescue nil
   end
 
+  def create_facebook_auth(omniauth_hash)
+    if self.facebook_auth
+      return self.facebook_auth
+    else
+      auth = Authentication.new
+      auth.provider = 'facebook'
+      auth.uid = omniauth_hash['uid']
+      auth.token = omniauth_hash['credentials']['token']
+      auth.token_expires_at = omniauth_hash['credentials']['token_expires_at']
+      auth.user = self
+      auth.save!
+      return auth
+    end
+  end
+
   private
 
   def automake_vanity
