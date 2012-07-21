@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120719202042) do
+ActiveRecord::Schema.define(:version => 20120721014520) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id",          :null => false
@@ -29,6 +29,23 @@ ActiveRecord::Schema.define(:version => 20120719202042) do
   add_index "authentications", ["uid", "provider"], :name => "index_authentications_on_uid_and_provider", :unique => true
   add_index "authentications", ["user_id", "provider"], :name => "index_authentications_on_user_id_and_provider", :unique => true
   add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
+
+  create_table "cubes", :force => true do |t|
+    t.string   "name"
+    t.string   "tipe"
+    t.text     "description"
+    t.string   "language"
+    t.string   "owner_type"
+    t.integer  "owner_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "cubes", ["language"], :name => "index_cubes_on_language"
+  add_index "cubes", ["name", "owner_type", "owner_id"], :name => "index_cubes_on_name_and_owner_type_and_owner_id"
+  add_index "cubes", ["name"], :name => "index_cubes_on_name"
+  add_index "cubes", ["owner_type", "owner_id"], :name => "index_cubes_on_owner_type_and_owner_id"
+  add_index "cubes", ["tipe"], :name => "index_cubes_on_tipe"
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
@@ -57,8 +74,10 @@ ActiveRecord::Schema.define(:version => 20120719202042) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "middle_names"
+    t.boolean  "admin"
   end
 
+  add_index "users", ["admin"], :name => "index_users_on_admin"
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["first_name"], :name => "index_users_on_first_name"
   add_index "users", ["last_name"], :name => "index_users_on_last_name"

@@ -1,25 +1,39 @@
 class UsersController < ApplicationController
 
-  before_filter :correct_user, :except => [:show]
+  before_filter :authenticate_user!, :except => [:show]
+  # before_filter :correct_user, :except => [:show]
 
   def show
     redirect_to profile_path(params[:id])  
   end
 
-  def update
+  def edit
+    @user = current_user
+    respond_to do |format|
+      format.html {redirect_to @user.permalink}
+    end
+  end
 
-    # DO NOT MASS ASSIGN!!!
+  def update
+    @user = current_user
+
+    respond_to do |format|
+      if @user.save
+        format.html {redirect_to :action => :edit}
+      else
+        format.html {redirect_to @user.permalink}
+      end  
+    end
   end
 
   def destroy
-
+    # LEAVE THIS EMPTY
   end
-
 
   private
 
   def user_params
-    params[:user].slice(:first_name, :last_name)
+    params[:user].slice(:first_name, :last_name, :bio)
   end
 
   def user

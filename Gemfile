@@ -9,6 +9,7 @@ gem 'devise', '~> 2.1.2'
 gem 'recaptcha', '~> 0.3.4'
 gem "omniauth", "~> 1.1.0"
 gem "omniauth-facebook", "~> 1.4.1"
+gem "cancan", "~> 1.6.8"
 
 # Front end
 gem 'jquery-rails'
@@ -27,6 +28,7 @@ gem "pg_search", '~> 0.5'
 
 # Misc
 gem 'nokogiri', '~> 1.5.5'
+gem "carrierwave", "~> 0.6.2"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

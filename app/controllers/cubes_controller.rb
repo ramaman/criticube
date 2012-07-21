@@ -1,0 +1,3 @@
+
+class CubesController < ApplicationController
+end

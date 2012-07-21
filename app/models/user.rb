@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
                                 :allow_destroy => false, 
                                 :reject_if => proc {|a| a['name'].blank?}
 
-  attr_accessible :email, 
+  attr_accessible :email,
                   :password, 
                   :password_confirmation, 
                   :remember_me,
