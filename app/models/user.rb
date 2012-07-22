@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
             :format => { :with => /\A[^@]+@[^@]+\z/ }
   validates :first_name, 
             :presence => { :message => "Please enter your first name" },
-            :length => { :minimum => 2, :maximum => 16 },
+            :length => { :minimum => 1, :maximum => 16 },
             :format => { :with => /^[^0-9`!@#\$%\^&*+_=]+$/ , :message => 'Contains invalid characters'}
   validates :middle_names,
             :length => { :maximum => 40, :allow_nil => true, :allow_blank => true },
