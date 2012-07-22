@@ -1,5 +1,13 @@
 - provide :content do
-
-  .row
-    .span4.well
+ 
+  %h2
+    %p
       = @user.name
+  %p
+    - if @user.bio
+      = @user.bio
+    - else
+      = link_to 'Add a short description about yourself', edit_vanity_path(@user)
+  - if user_signed_in? && @user == current_user
+    %p
+      = link_to 'Edit profile', edit_vanity_path(@user)

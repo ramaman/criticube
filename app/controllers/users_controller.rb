@@ -1,25 +1,33 @@
 class UsersController < ApplicationController
 
   before_filter :authenticate_user!, :except => [:show]
-  # before_filter :correct_user, :except => [:show]
+  before_filter :correct_user, :except => [:old_show, :show]
+
+  def old_show
+    redirect_to vanity_path(params[:id])  
+  end
 
   def show
-    redirect_to profile_path(params[:id])  
+    @user = User.find(params[:id])
+    respond_to do |format|
+      format.html
+    end
   end
 
   def edit
-    @user = current_user
+    @user = User.find(params[:id])
     respond_to do |format|
-      format.html {redirect_to @user.permalink}
+      format.html
     end
   end
 
   def update
     @user = current_user
-
+    @user.update_attributes(user_params)
     respond_to do |format|
       if @user.save
-        format.html {redirect_to :action => :edit}
+        flash[:notice] = 'Your profile has been successfully updated'
+        format.html {redirect_to vanity_path(@user)}
       else
         format.html {redirect_to @user.permalink}
       end  

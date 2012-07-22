@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120721014520) do
+ActiveRecord::Schema.define(:version => 20120722004559) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id",          :null => false
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(:version => 20120721014520) do
     t.datetime "updated_at",                             :null => false
     t.string   "middle_names"
     t.boolean  "admin"
+    t.boolean  "super_admin"
   end
 
   add_index "users", ["admin"], :name => "index_users_on_admin"
@@ -83,6 +84,7 @@ ActiveRecord::Schema.define(:version => 20120721014520) do
   add_index "users", ["last_name"], :name => "index_users_on_last_name"
   add_index "users", ["middle_names"], :name => "index_users_on_middle_names"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["super_admin"], :name => "index_users_on_super_admin"
 
   create_table "vanities", :force => true do |t|
     t.string   "name",       :null => false

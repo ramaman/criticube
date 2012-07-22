@@ -1,0 +1,33 @@
+- provide :content do
+
+  .page-header
+    %h2
+      = link_to @user.name, vanity_path(@user)
+      = ' / '
+      = 'Edit profile'
+
+  .row
+    .span4
+      = 'Pic here'
+    = simple_form_for @user, :url => vanity_path(@user), :method => :put do |f|
+      .span8
+        .row
+          .span4
+            .control-group
+              = f.label 'First name', :class => 'control-label core'
+              .controls
+                = f.text_field :first_name, :class => 'span4'
+          .span4
+            .control-group
+              = f.label 'Last name', :class => 'control-label core'
+              .controls
+                = f.text_field :last_name, :class => 'span4'
+        .control-group
+          = f.label 'Bio', :class => 'control-label core'
+          .controls
+            = f.text_area :bio, :class => 'span8 slim', :placeholder => 'Describe yourself', :maxlength => 199
+          .help-block.minor
+            = "Maximum 200 characters"
+        .control-group
+          = f.submit "Update", :class => 'btn btn-large btn-primary'
+          = link_to "Cancel", vanity_path(@user), :class => 'btn btn-large'                      

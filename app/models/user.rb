@@ -28,6 +28,7 @@ class User < ActiveRecord::Base
                   :first_name,
                   :middle_names,
                   :last_name,
+                  :bio,
                   :page_name,
                   :vanity,
                   :vanity_attributes
@@ -61,7 +62,7 @@ class User < ActiveRecord::Base
                   :against => [:first_name, :middle_names, :last_name]
                   
   def permalink
-    Rails.application.routes.url_helpers.profile_path(self.page_name)
+    Rails.application.routes.url_helpers.vanity_path(self.page_name)
   end
 
   def name

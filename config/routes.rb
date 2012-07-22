@@ -16,9 +16,29 @@ Criticube::Application.routes.draw do
     post '/users/external' => 'registrations#create_with_omniauth', :as => 'omniauth_user_registration'
   end
 
-  resources :users
+  get '/users/:id' => 'users#old_show', :as => 'old_user'
 
   delete "/authentications/:provider" => 'authentications#destroy', :as => 'destroy_authentication'
-  get "/:id" => "vanities#show", :as => 'profile'
+
+  # get "/:id" => "vanities#show", :as => 'profile'
+
+  get '/:id', :as => 'vanity', :to => proc { |env| vanity_controller(env, 'show') }
+  get '/:id/edit', :as => 'edit_vanity', :to =>  proc { |env| vanity_controller(env, 'edit') }
+  put '/:id', :as => 'vanity', :to => proc { |env| vanity_controller(env, 'update') }
+
+  def vanity_controller(env, action)
+    id = env["action_dispatch.request.path_parameters"][:id]
+    vanity = Vanity.find(id) # rescue nil
+    if vanity.nil?
+      'application#404'
+    else
+      vanity_object = vanity.owner
+      model = vanity_object.class.model_name
+      controller = [model.pluralize.camelize,"Controller"].join.constantize
+      env["action_dispatch.request.path_parameters"][:id] = vanity_object.id
+      # do your internal redirect
+      controller.action(action).call(env)
+    end
+  end
 
 end

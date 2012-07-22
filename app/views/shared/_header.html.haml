@@ -6,7 +6,7 @@
 
         - if user_signed_in?
           %li
-            = link_to current_user.first_name, profile_path(current_user), :class => 'text'
+            = link_to current_user.first_name, vanity_path(current_user), :class => 'text'
           %li.dropdown
             %a.dropdown-toggle{:href => '#', 'data-toggle' => 'dropdown'}
               %b.caret.core

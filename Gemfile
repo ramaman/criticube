@@ -25,6 +25,7 @@ gem 'pg'
 gem 'friendly_id', '~> 4.0.7'
 gem 'squeel', '~> 1.0.7'
 gem "pg_search", '~> 0.5'
+gem "delayed_job_active_record", "~> 0.3.2"
 
 # Misc
 gem 'nokogiri', '~> 1.5.5'
