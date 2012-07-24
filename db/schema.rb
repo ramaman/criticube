@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120724041213) do
+ActiveRecord::Schema.define(:version => 20120724151857) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id",          :null => false
@@ -106,9 +106,11 @@ ActiveRecord::Schema.define(:version => 20120724041213) do
     t.boolean  "super_admin"
     t.string   "avatar"
     t.string   "page_name"
+    t.boolean  "banned"
   end
 
   add_index "users", ["admin"], :name => "index_users_on_admin"
+  add_index "users", ["banned"], :name => "index_users_on_banned"
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["first_name"], :name => "index_users_on_first_name"
   add_index "users", ["last_name"], :name => "index_users_on_last_name"

@@ -5,6 +5,7 @@ RESERVED_WORDS = [
   'account',
   'add',
   'admin',
+  'administrator',    
   'api',
   'app',
   'apps',

@@ -113,6 +113,10 @@ class User < ActiveRecord::Base
     owner && owner.class == User ? owner : nil 
   end
 
+  def is_admin?
+    return true if ((self.admin == true) || (self.super_admin == true))
+  end
+
   ## User actions
 
   # Followages

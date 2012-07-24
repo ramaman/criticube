@@ -28,6 +28,7 @@ gem 'squeel', '~> 1.0.7'
 gem "pg_search", '~> 0.5'
 gem "delayed_job", "~> 3.0.3"
 gem "delayed_job_active_record", "~> 0.3.2"
+gem "activeadmin", "~> 0.4.4"
 
 # Content % Files
 gem "carrierwave", "~> 0.6.2"

@@ -2,6 +2,8 @@
   - if user_signed_in?
     %h3
       = 'Inside area'
+    = link_to 'Admin', admin_dashboard_path
+
   - else
     %h3
-    = 'Outside area'      
+    = 'Outside area'

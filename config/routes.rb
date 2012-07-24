@@ -1,5 +1,7 @@
 Criticube::Application.routes.draw do
 
+  ActiveAdmin.routes(self)
+
   root :to => 'dashboard#home'
   
   devise_for :users, :path_names => {
