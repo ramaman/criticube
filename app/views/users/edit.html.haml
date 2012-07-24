@@ -8,7 +8,19 @@
 
   .row
     .span4
-      = 'Pic here'
+      = image_tag(@user.avatar_url)
+      - if @user.facebook_auth
+        %br/
+        %br/
+        = 'Refresh Facebook picture'
+        %br/
+      %br/
+      = simple_form_for @user, :url => vanity_path(@user), :method => :put, :html => {:multipart => true} do |f|
+        .control-group
+          = f.label 'Upload photo', :class => 'control-label core'
+          .controls
+          = f.file_field :avatar
+        = f.submit "Upload", :class => 'btn btn-primary'
     = simple_form_for @user, :url => vanity_path(@user), :method => :put do |f|
       .span8
         .row

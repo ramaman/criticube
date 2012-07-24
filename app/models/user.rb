@@ -31,7 +31,8 @@ class User < ActiveRecord::Base
                   :bio,
                   :page_name,
                   :vanity,
-                  :vanity_attributes
+                  :vanity_attributes,
+                  :avatar
 
   validates :email,
             :presence => { :message => "Please enter your email address" },
@@ -57,6 +58,8 @@ class User < ActiveRecord::Base
   default_scope includes(:vanity)
 
   after_initialize :automake_vanity
+
+  mount_uploader :avatar, AvatarUploader
 
   pg_search_scope :search, 
                   :against => [:first_name, :middle_names, :last_name]

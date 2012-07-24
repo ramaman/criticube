@@ -3,6 +3,8 @@
   %h2
     %p
       = @user.name
+  %br/  
+  = image_tag(@user.avatar_url)  
   %p
     - if @user.bio
       = @user.bio

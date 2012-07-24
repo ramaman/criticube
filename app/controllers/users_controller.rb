@@ -41,7 +41,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params[:user].slice(:first_name, :last_name, :bio)
+    params[:user].slice(:first_name, :last_name, :bio, :avatar)
   end
 
   def user

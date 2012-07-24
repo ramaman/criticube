@@ -27,9 +27,13 @@ gem 'squeel', '~> 1.0.7'
 gem "pg_search", '~> 0.5'
 gem "delayed_job_active_record", "~> 0.3.2"
 
+# Content % Files
+gem "carrierwave", "~> 0.6.2"
+gem "fog", "~> 1.4.0"
+gem "mini_magick", "~> 3.4"
+
 # Misc
 gem 'nokogiri', '~> 1.5.5'
-gem "carrierwave", "~> 0.6.2"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
