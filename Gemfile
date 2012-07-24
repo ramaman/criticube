@@ -17,14 +17,15 @@ gem 'haml-rails'
 gem 'simple_form', '~> 2.0.2'
 gem 'bootstrap-sass', '~> 2.0.4.0'
 gem 'hamlbars', '~> 1.0'
-gem 'client_side_validations', '~> 3.2.0.beta.4'
-gem 'client_side_validations-simple_form', "~> 2.0.0.beta.1"
+gem 'client_side_validations', '= 3.2.0.beta.4'
+gem 'client_side_validations-simple_form', "= 2.0.0.beta.1"
 
 # Database related
 gem 'pg'
 gem 'friendly_id', '~> 4.0.7'
 gem 'squeel', '~> 1.0.7'
 gem "pg_search", '~> 0.5'
+gem "delayed_job", "~> 3.0.3"
 gem "delayed_job_active_record", "~> 0.3.2"
 
 # Content % Files
@@ -39,4 +40,8 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
+end
+
+group :development do
+  gem "foreman", "~> 0.51.0"
 end

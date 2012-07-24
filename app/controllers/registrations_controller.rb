@@ -54,6 +54,7 @@ class RegistrationsController < Devise::RegistrationsController
       if @user.valid? == true
         @user.save_with_facebook_session(session["devise.omniauth_attributes"])
         if @user.persisted?
+          @user.delay.import_facebook_picture
           sign_in @user
           redirect_to after_sign_in_path_for(@user)
         else

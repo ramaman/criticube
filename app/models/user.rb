@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable
 
-  attr_reader :page_name
+  # attr_reader :page_name
   friendly_id :page_name
 
   devise :database_authenticatable, :registerable,
@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
                   :middle_names,
                   :last_name,
                   :bio,
-                  :page_name,
+                  # :page_name,
                   :vanity,
                   :vanity_attributes,
                   :avatar
@@ -54,10 +54,18 @@ class User < ActiveRecord::Base
   validates :vanity,
             :presence => true#,
             # :vanity_name_uniqueness => true
+  validates :page_name,
+            :presence => { :message => "Please fill in your desired pagename" },
+            :uniqueness => { :case_sensitive => false, :message => "has already been taken"},
+            :length => { :minimum => 3, :maximum => 24, :message => "needs to be between 3 to 24 characters" },
+            :exclusion => { :in => ALL_RESERVED_WORDS, :message => "has already been taken"},
+            :format => { :with => /\A[a-z0-9]+\z/i, :message => 'Contains invalid characters'} 
+            
 
   default_scope includes(:vanity)
 
   after_initialize :automake_vanity
+  before_validation :save_page_name
 
   mount_uploader :avatar, AvatarUploader
 
@@ -78,10 +86,6 @@ class User < ActiveRecord::Base
 
   def fast_name
     "#{self.first_name} #{self.last_name}"  
-  end    
-  
-  def page_name
-    self.vanity.name
   end
 
   def self.find_through_vanity(id)
@@ -103,7 +107,7 @@ class User < ActiveRecord::Base
     auth = self.facebook_auth
     if auth
       self.remote_avatar_url = auth.profile_picture_url(:size => 'large')
-      self.save    
+      self.save
     end
   end
 
@@ -160,6 +164,10 @@ class User < ActiveRecord::Base
 
   def automake_vanity
     self.build_vanity unless self.vanity
+  end
+
+  def save_page_name
+    (self.page_name = self.vanity.name) unless self.page_name == self.vanity.name
   end
 
 end

@@ -10,7 +10,8 @@
           = f.label 'Email', :class => 'control-label core'
           .controls
             = f.email_field :email, :class => 'span4'
+        %br/      
         .control-group
-          = f.submit "Send to my email", :class => 'btn btn-large'
-        %hr
-        = render :partial => "devise/shared/links"
+          = f.submit "Send to my email", :class => 'btn btn-large btn-primary'
+      %hr
+      = render :partial => "devise/shared/links"

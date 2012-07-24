@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120724004145) do
+ActiveRecord::Schema.define(:version => 20120724023914) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id",          :null => false
@@ -47,6 +47,22 @@ ActiveRecord::Schema.define(:version => 20120724004145) do
   add_index "cubes", ["owner_type", "owner_id"], :name => "index_cubes_on_owner_type_and_owner_id"
   add_index "cubes", ["tipe"], :name => "index_cubes_on_tipe"
 
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
     t.text     "data"
@@ -77,6 +93,7 @@ ActiveRecord::Schema.define(:version => 20120724004145) do
     t.boolean  "admin"
     t.boolean  "super_admin"
     t.string   "avatar"
+    t.string   "page_name"
   end
 
   add_index "users", ["admin"], :name => "index_users_on_admin"
@@ -84,6 +101,7 @@ ActiveRecord::Schema.define(:version => 20120724004145) do
   add_index "users", ["first_name"], :name => "index_users_on_first_name"
   add_index "users", ["last_name"], :name => "index_users_on_last_name"
   add_index "users", ["middle_names"], :name => "index_users_on_middle_names"
+  add_index "users", ["page_name"], :name => "index_users_on_page_name", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["super_admin"], :name => "index_users_on_super_admin"
 

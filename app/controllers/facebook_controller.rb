@@ -8,8 +8,7 @@ class FacebookController < ApplicationController
     # current_user.remote_avatar_url = graph.get_picture(auth.uid, :type => 'large')
     # current_user.save
 
-    current_user.remote_avatar_url = auth.profile_picture_url(:size => 'large')
-    current_user.save
+    current_user.import_facebook_picture
 
     respond_to do |format|
       flash[:notice] = 'Your profile has been successfully updated'
