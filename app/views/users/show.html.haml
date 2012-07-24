@@ -1,17 +1,22 @@
 - provide :content do
  
-  .row
-    .span2
-      = image_tag(@user.avatar_url)  
-    .span9
-      %h2
+  .page-header
+    .row
+      .span2
+        = image_tag(@user.avatar_url)
+      .span8
+        %h1
+          %p
+            = @user.name    
         %p
-          = @user.name    
-      %p
-        - if @user.bio
-          = @user.bio
+          - if @user.bio
+            = @user.bio
+          - else
+            = link_to 'Add a short description about yourself', edit_vanity_path(@user)
+      .span2
+        - if user_signed_in? && (@user == current_user)
+          = link_to 'Edit profile', edit_vanity_path(@user), :class => 'btn'
         - else
-          = link_to 'Add a short description about yourself', edit_vanity_path(@user)
-      - if user_signed_in? && @user == current_user
-        %p
-          = link_to 'Edit profile', edit_vanity_path(@user)
+          %span.follow_panel{:data => {"id" => @user.id, "tipe" => @user.class.to_s }}
+            = follow_button(@user)
+    %p
