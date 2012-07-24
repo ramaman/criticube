@@ -1,15 +1,17 @@
 - provide :content do
  
-  %h2
-    %p
-      = @user.name
-  %br/  
-  = image_tag(@user.avatar_url)  
-  %p
-    - if @user.bio
-      = @user.bio
-    - else
-      = link_to 'Add a short description about yourself', edit_vanity_path(@user)
-  - if user_signed_in? && @user == current_user
-    %p
-      = link_to 'Edit profile', edit_vanity_path(@user)
+  .row
+    .span2
+      = image_tag(@user.avatar_url)  
+    .span9
+      %h2
+        %p
+          = @user.name    
+      %p
+        - if @user.bio
+          = @user.bio
+        - else
+          = link_to 'Add a short description about yourself', edit_vanity_path(@user)
+      - if user_signed_in? && @user == current_user
+        %p
+          = link_to 'Edit profile', edit_vanity_path(@user)

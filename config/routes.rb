@@ -16,11 +16,11 @@ Criticube::Application.routes.draw do
     post '/users/external' => 'registrations#create_with_omniauth', :as => 'omniauth_user_registration'
   end
 
+  post '/facebook/import_picture' => 'facebook#import_picture', :as => 'facebook_import_picture'
+  
   get '/users/:id' => 'users#old_show', :as => 'old_user'
 
   delete "/authentications/:provider" => 'authentications#destroy', :as => 'destroy_authentication'
-
-  # get "/:id" => "vanities#show", :as => 'profile'
 
   get '/:id', :as => 'vanity', :to => proc { |env| vanity_controller(env, 'show') }
   get '/:id/edit', :as => 'edit_vanity', :to =>  proc { |env| vanity_controller(env, 'edit') }

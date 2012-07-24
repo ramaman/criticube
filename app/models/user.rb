@@ -89,7 +89,23 @@ class User < ActiveRecord::Base
     owner && owner.class == User ? owner : nil 
   end
 
-  ## Omniauth related
+  ## Facebook related
+
+  # Standard Facebook stuffs
+
+  def facebook_auth
+    self.authentications.where{:provider == 'facebook'}.first rescue nil
+  end
+
+  # More advanced facebook stuffs
+
+  def import_facebook_picture
+    auth = self.facebook_auth
+    if auth
+      self.remote_avatar_url = auth.profile_picture_url(:size => 'large')
+      self.save    
+    end
+  end
 
   def self.from_facebook(auth_hash)
     existing_auth = Authentication.where(auth_hash.slice(:provider, :uid)).first rescue nil
@@ -123,10 +139,6 @@ class User < ActiveRecord::Base
       auth.user = self
       auth.save!
     end
-  end
-
-  def facebook_auth
-    self.authentications.where{:provider == 'facebook'}.first rescue nil
   end
 
   def create_facebook_auth(omniauth_hash)

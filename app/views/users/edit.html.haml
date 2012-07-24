@@ -12,7 +12,7 @@
       - if @user.facebook_auth
         %br/
         %br/
-        = 'Refresh Facebook picture'
+        = link_to 'Refresh Facebook picture', facebook_import_picture_path, :class => ['btn btn-primary'], :method => :post
         %br/
       %br/
       = simple_form_for @user, :url => vanity_path(@user), :method => :put, :html => {:multipart => true} do |f|
