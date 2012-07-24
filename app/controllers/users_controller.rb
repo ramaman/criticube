@@ -1,7 +1,11 @@
 class UsersController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:show]
-  before_filter :correct_user, :except => [:old_show, :show]
+  before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :correct_user, :except => [:index, :show, :old_show]
+
+  def index
+    @users = User.order("RANDOM()").page(params[:page]).per(50)
+  end
 
   def old_show
     redirect_to vanity_path(params[:id])  

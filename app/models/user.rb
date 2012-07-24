@@ -160,14 +160,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def save_page_name
+    (self.page_name = self.vanity.name) unless self.page_name == self.vanity.name
+  end
+
   private
 
   def automake_vanity
     self.build_vanity unless self.vanity
-  end
-
-  def save_page_name
-    (self.page_name = self.vanity.name) unless self.page_name == self.vanity.name
   end
 
 end

@@ -18,7 +18,7 @@ Criticube::Application.routes.draw do
 
   post '/facebook/import_picture' => 'facebook#import_picture', :as => 'facebook_import_picture'
   
-  get '/users/:id' => 'users#old_show', :as => 'old_user'
+  resources :users, :only => [:index, :show]
 
   delete "/authentications/:provider" => 'authentications#destroy', :as => 'destroy_authentication'
 

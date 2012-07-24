@@ -4,11 +4,17 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def facebook
     omniauth_hash = request.env["omniauth.auth"]
+    user = User.from_facebook(omniauth_hash)
 
     if user_signed_in?
       ## Add Facebook to current user
-      current_user.create_facebook_auth(omniauth_hash)
-      redirect_to edit_user_registration_path
+      if user.persisted? && user != current_user
+        flash[:notice] = 'The currently logged on Facebook account is connected to another Criticube account'
+        redirect_to edit_user_registration_path
+      else
+        current_user.create_facebook_auth(omniauth_hash)
+        redirect_to edit_user_registration_path
+      end  
     else
       user = User.from_facebook(omniauth_hash)
       if user.persisted?

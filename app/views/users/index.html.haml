@@ -1,0 +1,9 @@
+- provide :content do
+
+  %h2.page-header
+    = 'The Criticube Community'
+  %ul.items.links.items-content
+    - @users.each do |u|
+      %p
+        = link_to(u.name, vanity_path(u))
+    = paginate(@users)
