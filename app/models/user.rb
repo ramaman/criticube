@@ -15,7 +15,27 @@ class User < ActiveRecord::Base
          :omniauthable
 
   has_one :vanity, :as => :owner, :dependent => :destroy
-  has_many :authentications, :dependent => :destroy      
+  has_many :authentications, :dependent => :destroy   
+  
+  has_many  :followages,
+            :foreign_key => 'follower_id',
+            :dependent => :destroy
+
+  has_many  :followeds,
+            :through => :followages
+
+  has_many  :followed_users,
+            :through => :followages,
+            :source => :followed,
+            :source_type => 'User'
+
+  has_many  :reverse_followages,
+            :as => :followed,
+            :class_name => 'Followage',
+            :dependent => :destroy
+
+  has_many  :followers,
+            :through => :reverse_followages   
 
   accepts_nested_attributes_for :vanity, 
                                 :allow_destroy => false, 
@@ -92,6 +112,33 @@ class User < ActiveRecord::Base
     owner = Vanity.find(id).owner rescue nil
     owner && owner.class == User ? owner : nil 
   end
+
+  ## User actions
+
+  # Followages
+
+  def following?(followed)
+    self.followages.find_by_followed_id_and_followed_type(followed.id, followed.class.to_s)
+  end
+
+  def follow!(followed, options={})
+    if !self.following?(followed) && self != followed
+      f = Followage.new
+      f.follower_id = self.id
+      f.followed_id = followed.id
+      f.followed_type = followed.class.to_s
+      f.save!
+    end
+  end
+
+  def unfollow!(followed)
+    if self.following?(followed)    
+      ActiveRecord::Base.transaction do
+        # destroy followage and update tallies on both sides
+        self.following?(followed).destroy  
+      end
+    end
+  end  
 
   ## Facebook related
 

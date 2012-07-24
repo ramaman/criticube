@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120724023914) do
+ActiveRecord::Schema.define(:version => 20120724041213) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id",          :null => false
@@ -62,6 +62,18 @@ ActiveRecord::Schema.define(:version => 20120724023914) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
+  create_table "followages", :force => true do |t|
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.integer  "follower_id"
+    t.integer  "followed_id"
+    t.string   "followed_type"
+  end
+
+  add_index "followages", ["followed_id", "followed_type"], :name => "index_followages_on_followed_id_and_followed_type"
+  add_index "followages", ["follower_id", "followed_id", "followed_type"], :name => "followage_combo", :unique => true
+  add_index "followages", ["follower_id"], :name => "index_followages_on_follower_id"
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
