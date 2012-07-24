@@ -14,15 +14,13 @@ if Rails.env.development?
 
 else
 
-  # Change this with sendgrid creds
-
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
-    :address              => "smtp.gmail.com",
+    :address              => "smtp.mandrillapp.com",
     :port                 => 587,
     :domain               => "criticube.com",
-    :user_name            => "development@criticube.com",
-    :password             => "DoraemonMailer2011!",
+    :user_name            => "ramaman",
+    :password             => "5d367983-e148-49c2-8758-bc3b91425670",
     :authentication       => "plain",
     :enable_starttls_auto => true
   }  
