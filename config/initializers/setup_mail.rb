@@ -12,6 +12,18 @@ if Rails.env.development?
   }  
   ActionMailer::Base.default_url_options[:host] = "criticube.com"
 
+  # ActionMailer::Base.delivery_method = :smtp
+  # ActionMailer::Base.smtp_settings = {
+  #   :address              => "email-smtp.us-east-1.amazonaws.com",
+  #   :port                 => 587,
+  #   :domain               => "criticube.com",
+  #   :user_name            => "AKIAJ24HE5LWVBTHVCDA",
+  #   :password             => "Ao5vCcp2zZBhT99wqqSbL9KLVAJeIwCEln2MwFirO3TX",
+  #   :authentication       => "plain",
+  #   :enable_starttls_auto => true
+  # }  
+  # ActionMailer::Base.default_url_options[:host] = "criticube.com"
+
 else
 
   ActionMailer::Base.delivery_method = :smtp

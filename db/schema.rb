@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120724151857) do
+ActiveRecord::Schema.define(:version => 20120724153740) do
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id",          :null => false
@@ -35,16 +35,14 @@ ActiveRecord::Schema.define(:version => 20120724151857) do
     t.string   "tipe"
     t.text     "description"
     t.string   "language"
-    t.string   "owner_type"
-    t.integer  "owner_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "page_name"
   end
 
   add_index "cubes", ["language"], :name => "index_cubes_on_language"
-  add_index "cubes", ["name", "owner_type", "owner_id"], :name => "index_cubes_on_name_and_owner_type_and_owner_id"
   add_index "cubes", ["name"], :name => "index_cubes_on_name"
-  add_index "cubes", ["owner_type", "owner_id"], :name => "index_cubes_on_owner_type_and_owner_id"
+  add_index "cubes", ["page_name"], :name => "index_cubes_on_page_name", :unique => true
   add_index "cubes", ["tipe"], :name => "index_cubes_on_tipe"
 
   create_table "delayed_jobs", :force => true do |t|
