@@ -62,19 +62,16 @@ ActiveAdmin.register User do
   csv do
     column :first_name
     column :last_name
-    column :user_name
+    column :page_name
     column :email
   end
 
   form do |f|  
     f.inputs "Details" do
       f.input :banned
-      f.input :subscribe_fact_updates
-      f.input :subscribe_follow_updates
-      f.input :admin     
+      f.input :admin
     end
     f.buttons
   end
-
   
 end

@@ -117,6 +117,10 @@ class User < ActiveRecord::Base
     return true if ((self.admin == true) || (self.super_admin == true))
   end
 
+  def is_super_admin?
+    return true if self.super_admin == true
+  end
+
   ## User actions
 
   # Followages
