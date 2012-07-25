@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
 
   before_filter :banned?, :store_location
 
-
   def store_location
     session[:user_return_to] = request.url unless 
     (params[:controller] == "devise/sessions") || 
