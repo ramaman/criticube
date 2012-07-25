@@ -1,0 +1,34 @@
+- provide :content do
+
+  .row
+    .span6.well
+      .page-header
+        %h2 Create a New Cube
+
+      = simple_form_for @cube, :url => cubes_path, :validate => true do |f|
+        .control-group
+          = f.label 'Language', :class => 'control-label core'
+          .controls
+            / = select_tag(:language, options_for_select(LANGUAGES)) 
+            = f.select :language, LANGUAGES, :class => 'span6'
+        .control-group
+          = f.label 'Name', :class => 'control-label core'
+          .controls
+            = f.text_field :name, :class => 'span6'
+        .control-group
+          = f.fields_for :vanity do |v|
+            = v.label 'page_name', :class => 'control-label core'
+            .controls{:style => "margin-bottom: 18px"}
+              .input-prepend
+                %span.add-on.span3{:style => "width: 116px"}
+                  = 'http://criticube.com/'
+                = v.text_field :name, :class => 'prependedInput', :style => "width: 324px", :data => { :validate => true }
+              .help-block.minor
+                = "3 to 24 characters, cannot contain special characters"
+        .control-group
+          = f.label 'Description', :class => 'control-label core'
+          .controls
+            = f.text_area :description, :class => 'span6 slim'
+        .control-group
+          = f.submit 'Create', :class => 'btn btn-large btn-primary'
+          = link_to 'Cancel', root_path, :class => 'btn btn-large'          

@@ -5,29 +5,44 @@ class Cube < ActiveRecord::Base
 
   friendly_id :page_name
 
-  has_one :vanity, :as => :owner, :dependent => :destroy
+  has_one   :vanity,
+            :as => :owner,
+            :dependent => :destroy
 
-  accepts_nested_attributes_for :vanity, 
+  has_many  :roles,
+            :as => :on,
+            :dependent => :destroy
+
+  has_many  :members,
+            :through => :roles,
+            :source => :owner,
+            :source_type => 'User'          
+
+  accepts_nested_attributes_for :vanity,
                                 :allow_destroy => false, 
                                 :reject_if => proc {|a| a['name'].blank?}
 
   attr_accessible :name,
                   :description,
                   :language,
-                  :vanity
+                  :vanity,
+                  :vanity_attributes                  
 
   validates :name,
-            :presence => { :message => "Please fill in your desired pagename" },
+            :presence => :true,
             :uniqueness => { :case_sensitive => false, :message => "has already been taken"},
-            :length => { :minimum => 3, :maximum => 24, :message => "needs to be between 3 to 24 characters" },
+            :length => { :minimum => 3, :maximum => 100, :message => "needs to be between 3 to 24 characters" },
+            :format => { :with => /^[^0-9`!@#\$%\^&*+_=]+$/, :message => 'Contains invalid characters' }
   validates :description,
             :length => {:maximum => 500 , :allow_nil => true, :allow_blank => true}          
   validates :language,          
             :inclusion => { :in => LANGUAGES, :message => "is not supported"},
             :format => { :with => /\A[a-z0-9]+\z/i, :message => 'Contains invalid characters'}                   
   validates :vanity,
-            :presence => true#,
-            # :vanity_name_uniqueness => true
+            :presence => true
+  # validates :tipe,
+  #           :inclusion => { :in => tipe, :message => "invalid tipe"},
+  #           :format => { :with => /\A[a-z0-9]+\z/i, :message => 'Contains invalid characters'}
   validates :page_name,
             :presence => { :message => "Please fill in your desired pagename" },
             :uniqueness => { :case_sensitive => false, :message => "has already been taken"},
@@ -40,6 +55,10 @@ class Cube < ActiveRecord::Base
   after_initialize :automake_vanity
   before_validation :save_page_name
 
+  def assign_manager(owner)
+    self.roles << Role.new_assignment(owner, self, 'manager')
+  end
+
   def save_page_name
     (self.page_name = self.vanity.name) unless self.page_name == self.vanity.name
   end
@@ -48,6 +67,6 @@ class Cube < ActiveRecord::Base
 
   def automake_vanity
     self.build_vanity unless self.vanity
-  end  
+  end
 
 end

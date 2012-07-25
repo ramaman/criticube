@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120725112124) do
+ActiveRecord::Schema.define(:version => 20120725143132) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -87,6 +87,20 @@ ActiveRecord::Schema.define(:version => 20120725112124) do
   add_index "followages", ["followed_id", "followed_type"], :name => "index_followages_on_followed_id_and_followed_type"
   add_index "followages", ["follower_id", "followed_id", "followed_type"], :name => "followage_combo", :unique => true
   add_index "followages", ["follower_id"], :name => "index_followages_on_follower_id"
+
+  create_table "roles", :force => true do |t|
+    t.string   "tipe"
+    t.string   "owner_type"
+    t.integer  "owner_id"
+    t.string   "on_type"
+    t.integer  "on_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "roles", ["on_id", "on_type"], :name => "index_roles_on_on_id_and_on_type"
+  add_index "roles", ["owner_id", "owner_type"], :name => "index_roles_on_owner_id_and_owner_type"
+  add_index "roles", ["tipe", "owner_id", "owner_type", "on_id", "on_type"], :name => "unique_participation_combo", :unique => true
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false

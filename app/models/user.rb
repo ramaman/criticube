@@ -14,8 +14,12 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable
 
-  has_one :vanity, :as => :owner, :dependent => :destroy
-  has_many :authentications, :dependent => :destroy   
+  has_one   :vanity, 
+            :as => :owner, 
+            :dependent => :destroy
+
+  has_many  :authentications, 
+            :dependent => :destroy   
   
   has_many  :followages,
             :foreign_key => 'follower_id',
@@ -35,21 +39,29 @@ class User < ActiveRecord::Base
             :dependent => :destroy
 
   has_many  :followers,
-            :through => :reverse_followages   
+            :through => :reverse_followages
+
+  has_many  :roles,
+            :as => :owner,
+            :dependent => :destroy
+
+  has_many  :cubes,
+            :through => :roles,
+            :source => :on,
+            :source_type => 'Cube'             
 
   accepts_nested_attributes_for :vanity, 
                                 :allow_destroy => false, 
                                 :reject_if => proc {|a| a['name'].blank?}
 
   attr_accessible :email,
-                  :password, 
-                  :password_confirmation, 
+                  :password,
+                  :password_confirmation,
                   :remember_me,
                   :first_name,
                   :middle_names,
                   :last_name,
                   :bio,
-                  # :page_name,
                   :vanity,
                   :vanity_attributes,
                   :avatar
@@ -81,7 +93,6 @@ class User < ActiveRecord::Base
             :exclusion => { :in => ALL_RESERVED_WORDS, :message => "has already been taken"},
             :format => { :with => /\A[a-z0-9]+\z/i, :message => 'Contains invalid characters'} 
             
-
   default_scope includes(:vanity)
 
   after_initialize :automake_vanity

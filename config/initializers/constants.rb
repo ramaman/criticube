@@ -1,11 +1,11 @@
 LANGUAGES = [
+  'English',
   'Arabic',
   'Bengali',
   'Croatian',
   'Czech',
   'Danish',
   'Dutch',
-  'English',
   'Esperanto',
   'Estonian',
   'Finnish',
@@ -225,3 +225,4 @@ OBJECT_WORDS = [
 ]
 
 ALL_RESERVED_WORDS = RESERVED_WORDS + OBJECT_WORDS + LANGUAGES
+ALL_RESERVED_WORDS = ALL_RESERVED_WORDS + (RESERVED_WORDS + OBJECT_WORDS).collect{|w| w.capitalize} + LANGUAGES.collect{|w| w.downcase} 
