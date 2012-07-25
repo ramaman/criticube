@@ -20,6 +20,7 @@ gem 'hamlbars', '~> 1.0'
 gem 'client_side_validations', '= 3.2.0.beta.4'
 gem 'client_side_validations-simple_form', "= 2.0.0.beta.1"
 gem "kaminari", "~> 0.13.0"
+gem "jbuilder", "~> 0.4.0"
 
 # Database related
 gem 'pg'
@@ -30,7 +31,7 @@ gem "delayed_job", "~> 3.0.3"
 gem "delayed_job_active_record", "~> 0.3.2"
 gem "activeadmin", "~> 0.4.4"
 
-# Content % Files
+# Content and Files
 gem "carrierwave", "~> 0.6.2"
 gem "fog", "~> 1.4.0"
 gem "mini_magick", "~> 3.4"

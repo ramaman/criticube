@@ -5,24 +5,22 @@ class UsersController < ApplicationController
 
   def index
     @users = User.order("RANDOM()").page(params[:page]).per(50)
+    respond_to :html, :json
   end
 
   def old_show
-    redirect_to vanity_path(params[:id])  
+    redirect_to vanity_path(params[:id])
+    respond_to :html
   end
 
   def show
     @user = User.find(params[:id])
-    respond_to do |format|
-      format.html
-    end
+    respond_to :html
   end
 
   def edit
     @user = User.find(params[:id])
-    respond_to do |format|
-      format.html
-    end
+    respond_to :html
   end
 
   def update

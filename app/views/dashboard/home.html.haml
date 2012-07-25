@@ -1,8 +1,9 @@
 - provide :content do
   - if user_signed_in?
-    %h3
-      = 'Inside area'
-    = link_to 'Admin', admin_dashboard_path
+    
+    = render 'dashboard'
+
+
 
   - else
     %h3

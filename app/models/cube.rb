@@ -1,9 +1,20 @@
 class Cube < ActiveRecord::Base
   
-  # attr_accessible :title, :body
-  attr_accessible :name
-                  :description
-                  :language
+  extend FriendlyId
+  include PgSearch
+
+  friendly_id :page_name
+
+  has_one :vanity, :as => :owner, :dependent => :destroy
+
+  accepts_nested_attributes_for :vanity, 
+                                :allow_destroy => false, 
+                                :reject_if => proc {|a| a['name'].blank?}
+
+  attr_accessible :name,
+                  :description,
+                  :language,
+                  :vanity
 
   validates :name,
             :presence => { :message => "Please fill in your desired pagename" },
@@ -14,6 +25,29 @@ class Cube < ActiveRecord::Base
   validates :language,          
             :inclusion => { :in => LANGUAGES, :message => "is not supported"},
             :format => { :with => /\A[a-z0-9]+\z/i, :message => 'Contains invalid characters'}                   
+  validates :vanity,
+            :presence => true#,
+            # :vanity_name_uniqueness => true
+  validates :page_name,
+            :presence => { :message => "Please fill in your desired pagename" },
+            :uniqueness => { :case_sensitive => false, :message => "has already been taken"},
+            :length => { :minimum => 3, :maximum => 24, :message => "needs to be between 3 to 24 characters" },
+            :exclusion => { :in => ALL_RESERVED_WORDS, :message => "has already been taken"},
+            :format => { :with => /\A[a-z0-9]+\z/i, :message => 'Contains invalid characters'}
 
+  default_scope includes(:vanity)
+
+  after_initialize :automake_vanity
+  before_validation :save_page_name
+
+  def save_page_name
+    (self.page_name = self.vanity.name) unless self.page_name == self.vanity.name
+  end
+
+  private
+
+  def automake_vanity
+    self.build_vanity unless self.vanity
+  end  
 
 end

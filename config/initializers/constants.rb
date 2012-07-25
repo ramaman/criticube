@@ -1,3 +1,57 @@
+LANGUAGES = [
+  'Arabic',
+  'Bengali',
+  'Croatian',
+  'Czech',
+  'Danish',
+  'Dutch',
+  'English',
+  'Esperanto',
+  'Estonian',
+  'Finnish',
+  'French',
+  'Galician',
+  'German',
+  'Greek',
+  'Gujarati',
+  'Hebrew',
+  'Hindi',
+  'Hungarian',
+  'Icelandic',
+  'Indonesian',
+  'Irish',
+  'Italian',
+  'Japanese',
+  'Korean',
+  'Latin',
+  'Latvian',
+  'Lithuanian',
+  'Macedonian',
+  'Malay',
+  'Maltese',
+  'Mandarin Chinese',  
+  'Norwegian',
+  'Persian',
+  'Polish',
+  'Portugese',
+  'Romanian',
+  'Russian',
+  'Serbian',
+  'Slovak',
+  'Slovenian',
+  'Spanish',
+  'Swahili',
+  'Swedish',
+  'Tagalog',  
+  'Tamil',
+  'Telugu',
+  'Thai',
+  'Turkish',
+  'Ukrainian',
+  'Urdu',
+  'Vietnamese'
+]
+
 RESERVED_WORDS = [
   'criticube',
   'url',
@@ -170,8 +224,4 @@ OBJECT_WORDS = [
   'comments'
 ]
 
-ALL_RESERVED_WORDS = RESERVED_WORDS + OBJECT_WORDS
-
-LANGUAGES = [
-  'English'
-]
+ALL_RESERVED_WORDS = RESERVED_WORDS + OBJECT_WORDS + LANGUAGES
