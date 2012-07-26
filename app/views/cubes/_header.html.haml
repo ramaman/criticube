@@ -1,0 +1,23 @@
+.page-header
+  .row
+    .span1
+      = image_tag(cube.avatar_url(:medium))
+    .span8
+      %h1
+        %p
+          - if (sub_page == true rescue nil)
+            = link_to cube.name, vanity_path(cube)
+          - else
+            = cube.name
+      %p
+        = link_to pluralize(cube.followers.count, 'follower'), vanity_followers_path(cube)    
+              
+    .span3
+      .right
+        / - if user_signed_in? && ( current_user)
+        /   = link_to 'Admin', '#', :class => 'btn'
+        / - else
+        %a{:class => 'btn dropdown-toggle', :href => '#', 'data-toggle' => 'dropdown'}
+          %i.icon-wrench                  
+        %span.follow_panel{:data => {"id" => cube.id, "tipe" => cube.class.to_s }}
+          = follow_button(cube)

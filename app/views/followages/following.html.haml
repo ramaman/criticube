@@ -1,0 +1,7 @@
+- provide :content do
+
+  = render :partial => "#{@parent.class.to_s.downcase.pluralize}/header", :locals => {:user => @parent, :sub_page => true}
+  
+  .row
+    .span7.offset2
+      = render :partial => '/shared/items_list', :locals => {:items => @followeds, :title => "Followed #{@tipe.pluralize}"}

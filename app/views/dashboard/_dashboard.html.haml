@@ -7,7 +7,7 @@
       %h4 Followed Cubes
     %ul.items.cubes
       - current_user.cubes_to_check.each do |cube|
-        %li.item
+        %li
           = link_to cube.name, vanity_path(cube), :class => 'label label-cclink'
     %hr    
     - if current_user.is_admin?

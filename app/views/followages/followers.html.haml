@@ -1,0 +1,11 @@
+- provide :content do
+
+  = render :partial => "#{@parent.class.to_s.downcase.pluralize}/header", :locals => {@parent.class.to_s.downcase.to_sym => @parent, :sub_page => true}
+  
+  .row
+    - if @parent.class == Cube
+      .span8.offset1
+        = render :partial => '/shared/items_list', :locals => {:items => @followers, :title => "Followers"}
+    - else
+      .span7.offset2
+        = render :partial => '/shared/items_list', :locals => {:items => @followers, :title => "Followers"}

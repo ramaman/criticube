@@ -1,0 +1,34 @@
+.page-header
+  .row
+    .span2
+      = image_tag(user.avatar_url)
+    .span7
+      %h1
+        %p
+          - if (sub_page == true rescue nil)
+            = link_to user.name, vanity_path(user)
+          - else
+            = user.name    
+      .big-text
+        %p
+          - if user.bio
+            = user.bio
+          - else
+            = link_to 'Add a short description about yourself', edit_vanity_path(user)
+        .clearfix
+          = 'Following'
+          = link_to(pluralize(user.followed_users.count , 'user'), vanity_following_path(user, 'users'))
+          = ' and '
+          = link_to(pluralize(user.followed_cubes.count , 'cube'), vanity_following_path(user, 'cubes'))
+          %br/
+          = 'Followed by '
+          = link_to(pluralize(user.followers.count , 'user'), vanity_followers_path(user))
+          
+    .span3
+      .right
+        %p
+          - if user_signed_in? && (user == current_user)
+            = link_to 'Edit profile', edit_vanity_path(user), :class => 'btn'
+          - else
+            %span.follow_panel{:data => {"id" => user.id, "tipe" => user.class.to_s }}
+              = follow_button(user)   

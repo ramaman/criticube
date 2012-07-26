@@ -1,0 +1,12 @@
+%ul.items
+  %h3
+    = title  
+  %hr.slim  
+  - items.each do |item|
+    %li
+      %p
+        = link_to image_tag(item.avatar_url(:inline)), vanity_path(item)
+        %nbsp
+        = link_to item.name, vanity_path(item), :class => 'core'
+        = link_to "(#{item.page_name})", vanity_path(item)
+  = paginate(items)      

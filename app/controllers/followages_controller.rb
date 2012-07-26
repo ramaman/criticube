@@ -26,10 +26,10 @@ class FollowagesController < ApplicationController
   end
 
   def following
-    @tipe = params[:tab].singularize
-    if ['topic','user','fact','link'].include?(@tipe)   
-      @parent = User.find(params[:user_id])    
-      @followages = @parent.followages.where{|f| f.followed_type == @tipe.capitalize}.page(params[:page]).per(25)
+    @tipe = params[:tipe].singularize
+    @parent = User.find(params[:id])
+    if (@parent.class == User) && (['user','cube'].include?(@tipe)) 
+      @followeds = @parent.send("followed_#{params[:tipe]}").page(params[:page]).per(50)
       respond_to do |format|
         format.html 
         format.js { render :layout => false }
@@ -41,7 +41,7 @@ class FollowagesController < ApplicationController
 
   def followers
     @parent = parent_object
-    @followers = @parent.followers.limit('1000').page(params[:page]).per(25)
+    @followers = @parent.followers.page(params[:page]).per(25)
     respond_to do |format|
       format.html
       format.js { render :layout => false }
@@ -51,10 +51,8 @@ class FollowagesController < ApplicationController
   private
 
   def parent_object
-    case
-      when params[:user_id] then User.find(params[:user_id])
-      when params[:cube_id] then Cube.find(params[:cube_id])        
-    end
+    v = Vanity.find(params[:id])
+    return v.owner
   end  
 
   def parent_url(parent)

@@ -1,20 +1,3 @@
 - provide :content do
 
-  .page-header
-    .row
-      .span2
-        = 'Avatar here'
-        / = image_tag(@cube.avatar_url)
-      .span7
-        %h1
-          %p
-            = @cube.name    
-      .span3
-        .right
-          / - if user_signed_in? && ( current_user)
-          /   = link_to 'Admin', '#', :class => 'btn'
-          / - else
-          %a{:class => 'btn dropdown-toggle', :href => '#', 'data-toggle' => 'dropdown'}
-            %i.icon-wrench                  
-          %span.follow_panel{:data => {"id" => @cube.id, "tipe" => @cube.class.to_s }}
-            = follow_button(@cube)
+  = render :partial => 'header', :locals => {:cube => @cube}

@@ -54,9 +54,9 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   def default_url
     if version_name
-      "fallback/" + [version_name, "avatar.jpg"].compact.join('_')
+      "fallback/" + [version_name, "#{model.class.to_s.downcase}_avatar.jpg"].compact.join('_')
     else
-      "fallback/avatar.jpg"
+      "fallback/#{model.class.to_s.downcase}_avatar.jpg"
     end  
   end
 

@@ -44,7 +44,8 @@ class Cube < ActiveRecord::Base
                   :description,
                   :language,
                   :vanity,
-                  :vanity_attributes                  
+                  :vanity_attributes,
+                  :avatar                  
 
   validates :name,
             :presence => :true,
@@ -69,6 +70,8 @@ class Cube < ActiveRecord::Base
             :format => { :with => /\A[a-z0-9]+\z/i, :message => 'Contains invalid characters'}
 
   default_scope includes(:vanity)
+
+  mount_uploader :avatar, AvatarUploader  
 
   after_initialize :automake_vanity
   before_validation :save_page_name

@@ -1,37 +1,17 @@
 - provide :content do
  
-  .page-header
-    .row
-      .span2
-        = image_tag(@user.avatar_url)
-      .span7
-        %h1
-          %p
-            = @user.name    
-        %p
-          - if @user.bio
-            = @user.bio
-          - else
-            = link_to 'Add a short description about yourself', edit_vanity_path(@user)
-      .span3
-        .right
-          - if user_signed_in? && (@user == current_user)
-            = link_to 'Edit profile', edit_vanity_path(@user), :class => 'btn'
-          - else
-            %span.follow_panel{:data => {"id" => @user.id, "tipe" => @user.class.to_s }}
-              = follow_button(@user)
-    %p
+  = render :partial => 'header', :locals => {:user => @user}
+
+  %p
       
   .row
-    .span4.right
+    .span7.offset2
+      = 'Feed'  
+    .span3
       %h3
         = 'Participated Cubes'
       %br/  
 
       - @user.participated_cubes.each do |cube|
         .well.white.slim
-          = link_to cube.name, vanity_path(cube), :class => 'core'
-    
-    .span8    
-      
-      
+          = link_to cube.name, vanity_path(cube), :class => 'core'         
