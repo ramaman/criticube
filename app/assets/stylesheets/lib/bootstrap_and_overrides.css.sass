@@ -53,12 +53,20 @@ $navbarTextBottomPad: 14px
   &.white
     border-color: $grayLight
     background-color: $white
+  &.divlink
+    &:hover, &.active
+      border-color: $grayLight
+      background-color: $grayLighter
+    &:active
+      border-color: $grayLight
+      background-color: $grayLight
+        
 
 span.label.label-cclink, a.label.label-cclink
   background-color: $linkColor
   color: $white
 
-//hr
-  //border-width: 1px
-  //color: $grayLighter !important
-  //border-color: $grayLighter !important
+hr.dark
+  border-width: 1px
+  color: $grayLight !important
+  border-color: $grayLight !important

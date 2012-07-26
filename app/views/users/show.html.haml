@@ -28,7 +28,7 @@
         = 'Participated Cubes'
       %br/  
 
-      - @user.cubes.each do |cube|
+      - @user.participated_cubes.each do |cube|
         .well.white.slim
           = link_to cube.name, vanity_path(cube), :class => 'core'
     

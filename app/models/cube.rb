@@ -27,7 +27,7 @@ class Cube < ActiveRecord::Base
             :through => :manager_roles,
             :source => :owner,
             :source_type => 'User'
-            
+                        
   has_many  :reverse_followages,
             :as => :followed,
             :class_name => 'Followage',
@@ -72,10 +72,6 @@ class Cube < ActiveRecord::Base
 
   after_initialize :automake_vanity
   before_validation :save_page_name
-
-  def managers
-    
-  end
 
   def assign_manager(owner)
     r = Role.where(:tipe => 'manager', :owner_id => owner.id, :owner_type => owner.class.to_s.downcase, :on_id => self.id, :on_type => self.class.to_s.downcase)

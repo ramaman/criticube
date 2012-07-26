@@ -55,7 +55,12 @@ class User < ActiveRecord::Base
             :class_name => 'Role',
             :conditions => {:tipe => 'manager'}            
 
-  has_many  :cubes,
+  has_many  :managed_cubes,
+            :through => :manager_roles,
+            :source => :on,
+            :source_type => 'Cube'            
+
+  has_many  :participated_cubes,
             :through => :roles,
             :source => :on,
             :source_type => 'Cube'             
