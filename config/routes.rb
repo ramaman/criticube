@@ -33,6 +33,8 @@ Criticube::Application.routes.draw do
   delete '/:id', :as => 'vanity', :to => proc { |env| vanity_controller(env, 'destroy') }
   get '/:id/following/:tipe', :as => 'vanity_following', :to => 'followages#following'
   get '/:id/followers', :as => 'vanity_followers', :to => 'followages#followers'  
+  get '/:id/admins', :as => 'vanity_admins', :to => 'cubes#admins'
+
 
   def vanity_controller(env, action)
     id = env["action_dispatch.request.path_parameters"][:id]

@@ -19,19 +19,30 @@
 
     .span8
       = simple_form_for @cube, :url => vanity_path(@cube), :method => :put do |f|
-        .row
-          .span4
-            .control-group
-              = f.label 'Name', :class => 'control-label core'
-              .controls
-                = f.text_field :name, :class => 'span8'
-        .row
-          .span4
-            .control-group
-              = f.label :description, :class => 'control-label core'
-              .controls
-                = f.text_area :description, :class => 'span8 medium autoresize'
+
+        .control-group
+          = f.label 'Name', :class => 'control-label core'
+          .controls
+            = f.text_field :name, :class => 'span8'
+
+        .control-group
+          = f.label :description, :class => 'control-label core'
+          .controls
+            = f.text_area :description, :class => 'span8 medium autoresize'
 
         .control-group
           = f.submit "Update", :class => 'btn btn-large btn-primary'
           = link_to "Cancel", vanity_path(@cube), :class => 'btn btn-large'
+
+      %hr    
+
+      .well.danger
+      
+        %h4 Delete Cube
+        %p
+        %p
+          %b
+            = "WARNING: This action will delete all contents of this cube and might spark a revolution against you and your regime"
+        %p
+          = link_to 'Delete Cube', vanity_path(@cube), :class => 'btn btn-danger core', :method => :delete, :confirm => 'Are you 100% sure? This is irreversible'
+          

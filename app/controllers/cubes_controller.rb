@@ -1,7 +1,7 @@
 class CubesController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:index, :show]
-  before_filter :manager_check, :except => [:index, :show, :new, :create]
+  before_filter :authenticate_user!, :except => [:index, :show, :admins]
+  before_filter :manager_check, :except => [:index, :show, :admins, :new, :create]
 
   def index
     @cubes = Cube.order("RANDOM()").page(params[:page]).per(50)
@@ -10,6 +10,12 @@ class CubesController < ApplicationController
 
   def show
     @cube = Cube.find(params[:id])
+    respond_to :html
+  end
+
+  def admins
+    @cube = Cube.find(params[:id])
+    @managers = @cube.managers.page(params[:page]).per(3)
     respond_to :html
   end
 
@@ -58,7 +64,15 @@ class CubesController < ApplicationController
   end
 
   def destroy
-
+    @cube = Cube.find(params[:id])
+    @cube.destroy
+    if @cube.destroy      
+      flash[:notice] = 'Cube has been successfully deleted'
+      redirect_to root_path
+    else
+      flash[:alert] = 'Error deleting cube'
+      redirect_to vanity_path(@cube)
+    end
   end
 
   private

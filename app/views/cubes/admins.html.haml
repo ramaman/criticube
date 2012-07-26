@@ -1,0 +1,7 @@
+- provide :content do
+
+  = render :partial => "header", :locals => {:cube => @cube, :sub_page => true}
+  
+  .row
+    .span7.offset2
+      = render :partial => '/shared/items_list', :locals => {:items => @managers, :title => "Managers"}
