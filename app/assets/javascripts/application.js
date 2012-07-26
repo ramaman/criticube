@@ -18,5 +18,6 @@
 //= require bootstrap-dropdown
 //= require rails.validations
 //= require rails.validations.simple_form
+//= require lib/jquery.autoresize
 //= require_tree .
 //= require active_admin/base

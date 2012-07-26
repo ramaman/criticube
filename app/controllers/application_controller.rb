@@ -8,11 +8,11 @@ class ApplicationController < ActionController::Base
   def store_location
     session[:user_return_to] = request.url unless 
     (params[:controller] == "devise/sessions") || 
-    (params[:controller] == "devise/registrations")  || 
-    (params[:controller] == "search") || 
-    (params[:controller] == 'authentications') || 
-    (params[:controller] == 'omniauth_callbacks') || 
-    (params[:controller] == 'registrations') ||     
+    (params[:controller] == "devise/registrations") ||
+    (params[:controller] == "search") ||
+    (params[:controller] == 'authentications') ||
+    (params[:controller] == 'omniauth_callbacks') ||
+    (params[:controller] == 'registrations') ||
     ((params[:controller] == 'facebook') && (params[:action] == 'relogin'))
   end
 
@@ -48,5 +48,4 @@ class ApplicationController < ActionController::Base
       root_path
     end
   end
-
 end

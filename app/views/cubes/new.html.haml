@@ -28,7 +28,7 @@
         .control-group
           = f.label 'Description', :class => 'control-label core'
           .controls
-            = f.text_area :description, :class => 'span6 slim'
+            = f.text_area :description, :class => 'span6 slim autoresize'
         .control-group
           = f.submit 'Create', :class => 'btn btn-large btn-primary'
           = link_to 'Cancel', root_path, :class => 'btn btn-large'          

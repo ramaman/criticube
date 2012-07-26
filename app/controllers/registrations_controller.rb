@@ -1,5 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
 
+  include Devise::Controllers::Rememberable
+
   def new
     @user = User.new
     @user.build_vanity
@@ -38,8 +40,9 @@ class RegistrationsController < Devise::RegistrationsController
       session[:user_return_to] = nil
       flash.delete :recaptcha_error
       @user.save
+      remember_me @user
       sign_in @user
-      redirect_to after_sign_in_path_for(@user)
+      redirect_to after_sign_up_path_for(@user)
     end
   end
 
@@ -55,8 +58,9 @@ class RegistrationsController < Devise::RegistrationsController
         @user.save_with_facebook_session(session["devise.omniauth_attributes"])
         if @user.persisted?
           @user.delay.import_facebook_picture
+          remember_me @user
           sign_in @user
-          redirect_to after_sign_in_path_for(@user)
+          redirect_to after_sign_up_path_for(@user)
         else
           render :new_from_facebook
         end        
@@ -71,9 +75,9 @@ class RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  # def after_sign_up_path_for(resource)
-  #   welcome_path
-  # end  
+  def after_sign_up_path_for(resource)
+    root_path
+  end  
 
   def user_params
     params[:user].slice(:email, :password, :password_confirmation, :first_name, :last_name)

@@ -1,0 +1,37 @@
+- provide :content do
+
+  .page-header
+    %h2
+      = link_to @cube.name, vanity_path(@cube)
+      = '/ Admin'
+
+  .row
+    .span4
+      = image_tag(@cube.avatar_url)
+      %br/      
+      %br/
+      = simple_form_for @cube, :url => vanity_path(@cube), :method => :put, :html => {:multipart => true} do |f|
+        .control-group
+          = f.label 'Upload photo', :class => 'control-label core'
+          .controls
+          = f.file_field :avatar
+        = f.submit "Upload", :class => 'btn btn-primary'
+
+    .span8
+      = simple_form_for @cube, :url => vanity_path(@cube), :method => :put do |f|
+        .row
+          .span4
+            .control-group
+              = f.label 'Name', :class => 'control-label core'
+              .controls
+                = f.text_field :name, :class => 'span8'
+        .row
+          .span4
+            .control-group
+              = f.label :description, :class => 'control-label core'
+              .controls
+                = f.text_area :description, :class => 'span8 medium autoresize'
+
+        .control-group
+          = f.submit "Update", :class => 'btn btn-large btn-primary'
+          = link_to "Cancel", vanity_path(@cube), :class => 'btn btn-large'
