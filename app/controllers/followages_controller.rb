@@ -4,10 +4,8 @@ class FollowagesController < ApplicationController
 
   def create
     if params[:followage]
-      if (params[:followage][:followed_type] == 'User')
-        @parent = Object.const_get(params[:followage][:followed_type]).find(params[:followage][:followed_id])
-        current_user.follow!(@parent)
-      end
+      @parent = Object.const_get(params[:followage][:followed_type]).find(params[:followage][:followed_id])
+      current_user.follow!(@parent)
     end
     
     respond_to do |format|
@@ -55,12 +53,13 @@ class FollowagesController < ApplicationController
   def parent_object
     case
       when params[:user_id] then User.find(params[:user_id])
+      when params[:cube_id] then Cube.find(params[:cube_id])        
     end
   end  
 
   def parent_url(parent)
     case
-      when params[:user_id] then vanity_path(parent)
+      when params[:cube_id] then vanity_path(parent)
     end
   end
 

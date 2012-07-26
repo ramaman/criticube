@@ -1,9 +1,9 @@
 class CubesController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:show]
+  before_filter :authenticate_user!, :except => [:index, :show]
 
   def index
-    @cubes = User.order("RANDOM()").page(params[:page]).per(50)
+    @cubes = Cube.order("RANDOM()").page(params[:page]).per(50)
     respond_to :html
   end
 
@@ -22,12 +22,20 @@ class CubesController < ApplicationController
     @cube = Cube.new(cube_params)
     @cube.vanity = Vanity.new_from_name(params[:cube][:vanity_attributes][:name])    
     @cube.assign_manager(current_user)
-    @cube.save!
+    @cube.save
     if @cube.save
       redirect_to vanity_path(@cube)
     else
       render :new
     end
+  end
+
+  def add_member
+
+  end
+
+  def remove_member
+
   end
 
   def edit

@@ -37,7 +37,8 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    # LEAVE THIS EMPTY
+    raise ActionController::RoutingError.new('Not Found')
+    # LEAVE THIS
   end
 
   private

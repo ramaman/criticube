@@ -21,4 +21,11 @@
             = follow_button(@user)
     %p
       
+  .row
+    .span4
+      - @user.cubes.each do |cube|
+        .clearfix
+          = link_to cube.name, vanity_path(cube)
+    .span8    
+      
       

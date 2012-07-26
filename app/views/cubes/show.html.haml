@@ -1,3 +1,17 @@
 - provide :content do
 
-  = @cube.name
+  .page-header
+    .row
+      .span2
+        = 'Avatar here'
+        / = image_tag(@cube.avatar_url)
+      .span8
+        %h1
+          %p
+            = @cube.name    
+      .span2
+        / - if user_signed_in? && ( current_user)
+        /   = link_to 'Admin', '#', :class => 'btn'
+        / - else
+        %span.follow_panel{:data => {"id" => @cube.id, "tipe" => @cube.class.to_s }}
+          = follow_button(@cube)

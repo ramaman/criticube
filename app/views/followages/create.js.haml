@@ -1,2 +1,2 @@
-$(".follow_panel[data-id=#{@parent.id}][data-tipe=#{@parent.class}]").html("#{escape_javascript(follow_button(@parent))}");
+$(".follow_panel[data-id=#{@parent.id}][data-tipe=#{@parent.class.to_s}]").html("#{escape_javascript(follow_button(@parent))}");
 $("a.follower_count[data-id=#{@parent.id}][data-tipe=#{@parent.class.to_s}]").html("#{escape_javascript(pluralize(@parent.followers.count, 'followers'))}");

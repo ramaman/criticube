@@ -1,0 +1,9 @@
+- provide :content do
+
+  %h2.page-header
+    = 'Recent Cubes'
+  %ul.items.links.items-content
+    - @cubes.each do |c|
+      %p
+        = link_to(c.name, vanity_path(c))
+    = paginate(@cubes)

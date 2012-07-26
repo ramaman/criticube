@@ -16,7 +16,15 @@ class Cube < ActiveRecord::Base
   has_many  :members,
             :through => :roles,
             :source => :owner,
-            :source_type => 'User'          
+            :source_type => 'User'    
+            
+  has_many  :reverse_followages,
+            :as => :followed,
+            :class_name => 'Followage',
+            :dependent => :destroy
+
+  has_many  :followers,
+            :through => :reverse_followages                  
 
   accepts_nested_attributes_for :vanity,
                                 :allow_destroy => false, 
@@ -55,8 +63,18 @@ class Cube < ActiveRecord::Base
   after_initialize :automake_vanity
   before_validation :save_page_name
 
+  def managers
+    
+  end
+
   def assign_manager(owner)
-    self.roles << Role.new_assignment(owner, self, 'manager')
+    r = Role.where(:tipe => 'manager', :owner_id => owner.id, :owner_type => owner.class.to_s.downcase, :on_id => self.id, :on_type => self.class.to_s.downcase)
+    if r.length > 0
+      r.each {|o| o.destroy}
+      self.roles << Role.new_assignment(owner, self, 'manager')
+    else
+      self.roles << Role.new_assignment(owner, self, 'manager')
+    end
   end
 
   def save_page_name

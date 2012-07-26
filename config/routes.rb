@@ -22,7 +22,7 @@ Criticube::Application.routes.draw do
   
   resources :users, :only => [:index]
   get '/users/:id' => 'users#old_show', :as => 'user_old_show'
-  resources :cubes, :only => [:new, :create]
+  resources :cubes, :only => [:index, :new, :create]
   resources :followages, :only => [:create, :destroy]
 
   delete "/authentications/:provider" => 'authentications#destroy', :as => 'destroy_authentication'
@@ -30,6 +30,7 @@ Criticube::Application.routes.draw do
   get '/:id', :as => 'vanity', :to => proc { |env| vanity_controller(env, 'show') }
   get '/:id/edit', :as => 'edit_vanity', :to =>  proc { |env| vanity_controller(env, 'edit') }
   put '/:id', :as => 'vanity', :to => proc { |env| vanity_controller(env, 'update') }
+  delete '/:id', :as => 'vanity', :to => proc { |env| vanity_controller(env, 'destroy') }
 
   def vanity_controller(env, action)
     id = env["action_dispatch.request.path_parameters"][:id]
