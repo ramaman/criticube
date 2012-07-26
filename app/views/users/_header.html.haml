@@ -9,11 +9,12 @@
             = link_to user.name, vanity_path(user)
           - else
             = user.name    
-      .big-text
-        %p
-          - if user.bio
+      .big-text        
+        - if user.bio
+          %p
             = user.bio
-          - else
+        - elsif user == current_user
+          %p
             = link_to 'Add a short description about yourself', edit_vanity_path(user)
         .clearfix
           = 'Following'
