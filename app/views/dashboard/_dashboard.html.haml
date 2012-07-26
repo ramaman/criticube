@@ -3,6 +3,15 @@
   .span8
     = 'feed'
   .span4
-    = link_to 'Admin', admin_dashboard_path
-    %br/
+    %p
+      %h4 Followed Cubes
+    %ul.items.cubes
+      - current_user.cubes_to_check.each do |cube|
+        %li.item
+          = link_to cube.name, vanity_path(cube), :class => 'label label-cclink'
+    %hr    
+    - if current_user.is_admin?
+      = link_to 'Admin', admin_dashboard_path
+      %hr
     = link_to 'New Cube', new_cube_path
+    %hr

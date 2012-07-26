@@ -4,7 +4,7 @@
     .row
       .span2
         = image_tag(@user.avatar_url)
-      .span8
+      .span7
         %h1
           %p
             = @user.name    
@@ -13,19 +13,25 @@
             = @user.bio
           - else
             = link_to 'Add a short description about yourself', edit_vanity_path(@user)
-      .span2
-        - if user_signed_in? && (@user == current_user)
-          = link_to 'Edit profile', edit_vanity_path(@user), :class => 'btn'
-        - else
-          %span.follow_panel{:data => {"id" => @user.id, "tipe" => @user.class.to_s }}
-            = follow_button(@user)
+      .span3
+        .right
+          - if user_signed_in? && (@user == current_user)
+            = link_to 'Edit profile', edit_vanity_path(@user), :class => 'btn'
+          - else
+            %span.follow_panel{:data => {"id" => @user.id, "tipe" => @user.class.to_s }}
+              = follow_button(@user)
     %p
       
   .row
-    .span4
+    .span4.right
+      %h3
+        = 'Participated Cubes'
+      %br/  
+
       - @user.cubes.each do |cube|
-        .clearfix
-          = link_to cube.name, vanity_path(cube)
+        .well.white.slim
+          = link_to cube.name, vanity_path(cube), :class => 'core'
+    
     .span8    
       
       

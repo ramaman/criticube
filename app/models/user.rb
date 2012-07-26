@@ -33,6 +33,11 @@ class User < ActiveRecord::Base
             :source => :followed,
             :source_type => 'User'
 
+  has_many  :followed_cubes,
+            :through => :followages,
+            :source => :followed,
+            :source_type => 'Cube'
+
   has_many  :reverse_followages,
             :as => :followed,
             :class_name => 'Followage',
@@ -44,6 +49,11 @@ class User < ActiveRecord::Base
   has_many  :roles,
             :as => :owner,
             :dependent => :destroy
+
+  has_many  :manager_roles,
+            :as => :owner,
+            :class_name => 'Role',
+            :conditions => {:tipe => 'manager'}            
 
   has_many  :cubes,
             :through => :roles,
@@ -130,6 +140,12 @@ class User < ActiveRecord::Base
 
   def is_super_admin?
     return true if self.super_admin == true
+  end
+
+  ## Personalized items
+
+  def cubes_to_check
+    self.followed_cubes
   end
 
   ## User actions

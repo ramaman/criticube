@@ -23,6 +23,7 @@ class CubesController < ApplicationController
     @cube.vanity = Vanity.new_from_name(params[:cube][:vanity_attributes][:name])    
     @cube.assign_manager(current_user)
     @cube.save
+    current_user.follow!(@cube)
     if @cube.save
       redirect_to vanity_path(@cube)
     else

@@ -18,6 +18,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     else
       user = User.from_facebook(omniauth_hash)
       if user.persisted?
+        remember_me user
         sign_in_and_redirect user
       else
         ## Prepare new user registration

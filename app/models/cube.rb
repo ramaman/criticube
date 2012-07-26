@@ -16,7 +16,17 @@ class Cube < ActiveRecord::Base
   has_many  :members,
             :through => :roles,
             :source => :owner,
-            :source_type => 'User'    
+            :source_type => 'User'
+            
+  has_many  :manager_roles,
+            :as => :on,
+            :class_name => 'Role',
+            :conditions => {:tipe => 'manager'}
+
+  has_many  :managers,
+            :through => :manager_roles,
+            :source => :owner,
+            :source_type => 'User'
             
   has_many  :reverse_followages,
             :as => :followed,

@@ -7,6 +7,8 @@ $blue: #4477AA
 $black: #000000
 $grayDarker: #222222
 $grayDark: #333333
+$gray: #555555
+$grayLight: #C7C7C7
 $grayLighter: #EEEEEE
 $graySuperLight: #F7F7F7
 $white: #FFFFFF
@@ -43,6 +45,20 @@ $navbarTextBottomPad: 14px
 
 .well
   background-color: $graySuperLight
+  &.slim
+    padding: 14px
   &.danger
     background-color: $btnDangerBackground
     color: $white 
+  &.white
+    border-color: $grayLight
+    background-color: $white
+
+span.label.label-cclink, a.label.label-cclink
+  background-color: $linkColor
+  color: $white
+
+//hr
+  //border-width: 1px
+  //color: $grayLighter !important
+  //border-color: $grayLighter !important
