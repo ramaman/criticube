@@ -10,6 +10,7 @@ class CubesController < ApplicationController
 
   def show
     @cube = Cube.find(params[:id])
+    @title = @cube.name
     respond_to :html
   end
 

@@ -33,7 +33,8 @@ class Post < ActiveRecord::Base
   validates :parent,
             :presence => true            
 
-  # default_scope includes{cube, cube.managers, creator}
+  default_scope includes{cube.managers creator}
+
 
   def name
     self.headline
@@ -41,6 +42,14 @@ class Post < ActiveRecord::Base
 
   def normalize_friendly_id(string)
     super[0..100]
+  end
+
+  def can_edit?(user)
+
+  end
+
+  def can_delete(user)
+
   end
 
 end
