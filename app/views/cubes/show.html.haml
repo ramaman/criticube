@@ -1,3 +1,15 @@
 - provide :content do
 
   = render :partial => 'header', :locals => {:cube => @cube}
+
+  .row
+    .span7.offset1
+      = render :partial => '/shared/new_post', :locals => {:parent => @cube}
+    .span4
+      %h3
+        = 'Recent opinions'
+      %br/
+      %ul.items  
+        - @cube.opinions.limit(8).each do |opinion|
+          %li
+            = link_to opinion.name, vanity_post_path(@cube, opinion), :class => 'core'         

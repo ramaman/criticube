@@ -34,7 +34,15 @@ class Cube < ActiveRecord::Base
             :dependent => :destroy
 
   has_many  :followers,
-            :through => :reverse_followages                  
+            :through => :reverse_followages
+            
+  has_many  :posts,
+            :as => :parent 
+
+  has_many  :opinions,
+            :as => :parent,
+            :class_name => 'Post',
+            :conditions => {:tipe => 'opinion'}                                        
 
   accepts_nested_attributes_for :vanity,
                                 :allow_destroy => false, 

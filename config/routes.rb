@@ -35,6 +35,10 @@ Criticube::Application.routes.draw do
   get '/:id/followers', :as => 'vanity_followers', :to => 'followages#followers'  
   get '/:id/admins', :as => 'vanity_admins', :to => 'cubes#admins'
 
+  post '/:vanity_id/posts' => 'posts#create', :as => 'vanity_posts'
+  get '/:vanity_id/:id' => 'posts#show', :as => 'vanity_post'
+  get '/:vanity_id/:id' => 'posts#edit', :as => 'edit_vanity_post'
+  put '/:vanity_id/:id' => 'posts#update', :as => 'vanity_post'
 
   def vanity_controller(env, action)
     id = env["action_dispatch.request.path_parameters"][:id]

@@ -1,2 +1,10 @@
-#new_post
-  = 'New post module'
+#new_post.well
+  %p.core
+    = 'Post new opinion'
+  = simple_form_for Post.new, :url => vanity_posts_path(parent), :html => {:class => 'form-vertical', :style => "margin-bottom:0px"}, :validate => true do |f|
+    = f.hidden_field :tipe, :value => 'opinion'
+    = f.hidden_field :parent_id, :value => parent.id
+    = f.hidden_field :parent_type, :value => parent.class.to_s
+    .controls
+      = f.text_field :headline, :placeholder => 'I think that..', :style => "width:489px", :autocomplete => :off
+    = f.submit 'Post', :class => 'btn btn-primary core'        

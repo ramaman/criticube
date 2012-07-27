@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120726163212) do
+ActiveRecord::Schema.define(:version => 20120726235120) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -88,6 +88,25 @@ ActiveRecord::Schema.define(:version => 20120726163212) do
   add_index "followages", ["followed_id", "followed_type"], :name => "index_followages_on_followed_id_and_followed_type"
   add_index "followages", ["follower_id", "followed_id", "followed_type"], :name => "followage_combo", :unique => true
   add_index "followages", ["follower_id"], :name => "index_followages_on_follower_id"
+
+  create_table "posts", :force => true do |t|
+    t.string   "headline",    :null => false
+    t.text     "content"
+    t.integer  "creator_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.string   "slug"
+    t.string   "tipe"
+    t.string   "parent_type"
+    t.integer  "parent_id"
+  end
+
+  add_index "posts", ["creator_id"], :name => "index_posts_on_creator_id"
+  add_index "posts", ["headline"], :name => "index_posts_on_headline"
+  add_index "posts", ["slug"], :name => "index_posts_on_slug", :unique => true
+  add_index "posts", ["tipe", "creator_id"], :name => "index_posts_on_tipe_and_creator_id"
+  add_index "posts", ["tipe", "parent_id", "parent_type"], :name => "index_posts_on_tipe_and_parent_id_and_parent_type"
+  add_index "posts", ["tipe"], :name => "index_posts_on_tipe"
 
   create_table "roles", :force => true do |t|
     t.string   "tipe"
