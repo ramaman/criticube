@@ -3,8 +3,9 @@
   = render :partial => 'header', :locals => {:cube => @cube}
 
   .row
-    .span7.offset1
-      = render :partial => '/shared/new_post', :locals => {:parent => @cube}
+    - if user_signed_in?
+      .span7.offset1
+        = render :partial => '/shared/new_post', :locals => {:parent => @cube}
     .span4
       %h3
         = 'Recent opinions'

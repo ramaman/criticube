@@ -45,7 +45,7 @@ ActiveAdmin.register User do
   show do 
     panel "User Details" do
       attributes_table_for user do
-        row("Name") { link_to(user.name, user_path(user)) }
+        row("Name") { link_to(user.name, vanity_path(user)) }
         row("Banned") { user.banned }
         row("Email") { user.email } if current_user.super_admin?
         row("Current sign in at") { user.current_sign_in_at }
