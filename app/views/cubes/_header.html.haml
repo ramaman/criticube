@@ -12,6 +12,10 @@
               - else
                 = cube.name
           .big-text
+            .content
+              - if cube.description && !cube.description.blank?
+                = htmlize(cube.description)                
+
             / .managers
             / %p
             /   = managers_list(cube)
