@@ -27,6 +27,7 @@ gem "meta-tags", "~> 1.2.6", :require => 'meta_tags'
 
 # Database related
 gem 'pg'
+gem 'yaml_db'
 gem 'friendly_id', '~> 4.0.7'
 gem 'squeel', '~> 1.0.7'
 gem "pg_search", '~> 0.5'
