@@ -41,3 +41,11 @@ staging:
   database: da8dahahupb18q
   username: rsdopfrzcqfcul
   password: 4c-2rMsIh84M3tiCV-NeWQFLm4
+
+production:
+  host: ec2-107-20-162-239.compute-1.amazonaws.com
+  adapter: postgresql
+  encoding: unicode
+  database: d7dd2iusp07r27
+  username: ua0oai4b7qoa6
+  password: pe1hopktr434113gtje246bdof

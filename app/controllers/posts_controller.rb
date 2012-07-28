@@ -10,7 +10,7 @@ class PostsController < ApplicationController
     @post = Post.new(new_post_params)
     @post.parent = @parent
     @post.creator = current_user
-    @post.save!
+    @post.save
     if @post.save
       redirect_to vanity_post_path(@parent, @post)
     else

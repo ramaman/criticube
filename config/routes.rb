@@ -41,6 +41,12 @@ Criticube::Application.routes.draw do
   put '/:vanity_id/:id' => 'posts#update', :as => 'vanity_post'
   delete '/:vanity_id/:id' => 'posts#destroy', :as => 'vanity_post'
 
+  post '/:vanity_id/:post_id/replies' => 'replies#create', :as => 'vanity_post_replies'
+  # get '/:vanity_id/:post_id/:id' => 'replies#update', :as => 'vanity_post_reply'
+  # get '/:vanity_id/:post_id/:id/edit' => 'replies#edit', :as => 'edit_vanity_post_reply'
+  # put '/:vanity_id/:post_id/:id' => 'replies#update', :as => 'vanity_post_reply'
+  delete '/:vanity_id/:post_id/:id' => 'replies#destroy', :as => 'vanity_post_reply'
+
   def vanity_controller(env, action)
     id = env["action_dispatch.request.path_parameters"][:id]
     vanity = Vanity.find(id) # rescue nil

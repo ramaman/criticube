@@ -65,10 +65,21 @@ class User < ActiveRecord::Base
             :source => :on,
             :source_type => 'Cube'
             
+  has_many  :created_cubes,
+            :class_name => 'Cube', 
+            :foreign_key => 'creator_id', 
+            :dependent => :nullify
+
   has_many  :created_posts,
             :class_name => 'Post', 
             :foreign_key => 'creator_id', 
-            :dependent => :destroy                        
+            :dependent => :destroy
+            
+  # FIXME
+  # has_many  :created_replies,
+  #           :class_name => 'Reply', 
+  #           :foreign_key => 'creator_id', 
+  #           :dependent => :destroy                                    
 
   accepts_nested_attributes_for :vanity, 
                                 :allow_destroy => false, 
