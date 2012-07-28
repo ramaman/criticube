@@ -18,6 +18,14 @@ module ApplicationHelper
     end
   end
 
+  def description
+    if @description.nil?
+      'Criticube lets you share, discover, and discuss opinions'
+    else
+      short_string(@description, 500)
+    end
+  end  
+
   def htmlize(text,html_options={}, options={})
     text = parse_urls(text)
     text = '' if text.nil?
@@ -62,6 +70,23 @@ module ApplicationHelper
 
   def year(time)
     time.strftime('%Y')
+  end
+
+  def keywords_array
+    base_keywords = "facts, references, investigation, social, media"
+    if @keywords.nil?
+      base_keywords
+    else
+      [@keywords, base_keywords].join(',')
+    end
+  end
+
+  def current_full_url
+    request.protocol + request.host + request.fullpath
+  end
+
+  def full_url(url)
+    request.protocol + request.host + url
   end
 
 end

@@ -15,7 +15,7 @@ class Post < ActiveRecord::Base
 
   belongs_to  :cube,
               :class_name => 'Cube',
-              :foreign_key => 'owner_id'
+              :foreign_key => 'owner_id'              
 
   attr_accessible :headline,
                   :content,

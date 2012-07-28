@@ -23,6 +23,7 @@ gem "kaminari", "~> 0.13.0"
 gem "jbuilder", "~> 0.4.0"
 gem "tinymce-rails", "~> 3.5.5"
 gem "auto_html", "~> 1.5.3"
+gem "meta-tags", "~> 1.2.6", :require => 'meta_tags'
 
 # Database related
 gem 'pg'

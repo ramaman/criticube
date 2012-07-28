@@ -8,6 +8,9 @@ class Reply < ActiveRecord::Base
               :class_name => 'User',
               :foreign_key => 'creator_id'
 
+  belongs_to  :owner
+              :polymorphic => true                        
+
   validates :tipe,
             :inclusion => { :in => tipes, :message => "is not supported"}
 
