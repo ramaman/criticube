@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120726235120) do
+ActiveRecord::Schema.define(:version => 20120728022146) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -54,8 +54,11 @@ ActiveRecord::Schema.define(:version => 20120726235120) do
     t.datetime "updated_at",  :null => false
     t.string   "page_name"
     t.string   "avatar"
+    t.integer  "creator_id"
   end
 
+  add_index "cubes", ["creator_id", "tipe"], :name => "index_cubes_on_creator_id_and_tipe"
+  add_index "cubes", ["creator_id"], :name => "index_cubes_on_creator_id"
   add_index "cubes", ["language"], :name => "index_cubes_on_language"
   add_index "cubes", ["name"], :name => "index_cubes_on_name"
   add_index "cubes", ["page_name"], :name => "index_cubes_on_page_name", :unique => true
@@ -107,6 +110,22 @@ ActiveRecord::Schema.define(:version => 20120726235120) do
   add_index "posts", ["tipe", "creator_id"], :name => "index_posts_on_tipe_and_creator_id"
   add_index "posts", ["tipe", "parent_id", "parent_type"], :name => "index_posts_on_tipe_and_parent_id_and_parent_type"
   add_index "posts", ["tipe"], :name => "index_posts_on_tipe"
+
+  create_table "replies", :force => true do |t|
+    t.string   "tipe"
+    t.text     "content"
+    t.integer  "creator_id"
+    t.integer  "parent_id"
+    t.string   "parent_type"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "replies", ["content"], :name => "index_replies_on_content"
+  add_index "replies", ["creator_id", "tipe"], :name => "index_replies_on_creator_id_and_tipe"
+  add_index "replies", ["creator_id"], :name => "index_replies_on_creator_id"
+  add_index "replies", ["parent_id", "parent_type"], :name => "index_replies_on_parent_id_and_parent_type"
+  add_index "replies", ["tipe"], :name => "index_replies_on_tipe"
 
   create_table "roles", :force => true do |t|
     t.string   "tipe"

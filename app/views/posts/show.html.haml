@@ -12,7 +12,6 @@
           = @post.headline
         .content
           - if @post.content && !@post.content.blank?
-            %br/
             = htmlize(@post.content)
           - elsif user_signed_in? && (current_user == @post.creator)
             %br/

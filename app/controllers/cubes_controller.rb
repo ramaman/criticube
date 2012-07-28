@@ -29,7 +29,8 @@ class CubesController < ApplicationController
   def create
     @cube = Cube.new(cube_params)
     @cube.language = params[:cube][:language]
-    @cube.vanity = Vanity.new_from_name(params[:cube][:vanity_attributes][:name])    
+    @cube.vanity = Vanity.new_from_name(params[:cube][:vanity_attributes][:name])  
+    @cube.creator = current_user  
     @cube.assign_manager(current_user)
     @cube.save
     current_user.follow!(@cube)
