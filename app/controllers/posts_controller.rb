@@ -27,15 +27,32 @@ class PostsController < ApplicationController
   end
 
   def edit
-
+    @post = Post.find(params[:id])  
+    @title = "Edit post - " + @post.headline
+    respond_to :html    
   end
 
   def update
-
+    @post.update_attributes(post_params)
+    respond_to do |format|
+      if @post.save
+        flash[:notice] = 'Cube has been successfully updated'
+        format.html {redirect_to vanity_post_path(@post.parent, @post)}
+      else
+        format.html {redirect_to edit_vanity_post_path(@post.parent, @post)}
+      end  
+    end
   end
 
   def destroy
-
+    @post.destroy
+    if @post.destroy      
+      flash[:notice] = "#{@post.tipe.capitalize} has been successfully deleted"
+      redirect_to vanity_path(@parent)
+    else
+      flash[:alert] = 'Error deleting cube'
+      redirect_to vanity_post_path(@post)
+    end
   end
 
   private
@@ -58,7 +75,11 @@ class PostsController < ApplicationController
 
   def moderator_check
     # Moderators can delete posts, but not edit
-
+    @post = Post.find(params[:id])
+    @parent = @post.parent
+    unless (@post.creator == current_user) || (@parent.managers.include?(current_user))
+      raise ActionController::RoutingError.new('Not Found')
+    end  
   end
 
 end

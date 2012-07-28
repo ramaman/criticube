@@ -22,8 +22,8 @@ class Post < ActiveRecord::Base
                   :tipe
 
   validates :headline,
-            :presence => true,
-            :length => { :minimum => 7, :maximum => 200 }
+            :presence => true #,
+            # :length => { :minimum => 7, :maximum => 200 }
   validates :content,
             :length => { :maximum => 3550, :allow_nil => true, :allow_blank => true }
   validates :slug,

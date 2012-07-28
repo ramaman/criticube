@@ -21,3 +21,4 @@
 //= require lib/jquery.autoresize
 //= require_tree .
 //= require active_admin/base
+//= require tinymce-jquery

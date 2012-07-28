@@ -21,6 +21,8 @@ gem 'client_side_validations', '= 3.2.0.beta.4'
 gem 'client_side_validations-simple_form', "= 2.0.0.beta.1"
 gem "kaminari", "~> 0.13.0"
 gem "jbuilder", "~> 0.4.0"
+gem "tinymce-rails", "~> 3.5.5"
+gem "auto_html", "~> 1.5.3"
 
 # Database related
 gem 'pg'

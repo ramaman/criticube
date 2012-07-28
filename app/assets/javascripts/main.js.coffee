@@ -24,3 +24,26 @@ $ ->
     extraSpace: 0
   )
 
+$ ->
+  $("textarea.steroid").tinymce
+    theme : 'advanced'
+    plugins : "autoresize"
+    height : '20'
+    theme_advanced_toolbar_location : "top"
+    theme_advanced_toolbar_align : "left"
+    theme_advanced_buttons1 : 'bold, italic, underline, strikethrough, separator, bullist, numlist, blockquote, separator, link, unlink'
+    theme_advanced_buttons2 : ''
+    theme_advanced_buttons3 : ''
+    # force_br_newlines : false
+    # force_p_newlines : true
+    remove_linebreaks : true
+    theme_advanced_path : false
+    theme_advanced_font_sizes: "13px"
+    content_css : "/assets/application.css"  
+    handle_event_callback: () ->
+      chars = tinyMCE.activeEditor.getContent().length
+      excess = -3500 + chars
+      if excess > 0
+        $('#bouncer').html('<p><b>' + excess + ' character(s) too long (including formatting) </b></p>')
+      else
+        $('#bouncer').html('')

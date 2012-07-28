@@ -1,31 +1,32 @@
-.page-header
-  .row
-    .span1
-      = image_tag(cube.avatar_url(:medium))
-    .span8
-      %h1
-        %p
-          - if (sub_page == true rescue nil)
-            = link_to cube.name, vanity_path(cube)
-          - else
-            = cube.name
-      .big-text
-        / .managers
-        / %p
-        /   = managers_list(cube)
-          
-        %p
-          = link_to pluralize(cube.followers.count, 'follower'), vanity_followers_path(cube)    
+.row
+  .span1
+    = image_tag(cube.avatar_url(:medium), :class => 'push-further-down')
+  .span11
+    .page-header
+      .row
+        .span7
+          %h1
+            %p
+              - if (sub_page == true rescue nil)
+                = link_to cube.name, vanity_path(cube)
+              - else
+                = cube.name
+          .big-text
+            / .managers
+            / %p
+            /   = managers_list(cube)
+              
+            %p
+              = link_to pluralize(cube.followers.count, 'follower'), vanity_followers_path(cube)    
+        .span4
+          .right
+            %p
+              - if user_signed_in?
+                - if cube.managers.include?(current_user)
+                  %a{:class => 'btn dropdown-toggle', :href => edit_vanity_path(cube), 'data-toggle' => 'dropdown'}
+                    %i.icon-wrench
 
-    .span3
-      .right
-        %p
-          - if user_signed_in?
-            - if cube.managers.include?(current_user)
-              %a{:class => 'btn dropdown-toggle', :href => edit_vanity_path(cube), 'data-toggle' => 'dropdown'}
-                %i.icon-wrench
-
-          %span.follow_panel{:data => {"id" => cube.id, "tipe" => cube.class.to_s }}
-            = follow_button(cube)
-        %p.right.big-text
-          = "Language: #{cube.language}"            
+              %span.follow_panel{:data => {"id" => cube.id, "tipe" => cube.class.to_s }}
+                = follow_button(cube)
+            %p.right.big-text
+              = "Language: #{cube.language}"            

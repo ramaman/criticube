@@ -1,10 +1,42 @@
 - provide :content do
   .row
-    .span8
-      %h2
-        = @post.headline
-
+    .span1
+      = link_to image_tag(@post.creator.avatar_url(:thumb), :class => 'push-further-down'), vanity_path(@post.creator), :class => 'right'
+    .span7
+      .page-header
+        %p
+          %h4
+            = "#{link_to(@post.creator.name, vanity_path(@post.creator))} posted an opinion in #{link_to(@post.parent.name, vanity_path(@post.parent))}".html_safe
+            = " - " + friendly_datetime(@post.created_at)
+        %h1
+          = @post.headline
+        .content
+          - if @post.content && !@post.content.blank?
+            %br/
+            = htmlize(@post.content)
+          - elsif user_signed_in? && (current_user == @post.creator)
+            %br/
+            = link_to 'Add description', edit_vanity_post_path(@post.parent, @post)
 
     .span4
-      .right
-        / = link_to()    
+      .right.push-further-down
+
+        - if user_signed_in?
+          - if @post.creator == current_user
+            .dropdown
+              %a{:class => 'btn dropdown-toggle', :href => '#', 'data-toggle' => 'dropdown'}
+                %i.icon-wrench
+                %b.caret.core
+              %ul.dropdown-menu
+                %li
+                  = link_to "Edit #{@post.tipe}", edit_vanity_post_path(@post.parent, @post)              
+                %li
+                  = link_to "Delete #{@post.tipe}", vanity_post_path(@post.parent, @post), :method => :delete, :confirm => "This action will also delete other users' replies, are you sure?"
+          - elsif @post.parent.managers.include?(current_user)   
+            .dropdown
+              %a{:class => 'btn dropdown-toggle', :href => '#', 'data-toggle' => 'dropdown'}
+                %i.icon-wrench
+                %b.caret.core
+              %ul.dropdown-menu
+                %li
+                  = link_to "Delete #{@post.tipe}", vanity_post_path(@post.parent, @post), :method => :delete, :confirm => "You are about to delete someone else's post using your cube admin rights, are you sure?"

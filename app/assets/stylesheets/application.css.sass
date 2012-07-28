@@ -2,6 +2,17 @@
 @import "lib/bootstrap_and_overrides"
 @import "bootstrap"
 
+// TinyMCE override
 
+span.mceEditor
+  table.mceLayout
+    border-radius: 3px !important
+    -moz-border-radius: 3px !important
+    -webkit-border-radius: 3px !important
 
+body#tinymce
+  margin: 8px !important
 
+blockquote
+  p
+    font-size: $basefont  !important
