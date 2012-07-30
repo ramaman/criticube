@@ -23,7 +23,7 @@
                 = link_to 'Add description', edit_vanity_post_path(@post.parent, @post)
       .row
         .span8
-          %ul.items.replies
+          %ul.items.replies{:data => {'root' => ""}}
             - @post.replies.roots.each do |reply|
               = render :partial => 'reply', :locals => {:reply => reply}
 

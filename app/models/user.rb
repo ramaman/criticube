@@ -136,8 +136,8 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
 
-  pg_search_scope :pg_search, 
-                  :against => [:first_name, :middle_names, :last_name, :page_name]
+  pg_search_scope :pg_search, :against => [:first_name, :middle_names, :last_name, :page_name]
+  multisearchable :against => [:first_name, :middle_names, :last_name, :page_name]
                   
   def permalink
     Rails.application.routes.url_helpers.vanity_path(self.page_name)

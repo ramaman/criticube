@@ -1,0 +1,4 @@
+- if @reply.parent_id
+  = render :partial => '/posts/reply_reply', :locals => {:reply_reply => @reply}
+- else
+  = render :partial => '/posts/reply', :locals => {:reply => @reply}

@@ -18,6 +18,7 @@ class RepliesController < ApplicationController
     respond_to do |format|
       if @reply.save
         format.html {redirect_to vanity_post_path(@post.parent, @post)}
+        format.js {:layout => false}
       else
         flash[:notice] = 'Error posting reply'
         format.html {redirect_to vanity_post_path(@post.parent, @post)}

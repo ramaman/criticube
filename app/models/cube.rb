@@ -87,8 +87,8 @@ class Cube < ActiveRecord::Base
   after_initialize :automake_vanity
   before_validation :save_page_name
 
-  pg_search_scope :pg_search, 
-                  :against => [:name, :page_name]
+  pg_search_scope :pg_search, :against => [:name, :page_name]
+  multisearchable :against => [:name, :page_name]                
 
   def assign_manager(owner)
     r = Role.where(:tipe => 'manager', :owner_id => owner.id, :owner_type => owner.class.to_s.downcase, :on_id => self.id, :on_type => self.class.to_s.downcase)
@@ -103,6 +103,7 @@ class Cube < ActiveRecord::Base
   def save_page_name
     (self.page_name = self.vanity.name) unless self.page_name == self.vanity.name
   end
+
 
   private
 

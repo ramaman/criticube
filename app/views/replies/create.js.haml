@@ -1,0 +1,1 @@
+$("ul.replies[data-root=#{@root rescue nil}]").append("#{escape_javascript(render :partial => 'reply')}")
