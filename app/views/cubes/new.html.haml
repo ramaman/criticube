@@ -11,6 +11,8 @@
           .controls
             / = select_tag(:language, options_for_select(LANGUAGES)) 
             = f.select :language, LANGUAGES, :class => 'span6'
+          .help-block.minor
+            = "Please only use English, other languages will be supported soon."
         .control-group
           = f.label 'Name', :class => 'control-label core'
           .controls
