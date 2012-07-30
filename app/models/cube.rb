@@ -87,7 +87,7 @@ class Cube < ActiveRecord::Base
   after_initialize :automake_vanity
   before_validation :save_page_name
 
-  pg_search_scope :search, 
+  pg_search_scope :pg_search, 
                   :against => [:name, :page_name]
 
   def assign_manager(owner)
