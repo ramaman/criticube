@@ -1,0 +1,17 @@
+%li.reply_reply
+  .row
+    .span1
+      = link_to image_tag(reply_reply.creator.avatar_url(:small)), vanity_path(reply_reply.creator), :class => 'right'
+    .span6
+      .row.header
+        .span4
+          %p
+            = link_to reply_reply.creator.fast_name, vanity_path(reply_reply.creator), :class => 'core'
+        .span2
+          .right
+            = reply_tipe_label(reply_reply)
+      .row.content
+        .span6
+          = simple_htmlize reply_reply.content
+       
+      %hr    

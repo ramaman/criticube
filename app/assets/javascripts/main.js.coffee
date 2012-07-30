@@ -47,3 +47,51 @@ $ ->
         $('#bouncer').html('<p><b>' + excess + ' character(s) too long (including formatting) </b></p>')
       else
         $('#bouncer').html('')
+
+$ -> 
+  # Show/hide by click (click-magic), click => show cm-b
+
+  $('a.click-magic-show').live 'click', (event) ->
+    event.preventDefault()
+    switch_tag = $(this).attr('data-cm-tag')
+    $('.click-magic-front[data-cm-tag='+ switch_tag + ']').hide()
+    $('.click-magic-back[data-cm-tag='+ switch_tag + ']').show()
+
+  $('a.click-magic-hide').live 'click', (event) ->
+    event.preventDefault()
+    switch_tag = $(this).attr('data-cm-tag')
+    $('.click-magic-front[data-cm-tag='+ switch_tag + ']').show()    
+    $('.click-magic-back[data-cm-tag='+ switch_tag + ']').hide()
+
+  $('a.click-magic-showall').live 'click', (event) ->
+    event.preventDefault()
+    switch_tag = $(this).attr('data-cm-tag')
+    $('.click-magic-front[data-cm-tag='+ switch_tag + ']').show()
+    $(this).hide()    
+    
+$ -> 
+  # Show/hide by click (click-magic), click => show cm-b
+  # CMF = CLICK MAGIC FAST 
+
+  $('a.cmf-toggle').live 'click', (event) ->
+    event.preventDefault()
+    switch_tag = $(this).attr('data-cmf-tag')
+    $('.cmf-area[data-cmf-tag='+ switch_tag + ']').toggle()
+  
+  $('a.cmf-show').live 'click', (event) ->
+    event.preventDefault()
+    switch_tag = $(this).attr('data-cmf-tag')
+    $('.cmf-area[data-cmf-tag='+ switch_tag + ']').show()
+
+  $('a.cmf-hide').live 'click', (event) ->
+    event.preventDefault()
+    switch_tag = $(this).attr('data-cmf-tag')
+    $('.cmf-area[data-cmf-tag='+ switch_tag + ']').hide()
+
+$ ->
+  # Show and teleport
+  
+  $('a.sat-switch').live 'click', (event) ->
+    switch_tag = $(this).attr('data-sat-tag')
+    # new_position = $(this).attr('href')
+    $('.sat-area[data-sat-tag='+ switch_tag + ']').show()       

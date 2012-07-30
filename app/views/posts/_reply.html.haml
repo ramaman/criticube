@@ -1,0 +1,76 @@
+%a{:name => "reply_#{reply.id}"}
+%li.post_reply{:data => {'id' => reply.id, 'type' => 'Reply'}}
+  .row
+    .span1
+      = link_to image_tag(reply.creator.avatar_url(:small)), vanity_path(reply.creator), :class => 'right'
+    .span7
+      .row.header
+        .span5
+          %p
+            = link_to reply.creator.fast_name, vanity_path(reply.creator), :class => 'core'
+        .span2
+          .right
+            = reply_tipe_label(reply)
+      .row.content
+        .span7
+          = simple_htmlize reply.content
+      .row.meta
+        .span7
+          %span.actions
+            - if user_signed_in?
+              = link_to 'Reply', "#reply_replies_form_#{reply.id}", :class => 'sat-switch',:data => {"cmf-tag" => "reply_replies_#{reply.id}", "sat-tag" => "reply_replies_#{reply.id}"}
+            - else
+              = link_to 'Reply', new_user_session_path
+            = ' · '  
+          %span.stats.right
+            = link_to "#{reply.children.count} replies", "#", :class => 'cmf-toggle',:data => {"cmf-tag" => "reply_replies_#{reply.id}"}   
+          .hidden-panel.sat-area.cmf-area{:data => {"cmf-tag" => "reply_replies_#{reply.id}", "sat-tag" => "reply_replies_#{reply.id}" }}  
+            %hr
+
+            %ul.items.reply_replies
+              - reply.descendants.each do |reply_reply|
+                = render :partial => 'reply_reply' , :locals => {:reply_reply => reply_reply} 
+
+            - if user_signed_in?  
+
+              %a{:name => "reply_replies_form_#{reply.id}"}
+              .row
+                .span1
+                  = link_to image_tag(current_user.avatar_url(:small)), vanity_path(current_user), :class => 'right'
+                .span6 
+                  .well.reply_reply_form{:data => {'id' => reply.id, 'type' => 'Reply'}}             
+
+                    %p.core
+                      = "Reply to"
+                      %span.reply_to_indicator
+                        = link_to("#{reply.creator.name}'s opinion", reply.dynamic_permalink)
+                    %p
+                      = "Be friendly and respectful to other people."
+                      %br/
+                      = "Write in #{@post.parent.language} (language of the containing cube)."  
+
+                    = form_for Reply.new, :url => vanity_post_replies_path(@post.parent, @post), :validate => true, :html => {:class => 'form-vertical', :style => "margin-bottom:0px"} do |f|
+                      .control-group
+                        .controls
+                          = f.hidden_field :parent_id, :value => reply.id
+                          = f.text_area :content, :class => "medium span6 autoresize", :style => "width:410px", :placeholder => 'Post a reply', :maxlength => 3000
+                          / = f.text_area :content, :class => ['steroid', 'medium'], :style => "width:500px", :placeholder => 'You can fill this later (maximum 2000 characters)',:toolbar => 'Easy', :autocomplete => :off
+                      .row
+                        .span4.controls
+                          %label.radio.inline
+                            = radio_button("reply", "tipe", "neutral", {:checked => true})
+                            %span.label.label-cclink
+                              = 'Neutral'
+                          %label.radio.inline
+                            = radio_button("reply", "tipe", "support")
+                            %span.label.label-success
+                              = 'Support'
+                          %label.radio.inline
+                            = radio_button("reply", "tipe", "challenge")
+                            %span.label.label-important
+                              = 'Challenge'
+                        .span1.pull-right
+                          .right
+                            = f.submit 'Post', :class => 'btn btn-primary core'            
+
+      %hr

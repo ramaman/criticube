@@ -11,4 +11,6 @@
       .controls
         = f.text_area :content, :class => ['steroid', 'medium'], :style => "width:500px", :placeholder => 'You can fill this later (maximum 2000 characters)',:toolbar => 'Easy', :autocomplete => :off
       #bouncer  
-    = f.submit 'Post', :class => 'btn btn-primary core'
+    .row
+      .right
+        = f.submit 'Post', :class => 'btn btn-primary core'

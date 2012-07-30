@@ -74,12 +74,17 @@ class User < ActiveRecord::Base
             :class_name => 'Post', 
             :foreign_key => 'creator_id', 
             :dependent => :destroy
+
+  has_many  :created_replies,
+            :class_name => 'Reply', 
+            :foreign_key => 'creator_id', 
+            :dependent => :destroy            
             
   # FIXME
   # has_many  :created_replies,
   #           :class_name => 'Reply', 
   #           :foreign_key => 'creator_id', 
-  #           :dependent => :destroy                                    
+  #           :dependent => :destroy
 
   accepts_nested_attributes_for :vanity, 
                                 :allow_destroy => false, 

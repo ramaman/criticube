@@ -15,7 +15,10 @@ class Post < ActiveRecord::Base
 
   belongs_to  :cube,
               :class_name => 'Cube',
-              :foreign_key => 'owner_id'              
+              :foreign_key => 'owner_id'  
+              
+  has_many  :replies,
+            :as => :container                          
 
   attr_accessible :headline,
                   :content,
@@ -35,6 +38,7 @@ class Post < ActiveRecord::Base
 
   default_scope includes{cube.managers creator}
 
+  before_validation :cleanup
 
   def name
     self.headline
@@ -51,5 +55,21 @@ class Post < ActiveRecord::Base
   def can_delete(user)
 
   end
+
+  private
+
+  def cleanup
+    self[:headline] = self[:headline].strip
+    if self[:content] 
+      self[:content].gsub(/<code>.+?<\/code>/) {|s| s.gsub(/<br\s*\/?>/, "")}
+      self[:content].gsub(/<p>[\s$]*<\/p>/, '')
+      self[:content].gsub! /(&nbsp;|\s)+/, ' '
+      self[:content] = Sanitize.clean( self[:content], 
+          :elements => %w(a abbr b blockquote cite dd dfn dl dt em i kbd li mark ol p pre q s samp small strike strong sub sup time u ul var),
+          :attributes => {'a' => ['href', 'title'], 'span' => ['class']},
+          :protocols => {'a' => {'href' => ['http', 'https', 'mailto']}}
+          )
+    end
+  end  
 
 end

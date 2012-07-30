@@ -1,21 +1,38 @@
 - provide :content do
+  %a{:name => "post_#{@post.id}"}
   .row
-    .span1
-      = link_to image_tag(@post.creator.avatar_url(:thumb), :class => 'push-further-down'), vanity_path(@post.creator), :class => 'right'
-    .span7
-      .page-header
-        %p
-          %h4
-            = "#{link_to(@post.creator.name, vanity_path(@post.creator))} posted an opinion in #{link_to(@post.parent.name, vanity_path(@post.parent))}".html_safe
-            = " - " + friendly_datetime(@post.created_at)
-        %h1
-          = @post.headline
-        .content
-          - if @post.content && !@post.content.blank?
-            = htmlize(@post.content)
-          - elsif user_signed_in? && (current_user == @post.creator)
-            %br/
-            = link_to 'Add description', edit_vanity_post_path(@post.parent, @post)
+    .span8
+      .row
+        .span1
+          = link_to image_tag(@post.creator.avatar_url(:thumb), :class => 'push-further-down'), vanity_path(@post.creator), :class => 'right'
+        .span7
+          .page-header
+            %p
+              %h4
+                = link_to(@post.creator.name, vanity_path(@post.creator))
+                = ' posted an opinion in '
+                = link_to(@post.parent.name, vanity_path(@post.parent))
+                = " - " + friendly_datetime(@post.created_at)
+            %h1
+              = @post.headline
+            .content
+              - if @post.content && !@post.content.blank?
+                = htmlize(@post.content)
+              - elsif user_signed_in? && (current_user == @post.creator)
+                %br/
+                = link_to 'Add description', edit_vanity_post_path(@post.parent, @post)
+      .row
+        .span8
+          %ul.items.replies
+            - @post.replies.roots.each do |reply|
+              = render :partial => 'reply', :locals => {:reply => reply}
+
+      - if user_signed_in?
+        .row
+          .span1
+            = link_to image_tag(current_user.avatar_url(:small)), vanity_path(current_user), :class => 'right'
+          .span7
+            = render :partial => 'new_reply'  
 
     .span4
       .right.push-further-down

@@ -7,10 +7,10 @@
       = f.hidden_field :parent_id, :value => @post.parent.id
       = f.hidden_field :parent_type, :value => @post.parent.class.to_s
       .controls
-        = f.text_field :headline, :placeholder => 'I think that..', :style => "width:490px", :autocomplete => :off, :maxlength => 199
+        = f.text_field :headline, :placeholder => 'I think that..', :autocomplete => :off, :maxlength => 199, :class => 'span7'
       .control-group
         .controls
-          = f.text_area :content, :class => ['steroid', 'medium'], :style => "width:500px", :placeholder => 'You can fill this later (maximum 2000 characters)',:toolbar => 'Easy'
+          = f.text_area :content, :class => ['steroid', 'medium'], :style => "width:540px", :placeholder => 'You can fill this later (maximum 2000 characters)',:toolbar => 'Easy'
         #bouncer  
       = f.submit 'Update', :class => 'btn btn-primary core'
       = link_to "Back", vanity_post_path(@post.parent, @post), :class => 'btn'

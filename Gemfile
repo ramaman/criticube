@@ -43,6 +43,7 @@ gem "mini_magick", "~> 3.4"
 
 # Misc
 gem 'nokogiri', '~> 1.5.5'
+gem "sanitize", "~> 2.0.3"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

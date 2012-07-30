@@ -1,5 +1,6 @@
 //= require_self
 @import "lib/bootstrap_and_overrides"
+@import "lib/javascript_specific"
 @import "bootstrap"
 
 // TinyMCE override
@@ -15,4 +16,12 @@ body#tinymce
 
 blockquote
   p
-    font-size: $basefont  !important
+    font-size: $basefont !important
+
+footer
+  margin: 75px 0px 0px 0px
+  background-color: #EEE  
+  min-height: 256px 
+  height: auto !important
+  .container
+    padding: 40px 0px 0px 0px

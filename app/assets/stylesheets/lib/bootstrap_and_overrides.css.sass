@@ -122,14 +122,17 @@ span.push-further-down, img.push-further-down, .push-further-down
 .minor, a.minor, p.minor, span.minor
   font-size: 11px 
 
+.quiet, p.quiet, span.quiet .quiet a, .quiet a:hover, .quiet a:visited
+  opacity: 0.7 !important  
+
 .blend a, a.blend, p.blend a, span.blend a
   color: $textColor
   
 .left
-  float: left
+  float: left !important
 
 .right
-  float: right
+  float: right !important
 
 textarea.slim
   height: 60px

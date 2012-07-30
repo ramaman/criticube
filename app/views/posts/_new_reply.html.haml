@@ -1,0 +1,27 @@
+.well
+  %p
+    = "Be friendly and respectful to other people."
+    %br/
+    = "Write in #{@post.parent.language} (language of the containing cube)."  
+  = form_for Reply.new, :url => vanity_post_replies_path(@post.parent, @post), :validate => true, :html => {:class => 'form-vertical', :style => "margin-bottom:0px"} do |f|
+    .control-group
+      .controls
+        = f.text_area :content, :class => "medium span6 autoresize", :style => "width:490px", :placeholder => 'Post a reply', :maxlength => 3000
+        / = f.text_area :content, :class => ['steroid', 'medium'], :style => "width:500px", :placeholder => 'You can fill this later (maximum 2000 characters)',:toolbar => 'Easy', :autocomplete => :off
+    .row
+      .span5.controls
+        %label.radio.inline
+          = radio_button("reply", "tipe", "neutral", {:checked => true})
+          %span.label.label-cclink
+            = 'Neutral'
+        %label.radio.inline
+          = radio_button("reply", "tipe", "support")
+          %span.label.label-success
+            = 'Support'
+        %label.radio.inline
+          = radio_button("reply", "tipe", "challenge")
+          %span.label.label-important
+            = 'Challenge'
+      .span1.pull-right
+        .right
+          = f.submit 'Post', :class => 'btn btn-primary core'
