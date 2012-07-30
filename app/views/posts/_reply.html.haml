@@ -49,7 +49,7 @@
                       %br/
                       = "Write in #{@post.parent.language} (language of the containing cube)."  
 
-                    = form_for Reply.new, :url => vanity_post_replies_path(@post.parent, @post), :html => {:class => 'form-vertical', :style => "margin-bottom:0px"}, :remote => true do |f|
+                    = form_for Reply.new, :url => vanity_post_replies_path(@post.parent, @post), :html => {:class => 'form-vertical', :style => "margin-bottom:0px", 'data-root' => "Reply_#{reply.id}"}, :remote => true do |f|
                       .control-group
                         .controls
                           = f.hidden_field :parent_id, :value => reply.id

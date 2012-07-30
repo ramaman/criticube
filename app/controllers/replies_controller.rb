@@ -12,13 +12,14 @@ class RepliesController < ApplicationController
     @reply.creator = current_user
     if params[:reply][:parent_id] && !params[:reply][:parent_id].blank? # ADD CHECK IF REPLY IS INSIDE THE CUBE && @cube.replies.find(params[:reply][:parent_id])
       @reply.parent_id = params[:reply][:parent_id]
+      @root = @reply.root
     end
     @reply.save
 
     respond_to do |format|
       if @reply.save
         format.html {redirect_to vanity_post_path(@post.parent, @post)}
-        format.js {:layout => false}
+        format.js {render :layout => false}
       else
         flash[:notice] = 'Error posting reply'
         format.html {redirect_to vanity_post_path(@post.parent, @post)}
