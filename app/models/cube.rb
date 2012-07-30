@@ -87,6 +87,9 @@ class Cube < ActiveRecord::Base
   after_initialize :automake_vanity
   before_validation :save_page_name
 
+  pg_search_scope :search, 
+                  :against => [:name, :page_name]
+
   def assign_manager(owner)
     r = Role.where(:tipe => 'manager', :owner_id => owner.id, :owner_type => owner.class.to_s.downcase, :on_id => self.id, :on_type => self.class.to_s.downcase)
     if r.length > 0
