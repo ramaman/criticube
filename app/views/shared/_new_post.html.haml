@@ -1,12 +1,15 @@
 #new_post.well
-  %p.core
-    = 'Post new opinion'
+  %p
+    %span.core
+      = "Post new opinion"
+    %span.minor.right
+      = "Please use #{parent.language}"
   = simple_form_for Post.new, :url => vanity_posts_path(parent), :html => {:class => 'form-vertical', :style => "margin-bottom:0px"} do |f|
     = f.hidden_field :tipe, :value => 'opinion'
     = f.hidden_field :parent_id, :value => parent.id
     = f.hidden_field :parent_type, :value => parent.class.to_s
     .controls
-      = f.text_field :headline, :placeholder => 'I think that..', :style => "width:490px", :autocomplete => :off, :maxlength => 199
+      = f.text_field :headline, :placeholder => 'I think that..', :style => "width:490px", :autocomplete => :off, :maxlength => 199            
     .control-group
       .controls
         = f.text_area :content, :class => ['steroid', 'medium'], :style => "width:500px", :placeholder => 'You can fill this later (maximum 2000 characters)',:toolbar => 'Easy', :autocomplete => :off

@@ -1,5 +1,5 @@
-%a{:name => "reply_#{reply_reply.id}"}
-%li.reply_reply
+%li.reply{:data => {'type' => 'Reply', 'id' => reply_reply.id}}
+  %a{:name => "reply_#{reply_reply.id}"}
   .row
     .span1
       = link_to image_tag(reply_reply.creator.avatar_url(:small)), vanity_path(reply_reply.creator), :class => 'right'
@@ -12,19 +12,14 @@
               %span.minor
                 = ' replied to '
                 = link_to("#{reply_reply.parent.creator.fast_name}'s opinion", reply_reply.parent.dynamic_permalink)            
-        .span2
-          .right
-            = reply_tipe_label(reply_reply)
+        .span2.align-right
+          = render :partial => '/posts/reply_corner', :locals => {:reply => reply_reply}
       .row.content
         .span6
           = simple_htmlize reply_reply.content
       .row.meta{:data => {'id' => reply_reply.id, 'anchor' => link_to("#{reply_reply.creator.name}'s opinion", reply_reply.dynamic_permalink)}} 
         .span6
           %span.actions
-            - if user_signed_in?
-              = link_to 'Reply', "#reply_replies_form_#{reply.id}", :class => 'sat-switch reply-to',:data => {"cmf-tag" => "reply_replies_#{reply.id}", "sat-tag" => "reply_replies_#{reply.id}"} # REPLY VARIABLE HERE REFERS TO ROOT REPLY !!
-            - else
-              = link_to 'Reply', new_user_session_path
-            = ' · '  
+            = reply_actions_tab(reply) 
 
       %hr    

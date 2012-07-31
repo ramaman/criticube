@@ -1,0 +1,10 @@
+= reply_tipe_label(reply)
+%span.dropdown.align-left
+  %a.dropdown-toggle.label{:href => '#', 'data-toggle' => 'dropdown'}
+    %b.caret.core
+  %ul.dropdown-menu
+    %li
+      - if reply.descendants && reply.descendants.length > 0
+        = link_to 'Delete', vanity_post_reply_path(@post.parent, @post, reply), :remote => true, :method => :delete, :confirm => "This action will also delete #{reply.descendants.count} reactions to this reply. Doing so might upset other users, are you sure?"
+      - else  
+        = link_to 'Delete', vanity_post_reply_path(@post.parent, @post, reply), :remote => true, :method => :delete, :confirm => "Are you sure?"

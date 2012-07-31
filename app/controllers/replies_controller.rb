@@ -35,7 +35,17 @@ class RepliesController < ApplicationController
   end
 
   def destroy
-
+    @destroyed_id = @reply.id
+    @reply.destroy
+    respond_to do |format|
+      if @reply.destroy
+        format.html {redirect_to vanity_post_path(@post.parent, @post)}
+        format.js {render :layout => false}
+      else
+        flash[:notice] = 'Error posting reply'
+        format.html {redirect_to vanity_post_path(@post.parent, @post)}
+      end  
+    end    
   end
 
   private

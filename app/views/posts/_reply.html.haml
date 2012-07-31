@@ -1,5 +1,5 @@
-%a{:name => "reply_#{reply.id}"}
-%li.post_reply.reply-to-area{:data => {'type' => 'Reply', 'id' => reply.id}}
+%li.post_reply.reply-to-area.reply{:data => {'type' => 'Reply', 'id' => reply.id}}
+  %a{:name => "reply_#{reply.id}"}
   .row
     .span1
       = link_to image_tag(reply.creator.avatar_url(:small)), vanity_path(reply.creator), :class => 'right'
@@ -8,22 +8,20 @@
         .span5
           %p
             = link_to reply.creator.fast_name, vanity_path(reply.creator), :class => 'core'
-        .span2
-          .right
-            = reply_tipe_label(reply)
+        .span2.align-right
+          = render :partial => '/posts/reply_corner', :locals => {:reply => reply}
+
       .row.content
         .span7
           = simple_htmlize reply.content
       .row.meta{:data => {'id' => reply.id, 'anchor' => link_to("#{reply.creator.name}'s opinion", reply.dynamic_permalink)}}
         .span7
           %span.actions
-            - if user_signed_in?
-              = link_to 'Reply', "#reply_replies_form_#{reply.id}", :class => 'sat-switch reply-to',:data => {"cmf-tag" => "reply_replies_#{reply.id}", "sat-tag" => "reply_replies_#{reply.id}"}
-            - else
-              = link_to 'Reply', new_user_session_path
-            = ' · '  
+            = reply_actions_tab(reply)
+
+
           %span.stats.right
-            = link_to "#{reply.children.count} replies", "#", :class => 'cmf-toggle',:data => {"cmf-tag" => "reply_replies_#{reply.id}"}   
+            = link_to "#{reply.descendants.count} replies", "#", :class => 'cmf-toggle',:data => {"cmf-tag" => "reply_replies_#{reply.id}"}   
           .hidden-panel.sat-area.cmf-area{:data => {"cmf-tag" => "reply_replies_#{reply.id}", "sat-tag" => "reply_replies_#{reply.id}" }}  
             %hr
 
@@ -49,7 +47,7 @@
                       %p
                         = "Be friendly and respectful to other people."
                         %br/
-                        = "Write in #{@post.parent.language} (language of the containing cube)."  
+                        = "Please use #{@post.parent.language} (language of the containing cube)."  
 
 
                       .control-group
