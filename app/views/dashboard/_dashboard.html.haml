@@ -2,11 +2,11 @@
 
   .span8
     = 'feed'
-  .span4
+  .span3.offset1
     %p
       %h4 
         = 'Followed Cubes'
-        .span.right
+        .btn-group-open.right
           = link_to 'Explore', cubes_path, :class => 'btn btn-mini btn-success core'
       %hr
     %ul.items.cubes

@@ -1,0 +1,10 @@
+- provide :content do
+  .row
+    .span8
+      .page-header
+        %h4
+          = "Search results for: #{@q}"
+      %ul.items#search_results
+        - @results.each do |result|
+          = render :partial => 'result', :locals => {:result => result}
+        = paginate @results        

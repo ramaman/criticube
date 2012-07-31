@@ -80,15 +80,22 @@ class Cube < ActiveRecord::Base
             :exclusion => { :in => ALL_RESERVED_WORDS, :message => "has already been taken"},
             :format => { :with => /\A[a-z0-9]+\z/i, :message => 'Contains invalid characters'}
 
-  default_scope includes(:vanity)
+  # default_scope includes(:vanity)
 
   mount_uploader :avatar, AvatarUploader  
 
   after_initialize :automake_vanity
   before_validation :save_page_name
 
-  pg_search_scope :pg_search, :against => [:name, :page_name]
-  multisearchable :against => [:name, :page_name]                
+  pg_search_scope :pg_search, :against => [:name, :page_name],
+                  :using => {:tsearch => {:prefix => true}}
+                  
+  searchable do
+    text :name, :stored => true 
+    text :language, :stored => true
+    text :page_name, :stored => true
+    text :description
+  end
 
   def assign_manager(owner)
     r = Role.where(:tipe => 'manager', :owner_id => owner.id, :owner_type => owner.class.to_s.downcase, :on_id => self.id, :on_type => self.class.to_s.downcase)

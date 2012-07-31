@@ -1,0 +1,12 @@
+%li
+  .picframe.left
+    = link_to image_tag(result.avatar_url(:small)), vanity_path(result)
+  %span.big-text
+    %a{:href => vanity_path(result)}
+      %span.core
+        = result.name
+      = " (#{result.page_name})"    
+  %br
+  %span.minor
+    = result.class.to_s
+  %hr     

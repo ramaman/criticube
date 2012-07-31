@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120730025556) do
+ActiveRecord::Schema.define(:version => 20120731220806) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -91,14 +91,6 @@ ActiveRecord::Schema.define(:version => 20120730025556) do
   add_index "followages", ["followed_id", "followed_type"], :name => "index_followages_on_followed_id_and_followed_type"
   add_index "followages", ["follower_id", "followed_id", "followed_type"], :name => "followage_combo", :unique => true
   add_index "followages", ["follower_id"], :name => "index_followages_on_follower_id"
-
-  create_table "pg_search_documents", :force => true do |t|
-    t.text     "content"
-    t.integer  "searchable_id"
-    t.string   "searchable_type"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
 
   create_table "posts", :force => true do |t|
     t.string   "headline",    :null => false

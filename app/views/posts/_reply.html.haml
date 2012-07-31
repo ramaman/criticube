@@ -44,7 +44,7 @@
                         = "Reply to"
                         %span.reply_to_indicator
                           = link_to("#{reply.creator.name}'s opinion", reply.dynamic_permalink)
-                      %p
+                      %p.minor
                         = "Be friendly and respectful to other people."
                         %br/
                         = "Please use #{@post.parent.language} (language of the containing cube)."  
@@ -53,7 +53,7 @@
                       .control-group
                         .controls
                           = f.hidden_field :parent_id, :value => reply.id
-                          = f.text_area :content, :class => "medium span6 autoresize", :style => "width:410px", :placeholder => 'Post a reply', :maxlength => 3000
+                          = f.text_area :content, :class => "slim span6 autoresize", :style => "width:410px", :placeholder => 'Post a reply', :maxlength => 3000
                           / = f.text_area :content, :class => ['steroid', 'medium'], :style => "width:500px", :placeholder => 'You can fill this later (maximum 2000 characters)',:toolbar => 'Easy', :autocomplete => :off
                       .row
                         .span4.controls

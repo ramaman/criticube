@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
 
   extend FriendlyId
-  include PgSearch
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -134,15 +133,18 @@ class User < ActiveRecord::Base
             :exclusion => { :in => ALL_RESERVED_WORDS, :message => "has already been taken"},
             :format => { :with => /\A[a-z0-9]+\z/i, :message => 'Contains invalid characters'} 
             
-  default_scope includes(:vanity)
+  # default_scope includes(:vanity)
 
   after_initialize :automake_vanity
   before_validation :save_page_name
 
   mount_uploader :avatar, AvatarUploader
 
-  pg_search_scope :pg_search, :against => [:first_name, :middle_names, :last_name, :page_name]
-  multisearchable :against => [:first_name, :middle_names, :last_name, :page_name]
+  searchable do
+    text :name, :stored => true
+    text :page_name, :stored => true
+    text :bio
+  end               
                   
   def permalink
     Rails.application.routes.url_helpers.vanity_path(self.page_name)
@@ -280,7 +282,9 @@ class User < ActiveRecord::Base
   private
 
   def automake_vanity
-    self.build_vanity unless self.vanity
+    if self.persisted? == false
+      self.build_vanity unless self.vanity
+    end
   end
 
 end

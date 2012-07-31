@@ -28,23 +28,39 @@ $navbarHeight: 50px
 $navbarLinkColor: $white
 $navbarLinkColorHover: $grayLighter
 $navbarLinkColorActive: $grayLighter
-$navbarLinkBackgroundHover: $grayDarker
+$navbarLinkBackgroundHover: $gray
 $navbarBackgroundHighlight: $grayDark
 $navbarBackground: $grayDark
+$navbarSearchBackground: lighten($navbarBackground, 25%)
+$navbarSearchBorder: darken($navbarSearchBackground, 30%)
+$navbarSearchBackgroundFocus: $white
 $bodyBackground: $bg
 $navbarTextTopPad: 18px
 $navbarTextBottomPad: 14px
 
 
-.navbar li
-  font-size: 13px !important
-  a.text
-    padding-top: $navbarTextTopPad !important
-    padding-bottom: $navbarTextBottomPad !important
-    text-shadow: none !important
+.navbar 
+  input#search
+    background-color: $navbarSearchBackground !important
+    border-color: $navbarSearchBorder !important
+    height: $navbarHeight - 26px
+    &:focus
+      background-color: $navbarSearchBackgroundFocus !important      
+  li
+    font-size: 13px !important
+    a.text
+      padding-top: $navbarTextTopPad !important
+      padding-bottom: $navbarTextBottomPad !important
+      text-shadow: none !important
+    a.brand
+      padding: 16px 20px 0px 20px !important
+  ul.nav li.dropdown a.dropdown-toggle
+    span.caret.navbar-caret
+      border-top-color: $navbarLinkColor !important
+      border-bottom-color: $navbarLinkColor !important          
 
 .navbar-inner > .container
-  width: 940px !important  
+  width: 940px !important    
 
 .well
   background-color: $graySuperLight
@@ -147,4 +163,13 @@ textarea.medium
   height: 90px
 
 hr.slim
-  margin: 10px 0px 10px 0px !important  
+  margin: 10px 0px 10px 0px !important
+  
+h2
+  line-height: 30px !important    
+
+.container.epicenter
+  min-height: 400px
+
+.picframe.left
+  padding: 1px 10px 0px 0px  

@@ -3,7 +3,6 @@ class Post < ActiveRecord::Base
   tipes = ['opinion']
 
   extend FriendlyId
-  include PgSearch  
 
   friendly_id :headline, :use => :slugged
 
@@ -48,9 +47,6 @@ class Post < ActiveRecord::Base
   default_scope includes{cube.managers creator}
 
   before_validation :cleanup
-
-  pg_search_scope :pg_search, 
-                  :against => [:headline]  
 
   def name
     self.headline
