@@ -4,7 +4,11 @@
     = 'feed'
   .span4
     %p
-      %h4 Followed Cubes
+      %h4 
+        = 'Followed Cubes'
+        .span.right
+          = link_to 'Explore', cubes_path, :class => 'btn btn-mini btn-success core'
+      %hr
     %ul.items.cubes
       - current_user.cubes_to_check.each do |cube|
         %li
@@ -13,8 +17,3 @@
     - if current_user.is_admin?
       = link_to 'Admin', admin_dashboard_path
       %hr
-
-    
-
-    = link_to 'New Cube', new_cube_path
-    %hr
