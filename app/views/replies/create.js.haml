@@ -1,2 +1,2 @@
-$("ul.replies[data-root=#{@root rescue nil}]").append("#{escape_javascript(render :partial => 'reply')}");
+$("ul.replies[data-root=#{@root}]").append("#{escape_javascript(render :partial => 'reply')}");
 $("form[data-root=#{@root rescue nil}] textarea").val('');

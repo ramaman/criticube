@@ -8,12 +8,12 @@
         .span7
           .page-header
             %p
-              %h4
+              %h5
                 = link_to(@post.creator.name, vanity_path(@post.creator))
                 = ' posted an opinion in '
                 = link_to(@post.parent.name, vanity_path(@post.parent))
                 = " - " + friendly_datetime(@post.created_at)
-            %h1
+            %h2
               = @post.headline
             .content
               - if @post.content && !@post.content.blank?
@@ -21,6 +21,12 @@
               - elsif user_signed_in? && (current_user == @post.creator)
                 %br/
                 = link_to 'Add description', edit_vanity_post_path(@post.parent, @post)
+      .row
+        .span7.offset1
+          %h3
+            = 'Replies'
+          %hr    
+
       .row
         .span8
           %ul.items.replies{:data => {'root' => ""}}

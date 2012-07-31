@@ -21,7 +21,8 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    @parent = Vanity.find(params[:vanity_id]).owner
+    @post = @parent.posts.find(params[:id])
     @title = @post.headline
     respond_to :html
   end

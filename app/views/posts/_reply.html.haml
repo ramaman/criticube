@@ -1,5 +1,5 @@
 %a{:name => "reply_#{reply.id}"}
-%li.post_reply{:data => {'id' => reply.id, 'type' => 'Reply'}}
+%li.post_reply.reply-to-area{:data => {'type' => 'Reply', 'id' => reply.id}}
   .row
     .span1
       = link_to image_tag(reply.creator.avatar_url(:small)), vanity_path(reply.creator), :class => 'right'
@@ -14,11 +14,11 @@
       .row.content
         .span7
           = simple_htmlize reply.content
-      .row.meta
+      .row.meta{:data => {'id' => reply.id, 'anchor' => link_to("#{reply.creator.name}'s opinion", reply.dynamic_permalink)}}
         .span7
           %span.actions
             - if user_signed_in?
-              = link_to 'Reply', "#reply_replies_form_#{reply.id}", :class => 'sat-switch',:data => {"cmf-tag" => "reply_replies_#{reply.id}", "sat-tag" => "reply_replies_#{reply.id}"}
+              = link_to 'Reply', "#reply_replies_form_#{reply.id}", :class => 'sat-switch reply-to',:data => {"cmf-tag" => "reply_replies_#{reply.id}", "sat-tag" => "reply_replies_#{reply.id}"}
             - else
               = link_to 'Reply', new_user_session_path
             = ' · '  
@@ -29,7 +29,7 @@
 
             %ul.items.replies.reply_replies{:data => {'root' => "Reply_#{reply.id}"}}
               - reply.descendants.each do |reply_reply|
-                = render :partial => 'reply_reply' , :locals => {:reply_reply => reply_reply} 
+                = render :partial => 'reply_reply' , :locals => {:reply => reply, :reply_reply => reply_reply} 
 
             - if user_signed_in?  
 
@@ -40,16 +40,18 @@
                 .span6 
                   .well.reply_reply_form{:data => {'id' => reply.id, 'type' => 'Reply'}}             
 
-                    %p.core
-                      = "Reply to"
-                      %span.reply_to_indicator
-                        = link_to("#{reply.creator.name}'s opinion", reply.dynamic_permalink)
-                    %p
-                      = "Be friendly and respectful to other people."
-                      %br/
-                      = "Write in #{@post.parent.language} (language of the containing cube)."  
+                    = form_for Reply.new, :url => vanity_post_replies_path(@post.parent, @post), :html => {:class => 'form-vertical reply', :style => "margin-bottom:0px", 'data-root' => "Reply_#{reply.id}"}, :remote => true do |f|
 
-                    = form_for Reply.new, :url => vanity_post_replies_path(@post.parent, @post), :html => {:class => 'form-vertical', :style => "margin-bottom:0px", 'data-root' => "Reply_#{reply.id}"}, :remote => true do |f|
+                      %p.core
+                        = "Reply to"
+                        %span.reply_to_indicator
+                          = link_to("#{reply.creator.name}'s opinion", reply.dynamic_permalink)
+                      %p
+                        = "Be friendly and respectful to other people."
+                        %br/
+                        = "Write in #{@post.parent.language} (language of the containing cube)."  
+
+
                       .control-group
                         .controls
                           = f.hidden_field :parent_id, :value => reply.id

@@ -27,6 +27,8 @@ Criticube::Application.routes.draw do
 
   delete "/authentications/:provider" => 'authentications#destroy', :as => 'destroy_authentication'
 
+  # Vanity level 1 and 2 are without named REST routing, but not after that (e.g. /replies/:id)
+
   get '/:id', :as => 'vanity', :to => proc { |env| vanity_controller(env, 'show') }
   get '/:id/edit', :as => 'edit_vanity', :to =>  proc { |env| vanity_controller(env, 'edit') }
   put '/:id', :as => 'vanity', :to => proc { |env| vanity_controller(env, 'update') }
@@ -42,10 +44,11 @@ Criticube::Application.routes.draw do
   delete '/:vanity_id/:id' => 'posts#destroy', :as => 'vanity_post'
 
   post '/:vanity_id/:post_id/replies' => 'replies#create', :as => 'vanity_post_replies'
-  # get '/:vanity_id/:post_id/:id' => 'replies#update', :as => 'vanity_post_reply'
-  # get '/:vanity_id/:post_id/:id/edit' => 'replies#edit', :as => 'edit_vanity_post_reply'
-  # put '/:vanity_id/:post_id/:id' => 'replies#update', :as => 'vanity_post_reply'
-  delete '/:vanity_id/:post_id/:id' => 'replies#destroy', :as => 'vanity_post_reply'
+  get '/:vanity_id/:post_id//replies/:id' => 'replies#show', :as => 'vanity_post_reply'
+  # get '/:vanity_id/:post_id/replies/:id' => 'replies#update', :as => 'vanity_post_reply'
+  # get '/:vanity_id/:post_id/replies/:id/edit' => 'replies#edit', :as => 'edit_vanity_post_reply'
+  # put '/:vanity_id/:post_id/replies/:id' => 'replies#update', :as => 'vanity_post_reply'
+  delete '/:vanity_id/:post_id/replies/:id' => 'replies#destroy', :as => 'vanity_post_reply'
 
   def vanity_controller(env, action)
     id = env["action_dispatch.request.path_parameters"][:id]

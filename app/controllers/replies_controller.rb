@@ -4,6 +4,10 @@ class RepliesController < ApplicationController
   before_filter :initialize_variables, :except => [:create]
   before_filter :moderator_check, :only => :destroy
 
+  def show
+    respond_to :html
+  end
+
   def create
     @cube ||= Cube.find(params[:vanity_id])
     @post ||= @cube.posts.find(params[:post_id])    
@@ -12,8 +16,11 @@ class RepliesController < ApplicationController
     @reply.creator = current_user
     if params[:reply][:parent_id] && !params[:reply][:parent_id].blank? # ADD CHECK IF REPLY IS INSIDE THE CUBE && @cube.replies.find(params[:reply][:parent_id])
       @reply.parent_id = params[:reply][:parent_id]
-      @root = @reply.root
+      @root = 'Reply_' + @reply.root.id.to_s
+    else
+      @root = ''
     end
+
     @reply.save
 
     respond_to do |format|
@@ -38,9 +45,9 @@ class RepliesController < ApplicationController
   end
 
   def moderator_check
-    unless (@post.creator == current_user) || (@parent.managers.include?(current_user))
+    unless (@reply.creator == current_user) || (@cube.managers.include?(current_user))
       raise ActionController::RoutingError.new('Not Found')
-    end  
+    end
   end
 
   def initialize_variables

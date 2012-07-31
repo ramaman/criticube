@@ -1,3 +1,4 @@
+%a{:name => "reply_#{reply_reply.id}"}
 %li.reply_reply
   .row
     .span1
@@ -7,11 +8,23 @@
         .span4
           %p
             = link_to reply_reply.creator.fast_name, vanity_path(reply_reply.creator), :class => 'core'
+            - if reply_reply.parent != reply_reply.root
+              %span.minor
+                = ' replied to '
+                = link_to("#{reply_reply.parent.creator.fast_name}'s opinion", reply_reply.parent.dynamic_permalink)            
         .span2
           .right
             = reply_tipe_label(reply_reply)
       .row.content
         .span6
           = simple_htmlize reply_reply.content
-       
+      .row.meta{:data => {'id' => reply_reply.id, 'anchor' => link_to("#{reply_reply.creator.name}'s opinion", reply_reply.dynamic_permalink)}} 
+        .span6
+          %span.actions
+            - if user_signed_in?
+              = link_to 'Reply', "#reply_replies_form_#{reply.id}", :class => 'sat-switch reply-to',:data => {"cmf-tag" => "reply_replies_#{reply.id}", "sat-tag" => "reply_replies_#{reply.id}"} # REPLY VARIABLE HERE REFERS TO ROOT REPLY !!
+            - else
+              = link_to 'Reply', new_user_session_path
+            = ' · '  
+
       %hr    
