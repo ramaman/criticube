@@ -45,7 +45,7 @@
 
         - if user_signed_in?
           - if @post.creator == current_user
-            .dropdown
+            %span.dropdown
               %a{:class => 'btn dropdown-toggle', :href => '#', 'data-toggle' => 'dropdown'}
                 %i.icon-wrench
                 %b.caret.core
@@ -55,10 +55,13 @@
                 %li
                   = link_to "Delete #{@post.tipe}", vanity_post_path(@post.parent, @post), :method => :delete, :confirm => "This action will also delete other users' replies, are you sure?"
           - elsif @post.parent.managers.include?(current_user)   
-            .dropdown
+            %span.dropdown
               %a{:class => 'btn dropdown-toggle', :href => '#', 'data-toggle' => 'dropdown'}
                 %i.icon-wrench
                 %b.caret.core
               %ul.dropdown-menu
                 %li
                   = link_to "Delete #{@post.tipe}", vanity_post_path(@post.parent, @post), :method => :delete, :confirm => "You are about to delete someone else's post using your cube admin rights, are you sure?"
+
+        %span.follow_panel{:data => {"id" => @post.id, "tipe" => @post.class.to_s }}
+          = follow_button(@post)                    

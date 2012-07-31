@@ -17,6 +17,14 @@ class Post < ActiveRecord::Base
   belongs_to  :cube,
               :class_name => 'Cube',
               :foreign_key => 'owner_id'  
+
+  has_many  :reverse_followages,
+            :as => :followed,
+            :class_name => 'Followage',
+            :dependent => :destroy
+
+  has_many  :followers,
+            :through => :reverse_followages              
               
   has_many  :replies,
             :as => :container                          

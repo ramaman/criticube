@@ -38,6 +38,11 @@ class User < ActiveRecord::Base
             :source => :followed,
             :source_type => 'Cube'
 
+  has_many  :followed_posts,
+            :through => :followages,
+            :source => :followed,
+            :source_type => 'Post'
+
   has_many  :reverse_followages,
             :as => :followed,
             :class_name => 'Followage',
