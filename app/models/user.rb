@@ -138,6 +138,7 @@ class User < ActiveRecord::Base
 
   after_initialize :automake_vanity
   before_validation :save_page_name
+  after_create :follow_starter_cubes
 
   mount_uploader :avatar, AvatarUploader
 
@@ -280,6 +281,11 @@ class User < ActiveRecord::Base
 
   def save_page_name
     (self.page_name = self.vanity.name) unless self.page_name == self.vanity.name
+  end
+
+  def follow_starter_cubes
+    one = Cube.find('criticube_beginners') rescue nil
+    self.follow!(one) if one
   end
 
   private
