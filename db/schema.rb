@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120731220809) do
+ActiveRecord::Schema.define(:version => 20120731220910) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -115,16 +115,16 @@ ActiveRecord::Schema.define(:version => 20120731220809) do
     t.string   "tipe"
     t.text     "content"
     t.integer  "creator_id"
-    t.integer  "parent_id"
-    t.string   "parent_type"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "container_id"
+    t.string   "container_type"
   end
 
+  add_index "replies", ["container_id", "container_type"], :name => "index_replies_on_container_id_and_container_type"
   add_index "replies", ["content"], :name => "index_replies_on_content"
   add_index "replies", ["creator_id", "tipe"], :name => "index_replies_on_creator_id_and_tipe"
   add_index "replies", ["creator_id"], :name => "index_replies_on_creator_id"
-  add_index "replies", ["parent_id", "parent_type"], :name => "index_replies_on_parent_id_and_parent_type"
   add_index "replies", ["tipe"], :name => "index_replies_on_tipe"
 
   create_table "roles", :force => true do |t|
