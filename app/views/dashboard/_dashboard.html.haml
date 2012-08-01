@@ -1,31 +1,28 @@
-- if user_signed_in?
-
-  .row
-
-    .span7
-      .row
-        .span6.offset1
-          %p
-            %h3
-              = 'Activities'    
-      %hr.slim
-      %ul.items
-        - @feed.each do |feed|
-          = render :partial => '/activities/activity', :locals => {:activity => feed}
+.row
+  .span7
+    .row
+      .span6.offset1
+        %h3
+          = 'Activities'    
+        %hr.slim
+    %ul.items
+      - @feed.each do |feed|
+        = render :partial => '/activities/activity', :locals => {:activity => feed}
+    .row
+      .span6.offset1
         = paginate @feed  
 
-    .span4.offset1
-      %p
-        %h3
-          = 'Followed Cubes'
-          .btn-group-open.right
-            = link_to 'Explore', cubes_path, :class => 'btn btn-mini btn-success core'
-        %hr.slim
-      %ul.items.cubes
-        - current_user.cubes_to_check.each do |cube|
-          %li
-            = link_to cube.name, vanity_path(cube), :class => 'label label-cclink'
+  .span4.offset1
+    %h3
+      = 'Followed Cubes'
+      .btn-group-open.right
+        = link_to 'Explore', cubes_path, :class => 'btn btn-mini btn-success core'
+    %hr.slim
+    %ul.items.cubes
+      - current_user.cubes_to_check.each do |cube|
+        %li
+          = link_to cube.name, vanity_path(cube), :class => 'label label-cclink'
+    %hr
+    - if current_user.is_admin?
+      = link_to 'Admin', admin_dashboard_path
       %hr
-      - if current_user.is_admin?
-        = link_to 'Admin', admin_dashboard_path
-        %hr
