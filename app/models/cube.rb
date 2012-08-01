@@ -97,7 +97,7 @@ class Cube < ActiveRecord::Base
     text :description
   end
 
-  handle_asynchronously :solr_index
+  # handle_asynchronously :solr_index
 
   def assign_manager(owner)
     r = Role.where(:tipe => 'manager', :owner_id => owner.id, :owner_type => owner.class.to_s.downcase, :on_id => self.id, :on_type => self.class.to_s.downcase)

@@ -146,7 +146,7 @@ class User < ActiveRecord::Base
     text :bio
   end    
   
-  handle_asynchronously :solr_index           
+  # handle_asynchronously :solr_index           
                   
   def permalink
     Rails.application.routes.url_helpers.vanity_path(self.page_name)
