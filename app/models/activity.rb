@@ -29,6 +29,9 @@ class Activity < ActiveRecord::Base
   belongs_to  :tertiary_objekt,
               :polymorphic => true                            
 
+  has_many  :notifications,
+            :dependent => :destroy
+
   validates   :action,
               :inclusion => { :in => actions, :message => "is not supported" }
               
@@ -47,6 +50,10 @@ class Activity < ActiveRecord::Base
   def set_as_archived
     self.archived = true
     self.save
+  end
+  
+  def send_notifications
+  
   end 
 
 end

@@ -93,7 +93,9 @@ class User < ActiveRecord::Base
             :class_name => 'Activity',
             :as => :primary_objekt,
             :dependent => :destroy 
-                        
+
+  has_many  :notifications,
+            :dependent => :destroy
 
   # FIXME
   # has_many  :created_replies,
