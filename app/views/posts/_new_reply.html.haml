@@ -1,8 +1,8 @@
 .well
   %p.minor
     = "Be friendly and respectful to other people."
-    %br/
-    = "Please use #{@post.parent.language} (language of the containing cube)."  
+    %span.right
+      = "Please use #{@post.parent.language}"  
   = form_for Reply.new, :url => vanity_post_replies_path(@post.parent, @post), :html => {:class => 'form-vertical', :style => "margin-bottom:0px", :data => {'root' => ""}}, :remote => true do |f|
     .control-group
       .controls
