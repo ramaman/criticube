@@ -38,7 +38,8 @@ Criticube::Application.routes.draw do
   delete '/:id', :as => 'vanity', :to => proc { |env| vanity_controller(env, 'destroy') }
   get '/:id/following/:tipe', :as => 'vanity_following', :to => 'followages#following'
   get '/:id/followers', :as => 'vanity_followers', :to => 'followages#followers'
-  get '/:id/activities', :as => 'vanity_activities', :to => 'activities#index'     
+  get '/:id/activities', :as => 'vanity_activities', :to => 'activities#index'  
+  get '/:id/posts', :as => 'vanity_posts', :to => 'posts#index'     
   get '/:id/admins', :as => 'vanity_admins', :to => 'cubes#admins'
 
   post '/:vanity_id/posts' => 'posts#create', :as => 'vanity_posts'

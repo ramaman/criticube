@@ -62,6 +62,10 @@ class Post < ActiveRecord::Base
     self.headline
   end  
 
+  def tipe_name
+    'an opinion' if self.tipe == 'opinion'
+  end
+
   def normalize_friendly_id(string)
     super[0..100]
   end

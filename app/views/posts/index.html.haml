@@ -1,0 +1,28 @@
+- provide :content do
+ 
+  = render :partial => "#{@parent.class.to_s.downcase.pluralize}/header", :locals => {@parent.class.to_s.downcase.to_sym => @parent, :sub_page => true}
+
+  - if @parent.class == User
+
+    %p
+        
+    .row
+      .span7.offset1
+        .row
+          .span6.offset1
+            %h3
+              = 'Opinions'
+            %hr.slim
+
+        - if @posts.length == 0
+          .row
+            .span6.offset1
+              = 'No opinions yet'
+
+        - else
+          %ul.items.activities
+            - @posts.each do |post|
+              = render :partial => '/posts/post', :locals => {:post => post}
+            .row
+              .span6.offset1
+                = paginate @posts     

@@ -7,13 +7,12 @@
     %p
         
     .row
-      .span8.offset1
+      .span7.offset1
         .row
-          .span7.offset1
+          .span6.offset1
             %h3
               = 'Activities'
-              .span.right.minor
-                = link_to 'Back', vanity_path(@parent)
+              = link_to 'Back', vanity_path(@parent), :class => 'right btn btn-mini'
             %hr
         %ul.items.activities
           - @activities.each do |activity|

@@ -9,14 +9,43 @@
       .row
         .span6.offset1
           %h3
-            = 'Activities'
-          %hr
-      %ul.items.activities
-        - @activities.each do |activity|
-          = render :partial => '/activities/activity', :locals => {:activity => activity}
+            = 'Opinions'
+          %hr.slim
+
+      - if @posts.length == 0
         .row
           .span6.offset1
-            = link_to 'See all activities', vanity_activities_path(@user)    
+            = 'No opinions yet'
+
+      - else
+        %ul.items.activities
+          - @posts.each do |post|
+            = render :partial => '/posts/post', :locals => {:post => post}
+          .row
+            .span6.offset1
+              = link_to 'See all opinions', vanity_posts_path(@user)    
+      
+      %br/
+      %br/      
+
+      .row
+        .span6.offset1
+          %h3
+            = 'Activities'
+          %hr.slim
+      
+      - if @activities.length == 0
+        .row
+          .span6.offset1
+            = 'No activities yet'
+
+      - else
+        %ul.items.activities
+          - @activities.each do |activity|
+            = render :partial => '/activities/activity', :locals => {:activity => activity}
+          .row
+            .span6.offset1
+              = link_to 'See all activities', vanity_activities_path(@user)    
 
     .span3.offset1
       %h3

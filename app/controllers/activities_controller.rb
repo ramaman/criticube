@@ -2,7 +2,7 @@ class ActivitiesController < ApplicationController
 
   def index
     @parent = parent_object
-    @activities = @parent.activities.clean.page(params[:page]).per(5)
+    @activities = @parent.activities.clean.page(params[:page]).per(12)
     respond_to do |format|
       format.html
       # format.js { render :layout => false }

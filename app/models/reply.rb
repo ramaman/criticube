@@ -46,4 +46,8 @@ class Reply < ActiveRecord::Base
     end
   end
 
+  def tipe_name
+    'a reply'
+  end  
+
 end

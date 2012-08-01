@@ -5,6 +5,15 @@ class PostsController < ApplicationController
   before_filter :moderator_check, :only => [:destroy]
 
 
+  def index
+    @parent = parent_object
+    @posts = @parent.created_posts.page(params[:page]).per(20)
+    respond_to do |format|
+      format.html
+      # format.js { render :layout => false }
+    end
+  end
+
   def create
     @parent = params[:post][:parent_type].constantize.find(params[:post][:parent_id])
     @post = Post.new(new_post_params)
@@ -59,6 +68,11 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def parent_object
+    v = Vanity.find(params[:id])
+    return v.owner
+  end  
 
   def post_params
     params[:post].slice(:headline, :content)    
