@@ -3,11 +3,13 @@
   = render :partial => 'header', :locals => {:cube => @cube}
 
   .row
-    .span8
+    .span7
       .row
         .span6.offset1
           %h3
             = 'Opinions'
+            %span.minor.right
+              = link_to 'See all', vanity_posts_path(@cube) 
           %hr.slim
 
           - if user_signed_in?
@@ -29,11 +31,21 @@
               .span6.offset1
                 = link_to 'See all opinions', vanity_posts_path(@cube) 
 
-    .span4.offset
-      %h3
-        = 'Recent activities'
-      %hr.slim
-      %ul.items.activities  
+    .span5
+      .row
+        .span4.offset1
+          %h3
+            = 'Recent activities'
+            %span.minor.right
+              = link_to 'See all', vanity_activities_path(@activities)
+          %hr.slim
+      %ul.items.activities
+        - @activities.each do |activity|
+          = render :partial => '/activities/mini_activity', :locals => {:activity => activity}
+        .row
+          .span4.offset1
+            = link_to 'See all activities', vanity_activities_path(@cube)  
+
         / - @cube.feed.limit(8).each do |opinion|
         /   %li
         /     = link_to opinion.name, vanity_post_path(@cube, opinion), :class => 'core'         

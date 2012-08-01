@@ -20,3 +20,20 @@
           .row
             .span6.offset1
               = paginate @activities    
+
+  - elsif @parent.class == Cube
+    
+    %p
+        
+    .row
+      .span6.offset1
+        %h3
+          = 'Activities'
+          = link_to 'Back', vanity_path(@parent), :class => 'right btn btn-mini'
+        %hr
+    %ul.items.activities
+      - @activities.each do |activity|
+        = render :partial => '/activities/activity', :locals => {:activity => activity}
+      .row
+        .span6.offset1
+          = paginate @activities                  

@@ -1,0 +1,47 @@
+%li
+  .row
+    .span1
+      = link_to image_tag(activity.actor.avatar_url(:small)), vanity_path(activity.actor), :class => 'right'
+          
+    .span4
+
+      - if activity.action == 'followed'
+        %p.header
+          = link_to activity.actor.name, vanity_path(activity.actor), :class => 'core blend'
+          = activity.action_story
+          = link_to activity.primary_objekt.name, vanity_path(activity.primary_objekt)
+        .meta.minor
+          = friendly_datetime activity.created_at
+      
+      - if activity.action == 'created'    
+        %p.header
+
+          = link_to activity.actor.name, vanity_path(activity.actor), :class => 'core blend'
+          = activity.action_story
+          = "#{activity.primary_objekt.tipe_name}"
+
+          - if activity.primary_objekt_type == 'Reply'
+            = ' to '
+            = link_to activity.secondary_objekt.name, vanity_post_path(activity.tertiary_objekt, activity.secondary_objekt), :class => ''
+            %br/
+
+        %p.content
+
+          - if activity.primary_objekt_type == 'Reply'
+            = activity.primary_objekt.content
+            .meta.minor
+              = "#{friendly_datetime activity.created_at} • Posted on"
+              = link_to activity.tertiary_objekt.name, vanity_path(activity.tertiary_objekt)           
+          
+          - elsif activity.primary_objekt_type == 'Post'
+            = link_to activity.primary_objekt.name, vanity_post_path(activity.secondary_objekt, activity.primary_objekt), :class => 'core'
+            .meta.minor
+              = "#{friendly_datetime activity.created_at} • Posted on"
+              = link_to activity.secondary_objekt.name, vanity_path(activity.secondary_objekt)           
+             
+          - elsif activity.primary_objekt_type == 'Cube'            
+            = link_to activity.primary_objekt.name, vanity_path(activity.primary_objekt), :class => 'core'
+            .meta.minor
+              = friendly_datetime activity.created_at
+
+      %hr.slim  
