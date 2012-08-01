@@ -1,19 +1,27 @@
-.row
+- if user_signed_in?
 
-  .span8
-    = 'feed'
-  .span3.offset1
-    %p
-      %h3
-        = 'Followed Cubes'
-        .btn-group-open.right
-          = link_to 'Explore', cubes_path, :class => 'btn btn-mini btn-success core'
+  .row
+
+    .span8
+      %p
+        %h3
+          = 'Activities'    
+      %hr.slim
+      - @feed.each do |feed|
+        = feed
+
+    .span3.offset1
+      %p
+        %h3
+          = 'Followed Cubes'
+          .btn-group-open.right
+            = link_to 'Explore', cubes_path, :class => 'btn btn-mini btn-success core'
+        %hr.slim
+      %ul.items.cubes
+        - current_user.cubes_to_check.each do |cube|
+          %li
+            = link_to cube.name, vanity_path(cube), :class => 'label label-cclink'
       %hr
-    %ul.items.cubes
-      - current_user.cubes_to_check.each do |cube|
-        %li
-          = link_to cube.name, vanity_path(cube), :class => 'label label-cclink'
-    %hr    
-    - if current_user.is_admin?
-      = link_to 'Admin', admin_dashboard_path
-      %hr
+      - if current_user.is_admin?
+        = link_to 'Admin', admin_dashboard_path
+        %hr

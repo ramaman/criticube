@@ -34,7 +34,7 @@ class Activity < ActiveRecord::Base
               
   scope :clean, where{ |a|
     a.archived == nil    
-  }                       
+  }
 
   def action_story
     if self.action == 'created'

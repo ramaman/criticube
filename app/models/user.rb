@@ -304,9 +304,14 @@ class User < ActiveRecord::Base
 
   def dashboard_feed
     followages = self.followages
-    user_ids = followages.where{followed_type == 'User'}.collect{|f| f.id}
-    cube_ids = followages.where{followed_type == 'Cube'}.collect{|f| f.id}
-    post_ids = followages.where{followed_type == 'Post'}.collect{|f| f.id}
+    user_ids = followages.where{followed_type == 'User'}.collect{|f| f.followed_id}
+    cube_ids = followages.where{followed_type == 'Cube'}.collect{|f| f.followed_id}
+    post_ids = followages.where{followed_type == 'Post'}.collect{|f| f.followed_id}
+    Activity.where{ |a|
+      (a.actor_id >> user_ids) |
+      ((a.secondary_objekt_id >> cube_ids) & (a.secondary_objekt_type == 'Cube')) |
+      ((a.secondary_objekt_id >> post_ids) & (a.secondary_objekt_type == 'Post'))
+    }
   end
 
   def feed

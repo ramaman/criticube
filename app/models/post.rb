@@ -36,7 +36,7 @@ class Post < ActiveRecord::Base
   has_many  :secondary_activity_objekt,
             :class_name => 'Activity',
             :as => :secondary_objekt,
-            :dependent => :destroy                                                  
+            :dependent => :destroy
 
   attr_accessible :headline,
                   :content,
