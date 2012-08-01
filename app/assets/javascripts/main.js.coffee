@@ -94,4 +94,9 @@ $ ->
   $('a.sat-switch').live 'click', (event) ->
     switch_tag = $(this).attr('data-sat-tag')
     # new_position = $(this).attr('href')
-    $('.sat-area[data-sat-tag='+ switch_tag + ']').show()    
+    $('.sat-area[data-sat-tag='+ switch_tag + ']').show()
+    
+$ ->
+
+  $('.expanding-form-area input[type=text]').live 'focus', (event) ->
+    $(this).closest('.expanding-form-area').find('.hidden-panel').show()

@@ -1,5 +1,5 @@
-#new_post.well
-  %p
+#new_post.well.expanding-form-area{:style => 'padding-bottom: 11px;' }
+  %p.hidden-panel
     %span.core
       = "Post new opinion"
     %span.minor.right
@@ -8,12 +8,13 @@
     = f.hidden_field :tipe, :value => 'opinion'
     = f.hidden_field :parent_id, :value => parent.id
     = f.hidden_field :parent_type, :value => parent.class.to_s
-    .controls
-      = f.text_field :headline, :placeholder => 'I think that..', :style => "width:410px", :autocomplete => :off, :maxlength => 199            
-    .control-group
-      .controls
-        = f.text_area :content, :class => ['steroid', 'medium'], :style => "width:422px", :placeholder => 'You can fill this later (maximum 2000 characters)',:toolbar => 'Easy', :autocomplete => :off
-      #bouncer  
-    .row
-      .right
-        = f.submit 'Post', :class => 'btn btn-primary core'
+    
+    = f.text_field :headline, :placeholder => 'I think that..', :style => "width:410px", :autocomplete => :off, :maxlength => 199            
+    .hidden-panel
+      .control-group
+        .controls
+          = f.text_area :content, :class => ['steroid', 'medium'], :style => "width:422px", :placeholder => 'You can fill this later (maximum 2000 characters)',:toolbar => 'Easy', :autocomplete => :off
+        #bouncer  
+      .row
+        .right
+          = f.submit 'Post', :class => 'btn btn-primary core'
