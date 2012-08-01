@@ -35,6 +35,8 @@ class Activity < ActiveRecord::Base
   validates   :action,
               :inclusion => { :in => actions, :message => "is not supported" }
               
+  after_save :send_notifications
+
   scope :clean, where{ |a|
     a.archived == nil    
   }
@@ -55,12 +57,29 @@ class Activity < ActiveRecord::Base
   def send_notifications
     # Those who follow actor and secondary_objekt should get notification
     subscriber_ids = []
-      
+
+    # Add followers of Actor    
+    # subscriber_ids += self.actor.reverse_followages.collect{|f| f.follower_id}
+       
     if secondary = self.secondary_objekt
-    
+      # Add followers of Cube or Post
+      if (secondary.class == Cube) || (secondary.class == Post)
+        secondary.reverse_followages.collect{|f| f.follower_id}
+        secondary.reverse_followages.each do |f|
+          subscriber_ids << f.follower_id unless f.follower_id == self.actor_id 
+        end
+      end
     end
-        
+
+    subscriber_ids.uniq.each do |subscriber_id|
+      n = Notification.new
+      n.user_id = subscriber_id
+      n.activity_id = self.id
+      n.save
+    end
+
   end
-   
+
+  handle_asynchronously :send_notifications
 
 end

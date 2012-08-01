@@ -5,6 +5,9 @@ class Notification < ActiveRecord::Base
 
   after_save :update_notification_count
 
+  validates :activity, :presence => true
+  validates :user, :presence => true
+
   scope :read, where{ |a|
     a.read == true
   }
@@ -13,12 +16,15 @@ class Notification < ActiveRecord::Base
     a.read == nil
   }  
 
-  def update_notification_count
-    u = self.user
-    u.notifications_count = u.notifications.where{ read == nil }.count
-    u.save
+  def mark_as_read
+    self.read = true
+    self.save
   end
 
-  handle_asynchronously :update_notification_count
+  def update_notification_count
+    u = self.user
+    u.notifications_count = u.notifications.where{ read == false }.count
+    u.save
+  end
 
 end
