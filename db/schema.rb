@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120731221010) do
+ActiveRecord::Schema.define(:version => 20120801020239) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -27,6 +27,29 @@ ActiveRecord::Schema.define(:version => 20120731221010) do
   add_index "active_admin_comments", ["author_type", "author_id"], :name => "index_active_admin_comments_on_author_type_and_author_id"
   add_index "active_admin_comments", ["namespace"], :name => "index_active_admin_comments_on_namespace"
   add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
+
+  create_table "activities", :force => true do |t|
+    t.integer  "actor_id",              :null => false
+    t.string   "action",                :null => false
+    t.string   "primary_objekt_type",   :null => false
+    t.integer  "primary_objekt_id",     :null => false
+    t.string   "secondary_objekt_type"
+    t.integer  "secondary_objekt_id"
+    t.string   "tertiary_objekt_type"
+    t.integer  "tertiary_objekt_id"
+    t.boolean  "archived"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  add_index "activities", ["action"], :name => "index_activities_on_action"
+  add_index "activities", ["actor_id"], :name => "index_activities_on_actor_id"
+  add_index "activities", ["archived"], :name => "index_activities_on_archived"
+  add_index "activities", ["created_at"], :name => "index_activities_on_created_at"
+  add_index "activities", ["primary_objekt_type", "primary_objekt_id"], :name => "primary_objekt"
+  add_index "activities", ["secondary_objekt_type", "secondary_objekt_id"], :name => "secondary_objekt"
+  add_index "activities", ["tertiary_objekt_type", "tertiary_objekt_id"], :name => "tertiary_objekt"
+  add_index "activities", ["updated_at"], :name => "index_activities_on_updated_at"
 
   create_table "authentications", :force => true do |t|
     t.integer  "user_id",          :null => false

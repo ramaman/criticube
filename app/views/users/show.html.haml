@@ -5,12 +5,23 @@
   %p
       
   .row
-    .span7.offset2
-      = 'Feed'  
-    .span3
+    .span7.offset1
+      .row
+        .span6.offset1
+          %h3
+            = 'Activities'
+          %hr
+      %ul.items.activities
+        - @activities.each do |activity|
+          = render :partial => '/activities/activity', :locals => {:activity => activity}
+        .row
+          .span6.offset1
+            = link_to 'See all activities', vanity_activities_path(@user)    
+
+    .span3.offset1
       %h3
         = 'Participated Cubes'
-      %br/  
+      %hr  
 
       - @user.participated_cubes.each do |cube|
         .well.white.slim

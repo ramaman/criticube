@@ -34,6 +34,7 @@ class CubesController < ApplicationController
     @cube.assign_manager(current_user)
     @cube.save
     current_user.follow!(@cube)
+    current_user.record_create(@cube)
     if @cube.save
       redirect_to vanity_path(@cube)
     else

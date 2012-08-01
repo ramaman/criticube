@@ -46,7 +46,22 @@ class Cube < ActiveRecord::Base
   has_many  :opinions,
             :as => :parent,
             :class_name => 'Post',
-            :conditions => {:tipe => 'opinion'}                                        
+            :conditions => {:tipe => 'opinion'}
+            
+  has_many  :primary_activity_objekt,
+            :class_name => 'Activity',
+            :as => :primary_objekt,
+            :dependent => :destroy
+            
+  has_many  :secondary_activity_objekt,
+            :class_name => 'Activity',
+            :as => :secondary_objekt,
+            :dependent => :destroy
+            
+  has_many  :tertiary_activity_objekt,
+            :class_name => 'Activity',
+            :as => :tertiary_objekt,
+            :dependent => :destroy                                                                                  
 
   accepts_nested_attributes_for :vanity,
                                 :allow_destroy => false, 
@@ -118,7 +133,9 @@ class Cube < ActiveRecord::Base
   private
 
   def automake_vanity
-    self.build_vanity unless self.vanity
+    if self.persisted? == false
+      self.build_vanity unless self.vanity
+    end
   end
 
 end

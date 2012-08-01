@@ -15,7 +15,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @activities = @user.feed.limit(5)
     @title = @user.name
+
     respond_to :html
   end
 

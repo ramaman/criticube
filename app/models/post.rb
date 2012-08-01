@@ -26,7 +26,17 @@ class Post < ActiveRecord::Base
             :through => :reverse_followages              
               
   has_many  :replies,
-            :as => :container                          
+            :as => :container
+            
+  has_many  :primary_activity_objekt,
+            :class_name => 'Activity',
+            :as => :primary_objekt,
+            :dependent => :destroy
+            
+  has_many  :secondary_activity_objekt,
+            :class_name => 'Activity',
+            :as => :secondary_objekt,
+            :dependent => :destroy                                                  
 
   attr_accessible :headline,
                   :content,

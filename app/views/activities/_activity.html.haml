@@ -1,0 +1,17 @@
+%li
+  .row
+    .span1
+      - if activity.action == 'followed'
+        = link_to image_tag(activity.actor.avatar_url(:small)), vanity_path(activity.actor), :class => 'right'
+      - else
+        = link_to image_tag(activity.actor.avatar_url(:thumb)), vanity_path(activity.actor), :class => 'right'
+          
+    .span6
+      .header
+        = link_to activity.actor.name, vanity_path(activity.actor), :class => 'core blend'
+        = activity.action_story
+        = link_to activity.primary_objekt.name, vanity_path(activity.primary_objekt)
+
+      .meta.minor
+        = friendly_datetime activity.created_at
+      %hr.slim  

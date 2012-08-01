@@ -84,6 +84,17 @@ class User < ActiveRecord::Base
             :foreign_key => 'creator_id', 
             :dependent => :destroy            
             
+  has_many  :activities,
+            :class_name => 'Activity', 
+            :foreign_key => 'actor_id', 
+            :dependent => :destroy
+
+  has_many  :primary_activity_objekt,
+            :class_name => 'Activity',
+            :as => :primary_objekt,
+            :dependent => :destroy 
+                        
+
   # FIXME
   # has_many  :created_replies,
   #           :class_name => 'Reply', 
@@ -200,6 +211,7 @@ class User < ActiveRecord::Base
       f.followed_id = followed.id
       f.followed_type = followed.class.to_s
       f.save!
+      self.record_follow(followed) if options[:record] == true
     end
   end
 
@@ -287,6 +299,60 @@ class User < ActiveRecord::Base
     one = Cube.find('criticube_beginners') rescue nil
     self.follow!(one) if one
   end
+
+  # Feed
+
+  def feed
+    Activity.clean.where{ |a|
+      (a.actor_id == self.id) |
+      ((a.primary_objekt_type == 'User') & (a.primary_objekt_id == self.id))
+    }
+  end
+
+  # Feed recording
+
+  def record_follow(primary_objekt)
+    existing_activity = Activity.where{ |a|
+      (a.actor_id == self.id) & (a.action == 'followed') & 
+      (a.primary_objekt_id == primary_objekt.id) & 
+      (a.primary_objekt_type == primary_objekt.class.to_s)
+    }
+    if existing_activity.length > 0
+      existing_activity.each {|a| a.set_as_archived}
+    end
+    Activity.create(
+      :actor => self,
+      :action => 'followed',
+      :primary_objekt => primary_objekt
+    )
+  end
+
+  def record_create(primary_objekt)
+    if primary_objekt.class == Cube
+      Activity.create(
+        :actor => self,
+        :action => 'created',
+        :primary_objekt => primary_objekt
+      )
+    elsif primary_objekt.class == Post
+      Activity.create(
+        :actor => self,
+        :action => 'created',
+        :primary_objekt => primary_objekt,
+        :secondary_objekt => primary_objekt.parent
+      )
+    elsif primary_objekt.class == Reply  
+      Activity.create(
+        :actor => self,
+        :action => 'created',
+        :primary_objekt => primary_objekt,
+        :secondary_objekt => primary_objekt.container,
+        :tertiary_objekt => primary_objekt.container.parent
+      )
+    end
+  end
+  
+  handle_asynchronously :record_follow, :record_create
 
   private
 

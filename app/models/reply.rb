@@ -21,11 +21,29 @@ class Reply < ActiveRecord::Base
 
   validates :content,
             :length => { :maximum => 3550} 
+
+  has_many  :primary_activity_objekt,
+            :class_name => 'Activity',
+            :as => :primary_objekt,
+            :dependent => :destroy
+            
+  has_many  :secondary_activity_objekt,
+            :class_name => 'Activity',
+            :as => :secondary_objekt,
+            :dependent => :destroy             
             
   default_scope includes(:container)                       
 
   def dynamic_permalink
     Rails.application.routes.url_helpers.vanity_post_path(self.container.parent, self.container) + "#reply_#{self.id}"
+  end
+
+  def name
+    if self.content.length < 150
+      self.content[0..150]
+    else
+      self.content[0..150] + '...'
+    end
   end
 
 end

@@ -1,0 +1,23 @@
+- provide :content do
+ 
+  = render :partial => "#{@parent.class.to_s.downcase.pluralize}/header", :locals => {@parent.class.to_s.downcase.to_sym => @parent, :sub_page => true}
+
+  - if @parent.class == User
+
+    %p
+        
+    .row
+      .span8.offset1
+        .row
+          .span7.offset1
+            %h3
+              = 'Activities'
+              .span.right.minor
+                = link_to 'Back', vanity_path(@parent)
+            %hr
+        %ul.items.activities
+          - @activities.each do |activity|
+            = render :partial => '/activities/activity', :locals => {:activity => activity}
+          .row
+            .span6.offset1
+              = paginate @activities    

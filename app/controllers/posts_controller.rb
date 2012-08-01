@@ -12,6 +12,8 @@ class PostsController < ApplicationController
     @post.creator = current_user
     @post.save
     if @post.save
+      current_user.follow!(@post)
+      current_user.record_create(@post)
       redirect_to vanity_post_path(@parent, @post)
     else
       flash[:alert] = 'Error posting'

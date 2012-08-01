@@ -25,6 +25,8 @@ class RepliesController < ApplicationController
 
     respond_to do |format|
       if @reply.save
+        current_user.follow!(@reply.container)
+        current_user.record_create(@reply)        
         format.html {redirect_to vanity_post_path(@post.parent, @post)}
         format.js {render :layout => false}
       else
