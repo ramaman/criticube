@@ -1,5 +1,6 @@
 class CreateReplies < ActiveRecord::Migration
   def change
+    drop_table :replies
     create_table :replies do |t|
       t.string :tipe
       t.text :content
