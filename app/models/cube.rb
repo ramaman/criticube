@@ -142,7 +142,6 @@ class Cube < ActiveRecord::Base
     }
   end
 
-
   private
 
   def automake_vanity

@@ -13,11 +13,12 @@
         = paginate @feed  
 
   .span4.offset1
-    %h3
-      = 'Followed Cubes'
-      .btn-group-open.right
-        = link_to 'Explore', cubes_path, :class => 'btn btn-mini btn-success core'
-    %hr.slim
+      %h3
+        = 'Followed Cubes'
+        .btn-group-open.right
+          = link_to 'Explore', cubes_path, :class => 'btn btn-mini btn-success core'
+      %hr.slim
+
     %ul.items.cubes
       - current_user.cubes_to_check.each do |cube|
         %li
