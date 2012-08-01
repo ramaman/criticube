@@ -2,15 +2,19 @@
 
   .row
 
-    .span8
-      %p
-        %h3
-          = 'Activities'    
+    .span7
+      .row
+        .span6.offset1
+          %p
+            %h3
+              = 'Activities'    
       %hr.slim
-      - @feed.each do |feed|
-        = feed
+      %ul.items
+        - @feed.each do |feed|
+          = render :partial => '/activities/activity', :locals => {:activity => feed}
+        = paginate @feed  
 
-    .span3.offset1
+    .span4.offset1
       %p
         %h3
           = 'Followed Cubes'
