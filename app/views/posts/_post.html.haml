@@ -1,10 +1,12 @@
-%li.big-text
+%li
   .row
     .span1
       = link_to image_tag(post.parent.avatar_url(:small), :class => 'push-down'), vanity_post_path(post.parent), :class => 'right'
 
     .span6
       %p
+        = link_to post.creator.name, vanity_path(post.creator), :class => 'core blend'
+      %p.big-text
         = link_to post.headline, vanity_post_path(post.parent, post), :class => 'core'
       %span.minor
         = "#{friendly_datetime(post.updated_at)} • Posted on"
