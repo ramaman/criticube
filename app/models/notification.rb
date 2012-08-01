@@ -19,6 +19,6 @@ class Notification < ActiveRecord::Base
     u.save
   end
 
-  handle_asynchrounously :update_notification_count
+  handle_asynchronously :update_notification_count
 
 end
