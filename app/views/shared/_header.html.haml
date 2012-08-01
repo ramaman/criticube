@@ -9,7 +9,7 @@
       %ul.nav.pull-right
 
         - if user_signed_in?
-
+        
           %li
             = link_to current_user.first_name, vanity_path(current_user),:class => 'text core'
           %li
@@ -27,8 +27,8 @@
               %li
                 = link_to 'Logout', destroy_user_session_path, :method => :delete
           %li
-            #notifications_counter{:style => 'padding:16px 0px 0px 10px'}
-              = link_to current_user.notifications_count, '#', :class => 'label', :style => 'background-color:#33cc66; height: 20px'
+            = render '/shared/notifications_panel'
+
 
         - else
 

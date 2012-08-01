@@ -13,7 +13,7 @@ class Notification < ActiveRecord::Base
   }
 
   scope :unread, where{ |a|
-    a.read == nil
+    a.read == false
   }  
 
   def mark_as_read

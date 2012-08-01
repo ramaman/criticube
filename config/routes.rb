@@ -24,10 +24,12 @@ Criticube::Application.routes.draw do
   get '/users/:id' => 'users#old_show', :as => 'user_old_show'
   resources :cubes, :only => [:index, :new, :create]
   resources :followages, :only => [:create, :destroy]
+  delete '/notifications/read_all' => 'notifications#read_all', :as => 'read_all_notifications'
+  resources :notifications, :only => [:index, :destroy]
 
   delete "/authentications/:provider" => 'authentications#destroy', :as => 'destroy_authentication'
 
-  get '/search', :as => 'search', :to => 'search#main'
+  get '/search', :as => 'search', :to => 'search#main'  
   post '/search', :as => 'search', :to => 'search#main'  
 
   # Vanity level 1 and 2 are without named REST routing, but not after that (e.g. /replies/:id)

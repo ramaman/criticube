@@ -53,13 +53,25 @@ class Activity < ActiveRecord::Base
     self.archived = true
     self.save
   end
+
+  def check_duplicates
+    Activity.where{
+      (action == self.action) & (actor_id == self.actor_id) &
+      (primary_objekt_type == self.primary_objekt_type) &
+      (primary_objekt_id == self.primary_objekt_id)
+    }
+  end
   
   def send_notifications
-    # Those who follow actor and secondary_objekt should get notification
+    # Those who follow primary_objekt and secondary_objekt should get notification
     subscriber_ids = []
 
     # Add followers of Actor    
     # subscriber_ids += self.actor.reverse_followages.collect{|f| f.follower_id}
+    if self.action == 'follow' && self.primary_objekt_type == 'User'
+      # Add followed user to subscriber
+      # if self
+    end
        
     if secondary = self.secondary_objekt
       # Add followers of Cube or Post

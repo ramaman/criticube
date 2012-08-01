@@ -1,0 +1,31 @@
+- provide :content do
+  .row
+    .span7.offset1
+      .row
+        .span5
+          %h3
+            = 'Unread Notifications'
+        .span2
+          - if @unread_notifications && @unread_notifications.length > 0
+            = link_to 'Mark all as read', read_all_notifications_path, :method => :delete, :class => 'btn btn-mini right', :remote => true
+      %hr.slim
+
+  %ul.items.unread_notifications
+    - @unread_notifications.each do |notification|
+      = render :partial => 'notification', :locals => {:notification => notification}
+    .row
+      .span7.offset1
+        = paginate(@unread_notifications, :param_name => :unread_page)
+
+  .row
+    .span7.offset1
+      %h3
+        = 'Read Notifications'
+      %hr.slim
+
+  %ul.items.read_notifications
+    - @read_notifications.each do |notification|
+      = render :partial => 'notification', :locals => {:notification => notification}
+    .row
+      .span7.offset1
+        = paginate(@read_notifications, :param_name => :read_page)        
