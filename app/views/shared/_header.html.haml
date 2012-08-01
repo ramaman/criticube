@@ -25,6 +25,9 @@
                   = link_to 'Admin', admin_dashboard_path  
               %li
                 = link_to 'Logout', destroy_user_session_path, :method => :delete
+          %li
+            #notifications_counter{:style => 'padding:16px 0px 0px 10px'}
+              = link_to '12', '#', :class => 'label', :style => 'background-color:#33cc66; height: 20px'
 
         - else
           %li

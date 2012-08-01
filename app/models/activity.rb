@@ -53,7 +53,14 @@ class Activity < ActiveRecord::Base
   end
   
   def send_notifications
-  
-  end 
+    # Those who follow actor and secondary_objekt should get notification
+    subscriber_ids = []
+    
+    if secondary = self.secondary_objekt
+    
+    end
+        
+  end
+   
 
 end

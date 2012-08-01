@@ -323,10 +323,6 @@ class User < ActiveRecord::Base
     }
   end
 
-  def eat(activity)
-        
-  end
-
   # Feed recording
 
   def record_follow(primary_objekt)
