@@ -133,6 +133,15 @@ class Cube < ActiveRecord::Base
     (self.page_name = self.vanity.name) unless self.page_name == self.vanity.name
   end
 
+  def feed
+    # Feed NEVER fetches activities where self is secondary_objekt!
+    Activity.clean.where{ |a|
+      (a.action != 'followed') |
+      ((a.primary_objekt_type == 'Cube') & (a.primary_objekt_id == self.id)) |
+      ((a.secondary_objekt_type == 'Cube') & (a.secondary_objekt_id == self.id))
+    }
+  end
+
 
   private
 

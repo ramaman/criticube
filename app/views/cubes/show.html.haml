@@ -3,14 +3,37 @@
   = render :partial => 'header', :locals => {:cube => @cube}
 
   .row
-    - if user_signed_in?
-      .span6.offset1
-        = render :partial => '/shared/new_post', :locals => {:parent => @cube}
-    .span4.offset1
+    .span8
+      .row
+        .span6.offset1
+          %h3
+            = 'Opinions'
+          %hr.slim
+
+          - if user_signed_in?
+            = render :partial => '/shared/new_post', :locals => {:parent => @cube}
+            %hr.slim
+
+      .row  
+        - if @posts.length == 0
+          .row
+            .span6.offset1
+              = 'No opinions yet'
+
+        - else
+          .span7
+            %ul.items.posts
+              - @posts.each do |post|
+                = render :partial => '/posts/post', :locals => {:post => post}
+            .row
+              .span6.offset1
+                = link_to 'See all opinions', vanity_posts_path(@cube) 
+
+    .span4.offset
       %h3
-        = 'Recent opinions'
-      %br/
-      %ul.items  
-        - @cube.opinions.limit(8).each do |opinion|
-          %li
-            = link_to opinion.name, vanity_post_path(@cube, opinion), :class => 'core'         
+        = 'Recent activities'
+      %hr.slim
+      %ul.items.activities  
+        / - @cube.feed.limit(8).each do |opinion|
+        /   %li
+        /     = link_to opinion.name, vanity_post_path(@cube, opinion), :class => 'core'         

@@ -52,9 +52,9 @@ class Post < ActiveRecord::Base
   validates :tipe,
             :inclusion => { :in => tipes, :message => "is not supported"}
   validates :parent,
-            :presence => true            
+            :presence => true         
 
-  default_scope includes{cube.managers creator}
+  default_scope includes{cube.managers creator}.order('created_at DESC')
 
   before_validation :cleanup
 

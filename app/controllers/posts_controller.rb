@@ -7,7 +7,12 @@ class PostsController < ApplicationController
 
   def index
     @parent = parent_object
-    @posts = @parent.created_posts.page(params[:page]).per(20)
+    if @parent.class == Cube
+      @posts = @parent.posts.page(params[:page]).per(20)
+    elsif @parent.class == User 
+      @posts = @parent.created_posts.page(params[:page]).per(20)
+    end
+
     respond_to do |format|
       format.html
       # format.js { render :layout => false }

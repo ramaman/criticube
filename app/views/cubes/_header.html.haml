@@ -21,7 +21,9 @@
             /   = managers_list(cube)
               
             %p
-              = link_to pluralize(cube.followers.count, 'follower'), vanity_followers_path(cube)    
+              = link_to(pluralize(cube.posts.count , 'opinion'), vanity_posts_path(cube)) 
+              = ' and '
+              = link_to pluralize(cube.followers.count, 'follower'), vanity_followers_path(cube)
         .span4
           .right
             %p

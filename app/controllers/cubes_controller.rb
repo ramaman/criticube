@@ -10,6 +10,7 @@ class CubesController < ApplicationController
 
   def show
     @cube = Cube.find(params[:id])
+    @posts = @cube.posts.limit(20)
     @title = @cube.name
     respond_to :html
   end

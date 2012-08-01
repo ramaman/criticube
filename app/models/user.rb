@@ -302,11 +302,22 @@ class User < ActiveRecord::Base
 
   # Feed
 
+  def dashboard_feed
+    followages = self.followages
+    user_ids = followages.where{followed_type == 'User'}.collect{|f| f.id}
+    cube_ids = followages.where{followed_type == 'Cube'}.collect{|f| f.id}
+    post_ids = followages.where{followed_type == 'Post'}.collect{|f| f.id}
+  end
+
   def feed
     Activity.clean.where{ |a|
       (a.actor_id == self.id) |
       ((a.primary_objekt_type == 'User') & (a.primary_objekt_id == self.id))
     }
+  end
+
+  def eat(activity)
+        
   end
 
   # Feed recording
