@@ -4,9 +4,9 @@
 
   .row
     - if user_signed_in?
-      .span7.offset1
+      .span6.offset1
         = render :partial => '/shared/new_post', :locals => {:parent => @cube}
-    .span4
+    .span4.offset1
       %h3
         = 'Recent opinions'
       %br/
