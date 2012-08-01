@@ -36,7 +36,6 @@ gem "delayed_job_active_record", "~> 0.3.2"
 gem "activeadmin", "~> 0.4.4"
 gem "ancestry", "~> 1.3.0"
 gem "sunspot_rails", "~> 1.3.3"
-# gem "sunspot_with_kaminari", "~> 0.1.0"
 
 # Content and Files
 gem "carrierwave", "~> 0.6.2"
@@ -46,6 +45,7 @@ gem "mini_magick", "~> 3.4"
 # Misc
 gem 'nokogiri', '~> 1.5.5'
 gem "sanitize", "~> 2.0.3"
+gem "progress_bar", "~> 0.4.0"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -54,7 +54,6 @@ group :assets do
 end
 
 group :development, :test do
-  gem "progress_bar", "~> 0.4.0"
   gem "foreman", "~> 0.51.0"
   gem "sunspot_solr", "~> 1.3.3"
 end
