@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120731220910) do
+ActiveRecord::Schema.define(:version => 20120731221010) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -119,8 +119,10 @@ ActiveRecord::Schema.define(:version => 20120731220910) do
     t.datetime "updated_at",     :null => false
     t.integer  "container_id"
     t.string   "container_type"
+    t.string   "ancestry"
   end
 
+  add_index "replies", ["ancestry"], :name => "index_replies_on_ancestry"
   add_index "replies", ["container_id", "container_type"], :name => "index_replies_on_container_id_and_container_type"
   add_index "replies", ["content"], :name => "index_replies_on_content"
   add_index "replies", ["creator_id", "tipe"], :name => "index_replies_on_creator_id_and_tipe"
