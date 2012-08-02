@@ -66,9 +66,9 @@ class Post < ActiveRecord::Base
     'an opinion' if self.tipe == 'opinion'
   end
 
-  def normalize_friendly_id(string)
-    super[0..100]
-  end
+  # def normalize_friendly_id(string)
+  #   super[0..100] + '-post'
+  # end
 
   def can_edit?(user)
 
