@@ -4,7 +4,8 @@ class CubesController < ApplicationController
   before_filter :manager_check, :except => [:index, :show, :admins, :new, :create]
 
   def index
-    @cubes = Cube.order("RANDOM()").page(params[:page]).per(50)
+    @featured_cubes = Cube.order("RANDOM()").page(params[:page]).per(50)
+    @cubes = Cube.order("RANDOM()").page(params[:page]).per(20)  
     respond_to :html
   end
 

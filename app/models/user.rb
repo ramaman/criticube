@@ -213,7 +213,9 @@ class User < ActiveRecord::Base
       f.followed_id = followed.id
       f.followed_type = followed.class.to_s
       f.save!
-      self.record_follow(followed) if options[:record] == true
+      if options[:record] == true
+        self.delay.record_follow(followed)
+      end  
     end
   end
 
@@ -313,7 +315,7 @@ class User < ActiveRecord::Base
       (a.actor_id >> user_ids) |
       ((a.secondary_objekt_id >> cube_ids) & (a.secondary_objekt_type == 'Cube')) |
       ((a.secondary_objekt_id >> post_ids) & (a.secondary_objekt_type == 'Post'))
-    }
+    }.order('created_at DESC')
   end
 
   def feed
@@ -366,7 +368,7 @@ class User < ActiveRecord::Base
     end
   end
   
-  handle_asynchronously :record_follow, :record_create
+  handle_asynchronously :record_create
 
   private
 

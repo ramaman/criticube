@@ -8,6 +8,7 @@
         .span5
           %p
             = link_to reply.creator.fast_name, vanity_path(reply.creator), :class => 'core'
+            = reply_tipe_wording(reply, options={})
         .span2.align-right
           = render :partial => '/posts/reply_corner', :locals => {:reply => reply}
 

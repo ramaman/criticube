@@ -8,10 +8,11 @@
         .span4
           %p
             = link_to reply_reply.creator.fast_name, vanity_path(reply_reply.creator), :class => 'core'
-            - if reply_reply.parent != reply_reply.root
+            - if reply_reply.parent
               %span.minor
-                = ' replied to '
-                = link_to("#{reply_reply.parent.creator.fast_name}'s opinion", reply_reply.parent.dynamic_permalink)            
+                = reply_tipe_wording_complete(reply_reply, options={})
+                = link_to("#{reply_reply.parent.creator.fast_name}'s opinion", reply_reply.parent.dynamic_permalink)         
+
         .span2.align-right
           = render :partial => '/posts/reply_corner', :locals => {:reply => reply_reply}
       .row.content

@@ -68,9 +68,17 @@ class Activity < ActiveRecord::Base
 
     # Add followers of Actor    
     # subscriber_ids += self.actor.reverse_followages.collect{|f| f.follower_id}
-    if self.action == 'follow' && self.primary_objekt_type == 'User'
+    if self.action == 'follow'
       # Add followed user to subscriber
-      # if self
+      if self.check_duplicates.length == 0
+        if self.primary_objekt_type == 'User'
+          subscriber_ids << self.primary_objekt_id
+        elsif self.primary_objekt_type == 'Cube'
+          subscriber_ids += self.roles.collect{|r| r.owner_id}  
+        elsif self.primary_objekt_type == 'Post'
+          subscriber_ids << self.creator_id
+        end  
+      end
     end
        
     if secondary = self.secondary_objekt

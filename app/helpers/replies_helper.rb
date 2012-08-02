@@ -1,5 +1,23 @@
 module RepliesHelper
 
+  def reply_tipe_wording(reply, options={})
+    if reply.tipe == 'support'
+      content_tag :span, 'supported', :class => 'green'
+    elsif reply.tipe == 'challenge'
+      content_tag :span, 'challenged', :class => 'red'
+    end
+  end
+
+  def reply_tipe_wording_complete(reply, options={})
+    if reply.tipe == 'neutral'
+      'replied to'
+    elsif reply.tipe == 'support'
+      content_tag :span, 'supported', :class => 'green'
+    elsif reply.tipe == 'challenge'
+      content_tag :span, 'challenged', :class => 'red'
+    end
+  end
+
   def reply_tipe_label(reply, options={})
     if reply.tipe == 'neutral'
       label_tipe = 'cclink'

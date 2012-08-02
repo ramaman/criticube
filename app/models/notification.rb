@@ -3,8 +3,6 @@ class Notification < ActiveRecord::Base
   belongs_to :activity
   belongs_to :user
 
-  after_save :update_notification_count
-
   validates :activity, :presence => true
   validates :user, :presence => true
 
@@ -15,6 +13,8 @@ class Notification < ActiveRecord::Base
   scope :unread, where{ |a|
     a.read == false
   }  
+
+  after_save :update_notification_count  
 
   def mark_as_read
     self.read = true

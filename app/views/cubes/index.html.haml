@@ -1,10 +1,21 @@
 - provide :content do
+  
+  .clearfix
+    %h2.page-header
+      = 'Cubes'
+      %span.right
+        = link_to 'New Cube', new_cube_path, :class => 'btn'
+    %ul.items.links.items-content
+      - @cubes.each do |cube|
+        = render :partial => 'cubecard', :locals => {:cube => cube}
+      = paginate(@cubes)
 
-  %h2.page-header
-    = 'Cubes'
-    %span.right
-      = link_to 'New Cube', new_cube_path, :class => 'btn'
-  %ul.items.links.items-content
-    - @cubes.each do |cube|
-      = render :partial => 'cubecard', :locals => {:cube => cube}
-    = paginate(@cubes)
+  .clearfix
+    %h2.page-header
+      = 'Cubes'
+      %span.right
+        = link_to 'New Cube', new_cube_path, :class => 'btn'
+    %ul.items.links.items-content
+      - @cubes.each do |cube|
+        = render :partial => 'cubecard', :locals => {:cube => cube}
+      = paginate(@cubes)
