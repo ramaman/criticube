@@ -7,12 +7,11 @@
           = link_to image_tag(@post.creator.avatar_url(:thumb), :class => 'push-further-down'), vanity_path(@post.creator), :class => 'right'
         .span7
           .page-header
-            %p
-              %h5
-                = link_to(@post.creator.name, vanity_path(@post.creator))
-                = ' posted an opinion in '
-                = link_to(@post.parent.name, vanity_path(@post.parent))
-                = " - " + friendly_datetime(@post.created_at)
+            %p.core
+              = link_to(@post.creator.name, vanity_path(@post.creator))
+              = ' posted an opinion in '
+              = link_to(@post.parent.name, vanity_path(@post.parent))
+              = " - " + friendly_datetime(@post.created_at)
             %h2
               = @post.headline
             .content
