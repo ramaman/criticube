@@ -1,6 +1,9 @@
-%footer.footer
+%footer.footer{:class => (@special_page ? 'special_footer' : '')}
   .container
-    = 'pages'
+    = link_to 'Blog', 'http://blog.criticube.com', :class => 'blend', :style => (@special_page ? 'color:#FFF' : '')
+    %span{:style => (@special_page ? 'color:#FFF' : '')}
+      = ' | '  
+    = link_to 'Contact', contact_path, :class => 'blend', :style => (@special_page ? 'color:#FFF' : '')
 
     .pull-right
       = render :partial => '/shared/social_bar'

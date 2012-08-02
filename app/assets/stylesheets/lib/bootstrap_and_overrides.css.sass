@@ -19,6 +19,7 @@ $errorBackground: #f2dede
 
 $textColor: $grayDark
 $linkColor: #336699
+$linkColorLight: #6699CC
 $btnPrimaryBackground: $linkColor
 $btnDangerBackground: #ee5f5b
 
@@ -143,7 +144,10 @@ span.push-further-down, img.push-further-down, .push-further-down
 
 .blend a, a.blend, p.blend a, span.blend a
   color: $textColor
-  
+  &:hover, &:active 
+    color: $textColor
+
+
 .left
   float: left !important
 

@@ -20,6 +20,7 @@ Criticube::Application.routes.draw do
 
   post '/facebook/import_picture' => 'facebook#import_picture', :as => 'facebook_import_picture'
   
+  get '/contact' => 'pages#contact', :to => 'pages#contact', :as => 'contact'
   resources :users, :only => [:index]
   get '/users/:id' => 'users#old_show', :as => 'user_old_show'
   resources :cubes, :only => [:index, :new, :create]

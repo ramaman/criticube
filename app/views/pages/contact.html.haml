@@ -1,0 +1,17 @@
+-provide :content do
+  .page-header
+    %h2
+      Contact
+  %p
+    = 'You could contact us by sending email to '
+    = mail_to('info@criticube.com')  
+    = ' for general inquiries, or '
+    = mail_to('webmaster@criticube.com')  
+    = ' for technical questions.'
+  %p
+    = 'Find us on  '
+    = link_to('Facebook', 'https://www.facebook.com/criticube')
+    = ' and '
+    = link_to('Twitter', 'http://twitter.com/criticube')
+    = ' '
+    = link_to('@criticube', 'http://twitter.com/criticube')  
