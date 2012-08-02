@@ -2,4 +2,4 @@
   .clearfix.pad
     = image_tag(cube.avatar_url)
   .clearfix.pad
-    = link_to(cube.name, vanity_path(cube), :class => 'core big-text')
+    = link_to(short_string(cube.name, 50), vanity_path(cube), :class => 'core big-text')

@@ -16,7 +16,7 @@
         .control-group
           = f.label 'Name', :class => 'control-label core'
           .controls
-            = f.text_field :name, :class => 'span6'
+            = f.text_field :name, :class => 'span6', :maxlength => '99'
         .control-group
           = f.fields_for :vanity do |v|
             = v.label 'page_name', :class => 'control-label core'

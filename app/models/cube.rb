@@ -76,7 +76,7 @@ class Cube < ActiveRecord::Base
 
   validates :name,
             :presence => :true,
-            :length => { :minimum => 3, :maximum => 100, :message => "needs to be between 3 to 24 characters" },
+            :length => { :minimum => 3, :maximum => 100, :message => "needs to be between 3 to 100 characters" },
             :format => { :with => /^[^0-9`!@#\$%\^&*+_=]+$/, :message => 'Contains invalid characters' }
   validates :description,
             :length => {:maximum => 500 , :allow_nil => true, :allow_blank => true}          
