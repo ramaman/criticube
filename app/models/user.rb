@@ -214,7 +214,7 @@ class User < ActiveRecord::Base
       f.followed_type = followed.class.to_s
       f.save!
       if options[:record] == true
-        self.delay.record_follow(followed)
+        self.record_follow(followed)
       end  
     end
   end
@@ -343,6 +343,8 @@ class User < ActiveRecord::Base
     )
   end
 
+  handle_asynchronously :record_follow
+
   def record_create(primary_objekt)
     if primary_objekt.class == Cube
       Activity.create(
@@ -367,7 +369,7 @@ class User < ActiveRecord::Base
       )
     end
   end
-  
+   
   handle_asynchronously :record_create
 
   private
