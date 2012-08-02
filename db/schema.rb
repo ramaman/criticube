@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120801163218) do
+ActiveRecord::Schema.define(:version => 20120801224441) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -78,12 +78,16 @@ ActiveRecord::Schema.define(:version => 20120801163218) do
     t.string   "page_name"
     t.string   "avatar"
     t.integer  "creator_id"
+    t.boolean  "official"
+    t.boolean  "featured"
   end
 
   add_index "cubes", ["creator_id", "tipe"], :name => "index_cubes_on_creator_id_and_tipe"
   add_index "cubes", ["creator_id"], :name => "index_cubes_on_creator_id"
+  add_index "cubes", ["featured"], :name => "index_cubes_on_featured"
   add_index "cubes", ["language"], :name => "index_cubes_on_language"
   add_index "cubes", ["name"], :name => "index_cubes_on_name"
+  add_index "cubes", ["official"], :name => "index_cubes_on_official"
   add_index "cubes", ["page_name"], :name => "index_cubes_on_page_name", :unique => true
   add_index "cubes", ["tipe"], :name => "index_cubes_on_tipe"
 

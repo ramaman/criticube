@@ -1,11 +1,10 @@
 - provide :content do
 
   %h2.page-header
-    = 'Recent Cubes'
+    = 'Cubes'
     %span.right
       = link_to 'New Cube', new_cube_path, :class => 'btn'
   %ul.items.links.items-content
-    - @cubes.each do |c|
-      %p
-        = link_to(c.name, vanity_path(c))
+    - @cubes.each do |cube|
+      = render :partial => 'cubecard', :locals => {:cube => cube}
     = paginate(@cubes)
