@@ -29,7 +29,7 @@ class FollowagesController < ApplicationController
     @tipe = params[:tipe].singularize
     @parent = User.find(params[:id])
     if (@parent.class == User) && (['user','cube'].include?(@tipe)) 
-      @followeds = @parent.send("followed_#{params[:tipe]}").page(params[:page]).per(2)
+      @followeds = @parent.send("followed_#{params[:tipe]}").page(params[:page]).per(25)
       respond_to do |format|
         format.html 
         # format.js { render :layout => false }
