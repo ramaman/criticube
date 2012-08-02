@@ -46,6 +46,8 @@ gem "mini_magick", "~> 3.4"
 gem 'nokogiri', '~> 1.5.5'
 gem "sanitize", "~> 2.0.3"
 gem "progress_bar", "~> 0.4.0"
+gem "newrelic_rpm", "~> 3.4.1"
+gem "rpm_contrib", "~> 2.1.11"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
