@@ -151,6 +151,6 @@ class Cube < ActiveRecord::Base
     end
   end
 
-  handle_asynchronously :solr_index  
+  # handle_asynchronously :solr_index  
 
 end
