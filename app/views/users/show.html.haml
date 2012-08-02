@@ -50,6 +50,8 @@
     .span3.offset1
       %h3
         = "#{@user.first_name}'s cubes"
+        %span.right
+          = link_to 'New Cube', new_cube_path, :class => 'btn btn-mini'
       %hr.slim
 
       - @user.participated_cubes.each do |cube|
