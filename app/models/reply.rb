@@ -47,7 +47,13 @@ class Reply < ActiveRecord::Base
   end
 
   def tipe_name
-    'a reply'
+    if self.tipe == 'neutral'
+      'a neutral reply'
+    elsif self.tipe == 'challenging reply'
+      'a challenge'
+    elsif self.tipe == 'support'
+      'a supporting reply'      
+    end  
   end  
 
 end

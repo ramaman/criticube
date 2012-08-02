@@ -18,12 +18,15 @@
 
           = link_to activity.actor.name, vanity_path(activity.actor), :class => 'core blend'
           = activity.action_story
-          = "#{activity.primary_objekt.tipe_name}"
 
           - if activity.primary_objekt_type == 'Reply'
+            = reply_tipe_name_html(activity.primary_objekt)
             = ' to '
             = link_to activity.secondary_objekt.name, vanity_post_path(activity.tertiary_objekt, activity.secondary_objekt), :class => ''
             %br/
+
+          - else
+            = "#{activity.primary_objekt.tipe_name}"  
 
         %p.content.big-text
 

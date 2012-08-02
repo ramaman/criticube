@@ -1,6 +1,6 @@
 class FollowagesController < ApplicationController
 
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:following, :followers]
 
   def create
     if params[:followage]

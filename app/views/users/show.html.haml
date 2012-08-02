@@ -47,11 +47,11 @@
             .span6.offset1
               = link_to 'See all activities', vanity_activities_path(@user)    
 
-    / .span3.offset1
-    /   %h3
-    /     = 'Participated Cubes'
-    /   %hr.slim
+    .span3.offset1
+      %h3
+        = "#{@user.first_name}'s cubes"
+      %hr.slim
 
-    /   - @user.participated_cubes.each do |cube|
-    /     .well.white.slim
-    /       = link_to cube.name, vanity_path(cube), :class => 'core'
+      - @user.participated_cubes.each do |cube|
+        .well.white.slim
+          = link_to cube.name, vanity_path(cube), :class => 'core'

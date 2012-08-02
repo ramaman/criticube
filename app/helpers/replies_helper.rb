@@ -1,5 +1,15 @@
 module RepliesHelper
 
+  def reply_tipe_name_html(reply)
+    if reply.tipe == 'neutral'
+      'a neutral reply'      
+    elsif reply.tipe == 'support'
+      content_tag :span, 'a supporting reply', :class => 'green'
+    elsif reply.tipe == 'challenge'
+      content_tag :span, 'a challenge', :class => 'red'
+    end  
+  end  
+
   def reply_tipe_wording(reply, options={})
     if reply.tipe == 'support'
       content_tag :span, 'supported', :class => 'green'

@@ -2,11 +2,9 @@
   
   .clearfix
     %h2.page-header
-      = 'Cubes'
-      %span.right
-        = link_to 'New Cube', new_cube_path, :class => 'btn'
+      = 'Featured Cubes'
     %ul.items.links.items-content
-      - @cubes.each do |cube|
+      - @featured_cubes.each do |cube|
         = render :partial => 'cubecard', :locals => {:cube => cube}
       = paginate(@cubes)
 

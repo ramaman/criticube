@@ -98,6 +98,9 @@ class Cube < ActiveRecord::Base
 
   # default_scope includes(:vanity)
 
+  scope :featured, where{featured == true}
+  scope :common, where{(featured == nil) | (featured == false)}
+
   mount_uploader :avatar, AvatarUploader  
 
   after_initialize :automake_vanity
@@ -112,8 +115,6 @@ class Cube < ActiveRecord::Base
     text :page_name, :stored => true
     text :description
   end
-
-  # handle_asynchronously :solr_index
 
   def tipe_name
     'a cube'
@@ -136,7 +137,7 @@ class Cube < ActiveRecord::Base
   def feed
     # Feed NEVER fetches activities where self is secondary_objekt!
     Activity.clean.where{ |a|
-      (a.action != 'followed') |
+      (a.action != 'followed') &
       ((a.primary_objekt_type == 'Cube') & (a.primary_objekt_id == self.id)) |
       ((a.secondary_objekt_type == 'Cube') & (a.secondary_objekt_id == self.id))
     }
@@ -149,5 +150,7 @@ class Cube < ActiveRecord::Base
       self.build_vanity unless self.vanity
     end
   end
+
+  handle_asynchronously :solr_index  
 
 end

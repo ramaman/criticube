@@ -159,9 +159,7 @@ class User < ActiveRecord::Base
     text :name, :stored => true
     text :page_name, :stored => true
     text :bio
-  end    
-  
-  # handle_asynchronously :solr_index           
+  end             
                   
   def permalink
     Rails.application.routes.url_helpers.vanity_path(self.page_name)
@@ -372,12 +370,12 @@ class User < ActiveRecord::Base
    
   handle_asynchronously :record_create
 
-  private
-
   def automake_vanity
     if self.persisted? == false
       self.build_vanity unless self.vanity
     end
   end
+
+  handle_asynchronously :solr_index  
 
 end

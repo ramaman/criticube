@@ -1,5 +1,5 @@
-.cubecard.left
+.cubecard.left.opacityhover{:data => {'id' => cube.id, 'tipe' => 'Cube'}}
   .clearfix.pad
-    = image_tag(cube.avatar_url)
+    = link_to(image_tag(cube.avatar_url), vanity_path(cube))
   .clearfix.pad
     = link_to(short_string(cube.name, 50), vanity_path(cube), :class => 'core big-text')
