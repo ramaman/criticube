@@ -5,11 +5,14 @@
       .nav-collapse
         = form_tag search_path, :class => 'navbar-search', :id => 'main_search', :style => 'padding-top:9px; padding-bottom: 0px; margin:0px', :autocomplete => :off, :method => :get do
           = text_field_tag 'q', '', :id => 'main_search', :class => 'search-query span3'
+      %ul.nav{:style => 'padding-left: 10px;'}
+        / - if user_signed_in?
 
       %ul.nav.pull-right
 
         - if user_signed_in?
-        
+          %li
+            = link_to 'Feedback', new_feedback_path, :class => 'text'        
           %li
             = link_to current_user.first_name, vanity_path(current_user),:class => 'text core'
           %li

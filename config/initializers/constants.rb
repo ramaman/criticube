@@ -84,6 +84,8 @@ RESERVED_WORDS = [
   'favorites',
   'feed',
   'feeds',
+  'feedback',
+  'feedbacks',  
   'follow',
   'follows',
   'followers',

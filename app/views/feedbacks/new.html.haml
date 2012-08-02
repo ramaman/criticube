@@ -1,0 +1,14 @@
+-provide :content do
+  .row
+    .span7
+      .page-header
+        %h3
+          = 'We would love to hear your feedback to make Criticube better'
+      = form_for @feedback, :html => {:class => ['form-stacked', 'no_padding']}, :validate => true do |f|
+        %p.big-text
+          = f.select :tipe, options_for_select([["Idea", "Idea"],['Problem', 'Problem'], ['Question','Question'], ['Comment','Comment'], ['Miscellaneous','Miscellaneous']]), :class => 'span10'
+        %p.big-text
+          = f.text_area :content, :class => ['span7', 'medium', 'autoresize'], :placeholder => 'Description'
+        %p
+          = f.submit "Send", :class => 'btn btn-large btn-primary core'
+          = link_to 'Cancel', root_path, :class => 'btn btn-large'       

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120802135633) do
+ActiveRecord::Schema.define(:version => 20120802215631) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -106,6 +106,22 @@ ActiveRecord::Schema.define(:version => 20120802135633) do
   end
 
   add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
+  create_table "feedbacks", :force => true do |t|
+    t.integer  "creator_id"
+    t.string   "tipe"
+    t.text     "content"
+    t.boolean  "responded",  :default => false, :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+  end
+
+  add_index "feedbacks", ["created_at"], :name => "index_feedbacks_on_created_at"
+  add_index "feedbacks", ["creator_id"], :name => "index_feedbacks_on_creator_id"
+  add_index "feedbacks", ["responded"], :name => "index_feedbacks_on_responded"
+  add_index "feedbacks", ["tipe", "responded"], :name => "index_feedbacks_on_tipe_and_responded"
+  add_index "feedbacks", ["tipe"], :name => "index_feedbacks_on_tipe"
+  add_index "feedbacks", ["updated_at"], :name => "index_feedbacks_on_updated_at"
 
   create_table "followages", :force => true do |t|
     t.datetime "created_at",    :null => false

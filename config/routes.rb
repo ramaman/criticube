@@ -33,6 +33,8 @@ Criticube::Application.routes.draw do
   get '/search', :as => 'search', :to => 'search#main'  
   post '/search', :as => 'search', :to => 'search#main'  
 
+  resources :feedbacks, :only => [:new, :create]
+
   # Vanity level 1 and 2 are without named REST routing, but not after that (e.g. /replies/:id)
 
   get '/:id', :as => 'vanity', :to => proc { |env| vanity_controller(env, 'show') }
