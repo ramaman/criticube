@@ -7,7 +7,7 @@ class Feedback < ActiveRecord::Base
 
   validates :tipe,
             :presence => true,
-            :inclusion => { :in => %w(Idea Problem Question Miscellaneous)} 
+            :inclusion => { :in => %w(Idea Problem Question Comment Miscellaneous)} 
   validates :content,
             :presence => true,
             :length => { :maximum => 3550, :allow_nil => true, :allow_blank => true }             

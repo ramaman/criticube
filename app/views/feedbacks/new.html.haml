@@ -4,7 +4,7 @@
       .page-header
         %h3
           = 'We would love to hear your feedback to make Criticube better'
-      = form_for @feedback, :html => {:class => ['form-stacked', 'no_padding']}, :validate => true do |f|
+      = form_for @feedback, :html => {:class => ['form-stacked', 'no_padding']} do |f|
         %p.big-text
           = f.select :tipe, options_for_select([["Idea", "Idea"],['Problem', 'Problem'], ['Question','Question'], ['Comment','Comment'], ['Miscellaneous','Miscellaneous']]), :class => 'span10'
         %p.big-text
