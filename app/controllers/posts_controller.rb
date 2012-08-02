@@ -64,7 +64,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     if @post.destroy      
-      flash[:notice] = "#{@post.tipe.capitalize} has been successfully deleted"
+      flash[:notice] = "Post has been successfully deleted"
       redirect_to vanity_path(@parent)
     else
       flash[:alert] = 'Error deleting cube'
