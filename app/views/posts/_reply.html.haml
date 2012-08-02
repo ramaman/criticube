@@ -18,8 +18,8 @@
       .row.meta{:data => {'id' => reply.id, 'anchor' => link_to("#{reply.creator.name}'s opinion", reply.dynamic_permalink)}}
         .span7
           %span.actions
-            = reply_actions_tab(reply)
-
+            = reply_actions_tab(reply) + ' • '
+            = friendly_datetime(reply.created_at)
 
           %span.stats.right
             = link_to "#{reply.descendants.count} replies", "#", :class => 'cmf-toggle',:data => {"cmf-tag" => "reply_replies_#{reply.id}"}   

@@ -20,7 +20,8 @@
           = simple_htmlize reply_reply.content
       .row.meta{:data => {'id' => reply_reply.id, 'anchor' => link_to("#{reply_reply.creator.name}'s opinion", reply_reply.dynamic_permalink)}} 
         .span6
-          %span.actions
-            = reply_actions_tab(reply) 
+          %span.actions.minor
+            = reply_actions_tab(reply) + ' • '
+            = friendly_datetime(reply.created_at) 
 
       %hr    
