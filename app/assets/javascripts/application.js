@@ -18,7 +18,9 @@
 //= require bootstrap-dropdown
 //= require rails.validations
 //= require rails.validations.simple_form
+//= require lib/jquery.smart_autocomplete
 //= require lib/jquery.autoresize
+//= require lib/jquery.truncator
 //= require_tree .
 //= require active_admin/base
 //= require tinymce-jquery

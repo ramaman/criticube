@@ -3,8 +3,8 @@
     .container
       = link_to image_tag('logo.png'), root_path, :class => 'brand'
       .nav-collapse
-        = form_tag search_path, :class => 'navbar-search', :style => 'padding-top:9px; padding-bottom: 0px; margin:0px' do
-          = text_field_tag 'q', '', :id => 'search', :class => 'search-query span3'
+        = form_tag search_path, :class => 'navbar-search', :id => 'main_search', :style => 'padding-top:9px; padding-bottom: 0px; margin:0px', :autocomplete => :off, :method => :get do
+          = text_field_tag 'q', '', :id => 'main_search', :class => 'search-query span3'
 
       %ul.nav.pull-right
 
@@ -40,3 +40,11 @@
             = link_to 'Signup', new_user_registration_path, :class => 'text core'
   .right.minor
     = 'beta'            
+
+.navbar-search-ext
+  .container
+    .row
+      .span6.offset1
+        %ul.items#main-search-results    
+          %li
+            ='sklancla'

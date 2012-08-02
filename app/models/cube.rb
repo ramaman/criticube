@@ -116,6 +116,10 @@ class Cube < ActiveRecord::Base
     text :description
   end
 
+  def permalink
+    Rails.application.routes.url_helpers.vanity_path(self.page_name)
+  end
+
   def tipe_name
     'a cube'
   end
