@@ -11,8 +11,8 @@
           = activity.action_story
           - if activity.primary_objekt_type == 'Post'
             = link_to activity.primary_objekt.name, vanity_post_path(activity.primary_objekt.parent, activity.primary_objekt)
-
-          = link_to activity.primary_objekt.name, vanity_path(activity.primary_objekt)
+          - else   
+            = link_to activity.primary_objekt.name, vanity_path(activity.primary_objekt)
         .meta.minor
           = friendly_datetime activity.created_at
       
