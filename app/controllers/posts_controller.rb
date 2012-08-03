@@ -40,6 +40,7 @@ class PostsController < ApplicationController
     @parent = Vanity.find(params[:vanity_id]).owner
     @post = @parent.posts.find(params[:id])
     @title = @post.headline
+    @special_image = @parent.avatar_url
     respond_to :html
   end
 
