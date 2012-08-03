@@ -41,12 +41,12 @@
           
           - elsif activity.primary_objekt_type == 'Post'
             = link_to activity.primary_objekt.name, vanity_post_path(activity.secondary_objekt, activity.primary_objekt), :class => 'core'
-          - if activity.primary_objekt.content && !activity.primary_objekt.content.blank?
-            .content.truncate
-              = htmlize(activity.primary_objekt.content)        
-            .meta.minor.quiet
-              = "#{friendly_datetime activity.created_at} • Posted in"
-              = link_to activity.secondary_objekt.name, vanity_path(activity.secondary_objekt)           
+            - if activity.primary_objekt.content && !activity.primary_objekt.content.blank?
+              .content.truncate
+                = htmlize(activity.primary_objekt.content)        
+              .meta.minor.quiet
+                = "#{friendly_datetime activity.created_at} • Posted in"
+                = link_to activity.secondary_objekt.name, vanity_path(activity.secondary_objekt)           
              
           - elsif activity.primary_objekt_type == 'Cube'            
             = link_to activity.primary_objekt.name, vanity_path(activity.primary_objekt), :class => 'core'
