@@ -6,7 +6,7 @@
     = stylesheet_link_tag "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
-    = display_meta_tags :open_graph => {:title => @title, :site_name => 'Criticube' , :url => request.url, :description => strip_tags(description),:type => 'website', :image => @special_image ? @special_image : full_url('/assets/og_logo.jpg')}, 'fb:app_id' => fb_app_id , :keywords => keywords_array    
+    = display_meta_tags :open_graph => {:title => @title, :site_name => 'Criticube' , :url => request.url, :description => strip_tags(description),:type => 'website', :image => (@special_image ? @special_image : full_url('/assets/og_logo.jpg'))}, 'fb:app_id' => fb_app_id , :keywords => keywords_array    
     #fb-root
     %script{:src => "//connect.facebook.net/en_US/all.js#xfbml=1"} 
     %script{:src => "//platform.twitter.com/widgets.js", :type => "text/javascript"}
