@@ -1,7 +1,7 @@
 - provide :content do
   #edit_post.well.span7
     %p.core
-      = "Edit #{@post.tipe}"
+      = "Edit post"
     = simple_form_for @post, :url => vanity_post_path(@post.parent, @post), :html => {:class => 'form-vertical', :style => "margin-bottom:0px", :method => :put} do |f|
       = f.hidden_field :tipe, :value => 'opinion'
       = f.hidden_field :parent_id, :value => @post.parent.id

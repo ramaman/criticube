@@ -206,4 +206,8 @@ $ ->
     $('body').live 'click', (ev) ->
       $('.topbar-search-ext').hide()
     $('.topbar-search-ext').live 'click', (ev) ->
-      $('.topbar-search-ext').hide()          
+      $('.topbar-search-ext').hide()      
+      
+$ ->
+  # Text truncation
+  $('.truncate').truncate()          

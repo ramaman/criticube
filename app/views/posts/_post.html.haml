@@ -8,7 +8,11 @@
         = link_to post.creator.name, vanity_path(post.creator), :class => 'core blend'
       %p.big-text
         = link_to post.headline, vanity_post_path(post.parent, post), :class => 'core'
-      %span.minor
+      - if post.content && !post.content.blank?
+        .truncate.content
+          = htmlize(post.content) 
+        
+      %span.minor.quiet
         = "#{friendly_datetime(post.updated_at)} • Posted on"
         = link_to post.parent.name, vanity_path(post.parent)
       %hr.slim

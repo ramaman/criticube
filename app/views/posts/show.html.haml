@@ -50,9 +50,9 @@
                 %b.caret.core
               %ul.dropdown-menu
                 %li
-                  = link_to "Edit #{@post.tipe}", edit_vanity_post_path(@post.parent, @post)              
+                  = link_to "Edit #{@post.context_tipe}", edit_vanity_post_path(@post.parent, @post)              
                 %li
-                  = link_to "Delete #{@post.tipe}", vanity_post_path(@post.parent, @post), :method => :delete, :confirm => "This action will also delete other users' replies, are you sure?"
+                  = link_to "Delete #{@post.context_tipe}", vanity_post_path(@post.parent, @post), :method => :delete, :confirm => "This action will also delete other users' replies, are you sure?"
           - elsif @post.parent.managers.include?(current_user)   
             %span.dropdown
               %a{:class => 'btn dropdown-toggle', :href => '#', 'data-toggle' => 'dropdown'}

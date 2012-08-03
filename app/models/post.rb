@@ -62,6 +62,10 @@ class Post < ActiveRecord::Base
     self.headline
   end  
 
+  def self.display_name
+    'opinion'
+  end
+
   def context_tipe
     'opinion' if self.tipe == 'opinion'
   end
