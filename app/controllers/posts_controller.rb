@@ -53,7 +53,7 @@ class PostsController < ApplicationController
     @post.update_attributes(post_params)
     respond_to do |format|
       if @post.save
-        flash[:notice] = 'Cube has been successfully updated'
+        flash[:notice] = 'Post has been successfully updated'
         format.html {redirect_to vanity_post_path(@post.parent, @post)}
       else
         format.html {redirect_to edit_vanity_post_path(@post.parent, @post)}
