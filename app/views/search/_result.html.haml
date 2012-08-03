@@ -1,12 +1,13 @@
-%li
-  .picframe.left
+%li.clearfix
+  .left.picframe{:style => 'width:42px;'}
     = link_to image_tag(result.avatar_url(:small)), vanity_path(result)
-  %span.big-text
-    %a{:href => vanity_path(result)}
-      %span.core
-        = result.name
-      = " (#{result.page_name})"    
-  %br
-  %span.minor
-    = result.class.to_s
-  %hr     
+  .left.content{:style => 'width:524px !important;'}
+    %span.big-text
+      %a{:href => vanity_path(result)}
+        %span.core
+          = result.name
+        = " (#{result.page_name})"    
+    %br
+    %span.minor.follow_link_panel{:data => {"id" => result.id, "tipe" => result.class.to_s }}
+      = follow_link(result)
+    %hr     

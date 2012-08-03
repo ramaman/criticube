@@ -66,6 +66,10 @@ class Post < ActiveRecord::Base
     'opinion'
   end
 
+  def story_name
+    'post'
+  end
+
   def context_tipe
     'opinion' if self.tipe == 'opinion'
   end

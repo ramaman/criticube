@@ -12,7 +12,11 @@
         .truncate.content
           = htmlize(post.content) 
         
-      %span.minor.quiet
-        = "#{friendly_datetime(post.updated_at)} • Posted on"
+      %span.minor
+        %span.follow_link_panel{:data => {"id" => post.id, "tipe" => post.class.to_s }}
+          = follow_link(post)
+        = " • Posted on "
         = link_to post.parent.name, vanity_path(post.parent)
+        %span.quiet
+          = " • #{friendly_datetime(post.updated_at)}"
       %hr.slim

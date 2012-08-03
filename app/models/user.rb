@@ -177,6 +177,10 @@ class User < ActiveRecord::Base
     "#{self.first_name} #{self.last_name}"  
   end
 
+  def story_name
+    self.first_name
+  end
+
   def self.find_through_vanity(id)
     owner = Vanity.find(id).owner rescue nil
     owner && owner.class == User ? owner : nil 

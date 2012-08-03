@@ -1,0 +1,8 @@
+%span.follow_link_panel{:data => {"id" => objekt.id, "tipe" => objekt.class.to_s }}
+  = follow_link(objekt)
+- if objekt.class == Post
+  = " • posted on "
+  = link_to objekt.parent.name, vanity_path(objekt.parent)
+  
+%span.quiet
+  = " • #{friendly_datetime(objekt.updated_at)}"
