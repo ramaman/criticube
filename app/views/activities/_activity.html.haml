@@ -34,10 +34,15 @@
         %p.objekt.big-text
 
           - if activity.primary_objekt_type == 'Reply'
-            = activity.primary_objekt.content
+            .content.truncate.boxed{:class => activity.primary_objekt.tipe}
+              = simple_format(activity.primary_objekt.content)
+
+
             .meta.minor.quiet
               = "#{friendly_datetime activity.created_at} • Posted in"
-              = link_to activity.tertiary_objekt.name, vanity_path(activity.tertiary_objekt)           
+              = link_to activity.tertiary_objekt.name, vanity_path(activity.tertiary_objekt)        
+              
+                 
           
           - elsif activity.primary_objekt_type == 'Post'
             = link_to activity.primary_objekt.name, vanity_post_path(activity.secondary_objekt, activity.primary_objekt), :class => 'core'

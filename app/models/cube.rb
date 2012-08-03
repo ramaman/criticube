@@ -143,7 +143,8 @@ class Cube < ActiveRecord::Base
     Activity.clean.where{ |a|
       (a.action != 'followed') &
       ((a.primary_objekt_type == 'Cube') & (a.primary_objekt_id == self.id)) |
-      ((a.secondary_objekt_type == 'Cube') & (a.secondary_objekt_id == self.id))
+      ((a.secondary_objekt_type == 'Cube') & (a.secondary_objekt_id == self.id)) |
+      ((a.tertiary_objekt_type == 'Cube') & (a.tertiary_objekt_id == self.id)) 
     }
   end
 
