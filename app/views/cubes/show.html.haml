@@ -36,14 +36,14 @@
           %h3
             = 'Recent activities'
             %span.minor.right
-              = link_to 'See all', vanity_activities_path(@activities)
+              = link_to 'See all', vanity_activities_path(@cube)
           %hr.slim
       %ul.items.activities
         - @activities.each do |activity|
           = render :partial => '/activities/mini_activity', :locals => {:activity => activity}
         .row
           .span4.offset1
-            = link_to 'See all activities', vanity_activities_path(@cube)  
+            = link_to 'See all activities', vanity_activities_path(@cube)
 
         / - @cube.feed.limit(8).each do |opinion|
         /   %li
