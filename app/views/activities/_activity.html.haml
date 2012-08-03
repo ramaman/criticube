@@ -47,8 +47,8 @@
             - if activity.primary_objekt.content && !activity.primary_objekt.content.blank?
               .content.truncate
                 = htmlize(activity.primary_objekt.content)        
-              .meta.minor
-                = render :partial => 'activities/activity_meta', :locals => {:objekt => activity.primary_objekt}          
+            .meta.minor
+              = render :partial => 'activities/activity_meta', :locals => {:objekt => activity.primary_objekt}          
              
           - elsif activity.primary_objekt_type == 'Cube'            
             = link_to activity.primary_objekt.name, vanity_path(activity.primary_objekt), :class => 'core'
