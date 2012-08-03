@@ -9,6 +9,9 @@
         %p.header
           = link_to activity.actor.name, vanity_path(activity.actor), :class => 'core blend'
           = activity.action_story
+          - if activity.primary_objekt_type == 'Post'
+            = link_to activity.primary_objekt.name, vanity_post_path(activity.secondary_objekt, activity.primary_objekt)
+
           = link_to activity.primary_objekt.name, vanity_path(activity.primary_objekt)
         .meta.minor
           = friendly_datetime activity.created_at
