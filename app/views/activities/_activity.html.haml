@@ -40,8 +40,6 @@
             .meta.minor
               = render :partial => 'activities/activity_meta', :locals => {:objekt => activity.secondary_objekt}        
               
-                 
-          
           - elsif activity.primary_objekt_type == 'Post'
             = link_to activity.primary_objekt.name, vanity_post_path(activity.secondary_objekt, activity.primary_objekt), :class => 'core'
             - if activity.primary_objekt.content && !activity.primary_objekt.content.blank?

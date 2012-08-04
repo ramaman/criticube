@@ -20,12 +20,12 @@
               - elsif user_signed_in? && (current_user == @post.creator)
                 %br/
                 = link_to 'Add description', edit_vanity_post_path(@post.parent, @post)
+                
       .row
         .span7.offset1
           %h3
             = 'Replies'
-          %hr.slim 
-
+          %hr.slim
       .row
         .span8
           %ul.items.replies{:data => {'root' => ""}}
