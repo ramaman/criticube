@@ -56,5 +56,9 @@
       %hr.slim
 
       - @user.participated_cubes.each do |cube|
-        .well.white.slim
-          = link_to cube.name, vanity_path(cube), :class => 'core'
+        .cube.clearfix
+          .picture.left{:style => 'padding-right: 10px'}
+            = link_to image_tag(cube.avatar_url(:small)), vanity_path(cube)
+          .content.left{:style => 'width: 178px'}
+            = link_to cube.name, vanity_path(cube), :class => 'core'
+        %hr.slim

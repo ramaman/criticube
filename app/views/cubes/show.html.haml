@@ -26,6 +26,9 @@
             %ul.items.posts
               - @posts.each do |post|
                 = render :partial => '/posts/post', :locals => {:post => post}
+              / .row
+              /   .span6.offset1
+              /     = paginate(@posts, :route => vanity_path(@cube))  
             .row
               .span6.offset1
                 = link_to 'See all opinions', vanity_posts_path(@cube) 

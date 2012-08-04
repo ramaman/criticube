@@ -11,7 +11,7 @@ class CubesController < ApplicationController
 
   def show
     @cube = Cube.find(params[:id])
-    @posts = @cube.posts.limit(20)
+    @posts = @cube.posts.order('created_at DESC').page(params[:page]).per(25)
     @activities = @cube.feed.limit(10)
     @title = @cube.name
     respond_to :html

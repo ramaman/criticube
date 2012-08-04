@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/rmanusama/kaminari.git
+  revision: 2533cf0b7a922b9d9f2f3a6cc834d7c3222426d7
+  specs:
+    kaminari (0.13.0)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -133,10 +141,6 @@ GEM
     json (1.7.4)
     jwt (0.1.5)
       multi_json (>= 1.0)
-    kaminari (0.13.0)
-      actionpack (>= 3.0.0)
-      activesupport (>= 3.0.0)
-      railties (>= 3.0.0)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -291,7 +295,7 @@ DEPENDENCIES
   hamlbars (~> 1.0)
   jbuilder (~> 0.4.0)
   jquery-rails
-  kaminari (~> 0.13.0)
+  kaminari!
   meta-tags (~> 1.2.6)
   mini_magick (~> 3.4)
   newrelic_rpm (~> 3.4.1)

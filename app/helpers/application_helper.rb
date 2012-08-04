@@ -89,4 +89,15 @@ module ApplicationHelper
     request.protocol + request.host + url
   end
 
+  def url_for(options = {})
+    if (options.class == Cube) || (options.class == User)
+      vanity_path(options.page_name)
+    else
+      original = super(options)
+      # I tried this in order to improve performance:
+      return original
+    end
+  end
+
+
 end
