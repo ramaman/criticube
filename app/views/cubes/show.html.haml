@@ -31,7 +31,7 @@
               /     = paginate(@posts, :route => vanity_path(@cube))  
             .row
               .span6.offset1
-                = link_to 'See all opinions', vanity_posts_path(@cube) 
+                = link_to "See all #{Post.context_tipe}s", vanity_posts_path(@cube) 
 
     .span5
       .row
