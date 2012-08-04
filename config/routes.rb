@@ -4,6 +4,7 @@ Criticube::Application.routes.draw do
 
   root :to => 'dashboard#home'
   
+  ## USERS
   devise_for :users, :path_names => {
     :sign_in => 'login', 
     :sign_out => 'logout', 
@@ -17,22 +18,30 @@ Criticube::Application.routes.draw do
     post '/users' => 'registrations#create', :as => 'user_registration'
     post '/users/external' => 'registrations#create_with_omniauth', :as => 'omniauth_user_registration'
   end
-
+  delete "/authentications/:provider" => 'authentications#destroy', :as => 'destroy_authentication'  
   post '/facebook/import_picture' => 'facebook#import_picture', :as => 'facebook_import_picture'
-  
   get '/contact' => 'pages#contact', :to => 'pages#contact', :as => 'contact'
   resources :users, :only => [:index]
   get '/users/:id' => 'users#old_show', :as => 'user_old_show'
+  
+  ## CUBES
   resources :cubes, :only => [:index, :new, :create]
+  
+  ## FOLLOWAGES  
   resources :followages, :only => [:create, :destroy]
+  
+  ## VOTES
+  resources :votes, :only => [:create, :destroy]  
+  
+  ## NOTIFICATIONS
   delete '/notifications/read_all' => 'notifications#read_all', :as => 'read_all_notifications'
   resources :notifications, :only => [:index, :destroy]
 
-  delete "/authentications/:provider" => 'authentications#destroy', :as => 'destroy_authentication'
-
+  ## SEARCH
   get '/search', :as => 'search', :to => 'search#main'  
   post '/search', :as => 'search', :to => 'search#main'  
 
+  ## FEEDBACK
   resources :feedbacks, :only => [:new, :create]
 
   # Vanity level 1 and 2 are without named REST routing, but not after that (e.g. /replies/:id)
@@ -54,7 +63,7 @@ Criticube::Application.routes.draw do
   delete '/:vanity_id/:id' => 'posts#destroy', :as => 'vanity_post'
 
   post '/:vanity_id/:post_id/replies' => 'replies#create', :as => 'vanity_post_replies'
-  get '/:vanity_id/:post_id//replies/:id' => 'replies#show', :as => 'vanity_post_reply'
+  get '/:vanity_id/:post_id/replies/:id' => 'replies#show', :as => 'vanity_post_reply'
   # get '/:vanity_id/:post_id/replies/:id' => 'replies#update', :as => 'vanity_post_reply'
   # get '/:vanity_id/:post_id/replies/:id/edit' => 'replies#edit', :as => 'edit_vanity_post_reply'
   # put '/:vanity_id/:post_id/replies/:id' => 'replies#update', :as => 'vanity_post_reply'

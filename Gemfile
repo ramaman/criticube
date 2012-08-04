@@ -36,6 +36,7 @@ gem "delayed_job_active_record", "~> 0.3.2"
 gem "activeadmin", "~> 0.4.4"
 gem "ancestry", "~> 1.3.0"
 gem "sunspot_rails", "~> 1.3.3"
+gem "activerecord-reputation-system", "~> 1.3.0", require: 'reputation_system'
 
 # Content and Files
 gem "carrierwave", "~> 0.6.2"
