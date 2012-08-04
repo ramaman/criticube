@@ -22,8 +22,10 @@
           %br/
           = 'Following'
           = link_to(pluralize(user.followed_users.count , 'user'), vanity_following_path(user, 'users'))
-          = ' and '
+          = ', '
           = link_to(pluralize(user.followed_cubes.count , 'cube'), vanity_following_path(user, 'cubes'))
+          = ' and '
+          = link_to(pluralize(user.followed_cubes.count , 'post'), vanity_following_path(user, 'posts'))
           %br/
           = 'Followed by '
           = link_to(pluralize(user.followers.count , 'user'), vanity_followers_path(user))

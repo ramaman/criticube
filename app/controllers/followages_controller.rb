@@ -28,7 +28,7 @@ class FollowagesController < ApplicationController
   def following
     @tipe = params[:tipe].singularize
     @parent = User.find(params[:id])
-    if (@parent.class == User) && (['user','cube'].include?(@tipe)) 
+    if (@parent.class == User) && (['user','cube', 'post'].include?(@tipe)) 
       @followeds = @parent.send("followed_#{params[:tipe]}").page(params[:page]).per(25)
       respond_to do |format|
         format.html 
