@@ -1,0 +1,35 @@
+- if user_signed_in?
+  - if v = current_user.voted_with_direction?(voteable)
+    - if v == 'up'
+      - text = 'Unlike'
+    - elsif v == 'down'  
+      - text = 'Undislike'
+
+    - if voteable.class == Post
+      - url = vanity_post_unvote_path(voteable.parent, voteable)
+    - elsif voteable.class == Reply  
+      - url = vanity_post_reply_unvote_path(voteable.container.parent, voteable.container, voteable)
+
+    = link_to(text, url, :remote => true, :method => :delete)
+
+  - else
+    - if voteable.class == Post
+      - url_up = vanity_post_vote_path(voteable.parent, voteable, :direction => 'up')
+      - url_down = vanity_post_vote_path(voteable.parent, voteable, :direction => 'down')      
+    - elsif voteable.class == Reply
+      - url_up = vanity_post_reply_vote_path(voteable.container.parent, voteable.container, voteable, :direction => 'up')
+      - url_down = vanity_post_reply_vote_path(voteable.container.parent, voteable.container, voteable, :direction => 'down')
+
+    = link_to('Like', url_up, :remote => true, :method => :post)
+    = ' • '
+    = link_to('Dislike', url_down, :remote => true, :method => :post)
+
+
+- else
+  = link_to('Like', new_user_session_path)
+  = ' • '
+  = link_to('Dislike', new_user_session_path)
+
+= ' • '
+= pluralize(voteable.points, 'point')  
+  

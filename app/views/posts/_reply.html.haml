@@ -18,11 +18,16 @@
       .row.meta{:data => {'id' => reply.id, 'anchor' => link_to("#{reply.creator.name}'s opinion", reply.dynamic_permalink)}}
         .span7
           %span.actions
-            = reply_actions_tab(reply) + ' • '
+            %span.vote_panel{:data => {"id" => reply.id, "tipe" => reply.class.to_s }}
+              = render :partial => '/shared/vote_panel', :locals => {:voteable => reply}
+            = ' • '    
             = friendly_datetime(reply.created_at)
 
           %span.stats.right
+            = reply_actions_tab(reply)
+            = ' • '
             = link_to "#{reply.descendants.count} replies", "#", :class => 'cmf-toggle',:data => {"cmf-tag" => "reply_replies_#{reply.id}"}   
+
           .hidden-panel.sat-area.cmf-area{:data => {"cmf-tag" => "reply_replies_#{reply.id}", "sat-tag" => "reply_replies_#{reply.id}" }}  
             %hr
 
@@ -44,7 +49,7 @@
                       .core
                         = "Reply to"
                         %span.reply_to_indicator
-                          = link_to("#{reply.creator.name}'s opinion", reply.dynamic_permalink)
+                          = link_to("#{reply.creator.name}'s #{Post.context_tipe}", reply.dynamic_permalink)
                       %p.minor
                         = "Be friendly and respectful to other people."
                         %span.right

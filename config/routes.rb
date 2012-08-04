@@ -30,9 +30,6 @@ Criticube::Application.routes.draw do
   ## FOLLOWAGES  
   resources :followages, :only => [:create, :destroy]
   
-  ## VOTES
-  resources :votes, :only => [:create, :destroy]  
-  
   ## NOTIFICATIONS
   delete '/notifications/read_all' => 'notifications#read_all', :as => 'read_all_notifications'
   resources :notifications, :only => [:index, :destroy]
@@ -56,11 +53,17 @@ Criticube::Application.routes.draw do
   get '/:id/posts', :as => 'vanity_posts', :to => 'posts#index'     
   get '/:id/admins', :as => 'vanity_admins', :to => 'cubes#admins'
 
+  # Level 1 objects (User and Cube)
+
   post '/:vanity_id/posts' => 'posts#create', :as => 'vanity_posts'
   get '/:vanity_id/:id' => 'posts#show', :as => 'vanity_post'
   get '/:vanity_id/:id/edit' => 'posts#edit', :as => 'edit_vanity_post'
   put '/:vanity_id/:id' => 'posts#update', :as => 'vanity_post'
   delete '/:vanity_id/:id' => 'posts#destroy', :as => 'vanity_post'
+  post '/:vanity_id/:post_id/vote' => 'votes#vote', :as => 'vanity_post_vote'
+  delete '/:vanity_id/:post_id/unvote' => 'votes#unvote', :as => 'vanity_post_unvote'
+
+  # Level 2 object (Post) and level 3 object (Reply)
 
   post '/:vanity_id/:post_id/replies' => 'replies#create', :as => 'vanity_post_replies'
   get '/:vanity_id/:post_id/replies/:id' => 'replies#show', :as => 'vanity_post_reply'
@@ -68,6 +71,8 @@ Criticube::Application.routes.draw do
   # get '/:vanity_id/:post_id/replies/:id/edit' => 'replies#edit', :as => 'edit_vanity_post_reply'
   # put '/:vanity_id/:post_id/replies/:id' => 'replies#update', :as => 'vanity_post_reply'
   delete '/:vanity_id/:post_id/replies/:id' => 'replies#destroy', :as => 'vanity_post_reply'
+  post '/:vanity_id/:post_id/replies/:reply_id/vote' => 'votes#vote', :as => 'vanity_post_reply_vote'
+  delete '/:vanity_id/:post_id/replies/:reply_id/unvote' => 'votes#unvote', :as => 'vanity_post_reply_unvote'  
 
   def vanity_controller(env, action)
     id = env["action_dispatch.request.path_parameters"][:id]

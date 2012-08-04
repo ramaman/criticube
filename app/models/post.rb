@@ -92,6 +92,10 @@ class Post < ActiveRecord::Base
     'a thought' if self.tipe == 'opinion'
   end
 
+  def points
+    self.reputation_value_for(:votes).to_i
+  end  
+
   # def normalize_friendly_id(string)
   #   super[0..100] + '-post'
   # end

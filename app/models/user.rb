@@ -242,11 +242,18 @@ class User < ActiveRecord::Base
     evaluations.where(target_type: voted.class.to_s, target_id: voted.id).first rescue nil
   end
 
+  def voted_with_direction?(voted)
+    e = evaluations.where(target_type: voted.class.to_s, target_id: voted.id).first rescue nil
+    if e
+      (e.value > 0) ? 'up' : 'down'
+    end
+  end
+
   def can_vote?(voted)
     evaluations.where(target_type: voted.class.to_s, target_id: voted.id).present? ? nil : true
   end
 
-  def vote!(voted, direction)
+  def vote(voted, direction)
     if direction == 'up'
       voted.add_or_update_evaluation(:votes, 1, self)
     elsif direction == 'down'
@@ -254,9 +261,8 @@ class User < ActiveRecord::Base
     end
   end
 
-  def unvote!(voted)
-    vote = self.evaluations.where(target_type: voted.class.to_s, target_id: voted.id).first
-    vote.destroy
+  def unvote(voted)
+    voted.delete_evaluation(:votes, self)
   end
 
   ## Facebook related

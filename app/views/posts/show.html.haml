@@ -11,7 +11,7 @@
               = link_to(@post.creator.name, vanity_path(@post.creator))
               = " posted an #{@post.context_tipe} in "
               = link_to(@post.parent.name, vanity_path(@post.parent))
-              = " - " + friendly_datetime(@post.created_at)
+
             %h2
               = @post.headline
             .content
@@ -20,6 +20,13 @@
               - elsif user_signed_in? && (current_user == @post.creator)
                 %br/
                 = link_to 'Add description', edit_vanity_post_path(@post.parent, @post)
+            .meta
+              %span.vote_panel{:data => {"id" => @post.id, "tipe" => @post.class.to_s }}
+                = render :partial => '/shared/vote_panel', :locals => {:voteable => @post}
+              = ' • ' 
+              = friendly_datetime(@post.created_at)
+              %span.right
+                = post_actions_reply_link(@post)
                 
       .row
         .span7.offset1

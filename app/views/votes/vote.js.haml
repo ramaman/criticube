@@ -1,0 +1,1 @@
+$(".vote_panel[data-id=#{@parent.id}][data-tipe=#{@parent.class.to_s}]").html("#{escape_javascript(render :partial => '/shared/vote_panel', :locals => {:voteable => @parent})}");

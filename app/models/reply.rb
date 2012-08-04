@@ -31,7 +31,7 @@ class Reply < ActiveRecord::Base
   has_many  :secondary_activity_objekt,
             :class_name => 'Activity',
             :as => :secondary_objekt,
-            :dependent => :destroy         
+            :dependent => :destroy
             
   has_reputation :votes, source: :user, aggregated_by: :sum
             
@@ -57,6 +57,10 @@ class Reply < ActiveRecord::Base
     elsif self.tipe == 'support'
       'a supporting reply'      
     end  
-  end  
+  end
+  
+  def points
+    self.reputation_value_for(:votes).to_i
+  end
 
 end

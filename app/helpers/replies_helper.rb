@@ -55,5 +55,13 @@ module RepliesHelper
     end      
   end
 
+  def post_actions_reply_link(post)
+    if user_signed_in?
+      link_to 'Reply', "#post_replies_form_#{@post.id}", :class => 'sat-switch reply-to',:data => {"cmf-tag" => "reply_replies_#{@post.id}", "sat-tag" => "reply_replies_#{@post.id}"}
+    else
+      link_to 'Reply', new_user_session_path
+    end      
+  end
+
 
 end
