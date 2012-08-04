@@ -62,6 +62,10 @@ class Post < ActiveRecord::Base
     self.headline
   end  
 
+  def description
+    self.content
+  end
+
   def self.display_name
     'opinion'
   end
