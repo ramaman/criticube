@@ -1,7 +1,7 @@
 #new_post.well.expanding-form-area{:style => 'padding-bottom: 11px;' }
   %p.hidden-panel
     %span.core
-      = "Post new opinion"
+      = "Post a new #{Post.context_tipe}"
     %span.minor.right
       = "Please use #{parent.language}"
   = simple_form_for Post.new, :url => vanity_posts_path(parent), :html => {:class => 'form-vertical', :style => "margin-bottom:0px"} do |f|
