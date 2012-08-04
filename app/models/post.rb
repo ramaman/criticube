@@ -38,6 +38,8 @@ class Post < ActiveRecord::Base
             :as => :secondary_objekt,
             :dependent => :destroy
 
+  has_reputation :votes, source: :user, aggregated_by: :sum            
+
   attr_accessible :headline,
                   :content,
                   :tipe

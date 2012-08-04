@@ -1,6 +1,6 @@
 class Activity < ActiveRecord::Base
   
-  actions = ['followed', 'created', 'updated']
+  actions = ['followed', 'created', 'updated', 'like']
 
   attr_accessible :actor,
                   :actor_id,

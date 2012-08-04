@@ -97,6 +97,8 @@ class User < ActiveRecord::Base
   has_many  :notifications,
             :dependent => :destroy
 
+  has_many :evaluations, class_name: "RSEvaluation", as: :source
+
   # FIXME
   # has_many  :created_replies,
   #           :class_name => 'Reply', 
@@ -233,6 +235,29 @@ class User < ActiveRecord::Base
       end
     end
   end  
+
+  # Voting
+
+  def voted?(voted)
+    evaluations.where(target_type: voted.class.to_s, target_id: voted.id).first rescue nil
+  end
+
+  def can_vote?(voted)
+    evaluations.where(target_type: voted.class.to_s, target_id: voted.id).present? ? nil : true
+  end
+
+  def vote!(voted, direction)
+    if direction == 'up'
+      voted.add_or_update_evaluation(:votes, 1, self)
+    elsif direction == 'down'
+      voted.add_or_update_evaluation(:votes, -1, self)
+    end
+  end
+
+  def unvote!(voted)
+    vote = self.evaluations.where(target_type: voted.class.to_s, target_id: voted.id).first
+    vote.destroy
+  end
 
   ## Facebook related
 

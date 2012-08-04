@@ -33,6 +33,8 @@ class Reply < ActiveRecord::Base
             :as => :secondary_objekt,
             :dependent => :destroy         
             
+  has_reputation :votes, source: :user, aggregated_by: :sum
+            
   default_scope includes(:container)                       
 
   def dynamic_permalink
