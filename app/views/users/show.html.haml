@@ -9,13 +9,13 @@
       .row
         .span6.offset1
           %h3
-            = 'Opinions'
+            = "#{Post.context_tipe.capitalize}s"
           %hr.slim
 
       - if @posts.length == 0
         .row
           .span6.offset1
-            = 'No opinions yet'
+            = 'No #{Post.context_tipe} yet'
 
       - else
         %ul.items.activities
@@ -23,7 +23,7 @@
             = render :partial => '/posts/post', :locals => {:post => post}
           .row
             .span6.offset1
-              = link_to 'See all opinions', vanity_posts_path(@user)    
+              = link_to "See all #{Post.context_tipe}", vanity_posts_path(@user)    
       
       %br/
       %br/      

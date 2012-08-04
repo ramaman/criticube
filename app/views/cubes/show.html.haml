@@ -7,7 +7,7 @@
       .row
         .span6.offset1
           %h3
-            = 'Opinions'
+            = "#{Post.context_tipe.capitalize}s"
             %span.minor.right
               = link_to 'See all', vanity_posts_path(@cube) 
           %hr.slim
@@ -19,7 +19,7 @@
       .row  
         - if @posts.length == 0
           .span6.offset1
-            = 'No opinions yet'
+            = "No #{Post.context_tipe} yet"
 
         - else
           .span7

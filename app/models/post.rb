@@ -58,6 +58,10 @@ class Post < ActiveRecord::Base
 
   before_validation :cleanup
 
+  def self.context_tipe
+    'opinion'
+  end
+
   def permalink
     Rails.application.routes.url_helpers.vanity_post_path(self.parent, self)
   end
