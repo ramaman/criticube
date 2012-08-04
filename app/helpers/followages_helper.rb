@@ -45,9 +45,7 @@ module FollowagesHelper
           "Follow #{object.story_name}", 
           followages_path(:followage => {:followed_id => object.id, :followed_type => object.class.to_s}),
           :method => :post,
-          :remote => :true,
-          :class => ['ajax-loading'],
-          :data => {'loading-text' => 'Following...', 'error-text' => 'Error', 'ori-text' => "Follow #{object.class}"}
+          :remote => :true
         )
       else
         link_to(
@@ -55,8 +53,7 @@ module FollowagesHelper
           followage_path(followage),
           :method => :delete,
           :remote => :true, 
-          :class => 'quiet blend ajax-loading',
-          :data => {'loading-text' => 'Unfollowing...', 'error-text' => 'Error', 'ori-text' => "Unfollow #{object.class}"}
+          :class => 'blend'
         )
       end
     end  

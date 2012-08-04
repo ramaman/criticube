@@ -13,7 +13,7 @@
             = link_to activity.primary_objekt.name, vanity_post_path(activity.primary_objekt.parent, activity.primary_objekt)
           - else   
             = link_to activity.primary_objekt.name, vanity_path(activity.primary_objekt)
-        .meta.minor
+        .meta.minor.quiet
           = render :partial => 'activities/activity_meta', :locals => {:objekt => activity.primary_objekt}
       
       - if activity.action == 'created'    
@@ -37,7 +37,7 @@
             .content.truncate.boxed{:class => activity.primary_objekt.tipe}
               = simple_format(activity.primary_objekt.content)
 
-            .meta.minor
+            .meta.minor.quiet
               = render :partial => 'activities/activity_meta', :locals => {:objekt => activity.secondary_objekt}        
               
                  
@@ -47,12 +47,12 @@
             - if activity.primary_objekt.content && !activity.primary_objekt.content.blank?
               .content.truncate
                 = htmlize(activity.primary_objekt.content)        
-            .meta.minor
+            .meta.minor.quiet
               = render :partial => 'activities/activity_meta', :locals => {:objekt => activity.primary_objekt}          
              
           - elsif activity.primary_objekt_type == 'Cube'            
             = link_to activity.primary_objekt.name, vanity_path(activity.primary_objekt), :class => 'core'
-            .meta.minor
+            .meta.minor.quiet
               = render :partial => 'activities/activity_meta', :locals => {:objekt => activity.primary_objekt}
 
       %hr.slim  
