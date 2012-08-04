@@ -254,10 +254,12 @@ class User < ActiveRecord::Base
   end
 
   def vote(voted, direction)
-    if direction == 'up'
-      voted.add_or_update_evaluation(:votes, 1, self)
-    elsif direction == 'down'
-      voted.add_or_update_evaluation(:votes, -1, self)
+    if voted.creator != self
+      if direction == 'up'
+        voted.add_or_update_evaluation(:votes, 1, self)
+      elsif direction == 'down'
+        voted.add_or_update_evaluation(:votes, -1, self)
+      end
     end
   end
 
