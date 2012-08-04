@@ -8,6 +8,7 @@
           = result.name
         = " (#{result.page_name})"    
     %br
-    %span.minor.follow_link_panel{:data => {"id" => result.id, "tipe" => result.class.to_s }}
-      = follow_link(result)
+    - if !user_signed_in? || (user_signed_in? && (result.class != current_user))
+      %span.minor.follow_link_panel{:data => {"id" => result.id, "tipe" => result.class.to_s }}
+        = follow_link(result)
     %hr     
