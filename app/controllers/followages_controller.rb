@@ -3,7 +3,7 @@ class FollowagesController < ApplicationController
   before_filter :authenticate_user!, :except => [:following, :followers]
 
   def create
-    if params[:followage]
+    if params[:followage] && (['User','Cube', 'Post'].include?(params[:followage][:followed_type])
       @parent = Object.const_get(params[:followage][:followed_type]).find(params[:followage][:followed_id])
       current_user.follow!(@parent, :record => true)
     end
