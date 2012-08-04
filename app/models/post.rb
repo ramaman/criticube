@@ -61,7 +61,7 @@ class Post < ActiveRecord::Base
   before_validation :cleanup
 
   def self.context_tipe
-    'opinion'
+    'thought'
   end
 
   def permalink
@@ -77,7 +77,7 @@ class Post < ActiveRecord::Base
   end
 
   def self.display_name
-    'opinion'
+    'thought'
   end
 
   def story_name
@@ -85,11 +85,11 @@ class Post < ActiveRecord::Base
   end
 
   def context_tipe
-    'opinion' if self.tipe == 'opinion'
+    'thought' if self.tipe == 'opinion'
   end
 
   def tipe_name
-    'an opinion' if self.tipe == 'opinion'
+    'a thought' if self.tipe == 'opinion'
   end
 
   # def normalize_friendly_id(string)
