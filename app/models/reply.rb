@@ -20,6 +20,7 @@ class Reply < ActiveRecord::Base
             :inclusion => {:in => tipes, :message => "is not supported" }
 
   validates :content,
+            :presence => true,
             :length => { :maximum => 3550} 
 
   has_many  :primary_activity_objekt,
