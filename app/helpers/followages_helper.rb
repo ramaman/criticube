@@ -9,7 +9,7 @@ module FollowagesHelper
       )
     else    
       followage = current_user.following?(object)
-      if !followage
+      if !followage || objekt != current_user
         link_to(
           "Follow #{object.story_name}", 
           followages_path(:followage => {:followed_id => object.id, :followed_type => object.class.to_s}),
@@ -40,7 +40,7 @@ module FollowagesHelper
       )
     else    
       followage = current_user.following?(object)
-      if !followage
+      if !followage || objekt != current_user
         link_to(
           "Follow #{object.story_name}", 
           followages_path(:followage => {:followed_id => object.id, :followed_type => object.class.to_s}),
