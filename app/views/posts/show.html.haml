@@ -12,8 +12,9 @@
               = " posted an #{@post.context_tipe} in "
               = link_to(@post.parent.name, vanity_path(@post.parent))
 
-            %h2
-              = @post.headline
+            .headline
+              %h2
+                = @post.headline
             .content
               - if @post.content && !@post.content.blank?
                 = htmlize(@post.content)
