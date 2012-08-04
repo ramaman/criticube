@@ -52,6 +52,9 @@
              
           - elsif activity.primary_objekt_type == 'Cube'            
             = link_to activity.primary_objekt.name, vanity_path(activity.primary_objekt), :class => 'core'
+            - if activity.primary_objekt.description && !activity.primary_objekt.description.blank?
+              .content.truncate
+                = htmlize(activity.primary_objekt.description)        
             .meta.minor.quiet
               = render :partial => 'activities/activity_meta', :locals => {:objekt => activity.primary_objekt}
 
