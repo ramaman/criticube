@@ -34,7 +34,7 @@ gem "pg_search", '~> 0.5'
 gem "delayed_job", "~> 3.0.3"
 gem "delayed_job_active_record", "~> 0.3.2"
 gem "activeadmin", "~> 0.4.4"
-gem "ancestry", "~> 1.3.0"
+gem "ancestry", "~> 2.0.0", :git => 'git://github.com/stefankroes/ancestry.git'
 gem "sunspot_rails", "~> 1.3.3"
 gem "activerecord-reputation-system", "~> 1.3.0", require: 'reputation_system'
 
