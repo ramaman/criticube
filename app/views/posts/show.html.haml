@@ -45,7 +45,16 @@
           .span1
             = link_to image_tag(current_user.avatar_url(:small)), vanity_path(current_user), :class => 'right'
           .span7
-            = render :partial => 'new_reply'  
+            = render :partial => 'new_reply'
+      - else
+        .row
+          .span7.offset1
+            .well
+              = link_to 'Sign in with Facebook ', user_omniauth_authorize_path(:facebook)
+              = link_to ' or email ', new_user_registration_path
+              = " to participate in this discussion."
+              %br/
+              = " It's quick, free, and easy."        
 
     .span4
       .right.push-further-down

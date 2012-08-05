@@ -5,6 +5,8 @@
       .page-header
         %h4
           = 'Sign in with email'
+          %span.right
+            = link_to 'Use Facebook', user_omniauth_authorize_path(:facebook), :class => 'btn btn-mini btn-primary center'
       = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
         .control-group
           = f.label 'Email', :class => 'control-label core'
