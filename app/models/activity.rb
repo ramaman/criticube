@@ -41,6 +41,8 @@ class Activity < ActiveRecord::Base
     a.archived == nil    
   }
 
+  default_scope includes(:actor, :primary_objekt, :secondary_objekt, :tertiary_objekt)
+
   def action_story
     if self.action == 'created'
       'posted'
