@@ -3,6 +3,9 @@
   .clearfix
     %h2.page-header
       = 'Featured Cubes'
+      - if user_signed_in?
+        %span.right
+          = link_to 'Home', root_path, :class => 'btn'
     %ul.items.links.items-content
       - @featured_cubes.each do |cube|
         = render :partial => 'cubecard', :locals => {:cube => cube}
@@ -12,7 +15,7 @@
     %h2.page-header
       = 'Cubes'
       %span.right
-        = link_to 'Create Cube', new_cube_path, :class => 'btn btn-inverse'
+        = link_to 'Create Cube', new_cube_path, :class => 'btn btn-primary'
     %ul.items.links.items-content
       - @cubes.each do |cube|
         = render :partial => 'cubecard', :locals => {:cube => cube}

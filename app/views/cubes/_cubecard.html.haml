@@ -3,3 +3,6 @@
     = link_to(image_tag(cube.avatar_url), vanity_path(cube))
   .clearfix.pad
     = link_to(short_string(cube.name, 50), vanity_path(cube), :class => 'core big-text')
+    .clearfix.minor
+      %span.follow_link_panel{:data => {"id" => cube.id, "tipe" => cube.class.to_s }}
+        = follow_link(cube)
