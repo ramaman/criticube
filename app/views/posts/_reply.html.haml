@@ -28,7 +28,7 @@
             = ' • '
             = link_to "#{reply.descendants.count} replies", "#", :class => 'cmf-toggle',:data => {"cmf-tag" => "reply_replies_#{reply.id}"}   
 
-          .hidden-panel.sat-area.cmf-area{:data => {"cmf-tag" => "reply_replies_#{reply.id}", "sat-tag" => "reply_replies_#{reply.id}" }}  
+          .sat-area.cmf-area{:data => {"cmf-tag" => "reply_replies_#{reply.id}", "sat-tag" => "reply_replies_#{reply.id}" }}  
             %hr
 
             %ul.items.replies.reply_replies{:data => {'root' => "Reply_#{reply.id}"}}
