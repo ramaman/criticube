@@ -22,5 +22,4 @@
 //= require lib/jquery.autoresize
 //= require lib/jquery.truncator
 //= require_tree .
-//= require active_admin/base
 //= require tinymce-jquery
