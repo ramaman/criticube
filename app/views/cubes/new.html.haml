@@ -28,7 +28,10 @@
               .help-block.minor
                 = "3 to 24 characters, cannot contain special characters"
         .control-group
-          = f.label 'Description', :class => 'control-label core'
+          %b
+            = 'Description'
+          %span.minor
+            = '(You can fill this later)'
           .controls
             = f.text_area :description, :class => 'span6 slim autoresize'
         .control-group
