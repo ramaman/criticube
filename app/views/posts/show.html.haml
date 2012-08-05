@@ -24,8 +24,9 @@
             .meta
               %span.vote_panel{:data => {"id" => @post.id, "tipe" => @post.class.to_s }}
                 = render :partial => '/shared/vote_panel', :locals => {:voteable => @post}
-              = ' • ' 
-              = friendly_datetime(@post.created_at)
+              %span.quiet
+                = ' • ' 
+                = friendly_datetime(@post.created_at)
               %span.right
                 = post_actions_reply_link(@post)
                 

@@ -33,5 +33,6 @@
   = link_to('Dislike', new_user_session_path)
   = ' • '
 
-= pluralize(voteable.points, 'point')  
+%span.quiet
+  = pluralize(voteable.points, 'point')  
   
