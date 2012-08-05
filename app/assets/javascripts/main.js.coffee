@@ -99,8 +99,8 @@ $ ->
 $ ->
   # Expanding form area
   $('.expanding-form-area input[type=text]').live 'focus', (event) ->
-    $(this).closest('.expanding-form-area').find('.hidden-panel').show()
-
+    $(this).closest('.expanding-form-area').find('.hidden-panel').removeClass('hidden-panel')
+    
 $ ->
   # Main search
 
