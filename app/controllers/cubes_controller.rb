@@ -14,6 +14,7 @@ class CubesController < ApplicationController
     @posts = @cube.posts.order('created_at DESC').page(params[:page]).per(25)
     @activities = @cube.feed.limit(10)
     @title = @cube.name
+    @special_image = @cube.avatar_url
     respond_to :html
   end
 
