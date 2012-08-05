@@ -25,7 +25,7 @@
           = ', '
           = link_to(pluralize(user.followed_cubes.count , 'cube'), vanity_following_path(user, 'cubes'))
           = ' and '
-          = link_to(pluralize(user.followed_cubes.count , "#{Post.context_tipe}"), vanity_following_path(user, 'posts'))
+          = link_to(pluralize(user.followed_posts.count , "#{Post.context_tipe}"), vanity_following_path(user, 'posts'))
           %br/
           = 'Followed by '
           = link_to(pluralize(user.followers.count , 'user'), vanity_followers_path(user))

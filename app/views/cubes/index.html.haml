@@ -12,7 +12,7 @@
     %h2.page-header
       = 'Cubes'
       %span.right
-        = link_to 'New Cube', new_cube_path, :class => 'btn'
+        = link_to 'Create a New Cube', new_cube_path, :class => 'btn btn-inverse'
     %ul.items.links.items-content
       - @cubes.each do |cube|
         = render :partial => 'cubecard', :locals => {:cube => cube}
