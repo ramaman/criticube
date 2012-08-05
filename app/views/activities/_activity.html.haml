@@ -35,7 +35,7 @@
 
           - if activity.primary_objekt_type == 'Reply'
             .content.truncate.boxed{:class => activity.primary_objekt.tipe}
-              = simple_format(activity.primary_objekt.content)
+              = htmlize(activity.primary_objekt.content)
 
             .meta.minor
               = render :partial => 'activities/activity_meta', :locals => {:objekt => activity.secondary_objekt}        
