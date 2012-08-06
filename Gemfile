@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 # Core
 gem 'rails', '3.2.5'
-# gem 'thin'
-gem 'unicorn'
+gem 'thin'
+# gem 'unicorn'
 
 # Authentication
 gem 'devise', '~> 2.1.2'
