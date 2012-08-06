@@ -5,6 +5,7 @@
         %h3
           = 'Activities'    
         %hr.slim
+
     %ul.items
       - @feed.each do |feed|
         = render :partial => '/activities/activity', :locals => {:activity => feed}
