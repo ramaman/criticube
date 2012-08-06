@@ -361,7 +361,7 @@ class User < ActiveRecord::Base
     Activity.clean.where{ |a|
       (a.actor_id == self.id) |
       ((a.primary_objekt_type == 'User') & (a.primary_objekt_id == self.id))
-    }
+    }.order('created_at DESC')
   end
 
   # Feed recording
