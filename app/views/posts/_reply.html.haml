@@ -32,7 +32,7 @@
             %hr
 
             %ul.items.replies.reply_replies{:data => {'root' => "Reply_#{reply.id}"}}
-              - reply.descendants.each do |reply_reply|
+              - reply.descendants.order('created_at ASC').each do |reply_reply|
                 = render :partial => 'reply_reply' , :locals => {:reply => reply, :reply_reply => reply_reply} 
 
             - if user_signed_in?  
