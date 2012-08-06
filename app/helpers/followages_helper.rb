@@ -12,7 +12,7 @@ module FollowagesHelper
       if !followage
         link_to(
           "Follow #{object.story_name}", 
-          followages_path(:followage => {:followed_id => object.id, :followed_type => object.class.to_s}),
+          object.follow_permalink,
           :method => :post,
           :remote => :true,
           :class => ['btn', 'btn-success', 'core', 'ajax-loading'],
@@ -21,7 +21,7 @@ module FollowagesHelper
       else
         link_to(
           "Unfollow #{object.story_name}", 
-          followage_path(followage),
+          object.unfollow_permalink,
           :method => :delete,
           :remote => :true, 
           :class => ['btn', 'ajax-loading'],
@@ -43,14 +43,14 @@ module FollowagesHelper
       if !followage
         link_to(
           "Follow #{object.story_name}", 
-          followages_path(:followage => {:followed_id => object.id, :followed_type => object.class.to_s}),
+          object.follow_permalink,
           :method => :post,
           :remote => :true
         )
       else
         link_to(
           "Unfollow #{object.story_name}", 
-          followage_path(followage),
+          object.unfollow_permalink,
           :method => :delete,
           :remote => :true, 
           :class => 'blend'

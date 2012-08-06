@@ -120,6 +120,14 @@ class Cube < ActiveRecord::Base
     Rails.application.routes.url_helpers.vanity_path(self.page_name)
   end
 
+  def follow_permalink
+    Rails.application.routes.url_helpers.vanity_follow_path(self)
+  end  
+
+  def unfollow_permalink
+    Rails.application.routes.url_helpers.vanity_unfollow_path(self)
+  end
+
   def tipe_name
     'a cube'
   end

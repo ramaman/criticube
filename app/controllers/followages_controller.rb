@@ -1,12 +1,15 @@
 class FollowagesController < ApplicationController
 
   before_filter :authenticate_user!, :except => [:following, :followers]
+  before_filter :parent_object, :except => [:following]
 
-  def create
-    if params[:followage] && (['User','Cube', 'Post'].include?(params[:followage][:followed_type]))
-      @parent = Object.const_get(params[:followage][:followed_type]).find(params[:followage][:followed_id])
-      current_user.follow!(@parent, :record => true)
-    end
+  def follow
+    # if params[:followage] && (['User','Cube', 'Post'].include?(params[:followage][:followed_type]))
+    #   @parent = Object.const_get(params[:followage][:followed_type]).find(params[:followage][:followed_id])
+    #   current_user.follow!(@parent, :record => true)
+    # end
+
+    current_user.follow!(@parent, :record => true)
     
     respond_to do |format|
       format.html { redirect_to @parent }
@@ -14,9 +17,10 @@ class FollowagesController < ApplicationController
     end    
   end
 
-  def destroy
-    @followage = Followage.find(params[:id])
-    @parent = @followage.followed
+  def unfollow
+    # @followage = Followage.find(params[:id])
+    # @parent = @followage.followed
+
     current_user.unfollow!(@parent)
 
     respond_to do |format|
@@ -40,7 +44,6 @@ class FollowagesController < ApplicationController
   end
 
   def followers
-    @parent = parent_object
     @followers = @parent.followers.page(params[:page]).per(25)
     respond_to do |format|
       format.html
@@ -51,8 +54,11 @@ class FollowagesController < ApplicationController
   private
 
   def parent_object
-    v = Vanity.find(params[:id])
-    return v.owner
+    if params[:post_id]
+      @parent ||= Vanity.find(params[:vanity_id]).owner.posts.find(params[:post_id])
+    elsif params[:vanity_id]
+      @parent ||= Vanity.find(params[:vanity_id]).owner
+    end
   end  
 
   def parent_url(parent)

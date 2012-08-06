@@ -1,59 +1,62 @@
 %li
-  .row
-    .span1
-      = link_to image_tag(activity.actor.avatar_url(:small)), vanity_path(activity.actor), :class => 'right'
+  = activity.actor_id
+  = activity.action
+
+  / .row
+  /   .span1
+  /     = link_to image_tag(activity.actor.avatar_url(:small)), vanity_path(activity.actor), :class => 'right'
           
-    .span6
+  /   .span6
 
-      - if activity.action == 'followed'
-        %p.header
-          = link_to activity.actor.name, vanity_path(activity.actor), :class => 'core blend'
-          = activity.action_story
-          - if activity.primary_objekt_type == 'Post'
-            = link_to activity.primary_objekt.name, vanity_post_path(activity.primary_objekt.parent, activity.primary_objekt)
-          - else   
-            = link_to activity.primary_objekt.name, vanity_path(activity.primary_objekt)
-        .meta.minor
-          = render :partial => 'activities/activity_meta', :locals => {:objekt => activity.primary_objekt}
+  /     - if activity.action == 'followed'
+  /       %p.header
+  /         = link_to activity.actor.name, vanity_path(activity.actor), :class => 'core blend'
+  /         = activity.action_story
+  /         - if activity.primary_objekt_type == 'Post'
+  /           = link_to activity.primary_objekt.name, vanity_post_path(activity.primary_objekt.parent, activity.primary_objekt)
+  /         - else   
+  /           = link_to activity.primary_objekt.name, vanity_path(activity.primary_objekt)
+  /       .meta.minor
+  /         = render :partial => 'activities/activity_meta', :locals => {:objekt => activity.primary_objekt}
       
-      - if activity.action == 'created'    
-        %p.header
+  /     - if activity.action == 'created'    
+  /       %p.header
 
-          = link_to activity.actor.name, vanity_path(activity.actor), :class => 'core blend'
-          = activity.action_story
+  /         = link_to activity.actor.name, vanity_path(activity.actor), :class => 'core blend'
+  /         = activity.action_story
 
-          - if activity.primary_objekt_type == 'Reply'
-            = reply_tipe_name_html(activity.primary_objekt)
-            = ' to '
-            = link_to activity.secondary_objekt.name, vanity_post_path(activity.tertiary_objekt, activity.secondary_objekt), :class => ''
-            %br/
+  /         - if activity.primary_objekt_type == 'Reply'
+  /           = reply_tipe_name_html(activity.primary_objekt)
+  /           = ' to '
+  /           = link_to activity.secondary_objekt.name, vanity_post_path(activity.tertiary_objekt, activity.secondary_objekt), :class => ''
+  /           %br/
 
-          - else
-            = "#{activity.primary_objekt.tipe_name}"  
+  /         - else
+  /           = "#{activity.primary_objekt.tipe_name}"  
 
-        %p.objekt.big-text
+  /       %p.objekt.big-text
 
-          - if activity.primary_objekt_type == 'Reply'
-            .content.truncate.boxed{:class => activity.primary_objekt.tipe}
-              = htmlize(activity.primary_objekt.content)
+  /         - if activity.primary_objekt_type == 'Reply'
+  /           .content.truncate.boxed{:class => activity.primary_objekt.tipe}
+  /             = htmlize(activity.primary_objekt.content)
 
-            .meta.minor
-              = render :partial => 'activities/activity_meta', :locals => {:objekt => activity.secondary_objekt}        
+  /           .meta.minor
+  /             = render :partial => 'activities/activity_meta', :locals => {:objekt => activity.secondary_objekt}        
               
-          - elsif activity.primary_objekt_type == 'Post'
-            = link_to activity.primary_objekt.name, vanity_post_path(activity.secondary_objekt, activity.primary_objekt), :class => 'core'
-            - if activity.primary_objekt.content && !activity.primary_objekt.content.blank?
-              .content.truncate
-                = htmlize(activity.primary_objekt.content)        
-            .meta.minor
-              = render :partial => 'activities/activity_meta', :locals => {:objekt => activity.primary_objekt}          
+  /         - elsif activity.primary_objekt_type == 'Post'
+  /           = link_to activity.primary_objekt.name, vanity_post_path(activity.secondary_objekt, activity.primary_objekt), :class => 'core'
+  /           - if activity.primary_objekt.content && !activity.primary_objekt.content.blank?
+  /             .content.truncate
+  /               = htmlize(activity.primary_objekt.content)        
+  /           .meta.minor
+  /             = render :partial => 'activities/activity_meta', :locals => {:objekt => activity.primary_objekt}          
              
-          - elsif activity.primary_objekt_type == 'Cube'            
-            = link_to activity.primary_objekt.name, vanity_path(activity.primary_objekt), :class => 'core'
-            - if activity.primary_objekt.description && !activity.primary_objekt.description.blank?
-              .content.truncate
-                = htmlize(activity.primary_objekt.description)        
-            .meta.minor
-              = render :partial => 'activities/activity_meta', :locals => {:objekt => activity.primary_objekt}
+  /         - elsif activity.primary_objekt_type == 'Cube'            
+  /           = link_to activity.primary_objekt.name, vanity_path(activity.primary_objekt), :class => 'core'
+  /           - if activity.primary_objekt.description && !activity.primary_objekt.description.blank?
+  /             .content.truncate
+  /               = htmlize(activity.primary_objekt.description)        
+  /           .meta.minor
+  /             = render :partial => 'activities/activity_meta', :locals => {:objekt => activity.primary_objekt}
 
-      %hr 
+  /     %hr 

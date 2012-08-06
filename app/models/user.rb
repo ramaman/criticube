@@ -167,6 +167,14 @@ class User < ActiveRecord::Base
     Rails.application.routes.url_helpers.vanity_path(self.page_name)
   end
 
+  def follow_permalink
+    Rails.application.routes.url_helpers.vanity_follow_path(self)
+  end
+
+  def unfollow_permalink
+    Rails.application.routes.url_helpers.vanity_unfollow_path(self)
+  end  
+
   def name
     if self.middle_names
       "#{self.first_name} #{self.middle_names} #{self.last_name}"

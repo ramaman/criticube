@@ -5,13 +5,14 @@
         %h3
           = 'Activities'    
         %hr.slim
-
-    %ul.items
-      - @feed.each do |feed|
-        = render :partial => '/activities/activity', :locals => {:activity => feed}
-    .row
-      .span6.offset1
-        = paginate @feed  
+    
+    #activity_feed
+      %ul.items
+      /   - @feed.each do |feed|
+      /     = render :partial => '/activities/activity', :locals => {:activity => feed}
+      / .row
+      /   .span6.offset1
+      /     = paginate @feed  
 
   .span4.offset1  
     %h3
@@ -20,13 +21,13 @@
         = link_to 'Explore', cubes_path, :class => 'btn btn-small btn-success core'
     %hr.slim
 
-    %ul.items.cubes
-      - current_user.cubes_to_check.each do |cube|
-        %li
-          %p
-            = image_tag(cube.avatar_url(:inline))
-            = link_to cube.name, vanity_path(cube), :class => 'core'
-    %hr
+    / %ul.items.cubes
+    /   - current_user.cubes_to_check.each do |cube|
+    /     %li
+    /       %p
+    /         = image_tag(cube.avatar_url(:inline))
+    /         = link_to cube.name, vanity_path(cube), :class => 'core'
+    / %hr
     - if current_user.is_admin?
       = link_to 'Admin', admin_dashboard_path
       %hr

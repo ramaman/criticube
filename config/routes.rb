@@ -3,6 +3,7 @@ Criticube::Application.routes.draw do
   ActiveAdmin.routes(self)
 
   root :to => 'dashboard#home'
+  get '/feed' => 'dashboard#feed', :as => 'dashboard_feed'
   
   ## USERS
   devise_for :users, :path_names => {
@@ -55,13 +56,19 @@ Criticube::Application.routes.draw do
 
   # Level 1 objects (User and Cube)
 
+  post '/:vanity_id/follow' => 'followages#follow', :as => 'vanity_follow'
+  delete '/:vanity_id/unfollow' => 'followages#unfollow', :as => 'vanity_unfollow'
   post '/:vanity_id/posts' => 'posts#create', :as => 'vanity_posts'
+
   get '/:vanity_id/:id' => 'posts#show', :as => 'vanity_post'
   get '/:vanity_id/:id/edit' => 'posts#edit', :as => 'edit_vanity_post'
   put '/:vanity_id/:id' => 'posts#update', :as => 'vanity_post'
   delete '/:vanity_id/:id' => 'posts#destroy', :as => 'vanity_post'
+
   post '/:vanity_id/:post_id/vote' => 'votes#vote', :as => 'vanity_post_vote'
   delete '/:vanity_id/:post_id/unvote' => 'votes#unvote', :as => 'vanity_post_unvote'
+  post '/:vanity_id/:post_id/follow' => 'followages#follow', :as => 'vanity_post_follow'
+  delete '/:vanity_id/:post_id/unfollow' => 'followages#unfollow', :as => 'vanity_post_unfollow'
 
   # Level 2 object (Post) and level 3 object (Reply)
 

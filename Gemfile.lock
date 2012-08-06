@@ -122,11 +122,6 @@ GEM
       activesupport (~> 3.0)
       haml (~> 3.0)
       railties (~> 3.0)
-    hamlbars (1.0.0)
-      execjs (>= 1.2)
-      haml
-      sprockets
-      tilt
     has_scope (0.5.1)
     hashie (1.2.0)
     highline (1.6.13)
@@ -162,6 +157,7 @@ GEM
       subexec (~> 0.2.1)
     multi_json (1.3.6)
     multipart-post (1.1.5)
+    mustache (0.99.4)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-ssh (2.5.2)
@@ -299,12 +295,12 @@ DEPENDENCIES
   foreman (~> 0.51.0)
   friendly_id (~> 4.0.7)
   haml-rails
-  hamlbars (~> 1.0)
   jbuilder (~> 0.4.0)
   jquery-rails
   kaminari!
   meta-tags (~> 1.2.6)
   mini_magick (~> 3.4)
+  mustache (~> 0.99.4)
   newrelic_rpm (~> 3.4.1)
   nokogiri (~> 1.5.5)
   omniauth (~> 1.1.0)

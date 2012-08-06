@@ -17,7 +17,7 @@ gem 'jquery-rails'
 gem 'haml-rails'
 gem 'simple_form', '~> 2.0.2'
 gem 'bootstrap-sass', '~> 2.0.4.0'
-gem 'hamlbars', '~> 1.0'
+gem "mustache", "~> 0.99.4"
 gem 'client_side_validations', '= 3.2.0.beta.4'
 gem 'client_side_validations-simple_form', "= 2.0.0.beta.1"
 gem "kaminari", :git => 'git://github.com/rmanusama/kaminari.git'
