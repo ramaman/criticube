@@ -89,7 +89,7 @@ class User < ActiveRecord::Base
             :foreign_key => 'actor_id', 
             :dependent => :destroy
 
-  has_many  :primary_activity_objekt,
+  has_many  :primary_activity_objekts,
             :class_name => 'Activity',
             :as => :primary_objekt,
             :dependent => :destroy 

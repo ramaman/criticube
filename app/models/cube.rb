@@ -48,17 +48,17 @@ class Cube < ActiveRecord::Base
             :class_name => 'Post',
             :conditions => {:tipe => 'opinion'}
             
-  has_many  :primary_activity_objekt,
+  has_many  :primary_activity_objekts,
             :class_name => 'Activity',
             :as => :primary_objekt,
             :dependent => :destroy
             
-  has_many  :secondary_activity_objekt,
+  has_many  :secondary_activity_objekts,
             :class_name => 'Activity',
             :as => :secondary_objekt,
             :dependent => :destroy
             
-  has_many  :tertiary_activity_objekt,
+  has_many  :tertiary_activity_objekts,
             :class_name => 'Activity',
             :as => :tertiary_objekt,
             :dependent => :destroy                                                                                  
