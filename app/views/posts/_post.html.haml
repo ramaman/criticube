@@ -18,5 +18,6 @@
         = " • Posted in "
         = link_to post.parent.name, vanity_path(post.parent)
         %span.quiet
+          = " • #{pluralize(post.points, 'point')}"
           = " • #{friendly_datetime(post.updated_at)}"
       %hr.slim
