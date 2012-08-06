@@ -18,7 +18,7 @@
       .row.content
         .span6
           = simple_htmlize reply_reply.content
-      .row.meta{:data => {'id' => reply_reply.id, 'anchor' => link_to("#{reply_reply.creator.name}'s opinion", reply_reply.dynamic_permalink)}} 
+      .row.meta{:data => {'id' => reply_reply.id, 'anchor' => link_to(reply_reply.creator.fast_name, reply_reply.dynamic_permalink)}} 
         .span6
           %span.actions.minor
             %span.vote_panel{:data => {"id" => reply_reply.id, "tipe" => reply_reply.class.to_s }}
