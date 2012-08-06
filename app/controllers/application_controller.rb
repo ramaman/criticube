@@ -48,4 +48,8 @@ class ApplicationController < ActionController::Base
       root_path
     end
   end
+
+  def miniprofiler
+    Rack::MiniProfiler.authorize_request if (user_signed_in? && current_user.is_admin?)
+  end  
 end

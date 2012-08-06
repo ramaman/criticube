@@ -51,6 +51,9 @@ gem "progress_bar", "~> 0.4.0"
 gem "newrelic_rpm", "~> 3.4.1"
 gem "rpm_contrib", "~> 2.1.11"
 
+# Performance Monitoring
+gem "rack-mini-profiler", "~> 0.1.9"
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
