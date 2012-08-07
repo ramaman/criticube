@@ -35,8 +35,7 @@ module FollowagesHelper
     if !user_signed_in?
       link_to(
         "Follow #{object.story_name}", 
-        new_user_session_path,
-        :class => ['btn', 'btn-success', 'core', 'ajax-loading']
+        new_user_session_path
       )
     else    
       followage = current_user.following?(object)
