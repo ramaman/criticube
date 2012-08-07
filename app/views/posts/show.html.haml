@@ -9,7 +9,7 @@
           .page-header
             %p.core
               = link_to(@post.creator.name, vanity_path(@post.creator))
-              = " posted an #{@post.context_tipe} in "
+              = " posted a #{@post.context_tipe} in "
               = link_to(@post.parent.name, vanity_path(@post.parent))
 
             .headline
