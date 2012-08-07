@@ -3,25 +3,44 @@
     %h2
       Settings
       %span.right
-        = link_to 'Back', root_path, :class => 'btn btn-large btn-inverse'
-  .well
-    .page-header
-      %h3
-        Social
-    - if current_user.facebook_auth
-      %h4
-        = 'Connected to Facebook'
-      %span.minor.blend
-        = link_to 'Disconnect', destroy_authentication_path(:facebook) , :method => :delete, :confirm  => 'Are you sure?'
-    - else
-      %h4
-        = link_to 'Connect to Facebook', user_omniauth_authorize_path(:facebook)
-      %span.minor
-        = 'This will enable you to login with your Facebook account'
+        = link_to 'Back', root_path, :class => 'btn btn-inverse'
+
+  .row      
+
+    .span6
+      .well{:style => 'height:182px;'}
+        .page-header
+          %h4
+            Email me when:
+        = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+          .control-group
+            = f.check_box :subscribe_messages, :class => 'span4' 
+            %nbsp/  
+            = 'Someone sends me a private message'
+          .control-group
+            %br/
+            = f.submit "Update", :class => 'btn btn-primary'                     
+
+    .span6
+      .well{:style => 'height:182px;'}
+        .page-header
+          %h4
+            Social
+        - if current_user.facebook_auth
+          %h4
+            = 'Connected to Facebook'
+          %span.minor.blend
+            = link_to 'Disconnect', destroy_authentication_path(:facebook) , :method => :delete, :confirm  => 'Are you sure?'
+        - else
+          %h4
+            = link_to 'Connect to Facebook', user_omniauth_authorize_path(:facebook)
+          %span.minor
+            = 'This will enable you to login with your Facebook account'
+
         
   .well
     .page-header
-      %h3
+      %h4
         Account
     = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
       = devise_error_messages!
@@ -44,7 +63,7 @@
           = f.password_field :current_password, :class => 'span4'
           .help-block.minor (we need your current password to confirm your changes)
       .control-group
-        = f.submit "Update", :class => 'btn btn-large btn-primary'
+        = f.submit "Update", :class => 'btn btn-primary'
 
   .well.danger
     %h4 Destroy account

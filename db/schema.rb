@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120804014506) do
+ActiveRecord::Schema.define(:version => 20120807032900) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -135,6 +135,22 @@ ActiveRecord::Schema.define(:version => 20120804014506) do
   add_index "followages", ["follower_id", "followed_id", "followed_type"], :name => "followage_combo", :unique => true
   add_index "followages", ["follower_id"], :name => "index_followages_on_follower_id"
 
+  create_table "messages", :force => true do |t|
+    t.integer  "sender_id",                       :null => false
+    t.integer  "recipient_id",                    :null => false
+    t.text     "body"
+    t.boolean  "read",         :default => false, :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
+  end
+
+  add_index "messages", ["created_at"], :name => "index_messages_on_created_at"
+  add_index "messages", ["read", "recipient_id"], :name => "index_messages_on_read_and_recipient_id"
+  add_index "messages", ["read"], :name => "index_messages_on_read"
+  add_index "messages", ["recipient_id"], :name => "index_messages_on_recipient_id"
+  add_index "messages", ["sender_id", "recipient_id"], :name => "index_messages_on_sender_id_and_recipient_id"
+  add_index "messages", ["sender_id"], :name => "index_messages_on_sender_id"
+
   create_table "notifications", :force => true do |t|
     t.integer  "user_id"
     t.integer  "activity_id"
@@ -253,8 +269,8 @@ ActiveRecord::Schema.define(:version => 20120804014506) do
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                  :default => "",   :null => false
+    t.string   "encrypted_password",     :default => "",   :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -263,11 +279,11 @@ ActiveRecord::Schema.define(:version => 20120804014506) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "first_name",                             :null => false
-    t.string   "last_name",                              :null => false
+    t.string   "first_name",                               :null => false
+    t.string   "last_name",                                :null => false
     t.text     "bio"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.string   "middle_names"
     t.boolean  "admin"
     t.boolean  "super_admin"
@@ -275,6 +291,8 @@ ActiveRecord::Schema.define(:version => 20120804014506) do
     t.string   "page_name"
     t.boolean  "banned"
     t.integer  "notifications_count",    :default => 0
+    t.boolean  "subscribe_messages",     :default => true
+    t.integer  "unread_messages_count",  :default => 0
   end
 
   add_index "users", ["admin"], :name => "index_users_on_admin"

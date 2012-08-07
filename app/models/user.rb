@@ -97,7 +97,23 @@ class User < ActiveRecord::Base
   has_many  :notifications,
             :dependent => :destroy
 
-  has_many :evaluations, class_name: "RSEvaluation", as: :source
+  has_many  :messages,
+            :class_name => 'Message',
+            :foreign_key => 'recipient_id', 
+            :dependent => :destroy
+
+  has_many  :unread_messages,
+            :class_name => 'Message',
+            :foreign_key => 'recipient_id',
+            :conditions => {:read => false},             
+            :dependent => :destroy
+            
+  has_many  :sent_messages,
+            :class_name => 'Message',
+            :foreign_key => 'sender_id', 
+            :dependent => :destroy                               
+
+  has_many  :evaluations, class_name: "RSEvaluation", as: :source
 
   # FIXME
   # has_many  :created_replies,
@@ -119,7 +135,8 @@ class User < ActiveRecord::Base
                   :bio,
                   :vanity,
                   :vanity_attributes,
-                  :avatar
+                  :avatar,
+                  :subscribe_messages
 
   validates :email,
             :presence => { :message => "Please enter your email address" },
