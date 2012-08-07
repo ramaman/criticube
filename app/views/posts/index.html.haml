@@ -11,7 +11,7 @@
         .row
           .span6.offset1
             %h3
-              = 'Opinions'
+              = "#{Post.display_name.capitalize}s"
             %hr.slim
 
         - if @posts.length == 0

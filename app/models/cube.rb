@@ -161,7 +161,7 @@ class Cube < ActiveRecord::Base
       ((a.primary_objekt_type == 'Cube') & (a.primary_objekt_id == self.id)) |
       ((a.secondary_objekt_type == 'Cube') & (a.secondary_objekt_id == self.id)) |
       ((a.tertiary_objekt_type == 'Cube') & (a.tertiary_objekt_id == self.id)) 
-    }
+    }.order('created_at DESC')
   end
 
   private
