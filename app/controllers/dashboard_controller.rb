@@ -15,10 +15,10 @@ class DashboardController < ApplicationController
   end
 
   def feed
-    if [:tipe]
+    if params[:tipe]
 
     else
-      @feed = current_user.dashboard_feed.page(params[:page]).per(25)
+      @activities = current_user.dashboard_feed.page(params[:page]).per(25)
     end
 
     respond_to do |format|

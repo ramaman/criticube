@@ -222,6 +222,10 @@ class User < ActiveRecord::Base
     self.followages.find_by_followed_id_and_followed_type(followed.id, followed.class.to_s)
   end
 
+  def is_following?(followed)
+    self.following?(followed) ? true : false
+  end
+
   def follow!(followed, options={})
     if !self.following?(followed) && self != followed
       f = Followage.new

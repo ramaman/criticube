@@ -42,9 +42,21 @@ class Reply < ActiveRecord::Base
             
   default_scope includes(:container)                       
 
+  def permalink
+    self.dynamic_permalink
+  end
+
   def dynamic_permalink
     Rails.application.routes.url_helpers.vanity_post_path(self.container.parent, self.container) + "#reply_#{self.id}"
   end
+
+  def follow_permalink
+    Rails.application.routes.url_helpers.vanity_follow_path(self.creator)
+  end  
+
+  def unfollow_permalink
+    Rails.application.routes.url_helpers.vanity_unfollow_path(self.creator)
+  end  
 
   def name
     if self.content.length < 150
