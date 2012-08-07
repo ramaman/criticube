@@ -46,6 +46,10 @@ class Reply < ActiveRecord::Base
     self.dynamic_permalink
   end
 
+  def url
+    self.dynamic_permalink
+  end  
+
   def dynamic_permalink
     Rails.application.routes.url_helpers.vanity_post_path(self.container.parent, self.container) + "#reply_#{self.id}"
   end

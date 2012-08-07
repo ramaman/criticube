@@ -167,6 +167,10 @@ class User < ActiveRecord::Base
     Rails.application.routes.url_helpers.vanity_path(self.page_name)
   end
 
+  def url
+    self.permalink
+  end
+
   def follow_permalink
     Rails.application.routes.url_helpers.vanity_follow_path(self)
   end
@@ -366,7 +370,12 @@ class User < ActiveRecord::Base
       (a.actor_id >> user_ids) |
       ((a.secondary_objekt_id >> cube_ids) & (a.secondary_objekt_type == 'Cube')) |
       ((a.secondary_objekt_id >> post_ids) & (a.secondary_objekt_type == 'Post'))
-    }.order('created_at DESC')
+    }.includes(
+      :actor,
+      :primary_objekt,
+      :secondary_objekt,
+      :tertiary_objekt            
+    ).order('created_at DESC')
   end
 
   def feed

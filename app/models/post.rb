@@ -73,6 +73,10 @@ class Post < ActiveRecord::Base
     Rails.application.routes.url_helpers.vanity_post_path(self.parent, self)
   end
 
+  def url
+    self.permalink
+  end
+
   def follow_permalink
     Rails.application.routes.url_helpers.vanity_post_follow_path(self.parent, self)
   end  

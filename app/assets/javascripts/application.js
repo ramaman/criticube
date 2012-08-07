@@ -21,5 +21,6 @@
 //= require lib/jquery.smart_autocomplete
 //= require lib/jquery.autoresize
 //= require lib/jquery.truncator
-//= require_tree .
+//= require mustache
 //= require tinymce-jquery
+//= require_tree .

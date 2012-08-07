@@ -3,7 +3,7 @@ json.extract! activity, :id, :created_at, :updated_at, :action_story, :primary_o
 json.actor do |json|
   json.id activity.actor.id
   json.name activity.actor.fast_name
-  json.url activity.actor.permalink
+  json.url activity.actor.url
   json.avatar_url activity.actor.avatar_url(:small)
 end
 

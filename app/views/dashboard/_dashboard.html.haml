@@ -8,11 +8,11 @@
     
     #activity_feed
       %ul.items
-      /   - @feed.each do |feed|
-      /     = render :partial => '/activities/activity', :locals => {:activity => feed}
-      / .row
-      /   .span6.offset1
-      /     = paginate @feed  
+        - @activities.each do |activity|
+          = render :partial => '/activities/activity', :locals => {:activity => activity}
+      .row
+        .span6.offset1
+          = paginate @activities  
 
   .span4.offset1  
     %h3
