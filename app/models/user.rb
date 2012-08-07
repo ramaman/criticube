@@ -115,12 +115,6 @@ class User < ActiveRecord::Base
 
   has_many  :evaluations, class_name: "RSEvaluation", as: :source
 
-  # FIXME
-  # has_many  :created_replies,
-  #           :class_name => 'Reply', 
-  #           :foreign_key => 'creator_id', 
-  #           :dependent => :destroy
-
   accepts_nested_attributes_for :vanity, 
                                 :allow_destroy => false, 
                                 :reject_if => proc {|a| a['name'].blank?}
@@ -298,6 +292,33 @@ class User < ActiveRecord::Base
 
   def unvote(voted)
     voted.delete_evaluation(:votes, self)
+  end
+
+  ## Messages
+
+  def fetch_conversations
+    Message.joins(:recipient, :sender).where{
+      |m| m.recipient_id == self.id
+      }.select("DISTINCT ON (messages.sender_id) *").
+      order('messages.sender_id, messages.created_at DESC')#.
+      #limit(1000)#.
+      #sort {|a,b| b.created_at <=> a.created_at}
+  end
+
+  def fetch_conversation_with(user)
+    Message.joins(:recipient, :sender).where{ |m|
+      ((m.sender_id == self.id) & (m.recipient_id == user.id)) |
+      ((m.sender_id == user.id) & (m.recipient_id == self.id))
+    }.order('messages.created_at DESC')
+  end
+
+  def send_message_to!(user, body)
+    if user != self
+      m = Message.new(:body => body)
+      m.sender = self
+      m.recipient = user
+      m.save!
+    end
   end
 
   ## Facebook related
