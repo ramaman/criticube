@@ -192,7 +192,7 @@ class User < ActiveRecord::Base
   end
 
   def story_name
-    self.first_name
+    'User'
   end
 
   def description
