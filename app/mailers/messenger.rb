@@ -1,5 +1,5 @@
 class Messenger < ActionMailer::Base
-  default from: "messenger@criticube.com"
+  default from: "\"Criticube Messenger\" <messenger@criticube.com>"
 
   def inform_message(message)
     @message = message
