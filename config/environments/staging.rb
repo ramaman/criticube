@@ -15,7 +15,6 @@ Criticube::Application.configure do
   config.assets.compress = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
-  config.assets.initialize_on_precompile = false
   config.assets.compile = false
 
   # Generate digests for assets URLs
@@ -35,7 +34,7 @@ Criticube::Application.configure do
   config.log_level = :debug
 
   # Expands the lines which load the assets
-  config.assets.debug = true
+  # config.assets.debug = true
 
   # Prepend all log lines with the following tags
   # config.log_tags = [ :subdomain, :uuid ]
