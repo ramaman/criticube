@@ -105,8 +105,7 @@ class User < ActiveRecord::Base
   has_many  :unread_messages,
             :class_name => 'Message',
             :foreign_key => 'recipient_id',
-            :conditions => {:read => false},             
-            :dependent => :destroy
+            :conditions => {:read => false}
             
   has_many  :sent_messages,
             :class_name => 'Message',
@@ -297,7 +296,7 @@ class User < ActiveRecord::Base
   ## Messages
 
   def fetch_conversations
-    Message.joins(:recipient, :sender).where{
+    Message.includes(:recipient, :sender).where{
       |m| (m.recipient_id == self.id) & (m.sender_id != self.id)
       }.select("DISTINCT ON (messages.sender_id) *").
       order('messages.sender_id, messages.created_at DESC').
