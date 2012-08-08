@@ -40,6 +40,7 @@ class RegistrationsController < Devise::RegistrationsController
       session[:user_return_to] = nil
       flash.delete :recaptcha_error
       @user.save
+      Analytics.delay.record_signup('native')
       remember_me @user
       sign_in @user
       redirect_to after_sign_up_path_for(@user)
@@ -56,6 +57,7 @@ class RegistrationsController < Devise::RegistrationsController
 
       if @user.valid? == true
         @user.save_with_facebook_session(session["devise.omniauth_attributes"])
+        Analytics.delay.record_signup('facebook')
         if @user.persisted?
           @user.delay.import_facebook_picture
           remember_me @user
