@@ -32,7 +32,7 @@ class Message < ActiveRecord::Base
   def email_recipient
     if self.recipient.subscribe_messages == true
       # Release pigeons
-
+      ActionMailer::Base::Messenger.delay.inform_message(self)
     end
   end
   
