@@ -14,7 +14,7 @@
           %li
             = link_to 'Feedback', new_feedback_path, :class => 'text'        
           %li
-            = link_to message_title(current_user), messages_path, :class => 'text'
+            = messages_link(current_user)
           %li
             = link_to current_user.first_name, vanity_path(current_user),:class => 'text core'
           %li
