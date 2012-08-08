@@ -1,7 +1,7 @@
 class FollowagesController < ApplicationController
 
   before_filter :authenticate_user!, :except => [:following, :followers]
-  before_filter :parent_object, :except => [:following]
+  before_filter :parent_object#, :except => [:following]
 
   def follow
     # if params[:followage] && (['User','Cube', 'Post'].include?(params[:followage][:followed_type]))
@@ -58,6 +58,8 @@ class FollowagesController < ApplicationController
       @parent ||= Vanity.find(params[:vanity_id]).owner.posts.find(params[:post_id])
     elsif params[:vanity_id]
       @parent ||= Vanity.find(params[:vanity_id]).owner
+    elsif params[:id]
+      @parent ||= Vanity.find(params[:id]).owner      
     end
   end  
 
