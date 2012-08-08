@@ -97,13 +97,23 @@ class User < ActiveRecord::Base
   has_many  :notifications,
             :dependent => :destroy
 
-  has_many :evaluations, class_name: "RSEvaluation", as: :source
+  has_many  :messages,
+            :class_name => 'Message',
+            :foreign_key => 'recipient_id', 
+            :dependent => :destroy
 
-  # FIXME
-  # has_many  :created_replies,
-  #           :class_name => 'Reply', 
-  #           :foreign_key => 'creator_id', 
-  #           :dependent => :destroy
+  has_many  :unread_messages,
+            :class_name => 'Message',
+            :foreign_key => 'recipient_id',
+            :conditions => {:read => false},             
+            :dependent => :destroy
+            
+  has_many  :sent_messages,
+            :class_name => 'Message',
+            :foreign_key => 'sender_id', 
+            :dependent => :destroy                               
+
+  has_many  :evaluations, class_name: "RSEvaluation", as: :source
 
   accepts_nested_attributes_for :vanity, 
                                 :allow_destroy => false, 
@@ -119,7 +129,8 @@ class User < ActiveRecord::Base
                   :bio,
                   :vanity,
                   :vanity_attributes,
-                  :avatar
+                  :avatar,
+                  :subscribe_messages
 
   validates :email,
             :presence => { :message => "Please enter your email address" },
@@ -281,6 +292,57 @@ class User < ActiveRecord::Base
 
   def unvote(voted)
     voted.delete_evaluation(:votes, self)
+  end
+
+  ## Messages
+
+  def fetch_conversations
+    Message.joins(:recipient, :sender).where{
+      |m| (m.recipient_id == self.id) & (m.sender_id != self.id)
+      }.select("DISTINCT ON (messages.sender_id) *").
+      order('messages.sender_id, messages.created_at DESC').
+      limit(1000).
+      sort {|a,b| b.created_at <=> a.created_at}
+  end
+
+  def fetch_conversation_partners
+    User.find_by_sql(%Q{
+      select * from users where id in (
+          select recipient_id as user_id from messages where sender_id = #{self.id}
+          union all
+          select sender_id as user_id from messages where recipient_id = #{self.id}
+      )
+    })
+  end
+
+  def fetch_conversation_with(user)
+    Message.joins(:recipient, :sender).where{ |m|
+      ((m.sender_id == self.id) & (m.recipient_id == user.id)) |
+      ((m.sender_id == user.id) & (m.recipient_id == self.id))
+    }.order('messages.created_at DESC')
+  end
+
+  def mark_read_conversation_with(user)
+    unread_messages = Message.where{ |m|
+      (((m.sender_id == self.id) & (m.recipient_id == user.id)) |
+      ((m.sender_id == user.id) & (m.recipient_id == self.id))) &
+      m.read == false
+    }
+    unread_messages.each do |message|
+      message.read = true
+      message.save 
+    end
+    self.unread_messages_count = self.unread_messages.count
+    self.save
+  end
+
+  def send_message_to!(user, body)
+    if user != self
+      m = Message.new(:body => body)
+      m.sender = self
+      m.recipient = user
+      m.save!
+    end
   end
 
   ## Facebook related

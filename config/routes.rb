@@ -4,7 +4,7 @@ Criticube::Application.routes.draw do
 
   root :to => 'dashboard#home'
   get '/feed' => 'dashboard#feed', :as => 'dashboard_feed'
-  
+    
   ## USERS
   devise_for :users, :path_names => {
     :sign_in => 'login', 
@@ -25,6 +25,11 @@ Criticube::Application.routes.draw do
   resources :users, :only => [:index]
   get '/users/:id' => 'users#old_show', :as => 'user_old_show'
   
+  ## MESSAGES
+  get '/messages' => 'messages#index', :as => 'messages'
+  get '/messages/:user_id' => 'messages#conversation', :as => 'conversation'
+  post '/messages' => 'messages#create', :as => 'messages'
+
   ## CUBES
   resources :cubes, :only => [:index, :new, :create]
   

@@ -1,0 +1,12 @@
+= "Hi #{@message.recipient.first_name},"
+%br
+
+  %p
+    = "#{@message.sender.fast_name} sent you a message:"
+  
+  = ActionView::Base.new.extend(ApplicationHelper).simple_htmlize(@message.body) 
+
+  %p
+    = link_to("Click to see the full conversation with #{@message.sender.fast_name}", "http://criticube.com" + conversation_path(@message.sender))
+
+= render :partial => 'mail_footer', :locals => {:recipient => @message.recipient}

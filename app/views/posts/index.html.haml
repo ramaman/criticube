@@ -17,7 +17,7 @@
         - if @posts.length == 0
           .row
             .span6.offset1
-              = 'No opinions yet'
+              = 'No #{Post.display_name}s yet'
 
         - else
           %ul.items.activities
@@ -34,13 +34,13 @@
     .row
       .span6.offset1
         %h3
-          = 'Opinions'
+          = "#{Post.display_name.capitalize}s"
         %hr.slim
 
     - if @posts.length == 0
       .row
         .span6.offset1
-          = 'No opinions yet'
+          = 'No #{Post.display_name}s yet'
 
     - else
       %ul.items.activities

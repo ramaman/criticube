@@ -74,6 +74,8 @@ RESERVED_WORDS = [
   'contact',
   'contacts',  
   'contract',
+  'conversation',  
+  'conversations',
   'create',
   'delete',
   'direct_messages',

@@ -1,0 +1,27 @@
+- provide :content do
+  .row
+    .span7
+      .page-header
+        %h3
+          = 'Inbox'
+           
+      .clearfix
+        %ul.items.messages
+          - @messages.each do |message|
+            %li
+              .row
+                .span1
+                  = link_to image_tag(message.sender.avatar_url(:thumb), :class => 'right'), vanity_path(message.sender)
+                .span6
+                  %p
+                    = link_to message.sender.fast_name, vanity_path(message.sender), :class => 'core'
+                    %span.right.quiet
+                      = friendly_datetime(message.created_at)
+                  %p
+                    = link_to short_string(message.body, 35), conversation_path(message.sender)
+                    - if message.read == false
+                      = ' (unread)'
+              %hr    
+      .row
+        .span6.offset1.center
+          = paginate(@messages)        
