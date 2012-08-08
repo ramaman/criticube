@@ -14,7 +14,7 @@
             Email me when:
         = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
           .control-group
-            = f.check_box :subscribe_messages, :class => 'span4' 
+            = f.check_box :subscribe_messages 
             %nbsp/  
             = 'Someone sends me a private message'
           .control-group
