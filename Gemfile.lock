@@ -201,8 +201,6 @@ GEM
       rack
     rack-test (0.6.1)
       rack (>= 1.0)
-    rack-www (1.5.0)
-      rack
     rails (3.2.5)
       actionmailer (= 3.2.5)
       actionpack (= 3.2.5)
@@ -313,7 +311,6 @@ DEPENDENCIES
   pg_search (~> 0.5)
   progress_bar (~> 0.4.0)
   rack-mini-profiler (~> 0.1.9)
-  rack-www (~> 1.5.0)
   rails (= 3.2.5)
   recaptcha (~> 0.3.4)
   rpm_contrib (~> 2.1.11)

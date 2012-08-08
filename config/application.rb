@@ -77,6 +77,12 @@ module Criticube
       # g.test_framework :mini_test, :spec => true, :fixture => true
       # g.integration_tool :mini_test
     end
-       
+
+    # Force WWW
+    if Rails.env.production?
+      config.autoload_paths += %W(#{config.root}/lib)
+      config.middleware.use "CanonicalRedirect"
+    end   
+
   end
 end
