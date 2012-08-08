@@ -465,7 +465,7 @@ class User < ActiveRecord::Base
     )
   end
 
-  handle_asynchronously :record_follow
+  # handle_asynchronously :record_follow
 
   def record_create(primary_objekt)
     if primary_objekt.class == Cube
@@ -492,7 +492,7 @@ class User < ActiveRecord::Base
     end
   end
    
-  handle_asynchronously :record_create
+  # handle_asynchronously :record_create
 
   def automake_vanity
     if self.persisted? == false
