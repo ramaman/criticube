@@ -28,7 +28,7 @@ Criticube::Application.routes.draw do
   ## MESSAGES
   get '/messages' => 'messages#index', :as => 'messages'
   get '/messages/:user_id' => 'messages#conversation', :as => 'conversation'
-  post '/messages/:user_id' => 'messages#create', :as => 'conversation'
+  post '/messages' => 'messages#create', :as => 'messages'
 
   ## CUBES
   resources :cubes, :only => [:index, :new, :create]

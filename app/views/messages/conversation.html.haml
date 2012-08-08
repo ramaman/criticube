@@ -1,0 +1,31 @@
+- provide :content do
+  .row
+    .span7
+      .page-header
+        %h3
+          = link_to 'Messages', messages_path
+          = ' / '
+          = link_to @user.fast_name, vanity_path(@user)
+
+  / = link_to('')
+  #message-paginator
+    = paginate @messages, :remote => true, :theme => 'messages_vertical' 
+            
+  %ul.messages.items    
+    / = render @messages.reverse!
+
+    - @messages.reverse!.each do |message|
+      - if (message == @reply_point)
+        %a{:name => 'reply'}
+      = render :partial => '/messages/message', :locals => {:message => message}
+
+  - if !params[:page]    
+    .row
+      .span1
+        = image_tag(current_user.avatar_url(:thumb))
+      .span6
+        = form_for Message.new, :remote => true, :id => 'new_message' do |f|
+          = f.hidden_field :recipient_id, :value => @user.id
+          %p
+            = f.text_area :body, :autocomplete => :off, :class => 'slim span6 autoresize', :maxlength => 3000
+          = f.submit 'Send', :class => 'btn btn-primary right core'

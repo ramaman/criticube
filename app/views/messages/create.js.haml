@@ -1,0 +1,4 @@
+$('ul.messages').append("#{escape_javascript(render :partial => '/messages/message', :locals => {:message => @message})}");
+$('form#new_message textarea').val('');
+$('form#new_message input[type=submit]').button('reset');
+$('form#new_message input[type=submit]').val('Send');

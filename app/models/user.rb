@@ -298,11 +298,21 @@ class User < ActiveRecord::Base
 
   def fetch_conversations
     Message.joins(:recipient, :sender).where{
-      |m| m.recipient_id == self.id
+      |m| (m.recipient_id == self.id) & (m.sender_id != self.id)
       }.select("DISTINCT ON (messages.sender_id) *").
-      order('messages.sender_id, messages.created_at DESC')#.
-      #limit(1000)#.
-      #sort {|a,b| b.created_at <=> a.created_at}
+      order('messages.sender_id, messages.created_at DESC').
+      limit(1000).
+      sort {|a,b| b.created_at <=> a.created_at}
+  end
+
+  def fetch_conversation_partners
+    User.find_by_sql(%Q{
+      select * from users where id in (
+          select recipient_id as user_id from messages where sender_id = #{self.id}
+          union all
+          select sender_id as user_id from messages where recipient_id = #{self.id}
+      )
+    })
   end
 
   def fetch_conversation_with(user)
@@ -310,6 +320,20 @@ class User < ActiveRecord::Base
       ((m.sender_id == self.id) & (m.recipient_id == user.id)) |
       ((m.sender_id == user.id) & (m.recipient_id == self.id))
     }.order('messages.created_at DESC')
+  end
+
+  def mark_read_conversation_with(user)
+    unread_messages = Message.where{ |m|
+      (((m.sender_id == self.id) & (m.recipient_id == user.id)) |
+      ((m.sender_id == user.id) & (m.recipient_id == self.id))) &
+      m.read == false
+    }
+    unread_messages.each do |message|
+      message.read = true
+      message.save 
+    end
+    self.unread_messages_count = self.unread_messages.count
+    self.save
   end
 
   def send_message_to!(user, body)

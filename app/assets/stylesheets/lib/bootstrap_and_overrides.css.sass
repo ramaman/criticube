@@ -5,12 +5,12 @@ $baseline: 18px
 // Color
 $blue: #4477AA
 $black: #000000
-$grayDarker: #222222
-$grayDark: #333333
-$gray: #555555
-$grayLight: #C7C7C7
-$grayLighter: #EEEEEE
-$graySuperLight: #F7F7F7
+$greyDarker: #222222
+$greyDark: #333333
+$grey: #555555
+$greyLight: #C7C7C7
+$greyLighter: #EEEEEE
+$greySuperLight: #F7F7F7
 $white: #FFFFFF
 
 $green: #46a546
@@ -21,7 +21,7 @@ $bg: $white
 $errorText: #b94a48
 $errorBackground: #f2dede
 
-$textColor: $grayDark
+$textColor: $greyDark
 $linkColor: #336699
 $linkColorLight: #6699CC
 $btnPrimaryBackground: $linkColor
@@ -31,11 +31,11 @@ $btnDangerBackground: #ee5f5b
 // Navbar
 $navbarHeight: 50px
 $navbarLinkColor: $white
-$navbarLinkColorHover: $grayLighter
-$navbarLinkColorActive: $grayLighter
-$navbarLinkBackgroundHover: $gray
-$navbarBackgroundHighlight: $grayDark
-$navbarBackground: $grayDark
+$navbarLinkColorHover: $greyLighter
+$navbarLinkColorActive: $greyLighter
+$navbarLinkBackgroundHover: $grey
+$navbarBackgroundHighlight: $greyDark
+$navbarBackground: $greyDark
 $navbarSearchBackground: lighten($navbarBackground, 25%)
 $navbarSearchBorder: darken($navbarSearchBackground, 30%)
 $navbarSearchBackgroundFocus: $white
@@ -69,22 +69,22 @@ $navbarTextBottomPad: 14px
   width: 940px !important    
 
 .well
-  background-color: $graySuperLight
+  background-color: $greySuperLight
   &.slim
     padding: 14px
   &.danger
     background-color: $errorBackground
     color: $errorText
   &.white
-    border-color: $grayLight
+    border-color: $greyLight
     background-color: $white
   &.divlink
     &:hover, &.active
-      border-color: $grayLight
-      background-color: $grayLighter
+      border-color: $greyLight
+      background-color: $greyLighter
     &:active
-      border-color: $grayLight
-      background-color: $grayLight
+      border-color: $greyLight
+      background-color: $greyLight
         
 
 span.label.label-cclink, a.label.label-cclink
@@ -92,7 +92,7 @@ span.label.label-cclink, a.label.label-cclink
   color: $white
 
 .page-header
-  border-color: $grayLight !important
+  border-color: $greyLight !important
 
 ul.items
   padding: 0px 0px 0px 0px !important
@@ -112,7 +112,7 @@ ul.lined-items
     list-style-type: none !important
     color: $textColor
     border-bottom: 1px !important
-    border-color: $grayLight 
+    border-color: $greyLight 
 
 span.push-down, img.push-down
   padding-top: 3px
@@ -152,7 +152,6 @@ span.push-further-down, img.push-further-down, .push-further-down
   &:hover, &:active 
     color: $textColor
 
-
 .left
   float: left !important
 
@@ -164,6 +163,9 @@ span.push-further-down, img.push-further-down, .push-further-down
 
 .align-left
   text-align: left !important
+
+.align-center
+  text-align: center !important  
 
 textarea.slim
   height: 45px

@@ -1,0 +1,2 @@
+$('ul.messages').prepend("#{j render @messages.reverse!}");
+$('#message-paginator').html("#{j paginate @messages, :remote => true, :theme => 'messages_vertical'}")
