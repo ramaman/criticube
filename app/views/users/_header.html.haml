@@ -36,7 +36,8 @@
           - if user_signed_in? && (user == current_user)
             = link_to 'Edit profile', edit_vanity_path(user), :class => 'btn'
           - else
-            %a{:class => 'btn dropdown-toggle', :href => conversation_path(@user)}
-              %i.icon-envelope          
+            - if user_signed_in?
+              %a{:class => 'btn dropdown-toggle', :href => conversation_path(@user)}
+                %i.icon-envelope          
             %span.follow_panel{:data => {"id" => user.id, "tipe" => user.class.to_s }}
               = follow_button(user)   
