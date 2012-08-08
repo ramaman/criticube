@@ -14,7 +14,7 @@
           %li
             = link_to 'Feedback', new_feedback_path, :class => 'text'        
           %li
-            = link_to ( current_user.unread_messages_count > 0 ? "Messages (#{current_user.unread_messages_count})" : "Messages"), messages_path, :class => 'text'
+            = link_to message_title(user), messages_path, :class => 'text'
           %li
             = link_to current_user.first_name, vanity_path(current_user),:class => 'text core'
           %li
