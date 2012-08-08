@@ -54,6 +54,9 @@ gem "rpm_contrib", "~> 2.1.11"
 # Performance Monitoring
 gem "rack-mini-profiler", "~> 0.1.9"
 
+# Analytics
+gem "gabba", "~> 0.3.0"
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
