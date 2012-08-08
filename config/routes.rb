@@ -53,11 +53,11 @@ Criticube::Application.routes.draw do
   get '/:id/edit', :as => 'edit_vanity', :to =>  proc { |env| vanity_controller(env, 'edit') }
   put '/:id', :as => 'vanity', :to => proc { |env| vanity_controller(env, 'update') }
   delete '/:id', :as => 'vanity', :to => proc { |env| vanity_controller(env, 'destroy') }
-  get '/:id/following/:tipe', :as => 'vanity_following', :to => 'followages#following'
-  get '/:id/followers', :as => 'vanity_followers', :to => 'followages#followers'
-  get '/:id/activities', :as => 'vanity_activities', :to => 'activities#index'  
-  get '/:id/posts', :as => 'vanity_posts', :to => 'posts#index'     
-  get '/:id/admins', :as => 'vanity_admins', :to => 'cubes#admins'
+  get '/:vanity_id/following/:tipe', :as => 'vanity_following', :to => 'followages#following'
+  get '/:vanity_id/followers', :as => 'vanity_followers', :to => 'followages#followers'
+  get '/:vanity_id/activities', :as => 'vanity_activities', :to => 'activities#index'  
+  get '/:vanity_id/posts', :as => 'vanity_posts', :to => 'posts#index'     
+  get '/:vanity_id/admins', :as => 'vanity_admins', :to => 'cubes#admins'
 
   # Level 1 objects (User and Cube)
 

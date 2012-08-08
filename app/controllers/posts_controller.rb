@@ -76,7 +76,7 @@ class PostsController < ApplicationController
   private
 
   def parent_object
-    v = Vanity.find(params[:id])
+    v = Vanity.find(params[:vanity_id])
     return v.owner
   end  
 
