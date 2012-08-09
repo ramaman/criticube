@@ -41,6 +41,7 @@ class PostsController < ApplicationController
     @post = @parent.posts.find(params[:id])
     @title = @post.headline
     @special_image = @parent.avatar_url
+    @km_event = 'On Post'    
     respond_to :html
   end
 

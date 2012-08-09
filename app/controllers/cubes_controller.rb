@@ -16,6 +16,7 @@ class CubesController < ApplicationController
     @activities = @cube.feed.limit(10)
     @title = @cube.name
     @special_image = @cube.avatar_url
+    @km_event = 'On Cube'
     respond_to :html
   end
 

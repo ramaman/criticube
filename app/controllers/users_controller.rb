@@ -19,6 +19,7 @@ class UsersController < ApplicationController
     @posts = @user.created_posts.limit(8)
     @title = @user.name
     @special_image = @user.avatar_url
+    @km_event = 'On User'    
     respond_to :html
   end
 
