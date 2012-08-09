@@ -1,8 +1,7 @@
 !!!
 %html
   %head
-    = raw analytical.head_prepend_javascript 
-    = raw analytical.body_prepend_javascript
+    = render 'shared/km'
     %title 
       = title
     = stylesheet_link_tag "application", :media => "all"
@@ -18,9 +17,6 @@
     - else
       :javascript
         var _gaq = _gaq || [];_gaq.push(['_setAccount', 'UA-33989219-1']); _gaq.push(['_trackPageview']); (function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);})();
-    = raw analytical.head_append_javascript
-    - analytical.identify(current_user.id) if current_user    
-
   %body{:style => (@special_page ? 'background-color: #EEE;' : '')}
     
     = render 'shared/header'
@@ -35,4 +31,3 @@
           = alert
       = yield :content
     = render 'shared/footer'
-    = raw analytical.body_append_javascript      
