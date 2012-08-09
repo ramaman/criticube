@@ -73,7 +73,7 @@ module ApplicationHelper
   end
 
   def keywords_array
-    base_keywords = "facts, references, investigation, social, media"
+    base_keywords = "thoughts, opinions, investigation, social, media"
     if @keywords.nil?
       base_keywords
     else

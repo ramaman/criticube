@@ -56,6 +56,8 @@ gem "rack-mini-profiler", "~> 0.1.9"
 
 # Analytics
 gem "gabba", "~> 0.3.0"
+gem "analytical", :git => 'git://github.com/jkrall/analytical.git' #"~> 3.0.12"
+gem "kissmetrics", "~> 2.0.0"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

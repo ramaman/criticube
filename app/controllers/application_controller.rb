@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   include SessionsHelper
+  analytical# :modules => [:kissmetrics]
   # protected
 
   before_filter :banned?, :store_location

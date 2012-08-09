@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/jkrall/analytical.git
+  revision: bf835497014a8f3c8fc21800cf1925974f0817a4
+  specs:
+    analytical (3.0.12)
+
+GIT
   remote: git://github.com/rmanusama/kaminari.git
   revision: 2533cf0b7a922b9d9f2f3a6cc834d7c3222426d7
   specs:
@@ -142,6 +148,7 @@ GEM
     json (1.7.4)
     jwt (0.1.5)
       multi_json (>= 1.0)
+    kissmetrics (2.0.0)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -281,6 +288,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin (~> 0.4.4)
   activerecord-reputation-system (~> 1.3.0)
+  analytical!
   ancestry (~> 2.0.0)!
   auto_html (~> 1.5.3)
   bootstrap-sass (~> 2.0.4.0)
@@ -300,6 +308,7 @@ DEPENDENCIES
   jbuilder (~> 0.4.0)
   jquery-rails
   kaminari!
+  kissmetrics (~> 2.0.0)
   meta-tags (~> 1.2.6)
   mini_magick (~> 3.4)
   mustache (~> 0.99.4)

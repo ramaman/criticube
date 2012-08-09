@@ -1,0 +1,9 @@
+production:
+  KissMetrics:
+    js_url_key: d0dc29f9754cd374358c0b6c79c3c7fc5676b232
+staging:
+  KissMetrics:
+    js_url_key: a4a1c421ff2bc95f6555451a2f98c28770795fb2    
+development:
+  KissMetrics:
+    js_url_key: a4a1c421ff2bc95f6555451a2f98c28770795fb2       
