@@ -10,13 +10,13 @@
     #fb-root
     %script{:src => "//connect.facebook.net/en_US/all.js#xfbml=1"} 
     %script{:src => "//platform.twitter.com/widgets.js", :type => "text/javascript"}
-    - if Rails.env.production?
-      :javascript
-        var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-20803740-1']); _gaq.push(['_trackPageview']); (function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);})();
-    - else
-      :javascript
-        var _gaq = _gaq || [];_gaq.push(['_setAccount', 'UA-33989219-1']); _gaq.push(['_trackPageview']); (function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);})();    
-            
+    / - if Rails.env.production?
+    /   :javascript
+    /     var _gaq = _gaq || []; _gaq.push(['_setAccount', 'UA-20803740-1']); _gaq.push(['_trackPageview']); (function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);})();
+    / - else
+    /   :javascript
+    /     var _gaq = _gaq || [];_gaq.push(['_setAccount', 'UA-33989219-1']); _gaq.push(['_trackPageview']); (function() {var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);})();
+    = render '/shared/google_analytics'
 
   %body{:style => (@special_page ? 'background-color: #EEE;' : '')}
     = render 'shared/header'
