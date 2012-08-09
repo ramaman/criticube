@@ -4,8 +4,10 @@ class DashboardController < ApplicationController
 
   def home
     if user_signed_in?
+      @km_event = 'On Dashboard'
       @activities = current_user.dashboard_feed.page(params[:page]).per(25)
     else
+      @km_event = 'On Gate'
       @special_page = true  
     end
 

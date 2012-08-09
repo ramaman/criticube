@@ -23,5 +23,9 @@ module AnalyticsHelper
       "'a4a1c421ff2bc95f6555451a2f98c28770795fb2'"
     end    
   end
+  
+  def km_event
+    "_kmq.push(['record', '#{@km_event}']);" if @km_event
+  end
 
 end
