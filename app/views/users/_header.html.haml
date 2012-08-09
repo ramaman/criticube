@@ -19,6 +19,9 @@
         .clearfix
           = 'Posted'
           = link_to(pluralize(user.created_posts.count , "#{Post.context_tipe}"), vanity_posts_path(user))
+          / %br/
+          / = 'Managed'
+          / = link_to(pluralize(user.created_posts.count , "#{Post.context_tipe}"), vanity_posts_path(user))
           %br/
           = 'Following'
           = link_to(pluralize(user.followed_users.count , 'user'), vanity_following_path(user, 'users'))
