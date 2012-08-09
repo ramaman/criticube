@@ -5,7 +5,8 @@ class CubesController < ApplicationController
 
   def index
     @featured_cubes = Cube.featured.order("RANDOM()").page(params[:page]).per(50)
-    @cubes = Cube.common.order("RANDOM()").page(params[:page]).per(20)  
+    @cubes = Cube.common.order("RANDOM()").page(params[:page]).per(20)
+    @km_event = 'On Explorer'  
     respond_to :html
   end
 
