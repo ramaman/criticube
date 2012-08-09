@@ -11,4 +11,8 @@
         = link_to item.name, item.permalink, :class => 'core'
         - if item.class != Post
           = link_to "(#{item.page_name})", vanity_path(item)
+        %nbsp
+        - if user_signed_in? && item != current_user
+          %span.minor.follow_link_panel{:data => {"id" => item.id, "tipe" => item.class.to_s }}
+            = follow_link(item)            
   = paginate(items)      
