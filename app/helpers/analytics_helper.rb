@@ -38,4 +38,8 @@ module AnalyticsHelper
     end
   end
 
+  def km_custom
+    @km_custom if @km_custom
+  end
+
 end

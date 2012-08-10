@@ -1,5 +1,6 @@
 ActiveAdmin.register User do
 
+  filter :id
   filter :email
   filter :first_name
   filter :last_name
@@ -15,6 +16,7 @@ ActiveAdmin.register User do
         @user.banned = params[:user][:banned]
         if current_user.super_admin?
           @user.admin = params[:user][:admin]
+          @user.cc_team = params[:user][:cc_team]
         end
         @user.save
       end
@@ -70,6 +72,9 @@ ActiveAdmin.register User do
     f.inputs "Details" do
       f.input :banned
       f.input :admin
+      if current_user.super_admin?
+        f.input :cc_team
+      end
     end
     f.buttons
   end
