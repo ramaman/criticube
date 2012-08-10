@@ -1,13 +1,4 @@
 .dropdown#notifications_counter{:style => 'padding:16px 0px 0px 10px'}
   %a.dropdown-toggle{:href => notifications_path, 'data-toggle' => 'dropdown', :class => 'label', :style => 'background-color:#69B; height: 20px'}
     %span.notifications_count
-      = current_user.notifications_count.to_s
-    / %ul.dropdown-menu
-    /   - if current_user.notifications_count > 0
-    /     - current_user.notifications.unread.limit(12).each do |notification|
-    /       %li
-    /         = notification
-    /   %li
-    /     = link_to 'See all notifications', notifications_path
-    / %li
-    /   = link_to 'Mark all as read', read_all_notifications_path      
+      = current_user.notifications_count.to_s  

@@ -50,8 +50,12 @@ class CubesController < ApplicationController
     @cube.creator = current_user  
     @cube.assign_manager(current_user)
     @cube.save
+
     current_user.follow!(@cube)
     current_user.record_create(@cube)
+    
+    Analytics.km_created_cube(current_user, @cube)
+
     if @cube.save
       redirect_to vanity_path(@cube)
     else

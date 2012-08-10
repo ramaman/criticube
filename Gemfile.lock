@@ -48,7 +48,7 @@ GEM
       activesupport (= 3.2.5)
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
-    activerecord-reputation-system (1.3.0)
+    activerecord-reputation-system (1.3.4)
     activeresource (3.2.5)
       activemodel (= 3.2.5)
       activesupport (= 3.2.5)
@@ -80,12 +80,17 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.3.3)
-    daemons (1.1.8)
+    daemons (1.1.9)
     delayed_job (3.0.3)
       activesupport (~> 3.0)
     delayed_job_active_record (0.3.2)
       activerecord (> 2.1.0)
       delayed_job (~> 3.0.0)
+    delayed_kiss (0.2.0)
+      activesupport
+      delayed_job (>= 2.1.4)
+      httparty (>= 0.8.1)
+      i18n
     devise (2.1.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -127,6 +132,9 @@ GEM
     hashie (1.2.0)
     highline (1.6.13)
     hike (1.2.1)
+    httparty (0.8.3)
+      multi_json (~> 1.0)
+      multi_xml
     httpauth (0.1)
     i18n (0.6.0)
     inherited_resources (1.3.1)
@@ -142,7 +150,6 @@ GEM
     json (1.7.4)
     jwt (0.1.5)
       multi_json (>= 1.0)
-    kissmetrics (2.0.0)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -158,6 +165,7 @@ GEM
     mini_magick (3.4)
       subexec (~> 0.2.1)
     multi_json (1.3.6)
+    multi_xml (0.5.1)
     multipart-post (1.1.5)
     mustache (0.99.4)
     net-scp (1.0.4)
@@ -292,6 +300,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   delayed_job (~> 3.0.3)
   delayed_job_active_record (~> 0.3.2)
+  delayed_kiss (~> 0.2.0)
   devise (~> 2.1.2)
   fog (~> 1.4.0)
   foreman (~> 0.51.0)
@@ -301,7 +310,6 @@ DEPENDENCIES
   jbuilder (~> 0.4.0)
   jquery-rails
   kaminari!
-  kissmetrics (~> 2.0.0)
   meta-tags (~> 1.2.6)
   mini_magick (~> 3.4)
   mustache (~> 0.99.4)
