@@ -19,7 +19,9 @@ class UsersController < ApplicationController
     @posts = @user.created_posts.limit(8)
     @title = @user.name
     @special_image = @user.avatar_url
-    @km_event = 'On User'    
+
+    @km_custom = Analytics.km_on_user(current_user, @user) if user_signed_in?
+
     respond_to :html
   end
 

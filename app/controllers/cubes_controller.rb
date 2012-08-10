@@ -25,6 +25,9 @@ class CubesController < ApplicationController
     @title = @cube.name
     @special_image = @cube.avatar_url
     @km_event = 'On Cube'
+
+    @km_custom = Analytics.km_on_cube(current_user, @cube) if user_signed_in?
+
     respond_to :html
   end
 
