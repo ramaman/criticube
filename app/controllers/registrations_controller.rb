@@ -5,7 +5,7 @@ class RegistrationsController < Devise::RegistrationsController
   def new
     @user = User.new
     @user.build_vanity
-    @km_special = 'signup_form'
+    # @km_special = 'signup_form'
 
     respond_to do |format|
       format.html
@@ -43,8 +43,8 @@ class RegistrationsController < Devise::RegistrationsController
       flash.delete :recaptcha_error
       @user.save
       remember_me @user
-      sign_in @user
       session[:signup] = true
+      sign_in @user
       redirect_to after_sign_up_path_for(@user)
     end
   end
@@ -62,8 +62,8 @@ class RegistrationsController < Devise::RegistrationsController
         if @user.persisted?
           @user.delay.import_facebook_picture
           remember_me @user
-          sign_in @user
           session[:signup] = true
+          sign_in @user
           redirect_to after_sign_up_path_for(@user)
         else
           render :new_from_facebook
