@@ -3,6 +3,7 @@
   .clearfix
     %h2.page-header
       = 'Featured Cubes'
+      = "signup" if @km_special == 'signup'
       - if user_signed_in?
         %span.right
           = link_to 'Home', root_path, :class => 'btn'

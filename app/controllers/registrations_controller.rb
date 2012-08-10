@@ -44,6 +44,7 @@ class RegistrationsController < Devise::RegistrationsController
       @user.save
       remember_me @user
       sign_in @user
+      session[:signup] = true
       redirect_to after_sign_up_path_for(@user)
     end
   end
@@ -62,6 +63,7 @@ class RegistrationsController < Devise::RegistrationsController
           @user.delay.import_facebook_picture
           remember_me @user
           sign_in @user
+          session[:signup] = true
           redirect_to after_sign_up_path_for(@user)
         else
           render :new_from_facebook

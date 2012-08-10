@@ -28,4 +28,12 @@ module AnalyticsHelper
     "_kmq.push(['record', '#{@km_event}']);" if @km_event
   end
 
+  def km_special
+    if @km_special
+      if @km_special == 'signup'
+        "_kmq.push(['record', 'Signup']);"  
+      end
+    end
+  end
+
 end
