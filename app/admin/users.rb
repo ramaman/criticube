@@ -72,9 +72,6 @@ ActiveAdmin.register User do
     f.inputs "Details" do
       f.input :banned
       f.input :admin
-      if current_user.super_admin?
-        f.input :cc_team
-      end
     end
     f.buttons
   end
