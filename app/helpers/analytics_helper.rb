@@ -30,9 +30,11 @@ module AnalyticsHelper
 
   def km_special
     if @km_special
-      if @km_special == 'signup'
-        "_kmq.push(['record', 'Signup']);"  
-      end
+      "_kmq.push(['record', 'Signed up']);" if @km_special == 'signup'
+      "_kmq.push(['record', 'On signup form']);" if @km_special == 'signup_form'  
+      # if user_signed_in?
+          
+      # end
     end
   end
 

@@ -5,8 +5,7 @@
       .nav-collapse
         = form_tag search_path, :class => 'navbar-search', :id => 'main_search', :style => 'padding-top:9px; padding-bottom: 0px; margin:0px', :autocomplete => :off, :method => :get do
           = text_field_tag 'q', '', :id => 'main_search', :class => 'search-query span3'
-      %ul.nav{:style => 'padding-left: 10px;'}
-        / - if user_signed_in?
+      / %ul.nav{:style => 'padding-left: 10px;'}
 
       %ul.nav.pull-right
 

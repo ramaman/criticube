@@ -5,7 +5,7 @@ class RegistrationsController < Devise::RegistrationsController
   def new
     @user = User.new
     @user.build_vanity
-    @km_event = 'On Signup Form'
+    @km_special = 'signup_form'
 
     respond_to do |format|
       format.html
@@ -15,7 +15,7 @@ class RegistrationsController < Devise::RegistrationsController
   def new_from_facebook
     if session["devise.omniauth_attributes"]
       @user = User.new_with_facebook_session(session["devise.omniauth_attributes"])
-      @km_event = 'On Signup Form'
+      @km_special = 'signup_form'
       respond_to do |format|
         format.html
       end
