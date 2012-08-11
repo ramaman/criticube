@@ -49,7 +49,7 @@ class Analytics
 
   def self.km_created_cube(cur_user, cube)
     unless cur_user.cc_team == true
-      DelayedKiss.record(cur_user.id, 'Created cube'),
+      DelayedKiss.record(cur_user.id, 'Created cube',
         :id => cube.id, 
         :page_name => cube.page_name, 
         :name => cube.name
@@ -59,7 +59,7 @@ class Analytics
 
   def self.km_created_post(cur_user, post)
     unless cur_user.cc_team == true
-      DelayedKiss.record(cur_user.id, 'Created post'),
+      DelayedKiss.record(cur_user.id, 'Created post',
         :id => post.id, 
         :name => post.name
         )
@@ -68,7 +68,7 @@ class Analytics
   
   def self.km_created_reply(cur_user, reply)
     unless cur_user.cc_team == true
-      DelayedKiss.record(cur_user.id, 'Created reply'),
+      DelayedKiss.record(cur_user.id, 'Created reply',
         :id => reply.id
         )
     end
