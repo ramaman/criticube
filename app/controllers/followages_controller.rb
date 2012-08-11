@@ -10,6 +10,9 @@ class FollowagesController < ApplicationController
     # end
 
     current_user.follow!(@parent, :record => true)
+
+    ## IMPORTANT! Km analytics are on 'record_follow' method of the User class, as we need to prevent recording multiple-follows
+    Analytics.km_follow(current_user, @parent)
     
     respond_to do |format|
       format.html { redirect_to @parent }

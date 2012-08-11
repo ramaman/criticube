@@ -26,23 +26,13 @@ class Analytics
   end
 
   # Follow metrics are tracked by server fired events
-
-  def self.km_follow_cube(cur_user, cube)
+  
+  def self.km_follow(cur_user, followed)
     unless cur_user.cc_team == true
-
-    end
-  end
-
-  def self.km_follow_user(cur_user, user)
-    unless cur_user.cc_team == true
-
-    end
-  end
-
-  def self.km_follow_post(cur_user, post)
-    unless cur_user.cc_team == true
-
-    end
+      DelayedKiss.record(cur_user.id, "Followed #{followed.class.to_s.downcase}",
+        :id => followed.id, 
+        )
+    end  
   end  
 
   # Create metrics are tracked by server fired events
