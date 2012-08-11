@@ -27,6 +27,9 @@ class RepliesController < ApplicationController
       if @reply.save
         current_user.follow!(@reply.container)
         current_user.record_create(@reply)        
+
+        Analytics.km_created_reply(current_user, @reply)
+
         format.html {redirect_to vanity_post_path(@post.parent, @post)}
         format.js {render :layout => false}
       else
