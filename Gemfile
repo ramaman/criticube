@@ -56,8 +56,11 @@ gem "rack-mini-profiler", "~> 0.1.9"
 
 # Analytics
 gem "gabba", "~> 0.3.0"
-gem "delayed_kiss", "~> 0.2.0"
+gem "delayed_kiss", "~> 0.2.0", :git => 'git://github.com/ddeyoung/delayed_kiss.git'
 # gem "analytical", :git => 'git://github.com/jkrall/analytical.git' #"~> 3.0.12"
+
+# General external request
+gem "httparty", "~> 0.8.3"
 
 
 group :assets do

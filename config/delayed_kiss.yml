@@ -1,6 +1,6 @@
 development:
     key: a4a1c421ff2bc95f6555451a2f98c28770795fb2
-    # whiny_config: true
+    whiny_config: true
 staging:
     key: a4a1c421ff2bc95f6555451a2f98c28770795fb2
 test:

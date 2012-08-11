@@ -1,4 +1,14 @@
 GIT
+  remote: git://github.com/ddeyoung/delayed_kiss.git
+  revision: 705e757b042d2290cbea38fa846a00751d88bd65
+  specs:
+    delayed_kiss (0.2.0)
+      activesupport
+      delayed_job (>= 2.1.4)
+      httparty (>= 0.8.1)
+      i18n
+
+GIT
   remote: git://github.com/rmanusama/kaminari.git
   revision: 2533cf0b7a922b9d9f2f3a6cc834d7c3222426d7
   specs:
@@ -86,11 +96,6 @@ GEM
     delayed_job_active_record (0.3.2)
       activerecord (> 2.1.0)
       delayed_job (~> 3.0.0)
-    delayed_kiss (0.2.0)
-      activesupport
-      delayed_job (>= 2.1.4)
-      httparty (>= 0.8.1)
-      i18n
     devise (2.1.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -300,13 +305,14 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   delayed_job (~> 3.0.3)
   delayed_job_active_record (~> 0.3.2)
-  delayed_kiss (~> 0.2.0)
+  delayed_kiss (~> 0.2.0)!
   devise (~> 2.1.2)
   fog (~> 1.4.0)
   foreman (~> 0.51.0)
   friendly_id (~> 4.0.7)
   gabba (~> 0.3.0)
   haml-rails
+  httparty (~> 0.8.3)
   jbuilder (~> 0.4.0)
   jquery-rails
   kaminari!
