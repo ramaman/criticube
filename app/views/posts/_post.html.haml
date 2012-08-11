@@ -1,7 +1,7 @@
 %li
   .row
     .span1
-      = link_to image_tag(post.creator.avatar_url(:small), :class => 'push-down'), vanity_path(post.creator), :class => 'right'
+      = link_to image_tag(post.creator.avatar_url(:thumb), :class => 'push-down'), vanity_path(post.creator), :class => 'right'
 
     .span6
       %p
