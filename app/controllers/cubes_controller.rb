@@ -47,6 +47,7 @@ class CubesController < ApplicationController
     @cube = Cube.new(cube_params)
     @cube.language = params[:cube][:language]
     @cube.vanity = Vanity.new_from_name(params[:cube][:vanity_attributes][:name])  
+    @cube.topic_id = params[:cube][:topic]
     @cube.creator = current_user  
     @cube.assign_manager(current_user)
     @cube.save
@@ -72,11 +73,13 @@ class CubesController < ApplicationController
   end
 
   def edit
+    @cube = Cube.find(params[:id])
     respond_to :html
   end
 
   def update
     @cube.update_attributes(cube_params)
+    @cube.topic_id = params[:cube][:topic]    
     respond_to do |format|
       if @cube.save
         flash[:notice] = 'Cube has been successfully updated'

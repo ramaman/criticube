@@ -12,6 +12,7 @@
               - else
                 = cube.name
           .big-text
+
             .content
               - if cube.description && !cube.description.blank?
                 = htmlize(cube.description)                
@@ -20,10 +21,17 @@
             / %p
             /   = managers_list(cube)
               
+
             %p
+              - if cube.topic
+                = "Cube about "
+                = link_to cube.topic.name, topic_path(cube.topic)
+                = ', '
+
               = link_to(pluralize(cube.posts.count , "#{Post.context_tipe}"), vanity_posts_path(cube)) 
               = ' and '
               = link_to pluralize(cube.followers.count, 'follower'), vanity_followers_path(cube)
+
         .span4
           .right
             %p

@@ -42,6 +42,11 @@ class User < ActiveRecord::Base
             :source => :followed,
             :source_type => 'Post'
 
+  has_many  :followed_topics,
+            :through => :followages,
+            :source => :followed,
+            :source_type => 'Topic'
+
   has_many  :reverse_followages,
             :as => :followed,
             :class_name => 'Followage',

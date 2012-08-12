@@ -4,6 +4,7 @@ Criticube::Application.routes.draw do
 
   root :to => 'dashboard#home'
   get '/feed' => 'dashboard#feed', :as => 'dashboard_feed'
+  get '/explore' => 'dashboard#explore', :as => 'explore'
     
   ## USERS
   devise_for :users, :path_names => {
@@ -35,6 +36,8 @@ Criticube::Application.routes.draw do
 
   ## TOPICS
   resources :topics
+  post '/topics/:id/follow' => 'followages#follow', :as => 'topic_follow'
+  delete '/topics/:vanity_id/unfollow' => 'followages#unfollow', :as => 'topic_unfollow'  
   
   ## FOLLOWAGES  
   resources :followages, :only => [:create, :destroy]

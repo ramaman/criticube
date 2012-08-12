@@ -25,6 +25,40 @@ blockquote
   height: auto
   padding-bottom: 15px  
 
+.cubethumb
+  width: 200px
+  margin: 0px 20px 20px 0px
+  padding: 0px !important
+  
+  background-color: $greyLighter 
+  @include gradient-vertical($greySuperLight, $greyLighter)
+  hr
+    border-color: $greyLight
+  &:hover
+    .main
+      @include gradient-vertical($greyLighter, $greyLight)    
+    hr
+      border-color: $greyLighter
+      border-width: 1px
+    .meta
+      @include gradient-vertical(lighten($blue, 10%), lighten($blue, 5%))        
+
+  .main
+    border: 1px solid $greyLight
+    padding: 20px 24px 23px 24px
+
+  .meta
+    padding: 10px 0px 10px 0px
+    padding: 10px 24px 10px 24px
+    border: 1px solid $blue
+    background-color: $blue
+    @include gradient-vertical($blue, darken($blue, 5%)) 
+    a
+      color: $white
+      &:hover
+        font-style: none !important
+
+
 .pad
   padding: 0px 0px 10px 0px    
 

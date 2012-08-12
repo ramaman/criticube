@@ -12,7 +12,7 @@ module ApplicationHelper
 
   def short_string(text, limit)
     if text.length > limit
-      text[0..limit] + '...'
+      text[0..limit] + '..'
     else
       text
     end

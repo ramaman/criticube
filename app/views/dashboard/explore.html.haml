@@ -1,0 +1,20 @@
+- provide :content do
+  .row
+    .span9
+      %ul.cubes.items
+        .row
+          - @cubes.each do |cube|
+            %li.cubethumb.span2
+              .main
+                = image_tag(cube.avatar_url, :class => 'cube')
+              .meta
+                .clearfix
+                  = link_to(short_string(cube.name, 20), vanity_path(cube))
+                .clearfix.minor
+                  %span.follow_link_panel{:data => {"id" => cube.id, "tipe" => cube.class.to_s }}
+                    = follow_link(cube)
+
+    .span3
+      %h2
+        = 'Explore'
+      %hr

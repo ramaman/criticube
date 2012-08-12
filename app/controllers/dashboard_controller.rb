@@ -28,4 +28,20 @@ class DashboardController < ApplicationController
     end    
   end
 
+  def explore
+    @cubes = Cube.all
+
+
+    if session[:signup]
+      # IMPORTANT to fire analytics event 'signup' to kissmetrics
+      @km_special = 'signup' 
+      session[:signup] = nil
+    end
+
+    respond_to do |format|
+      format.html
+    end    
+  end
+
+
 end

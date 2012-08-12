@@ -20,10 +20,10 @@
                 = v.text_field :name, :class => 'prependedInput', :style => "width: 324px", :data => { :validate => true }
               .help-block.minor
                 = "3 to 24 characters, cannot contain special characters"
-        / .control-group
-        /   = f.label 'Topic', :class => 'control-label core'
-        /   .controls
-        /     = f.input :topic, :as => :select, :collection => Topic.all, :class => 'core', :label => false
+        .control-group
+          = f.label 'Topic', :class => 'control-label core'
+          .controls
+            = f.input :topic, :as => :select, :collection => Topic.all, :class => 'core', :label => false
         .control-group
           = f.label 'Language', :class => 'control-label core'
           .controls

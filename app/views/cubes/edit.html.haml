@@ -31,6 +31,11 @@
             = f.text_area :description, :class => 'span8 medium autoresize'
 
         .control-group
+          = f.label 'Topic', :class => 'control-label core'
+          .controls
+            = f.input :topic, :as => :select, :collection => Topic.all, :class => 'core', :label => false, :selected => @cube.topic.id
+
+        .control-group
           = f.submit "Update", :class => 'btn btn-large btn-primary'
           = link_to "Cancel", vanity_path(@cube), :class => 'btn btn-large'
 

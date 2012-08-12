@@ -5,9 +5,7 @@
       .nav-collapse
         = form_tag search_path, :class => 'navbar-search', :id => 'main_search', :style => 'padding-top:9px; padding-bottom: 0px; margin:0px', :autocomplete => :off, :method => :get do
           = text_field_tag 'q', '', :id => 'main_search', :class => 'search-query span3'
-      / %ul.nav{:style => 'padding-left: 10px;'}
-
-      %ul.nav.pull-right
+      %ul.nav{:style => 'padding-left: 10px;'}
 
         - if user_signed_in?
           %li
@@ -15,7 +13,16 @@
           %li
             = messages_link(current_user)
           %li
+            = link_to 'Explore', explore_path, :class => 'core text'
+
+
+      %ul.nav.pull-right
+
+        - if user_signed_in?
+
+          %li
             = link_to current_user.first_name, vanity_path(current_user),:class => 'text core'
+
           %li
             = link_to image_tag(current_user.avatar_url(:inline)), vanity_path(current_user)
           %li.dropdown
@@ -31,7 +38,7 @@
               %li
                 = link_to 'Logout', destroy_user_session_path, :method => :delete
           %li
-            = render '/shared/notifications_panel'
+            = render '/shared/notifications_panel'  
 
 
         - else
