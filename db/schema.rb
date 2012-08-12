@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120810144552) do
+ActiveRecord::Schema.define(:version => 20120811225046) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -267,6 +267,31 @@ ActiveRecord::Schema.define(:version => 20120810144552) do
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
   add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "topications", :force => true do |t|
+    t.integer  "topic_id"
+    t.integer  "cube_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "topications", ["cube_id"], :name => "index_topications_on_cube_id"
+  add_index "topications", ["topic_id", "cube_id"], :name => "index_topications_on_topic_id_and_cube_id", :unique => true
+  add_index "topications", ["topic_id"], :name => "index_topications_on_topic_id"
+
+  create_table "topics", :force => true do |t|
+    t.string   "name",        :null => false
+    t.string   "slug"
+    t.text     "description"
+    t.string   "avatar"
+    t.integer  "creator_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "topics", ["avatar"], :name => "index_topics_on_avatar"
+  add_index "topics", ["name"], :name => "index_topics_on_name"
+  add_index "topics", ["slug"], :name => "index_topics_on_slug", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false

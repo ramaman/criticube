@@ -7,13 +7,6 @@
 
       = simple_form_for @cube, :url => cubes_path, :validate => true do |f|
         .control-group
-          = f.label 'Language', :class => 'control-label core'
-          .controls
-            / = select_tag(:language, options_for_select(LANGUAGES)) 
-            = f.select :language, LANGUAGES, :class => 'span6'
-          .help-block.minor
-            = "Other languages will soon be supported."
-        .control-group
           = f.label 'Name', :class => 'control-label core'
           .controls
             = f.text_field :name, :class => 'span6', :maxlength => '99'
@@ -27,6 +20,18 @@
                 = v.text_field :name, :class => 'prependedInput', :style => "width: 324px", :data => { :validate => true }
               .help-block.minor
                 = "3 to 24 characters, cannot contain special characters"
+        / .control-group
+        /   = f.label 'Topic', :class => 'control-label core'
+        /   .controls
+        /     = f.input :topic, :as => :select, :collection => Topic.all, :class => 'core', :label => false
+        .control-group
+          = f.label 'Language', :class => 'control-label core'
+          .controls
+            / = select_tag(:language, options_for_select(LANGUAGES)) 
+            = f.select :language, LANGUAGES, :class => 'span2'
+          .help-block.minor
+            = "Other languages will soon be supported."
+
         .control-group
           %b
             = 'Description'

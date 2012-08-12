@@ -9,7 +9,7 @@
     %ul.items.links.items-content
       - @featured_cubes.each do |cube|
         = render :partial => 'cubecard', :locals => {:cube => cube}
-      = paginate(@cubes)
+      / = paginate(@cubes)
 
   .clearfix
     %h2.page-header
@@ -19,4 +19,4 @@
     %ul.items.links.items-content
       - @cubes.each do |cube|
         = render :partial => 'cubecard', :locals => {:cube => cube}
-      = paginate(@cubes)
+      / = paginate(@cubes)

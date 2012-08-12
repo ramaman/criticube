@@ -1,0 +1,11 @@
+- provide :content do
+  
+  .page-header  
+    .row
+      .span1
+        = image_tag(@topic.avatar_url(:thumb), :class => 'right')
+      .span8
+        %h1
+          = @topic.name
+
+  

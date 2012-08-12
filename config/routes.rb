@@ -32,6 +32,9 @@ Criticube::Application.routes.draw do
 
   ## CUBES
   resources :cubes, :only => [:index, :new, :create]
+
+  ## TOPICS
+  resources :topics
   
   ## FOLLOWAGES  
   resources :followages, :only => [:create, :destroy]

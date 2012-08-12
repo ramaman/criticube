@@ -9,6 +9,8 @@ class Cube < ActiveRecord::Base
               :class_name => 'User',
               :foreign_key => 'creator_id'
 
+  belongs_to  :topic
+
   has_one   :vanity,
             :as => :owner,
             :dependent => :destroy
@@ -46,7 +48,7 @@ class Cube < ActiveRecord::Base
   has_many  :opinions,
             :as => :parent,
             :class_name => 'Post',
-            :conditions => {:tipe => 'opinion'}
+            :conditions => {:tipe => 'opinion'}            
             
   has_many  :primary_activity_objekts,
             :class_name => 'Activity',

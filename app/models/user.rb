@@ -82,7 +82,12 @@ class User < ActiveRecord::Base
   has_many  :created_replies,
             :class_name => 'Reply', 
             :foreign_key => 'creator_id', 
-            :dependent => :destroy            
+            :dependent => :destroy    
+            
+  has_many  :created_topics,
+            :class_name => 'Topic', 
+            :foreign_key => 'creator_id', 
+            :dependent => :nullify
             
   has_many  :activities,
             :class_name => 'Activity', 
