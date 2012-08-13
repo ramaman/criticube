@@ -36,7 +36,7 @@ Criticube::Application.routes.draw do
   resources :cubes, :only => [:index, :new, :create]
 
   ## TOPICS
-  resources :topics
+  resources :topics, :only => :show
   post '/topics/:id/follow' => 'followages#follow', :as => 'topic_follow'
   delete '/topics/:vanity_id/unfollow' => 'followages#unfollow', :as => 'topic_unfollow'  
   

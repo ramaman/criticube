@@ -12,7 +12,7 @@
 
       .page-header{:style => 'width: 770px;'}
         %h2
-          = 'Cubes'
+          = @header
           .right
             = link_to 'Create cube', new_cube_path, :class => 'btn btn-primary'
 
@@ -40,7 +40,7 @@
         %h3
           = 'Topics'
       %ul.items
-        - Topic.all.each do |topic|
+        - @topics.each do |topic|
           %li
             %h4
               = link_to topic.name, explore_topic_path(topic)

@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
   def old_show
     redirect_to vanity_path(params[:id])
-    respond_to :html
+    # respond_to :html
   end
 
   def show

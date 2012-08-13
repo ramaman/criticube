@@ -10,11 +10,12 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:id])
+    redirect_to explore_topic_path(@topic)
 
-    respond_to do |format|
-      format.html
-      # format.js { render :layout => false }
-    end
+    # respond_to do |format|
+    #   format.html
+    #   # format.js { render :layout => false }
+    # end
   end
 
 

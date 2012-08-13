@@ -30,18 +30,23 @@ class DashboardController < ApplicationController
 
   def explore
 
+    @topics = Topic.find(:all, :order => :name)
+
     if !params[:topic_id] || params[:topic_id] == 'all'
 
       @cubes = Cube.order('RANDOM()').page(params[:page]).per(25)
       @featured_cubes = Cube.featured.order("RANDOM()")
+      @header = 'All Cubes'
 
     elsif params[:topic_id] == 'latest'
     
       @cubes = Cube.order('created_at DESC').page(params[:page]).per(25)
+      @header = 'Latest Cubes'
 
     else
-      
+      topic = Topic.find(params[:topic_id])
       @cubes = Topic.find(params[:topic_id]).cubes.page(params[:page]).per(25)
+      @header = topic.name
 
     end
 
