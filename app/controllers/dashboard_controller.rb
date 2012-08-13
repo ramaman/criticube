@@ -30,7 +30,7 @@ class DashboardController < ApplicationController
 
   def explore
 
-    @topics = Topic.find(:all, :order => :name)
+    @topics = Topic.all
 
     if !params[:topic_id] || params[:topic_id] == 'all'
 

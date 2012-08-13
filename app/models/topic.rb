@@ -19,6 +19,8 @@ class Topic < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader 
 
+  default_scope order('name')
+
   def permalink
     Rails.application.routes.url_helpers.topic_path(self)
   end
