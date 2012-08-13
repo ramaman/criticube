@@ -29,8 +29,19 @@ class DashboardController < ApplicationController
   end
 
   def explore
-    @cubes = Cube.all
 
+    if !params[:topic_id] || params[:topic_id] == 'all'
+
+      @cubes = Cube.order('created_at DESC').page(params[:page]).per(25)
+      @featured_cubes = Cube.featured.order("RANDOM()")
+
+    elsif params[:topic_id] == 'latest'
+    
+    else
+      
+      @cubes = Topic.find(params[:topic_id]).cubes.page(params[:page]).per(25)
+
+    end
 
     if session[:signup]
       # IMPORTANT to fire analytics event 'signup' to kissmetrics

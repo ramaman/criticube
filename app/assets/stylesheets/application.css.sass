@@ -19,11 +19,9 @@ blockquote
     font-size: $basefont !important
 
 .cubecard
-  width: 150px
-  margin-right: 6.5px
-  min-height: 250px
-  height: auto
-  padding-bottom: 15px  
+  width: 150px !important
+  margin: 0px 5px 10px 0px
+  height: 200px  
 
 .cubethumb
   width: 200px
@@ -34,20 +32,23 @@ blockquote
   @include gradient-vertical($greySuperLight, $greyLighter)
   hr
     border-color: $greyLight
+  
   &:hover
+    img.cube
+      opacity: 0.7  
     .main
       @include gradient-vertical($greyLighter, $greyLight)    
     hr
       border-color: $greyLighter
       border-width: 1px
-    .meta
+    .info
       @include gradient-vertical(lighten($blue, 10%), lighten($blue, 5%))        
 
   .main
     border: 1px solid $greyLight
     padding: 20px 24px 23px 24px
 
-  .meta
+  .info
     padding: 10px 0px 10px 0px
     padding: 10px 24px 10px 24px
     border: 1px solid $blue

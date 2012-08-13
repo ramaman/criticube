@@ -1,0 +1,10 @@
+%a{:href => vanity_path(cube)}
+  %li.cubethumb.span2
+    .main
+      = image_tag(cube.avatar_url, :class => 'cube')
+    .info
+      .clearfix.big-text
+        = link_to(short_string(cube.name, 17), vanity_path(cube))
+      .clearfix.minor
+        %span.follow_link_panel{:data => {"id" => cube.id, "tipe" => cube.class.to_s }}
+          = follow_link(cube)

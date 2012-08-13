@@ -33,7 +33,10 @@
         .control-group
           = f.label 'Topic', :class => 'control-label core'
           .controls
-            = f.input :topic, :as => :select, :collection => Topic.all, :class => 'core', :label => false, :selected => @cube.topic.id
+            - if @cube.topic
+              = f.input :topic, :as => :select, :collection => Topic.all, :class => 'core', :label => false, :selected => @cube.topic.id
+            - else  
+              = f.input :topic, :as => :select, :collection => Topic.all, :class => 'core', :label => false
 
         .control-group
           = f.submit "Update", :class => 'btn btn-large btn-primary'
