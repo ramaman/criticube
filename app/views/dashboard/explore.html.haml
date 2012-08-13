@@ -13,13 +13,15 @@
       .page-header{:style => 'width: 770px;'}
         %h2
           = 'Cubes'
+          .right
+            = link_to 'Create cube', new_cube_path, :class => 'btn btn-primary'
 
       .clearfix
         %ul.cubes.items
           - @cubes.each do |cube|
             = render :partial => '/cubes/cubecard', :locals => {:cube => cube}
       = paginate @cubes
-      
+
     .span2
       .page-header
         %h3 
