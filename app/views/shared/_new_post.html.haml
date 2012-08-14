@@ -2,8 +2,9 @@
   %p.hidden-panel
     %span.core
       = "Post a new #{Post.context_tipe}"
-    %span.minor.right
-      = "Please use #{parent.language}"
+    - if parent.in_english?
+      %span.minor.right
+        = "Please use #{parent.language}"
   = simple_form_for Post.new, :url => vanity_posts_path(parent), :html => {:class => 'form-vertical', :style => "margin-bottom:0px"} do |f|
     = f.hidden_field :tipe, :value => 'opinion'
     = f.hidden_field :parent_id, :value => parent.id

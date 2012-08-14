@@ -134,6 +134,10 @@ class Cube < ActiveRecord::Base
     Rails.application.routes.url_helpers.vanity_unfollow_path(self)
   end
 
+  def in_english?
+    (self.language == 'English') ? true : false
+  end
+
   def tipe_name
     'a cube'
   end

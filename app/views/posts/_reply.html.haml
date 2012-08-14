@@ -52,8 +52,9 @@
                           = link_to("#{reply.creator.name}", reply.dynamic_permalink)
                       %p.minor
                         = "Be friendly and respectful to other people."
-                        %span.right
-                          = "Please use #{@post.parent.language}"  
+                        - if @post.parent.in_english?
+                          %span.right
+                            = "Please use #{@post.parent.language}"  
 
                       .control-group
                         .controls
