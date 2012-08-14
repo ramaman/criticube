@@ -29,6 +29,8 @@
       = paginate @cubes
 
     .span2
+      .div{:style => 'padding-top: 10px'}
+        = link_to 'Create cube', new_cube_path, :class => 'btn btn-large core', :style => 'width: 110px;'
       .page-header
         %h3 
           = 'Explore'
