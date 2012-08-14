@@ -4,13 +4,11 @@ $ ->
   if (window.location.hash == "#_=_")
     window.location.hash = "";
 
-RecaptchaOptions =
-  theme : 'clean'
 
 $ -> 
   # Open external links on a new tab
 
-  $("a").each ->
+  $("a").not('#recaptcha_reload_btn').each ->
     a = new RegExp("/" + window.location.host + "/")
     unless a.test(@href)
       $(this).live 'click', (event) ->
