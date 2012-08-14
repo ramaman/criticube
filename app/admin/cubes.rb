@@ -15,6 +15,7 @@ ActiveAdmin.register Cube do
       @cube = Cube.find(params[:id])
       @cube.featured = params[:cube][:featured]
       @cube.official = params[:cube][:official]
+      @cube.language = params[:cube][:language]
       @cube.save
       redirect_to :action => 'show'
     end
@@ -44,6 +45,7 @@ ActiveAdmin.register Cube do
     f.inputs "Details" do
       f.input :featured
       f.input :official
+      f.input :language
     end
     f.buttons
   end

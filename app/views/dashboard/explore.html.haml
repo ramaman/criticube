@@ -11,10 +11,16 @@
               = render :partial => '/cubes/cubecard', :locals => {:cube => cube}
 
       .page-header{:style => 'width: 770px;'}
-        %h2
-          = @header
-          .right
-            = link_to 'Create cube', new_cube_path, :class => 'btn btn-primary'
+        .row
+          .span7
+            %h2
+              = @header
+          / .big-text.right
+          /   .dropdown{:style => 'padding-top: 10px;'}
+          /     %a.dropdown-toggle{:href => '#', 'data-toggle' => 'dropdown'}
+          /       %span.dropdown.open
+          /         = 'Language'
+          /         %span.caret.navbar-caret    
 
       .clearfix
         %ul.cubes.items

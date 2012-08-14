@@ -5,7 +5,9 @@ Criticube::Application.routes.draw do
   root :to => 'dashboard#home'
   get '/feed' => 'dashboard#feed', :as => 'dashboard_feed'
   get '/explore' => 'dashboard#explore', :as => 'explore'
+  get '/explore/l/:language' => 'dashboard#explore', :as => 'explore_language'
   get '/explore/:topic_id' => 'dashboard#explore', :as => 'explore_topic'
+  get '/explore/:topic_id/l/:language' => 'dashboard#explore', :as => 'explore_topic_language'
     
   ## USERS
   devise_for :users, :path_names => {

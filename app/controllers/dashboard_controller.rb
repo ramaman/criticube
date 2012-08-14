@@ -32,21 +32,30 @@ class DashboardController < ApplicationController
 
     @topics = Topic.all
 
+    if params[:language]
+      language_request = params[:language].capitalize
+    else
+      language_request = 'English'
+    end
+
     if !params[:topic_id] || params[:topic_id] == 'all'
 
-      @cubes = Cube.order('RANDOM()').page(params[:page]).per(25)
+      @cubes = Cube.where{language == language_request}.order('RANDOM()').page(params[:page]).per(25)
       @featured_cubes = Cube.featured.order("RANDOM()")
       @header = 'All Cubes'
+      # @language_filter_url = explore_topic_language_path('latest',language_request)
 
     elsif params[:topic_id] == 'latest'
     
-      @cubes = Cube.order('created_at DESC').page(params[:page]).per(25)
+      @cubes = Cube.where{language == language_request}.order('created_at DESC').page(params[:page]).per(25)
       @header = 'Latest Cubes'
+      # @language_filter_url = explore_topic_language_path('latest',language_request)
 
     else
       topic = Topic.find(params[:topic_id])
       @cubes = Topic.find(params[:topic_id]).cubes.page(params[:page]).per(25)
       @header = topic.name
+      # @language_filter_url = explore_topic_language_path(topic, language_request)
 
     end
 
