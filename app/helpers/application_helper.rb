@@ -20,7 +20,7 @@ module ApplicationHelper
 
   def description
     if @description.nil?
-      'Criticube lets you share, discover, and discuss opinions'
+      'Criticube helps you collect, share, and discuss your ideas and thoughts. Put them in personalized cubes and share, collaborate with others'
     else
       short_string(@description, 500)
     end
