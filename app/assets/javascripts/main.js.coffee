@@ -8,7 +8,7 @@ $ ->
 $ -> 
   # Open external links on a new tab
 
-  $("a").not('#recaptcha_reload_btn').each ->
+  $("a").not('#recaptcha_reload_btn, #recaptcha_switch_audio_btn, #recaptcha_whatsthis_btn').each ->
     a = new RegExp("/" + window.location.host + "/")
     unless a.test(@href)
       $(this).live 'click', (event) ->
