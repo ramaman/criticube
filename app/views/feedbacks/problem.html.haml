@@ -1,0 +1,16 @@
+-provide :content do
+  .row
+    .span7
+      .page-header
+        %h3
+          = 'Sorry for the problem, we will get it fixed ASAP!'
+      = form_for @feedback, :html => {:class => ['form-stacked', 'no_padding']} do |f|
+        = f.hidden_field :tipe, :value => 'Problem'
+        - if !user_signed_in?  
+          %p.big-text
+            = f.email_field :email, :placeholder => 'Email', :class => ['span7']  
+        %p.big-text
+          = f.text_area :content, :class => ['span7', 'medium', 'autoresize'], :placeholder => 'Problem'
+        %p
+          = f.submit "Send", :class => 'btn btn-large btn-primary core'
+          = link_to 'Cancel', root_path, :class => 'btn btn-large'       

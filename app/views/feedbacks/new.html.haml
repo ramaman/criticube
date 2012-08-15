@@ -9,6 +9,9 @@
           = f.select :tipe, options_for_select([["Idea", "Idea"],['Problem', 'Problem'], ['Question','Question'], ['Comment','Comment'], ['Miscellaneous','Miscellaneous']]), :class => 'span10'
         %p.big-text
           = f.text_area :content, :class => ['span7', 'medium', 'autoresize'], :placeholder => 'Description'
+        - if !user_signed_in?  
+          %p.big-text
+            = f.email_field :email, :placeholder => 'Email', :class => ['span7']           
         %p
           = f.submit "Send", :class => 'btn btn-large btn-primary core'
           = link_to 'Cancel', root_path, :class => 'btn btn-large'       

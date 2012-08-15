@@ -54,7 +54,8 @@ Criticube::Application.routes.draw do
   post '/search', :as => 'search', :to => 'search#main'  
 
   ## FEEDBACK
-  resources :feedbacks, :only => [:new, :create]
+  resources :feedbacks, :only => [:new, :create], :path => '/feedback'
+  get '/feedback/problem', :to => 'feedbacks#problem', :as => 'feedback_problem'
 
   # Vanity level 1 and 2 are without named REST routing, but not after that (e.g. /replies/:id)
 

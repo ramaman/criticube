@@ -40,7 +40,6 @@
           %li
             = render '/shared/notifications_panel'  
 
-
         - else
 
           %li
@@ -49,13 +48,13 @@
             = link_to 'Login', new_user_session_path, :class => 'text core'
           %li
             = link_to 'Signup', new_user_registration_path, :class => 'text core'
+
   .right.minor
     = 'beta'            
 
-.navbar-search-ext
-  .container
-    .row
-      .span6.offset1
-        %ul.items#main-search-results    
-          %li
-            ='sklancla'
+/ .navbar-search-ext
+/   .container
+/     .row
+/       .span6.offset1
+/         %ul.items#main-search-results    
+/           %li

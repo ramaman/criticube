@@ -56,7 +56,7 @@ ActiveAdmin::Dashboards.build do
   section "Recent Feedbacks", :priority => 3 do
     ul do
       Feedback.order('created_at DESC').limit(5).collect do |feedback|
-        li link_to("#{feedback.creator.fast_name} - #{short_string(feedback.content, 100)}", admin_feedback_path(feedback))
+        li link_to("#{feedback.creator ? feedback.creator.fast_name : 'Anonymous' } - #{short_string(feedback.content, 100)}", admin_feedback_path(feedback))
       end
     end
   end

@@ -14,15 +14,16 @@
         .span6.offset1
           = paginate @activities  
 
-  .span4.offset1  
-
-    %h3
-      = 'Followed Cubes'
-
     %hr.slim
 
+  .span4.offset1
+     
+    %h3
+      = 'Followed Cubes'
+    %hr.slim  
+    
     %ul.items.cubes
-      - current_user.cubes_to_check.each do |cube|
+      - current_user.cubes_to_check.order('name ASC').each do |cube|
         %li
           %p
             = image_tag(cube.avatar_url(:inline))

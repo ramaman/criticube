@@ -1,7 +1,5 @@
 class FeedbacksController < ApplicationController
 
-  before_filter :authenticate_user!
-
   def new
     @feedback = Feedback.new
 
@@ -10,14 +8,24 @@ class FeedbacksController < ApplicationController
     end
   end
 
+  def problem
+    @feedback = Feedback.new
+
+    respond_to do |format|
+      format.html
+    end  
+  end  
+
   def create
     @feedback = Feedback.new(params[:feedback])
-    @feedback.creator = current_user
+    if current_user
+      @feedback.creator = current_user
+    end
     @feedback.save
 
     respond_to do |format|
       if @feedback.save
-        flash[:notice] = 'Your feedback has been sent'        
+        flash[:notice] = 'Thank you!'        
         format.html{redirect_to root_path}
       else
         flash[:notice] = "Error sending your feedback"        
