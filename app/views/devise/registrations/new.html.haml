@@ -43,9 +43,9 @@
           = f.label 'Please prove that you are human'
           .controls
             - if Rails.env.development?
-              = recaptcha_tags(:display => {'theme' => 'white'})
+              = recaptcha_tags(:display => {'theme' => 'white'}, :ajax => true)
             - else
-              = recaptcha_tags(:display => {'theme' => 'white'}, :ssl => true)
+              = recaptcha_tags(:display => {'theme' => 'white'}, :ajax => true, :ssl => true)
         %br/      
         .control-group
           = f.submit "Create account", :class => ['btn', 'btn-large', 'btn-success', 'core']
