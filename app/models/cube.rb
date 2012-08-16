@@ -74,7 +74,7 @@ class Cube < ActiveRecord::Base
                   :language,
                   :vanity,
                   :vanity_attributes,
-                  :avatar                  
+                  :avatar
 
   validates :name,
             :presence => :true,
