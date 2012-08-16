@@ -65,6 +65,7 @@ GEM
     activesupport (3.2.5)
       i18n (~> 0.6)
       multi_json (~> 1.0)
+    addressable (2.3.2)
     arel (3.0.2)
     auto_html (1.5.3)
       redcarpet (~> 2.0.0)
@@ -300,6 +301,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin (~> 0.4.4)
   activerecord-reputation-system (~> 1.3.0)
+  addressable (~> 2.3.2)
   ancestry (~> 2.0.0)!
   auto_html (~> 1.5.3)
   bootstrap-sass (~> 2.0.4.0)

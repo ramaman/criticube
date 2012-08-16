@@ -62,6 +62,7 @@ gem "delayed_kiss", "~> 0.2.0", :git => 'git://github.com/ddeyoung/delayed_kiss.
 # General external request
 gem "httparty", "~> 0.8.3"
 gem "twitter", "~> 3.6.0"
+gem "addressable", "~> 2.3.2"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
