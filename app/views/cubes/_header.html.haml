@@ -41,5 +41,6 @@
 
             %span.follow_panel{:data => {"id" => cube.id, "tipe" => cube.class.to_s }}
               = follow_button(cube)   
-          .clearfix
-            = render :partial => '/shared/share_panel'                        
+          - unless (sub_page == true rescue nil)
+            .clearfix
+              = render :partial => '/shared/share_panel'                        
