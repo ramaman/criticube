@@ -23,7 +23,7 @@ class CubesController < ApplicationController
     @posts = @cube.posts.order('created_at DESC').page(params[:page]).per(25)
     @activities = @cube.feed.limit(10)
     @title = @cube.name
-    @special_image = @cube.avatar_url
+    @special_image = avatar_permalink(@cube)
     @km_event = 'On Cube'
 
     @km_custom = Analytics.km_on_cube(current_user, @cube) if user_signed_in?

@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     @activities = @user.feed.limit(5)
     @posts = @user.created_posts.limit(8)
     @title = @user.name
-    @special_image = @user.avatar_url
+    @special_image = avatar_permalink(@user)
 
     @km_custom = Analytics.km_on_user(current_user, @user) if user_signed_in?
 

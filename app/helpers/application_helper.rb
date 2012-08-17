@@ -99,5 +99,13 @@ module ApplicationHelper
     end
   end
 
+  def avatar_permalink(object)
+    if Rails.env.production? || Rails.env.staging? 
+      object.avatar.file ? object.avatar_url : request.protocol + request.host + '/assets/' + object.avatar_url 
+    else
+      object.avatar_url  
+    end
+  end  
+
 
 end
