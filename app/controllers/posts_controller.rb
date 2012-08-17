@@ -44,6 +44,7 @@ class PostsController < ApplicationController
     @post = @parent.posts.find(params[:id])
     @title = @post.headline
     @special_image = avatar_permalink(@parent)
+    @description = @post.description
 
     @km_custom = Analytics.km_on_post(current_user, @post) if user_signed_in?    
       

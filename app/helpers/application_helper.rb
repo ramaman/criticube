@@ -19,7 +19,7 @@ module ApplicationHelper
   end
 
   def description
-    if @description.nil?
+    if @description.nil? || @description.blank?
       'Criticube helps you collect, share, and discuss your ideas and thoughts.'
     else
       short_string(@description, 500)
