@@ -1,5 +1,6 @@
 .div{:style => 'margin-top: 10px;'}
   %p
-    %fb:like{:layout => "button_count", :show_faces => "true", :width => "75"}
+    %fb:like{:layout => "button_count", :width => "75", :send => 'false', :show_faces => 'false', :font => ''}
+
   %p
     %a.twitter-share-button{"data-count" => "horizontal", "data-via" => "criticube", :href => "http://twitter.com/intent/tweet", "data-text" => tweet, "data-url" => current_full_url}
