@@ -80,7 +80,9 @@ class CubesController < ApplicationController
 
   def update
     @cube.update_attributes(cube_params)
-    @cube.topic_id = params[:cube][:topic]    
+    if params[:cube][:topic]
+      @cube.topic_id = params[:cube][:topic]
+    end
     respond_to do |format|
       if @cube.save
         flash[:notice] = 'Cube has been successfully updated'
