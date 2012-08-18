@@ -138,9 +138,17 @@ class Post < ActiveRecord::Base
       self[:content].gsub(/<p>[\s$]*<\/p>/, '')
       self[:content].gsub! /(&nbsp;|\s)+/, ' '
       self[:content] = Sanitize.clean( self[:content], 
-          :elements => %w(a abbr b blockquote cite dd dfn dl dt em i kbd li mark ol p pre q s samp small strike strong sub sup time u ul var),
-          :attributes => {'a' => ['href', 'title'], 'span' => ['class']},
-          :protocols => {'a' => {'href' => ['http', 'https', 'mailto']}}
+          :elements => %w(a abbr b br blockquote cite dd dfn dl dt em i img kbd li mark ol p pre q s samp small strike strong sub sup time u ul var),
+          :attributes => {
+            'a' => ['href', 'title'], 
+            'span' => ['class'], 
+            'blockquote' => ['cite'], 
+            'img' => ['alt', 'src', 'title']
+            },
+          :protocols => {
+            'a' => {'href' => ['http', 'https', 'mailto']}, 
+            'img' => {'src'  => ['http', 'https']}
+            }
           )
     end
   end  
