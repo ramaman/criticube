@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     @user.update_attributes(user_params)
     respond_to do |format|
       if @user.save
-        flash[:notice] = 'Your profile has been successfully updated'
+        flash[:notice] = 'Update successful'
         format.html {redirect_to vanity_path(@user)}
       else
         format.html {redirect_to @user.permalink}
@@ -51,7 +51,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params[:user].slice(:first_name, :last_name, :bio, :avatar)
+    params[:user].slice(:first_name, :last_name, :bio, :avatar, :subscribe_messages, :subscribe_follow_self)
   end
 
   def user

@@ -139,7 +139,8 @@ class User < ActiveRecord::Base
                   :vanity,
                   :vanity_attributes,
                   :avatar,
-                  :subscribe_messages
+                  :subscribe_messages,
+                  :subscribe_follow_self
 
   validates :email,
             :presence => { :message => "Please enter your email address" },

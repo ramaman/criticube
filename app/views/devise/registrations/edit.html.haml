@@ -12,7 +12,7 @@
         .page-header
           %h4
             Email me when:
-        = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
+        = simple_form_for @user, :url => vanity_path(@user), :method => :put do |f|
           .control-group
             = f.check_box :subscribe_messages 
             %nbsp/  
