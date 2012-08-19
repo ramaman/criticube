@@ -57,10 +57,11 @@ class Activity < ActiveRecord::Base
   end
 
   def check_duplicates
-    Activity.where{
-      (action == self.action) & (actor_id == self.actor_id) &
-      (primary_objekt_type == self.primary_objekt_type) &
-      (primary_objekt_id == self.primary_objekt_id)
+    Activity.where{ |a|
+      (a.id != self.id) & 
+      (a.action == self.action) & (a.actor_id == self.actor_id) &
+      (a.primary_objekt_type == self.primary_objekt_type) &
+      (a.primary_objekt_id == self.primary_objekt_id)
     }
   end
   
@@ -70,20 +71,19 @@ class Activity < ActiveRecord::Base
 
     # Add followers of Actor    
     # subscriber_ids += self.actor.reverse_followages.collect{|f| f.follower_id}
-    if self.action == 'follow'
+    if (self.action == 'followed') && (self.check_duplicates.length == 0)
       # Add followed user to subscriber
-      if self.check_duplicates.length == 0
-        if self.primary_objekt_type == 'User'
-          subscriber_ids << self.primary_objekt_id
-        elsif self.primary_objekt_type == 'Cube'
-          subscriber_ids += self.roles.collect{|r| r.owner_id}  
-        elsif self.primary_objekt_type == 'Post'
-          subscriber_ids << self.creator_id
-        end  
+      if self.primary_objekt_type == 'User'
+        subscriber_ids << self.primary_objekt_id
+      elsif self.primary_objekt_type == 'Cube'
+        subscriber_ids += self.roles.collect{|r| r.owner_id}  
+      elsif self.primary_objekt_type == 'Post'
+        subscriber_ids << self.primary_objekt.creator_id
       end
     end
        
-    if secondary = self.secondary_objekt
+    if self.secondary_objekt
+      secondary = self.secondary_objekt
       # Add followers of Cube or Post
       if (secondary.class == Cube) || (secondary.class == Post)
         secondary.reverse_followages.collect{|f| f.follower_id}
@@ -99,6 +99,8 @@ class Activity < ActiveRecord::Base
       n.activity_id = self.id
       n.save
     end
+
+    # return subscriber_ids
 
   end
 

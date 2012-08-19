@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120815003444) do
+ActiveRecord::Schema.define(:version => 20120819001507) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -166,6 +166,19 @@ ActiveRecord::Schema.define(:version => 20120815003444) do
   add_index "notifications", ["user_id", "read"], :name => "index_notifications_on_user_id_and_read"
   add_index "notifications", ["user_id"], :name => "index_notifications_on_user_id"
 
+  create_table "pictures", :force => true do |t|
+    t.integer  "owner_type"
+    t.integer  "owner_id"
+    t.integer  "creator_id"
+    t.string   "image"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "pictures", ["creator_id"], :name => "index_pictures_on_creator_id"
+  add_index "pictures", ["owner_type", "owner_id"], :name => "index_pictures_on_owner_type_and_owner_id"
+
   create_table "posts", :force => true do |t|
     t.string   "headline",    :null => false
     t.text     "content"
@@ -311,6 +324,7 @@ ActiveRecord::Schema.define(:version => 20120815003444) do
     t.boolean  "subscribe_messages",     :default => true
     t.integer  "unread_messages_count",  :default => 0
     t.boolean  "cc_team",                :default => false
+    t.boolean  "subscribe_follow_self",  :default => true
   end
 
   add_index "users", ["admin"], :name => "index_users_on_admin"
@@ -322,6 +336,7 @@ ActiveRecord::Schema.define(:version => 20120815003444) do
   add_index "users", ["middle_names"], :name => "index_users_on_middle_names"
   add_index "users", ["page_name"], :name => "index_users_on_page_name", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["subscribe_follow_self"], :name => "index_users_on_subscribe_follow_self"
   add_index "users", ["super_admin"], :name => "index_users_on_super_admin"
 
   create_table "vanities", :force => true do |t|

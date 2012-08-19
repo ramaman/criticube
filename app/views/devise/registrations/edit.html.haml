@@ -18,6 +18,10 @@
             %nbsp/  
             = 'Someone sends me a private message'
           .control-group
+            = f.check_box :subscribe_follow_self 
+            %nbsp/  
+            = 'Someone follows me'            
+          .control-group
             %br/
             = f.submit "Update", :class => 'btn btn-primary'                     
 

@@ -9,9 +9,12 @@
             = link_to notification.activity.actor.fast_name, vanity_path(notification.activity.actor) 
             = notification.activity.action_story
             - if (notification.activity.primary_objekt.class == Cube) || (notification.activity.primary_objekt.class == User)
-              = link_to notification.activity.primary_objekt.name, vanity_path(notification.activity.primary_objekt)
+              - if notification.activity.primary_objekt == current_user
+                = link_to 'you', vanity_path(notification.activity.primary_objekt)
+              - else
+                = link_to notification.activity.primary_objekt.name, vanity_path(notification.activity.primary_objekt)
             - elsif notification.activity.primary_objekt.class == Post
-              = link_to notification.activity.primary_objekt.name, vanity_post_path(notification.activity.secondary_objekt, notification.activity.primary_objekt)
+              = link_to notification.activity.primary_objekt.name, vanity_post_path(notification.activity.primary_objekt.parent, notification.activity.primary_objekt)
             - elsif notification.activity.primary_objekt.class == Reply  
               = link_to notification.activity.primary_objekt.name, vanity_post_path(notification.activity.tertiary_objekt, notification.activity.secondary_objekt)
 
