@@ -5,7 +5,7 @@ class Notifier < ActionMailer::Base
     @notification = notification
     mail(
       :to => @notification.user.email, 
-      :subject => "#{@nnotification.user.first_name}, you have a new follower on Criticube"
+      :subject => "#{@notification.user.first_name}, you have a new follower on Criticube"
       )
   end
 

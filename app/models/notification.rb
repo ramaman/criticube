@@ -30,7 +30,7 @@ class Notification < ActiveRecord::Base
   def send_email
     if self.activity.action == 'followed'
       if (self.activity.primary_objekt_type == 'User') && (self.activity.primary_objekt.subscribe_follow_self == true)
-        ActionMailer::Base::Notifier.inform_follow_user(self)
+        ActionMailer::Base::Notifier.delay.inform_follow_user(self)
       end 
     end
   end

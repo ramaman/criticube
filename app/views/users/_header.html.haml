@@ -2,7 +2,7 @@
   .row
     .span2
       = image_tag(user.avatar_url)
-    .span7
+    .span6
       %h1
         %p
           - if (sub_page == true rescue nil)
@@ -33,14 +33,13 @@
           = 'Followed by '
           = link_to(pluralize(user.followers.count , 'user'), vanity_followers_path(user))
           
-    .span3
-      .right
-        %p
-          - if user_signed_in? && (user == current_user)
-            = link_to 'Edit profile', edit_vanity_path(user), :class => 'btn'
-          - else
-            - if user_signed_in?
-              %a{:class => 'btn dropdown-toggle', :href => conversation_path(user)}
-                %i.icon-envelope          
-            %span.follow_panel{:data => {"id" => user.id, "tipe" => user.class.to_s }}
-              = follow_button(user)   
+    .span3.offset1
+      %p
+        - if user_signed_in? && (user == current_user)
+          = link_to 'Edit profile', edit_vanity_path(user), :class => 'btn'
+        - else
+          - if user_signed_in?
+            %a{:class => 'btn dropdown-toggle', :href => conversation_path(user)}
+              %i.icon-envelope          
+          %span.follow_panel{:data => {"id" => user.id, "tipe" => user.class.to_s }}
+            = follow_button(user)   
