@@ -1,0 +1,10 @@
+= "Hi #{@notification.user.first_name},"
+%br
+
+  %p
+    = "#{@notification.activity.actor.fast_name} followed you on Criticube" 
+
+  %p
+    = link_to("Click to learn more about #{@notification.activity.actor.fast_name}", "http://criticube.com" + vanity_path(@notification.activity.actor))
+
+= render :partial => 'mail_footer', :locals => {:recipient => @notification.user}

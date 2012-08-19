@@ -14,7 +14,7 @@ class Notification < ActiveRecord::Base
     a.read == false
   }  
 
-  after_save :update_notification_count  
+  after_save :update_notification_count, :send_email
 
   def mark_as_read
     self.read = true
@@ -26,5 +26,15 @@ class Notification < ActiveRecord::Base
     u.notifications_count = u.notifications.where{ read == false }.count
     u.save
   end
+
+  def send_email
+    if self.activity.action == 'followed'
+      if (self.activity.primary_objekt_type == 'User') && (self.activity.primary_objekt.subscribe_follow_self == true)
+        ActionMailer::Base::Notifier.inform_follow_user(self)
+      end 
+    end
+  end
+
+  handle_asynchronously :send_email
 
 end
