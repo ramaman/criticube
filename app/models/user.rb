@@ -294,6 +294,7 @@ class User < ActiveRecord::Base
     if voted.creator != self
       if direction == 'up'
         voted.add_or_update_evaluation(:votes, 1, self)
+        self.record_like(voted)
       elsif direction == 'down'
         voted.add_or_update_evaluation(:votes, -1, self)
       end
@@ -503,6 +504,22 @@ class User < ActiveRecord::Base
   end
    
   # handle_asynchronously :record_create
+
+  def record_like(primary_objekt)
+    existing_activity = Activity.where{ |a|
+      (a.actor_id == self.id) & (a.action == 'liked') & 
+      (a.primary_objekt_id == primary_objekt.id) & 
+      (a.primary_objekt_type == primary_objekt.class.to_s)
+    }
+    if existing_activity.length > 0
+      existing_activity.each {|a| a.set_as_archived}
+    end
+    Activity.create(
+      :actor => self,
+      :action => 'liked',
+      :primary_objekt => primary_objekt
+    )    
+  end
 
   def automake_vanity
     if self.persisted? == false

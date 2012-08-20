@@ -1,4 +1,4 @@
-- if !user_signed_in? || (user_signed_in? && (objekt != current_user))
+- if (!user_signed_in? || (user_signed_in? && (objekt != current_user))) && objekt.class != Reply
   %span.follow_link_panel{:data => {"id" => objekt.id, "tipe" => objekt.class.to_s }}
     = follow_link(objekt)
   = " • "

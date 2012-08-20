@@ -16,7 +16,7 @@
             - elsif notification.activity.primary_objekt.class == Post
               = link_to notification.activity.primary_objekt.name, vanity_post_path(notification.activity.primary_objekt.parent, notification.activity.primary_objekt)
             - elsif notification.activity.primary_objekt.class == Reply  
-              = link_to notification.activity.primary_objekt.name, vanity_post_path(notification.activity.tertiary_objekt, notification.activity.secondary_objekt)
+              = link_to notification.activity.primary_objekt.name, vanity_post_path(notification.activity.primary_objekt.container.parent, notification.activity.primary_objekt.container)
 
           %p.minor
             = friendly_datetime(notification.activity.created_at)

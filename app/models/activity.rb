@@ -1,6 +1,6 @@
 class Activity < ActiveRecord::Base
   
-  actions = ['followed', 'created', 'updated', 'like']
+  actions = ['followed', 'created', 'updated', 'liked']
 
   attr_accessible :actor,
                   :actor_id,
@@ -71,13 +71,13 @@ class Activity < ActiveRecord::Base
 
     # Add followers of Actor    
     # subscriber_ids += self.actor.reverse_followages.collect{|f| f.follower_id}
-    if (self.action == 'followed') && (self.check_duplicates.length == 0)
+    if ((self.action == 'followed') || (self.action == 'liked')) && (self.check_duplicates.length == 0)
       # Add followed user to subscriber
       if self.primary_objekt_type == 'User'
         subscriber_ids << self.primary_objekt_id
       elsif self.primary_objekt_type == 'Cube'
         subscriber_ids += self.roles.collect{|r| r.owner_id}  
-      elsif self.primary_objekt_type == 'Post'
+      elsif (self.primary_objekt_type == 'Post') || self.primary_objekt_type == 'Reply'
         subscriber_ids << self.primary_objekt.creator_id
       end
     end
