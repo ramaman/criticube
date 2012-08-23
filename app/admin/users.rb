@@ -34,6 +34,17 @@ ActiveAdmin.register User do
     end
   end
 
+  member_action :lead, :method => :put do
+    user = User.find(params[:id])
+    user.lead = current_user
+    user.save
+    redirect_to :action => 'show'
+  end
+  
+  action_item :only => :show do
+    link_to('Lead contact', lead_admin_user_path(user), :method => :put)
+  end
+
   index do
     id_column
     column :first_name
@@ -49,6 +60,7 @@ ActiveAdmin.register User do
       attributes_table_for user do
         row("Name") { link_to(user.name, vanity_path(user)) }
         row("Banned") { user.banned }
+        row("lead") { link_to(user.lead.name, vanity_path(user.lead)) if user.lead }
         row("Email") { user.email } if current_user.super_admin?
         row("Current sign in at") { user.current_sign_in_at }
         row("Last sign in at") { user.last_sign_in_at }
@@ -72,6 +84,7 @@ ActiveAdmin.register User do
     f.inputs "Details" do
       f.input :banned
       f.input :admin
+      f.input :lead, :as => :select, :collection => User.where{cc_team == true}
     end
     f.buttons
   end

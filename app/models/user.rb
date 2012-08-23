@@ -13,6 +13,15 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable
 
+  belongs_to  :lead,
+              :foreign_key => 'lead_id',
+              :class_name => 'User'
+
+  has_many  :leads,
+            :foreign_key => 'lead_id',
+            :class_name => 'User',
+            :dependent => :nullify            
+
   has_one   :vanity, 
             :as => :owner, 
             :dependent => :destroy

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120819001507) do
+ActiveRecord::Schema.define(:version => 20120822173338) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -325,6 +325,7 @@ ActiveRecord::Schema.define(:version => 20120819001507) do
     t.integer  "unread_messages_count",  :default => 0
     t.boolean  "cc_team",                :default => false
     t.boolean  "subscribe_follow_self",  :default => true
+    t.integer  "lead_id"
   end
 
   add_index "users", ["admin"], :name => "index_users_on_admin"
@@ -333,6 +334,7 @@ ActiveRecord::Schema.define(:version => 20120819001507) do
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["first_name"], :name => "index_users_on_first_name"
   add_index "users", ["last_name"], :name => "index_users_on_last_name"
+  add_index "users", ["lead_id"], :name => "index_users_on_lead_id"
   add_index "users", ["middle_names"], :name => "index_users_on_middle_names"
   add_index "users", ["page_name"], :name => "index_users_on_page_name", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
