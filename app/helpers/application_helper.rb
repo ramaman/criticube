@@ -49,27 +49,27 @@ module ApplicationHelper
   end
 
   def friendly_datetime_fixed(time)
-    time.strftime('%B %d, %Y at %l:%M %p')
+    time.localtime.strftime('%B %d, %Y at %l:%M %p')
   end
   
   def friendly_date(time)
-    time.strftime('%B %d, %Y')
+    time.localtime.strftime('%B %d, %Y')
   end
 
   def friendly_datetime(time)
-    if time.to_datetime > 48.hours.ago
-      return time.strftime('%l:%M %p') 
+    if time.localtime.to_datetime > 48.hours.ago
+      return time.localtime.strftime('%l:%M %p') 
     else
-      return time.strftime('%B %d, %Y')
+      return time.localtime.strftime('%B %d, %Y')
     end
   end
 
   def monthyear(time)
-    time.strftime('%b %Y')
+    time.localtime.strftime('%b %Y')
   end
 
   def year(time)
-    time.strftime('%Y')
+    time.localtime.strftime('%Y')
   end
 
   def keywords_array
