@@ -21,10 +21,14 @@ class PostsController < ApplicationController
 
   def create
     @parent = params[:post][:parent_type].constantize.find(params[:post][:parent_id])
-    @post = Post.new(new_post_params)
-    @post.parent = @parent
-    @post.creator = current_user
-    @post.save
+    
+    if @parent.managers.include?(current_user)
+      @post = Post.new(new_post_params)
+      @post.parent = @parent
+      @post.creator = current_user
+      @post.save
+    end  
+
     if @post.save
       current_user.follow!(@post)
       current_user.record_create(@post)

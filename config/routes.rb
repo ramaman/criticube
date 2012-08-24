@@ -37,6 +37,9 @@ Criticube::Application.routes.draw do
   ## CUBES
   resources :cubes, :only => [:index, :new, :create]
 
+  ## POSTS
+  resources :posts, :only => [:create]
+
   ## TOPICS
   resources :topics, :only => :show
   post '/topics/:id/follow' => 'followages#follow', :as => 'topic_follow'

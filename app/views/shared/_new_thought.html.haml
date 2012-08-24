@@ -1,0 +1,39 @@
+.row
+  .span1
+    = link_to image_tag(current_user.avatar_url(:thumb)), vanity_path(current_user), :class => 'right'
+  - if current_user.managed_cubes.count > 0
+    .span6
+      #new_post.well.expanding-form-area{:style => 'padding-bottom: 11px;' }
+        %p.hidden-panel
+          %span.core
+            = "Post a new #{Post.context_tipe}"
+        = simple_form_for Post.new, :url => posts_path, :html => {:class => 'form-vertical', :style => "margin-bottom:0px"} do |f|
+          = f.hidden_field :tipe, :value => 'opinion'
+          = f.hidden_field :parent_type, :value => 'Cube'
+          
+          = f.text_field :headline, :placeholder => 'I think that..', :style => "width:410px", :autocomplete => :off, :maxlength => 199            
+          .hidden-panel
+            .control-group
+              = f.label 'Description (you can fill this later)', :class => 'minor'
+              .controls
+                = f.text_area :content, :class => ['steroid', 'medium'], :style => "width:422px", :placeholder => 'You can fill this later (maximum 2000 characters)',:toolbar => 'Easy', :autocomplete => :off
+              #bouncer  
+            %hr.slim
+            .row
+              .span4
+                %span.core{:style =>"padding-right: 10px;"}
+                  = 'Add to '
+                = f.select :parent_id, current_user.managed_cubes.collect{|cube| ["#{cube.name} (#{cube.language})", cube.id]}, :style => 'padding-top: 5px;'   
+              .span1.right
+                .right
+                  = f.submit 'Cube it!', :class => 'btn btn-primary core right'
+
+
+  - else
+    .span6
+      .well
+        %span.big-text.core
+          = "Welcome !"
+          = link_to('Click here to create your first cube', new_cube_path)
+        %span.minor
+          = link_to('[?]', '#')

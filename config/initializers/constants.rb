@@ -221,6 +221,8 @@ OBJECT_WORDS = [
   'files',
   'page',
   'pages',
+  'post',
+  'posts',  
   'comment',
   'comments'
 ]
