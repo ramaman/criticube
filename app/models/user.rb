@@ -249,7 +249,7 @@ class User < ActiveRecord::Base
   end
 
   def cubes_to_quickpost
-    Cube.includes(:roles).where{|c|(c.featured == true) || ((c.roles.owner_type == 'User') && (c.roles.owner_id == self.id))}
+    Cube.includes(:roles).where{|c|(c.featured == true) || ((c.roles.owner_type == 'User') && (c.roles.owner_id == self.id))}.order('name ASC')
   end
 
   ## User actions
