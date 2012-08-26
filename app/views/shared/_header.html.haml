@@ -4,7 +4,7 @@
       = link_to image_tag('logo.png'), root_path, :class => 'brand'
       .nav-collapse
         = form_tag search_path, :class => 'navbar-search', :id => 'main_search', :style => 'padding-top:9px; padding-bottom: 0px; margin:0px', :autocomplete => :off, :method => :get do
-          = text_field_tag 'q', '', :id => 'main_search', :class => 'search-query span3'
+          = text_field_tag 'q', '', :placeholder => 'Search Cubes and Users', :id => 'main_search', :class => 'search-query span3 bigtext'
       %ul.nav{:style => 'padding-left: 10px;'}
 
         - if user_signed_in?
