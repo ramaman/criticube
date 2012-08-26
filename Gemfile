@@ -50,6 +50,7 @@ gem "sanitize", "~> 2.0.3"
 gem "progress_bar", "~> 0.4.0"
 gem "newrelic_rpm", "~> 3.4.1"
 gem "rpm_contrib", "~> 2.1.11"
+gem "exceptional", "~> 2.0.32"
 
 # Performance Monitoring
 gem "rack-mini-profiler", "~> 0.1.9"
