@@ -248,6 +248,10 @@ class User < ActiveRecord::Base
     self.followed_cubes
   end
 
+  def cubes_to_quickpost
+    Cube.includes(:roles).where{|c|(c.featured == true) || ((c.roles.owner_type == 'User') && (c.roles.owner_id == self.id))}
+  end
+
   ## User actions
 
   # Followages

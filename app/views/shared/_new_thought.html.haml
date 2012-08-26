@@ -23,7 +23,7 @@
               .span4
                 %span.core{:style =>"padding-right: 10px;"}
                   = 'Add to '
-                = f.select :parent_id, current_user.managed_cubes.collect{|cube| ["#{cube.name} (#{cube.language})", cube.id]}, :style => 'padding-top: 5px;'   
+                = f.select :parent_id, current_user.cubes_to_quickpost.collect{|cube| ["#{cube.name} (#{cube.language})", cube.id]}, :style => 'padding-top: 5px;'   
               .span1.right
                 .right
                   = f.submit 'Cube it!', :class => 'btn btn-primary core right'
