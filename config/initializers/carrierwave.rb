@@ -12,7 +12,7 @@ CarrierWave.configure do |config|
     :aws_secret_access_key  => 'N0pd9CSZapMQaNwW94WpwcpNVcf0iZMEcgI/Gp+m'
   }
   config.fog_directory  = "criticube-#{Rails.env}"
-  config.fog_host       = "https://criticube-#{Rails.env}.s3-website-us-east-1.amazonaws.com"
+  config.fog_host       = "http://criticube-#{Rails.env}.s3-website-us-east-1.amazonaws.com"
   config.fog_public     = true
 
 end
