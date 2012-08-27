@@ -76,7 +76,7 @@ class Activity < ActiveRecord::Base
       if self.primary_objekt_type == 'User'
         subscriber_ids << self.primary_objekt_id
       elsif self.primary_objekt_type == 'Cube'
-        subscriber_ids += self.roles.collect{|r| r.owner_id}  
+        subscriber_ids += self.primary_objekt.roles.collect{|r| r.owner_id}  
       elsif (self.primary_objekt_type == 'Post') || self.primary_objekt_type == 'Reply'
         subscriber_ids << self.primary_objekt.creator_id
       end
