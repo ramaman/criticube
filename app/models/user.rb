@@ -455,13 +455,14 @@ class User < ActiveRecord::Base
     Activity.where{ |a|
       (a.actor_id >> user_ids) |
       ((a.secondary_objekt_id >> cube_ids) & (a.secondary_objekt_type == 'Cube')) |
+      ((a.tertiary_objekt_id >> cube_ids) & (a.tertiary_objekt_type == 'Cube')) |      
       ((a.secondary_objekt_id >> post_ids) & (a.secondary_objekt_type == 'Post'))
     }.includes(
       :actor,
       :primary_objekt,
       :secondary_objekt,
       :tertiary_objekt            
-    ).order('created_at DESC')
+    ).order('created_at DESC').uniq
   end
 
   def feed
