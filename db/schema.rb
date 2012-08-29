@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120829102006) do
+ActiveRecord::Schema.define(:version => 20120829210839) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -73,14 +73,15 @@ ActiveRecord::Schema.define(:version => 20120829102006) do
     t.string   "tipe"
     t.text     "description"
     t.string   "language"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.string   "page_name"
     t.string   "avatar"
     t.integer  "creator_id"
-    t.boolean  "official",    :default => false
-    t.boolean  "featured",    :default => false
+    t.boolean  "official",     :default => false
+    t.boolean  "featured",     :default => false
     t.integer  "topic_id"
+    t.boolean  "private_cube"
   end
 
   add_index "cubes", ["creator_id", "tipe"], :name => "index_cubes_on_creator_id_and_tipe"
@@ -90,6 +91,7 @@ ActiveRecord::Schema.define(:version => 20120829102006) do
   add_index "cubes", ["name"], :name => "index_cubes_on_name"
   add_index "cubes", ["official"], :name => "index_cubes_on_official"
   add_index "cubes", ["page_name"], :name => "index_cubes_on_page_name", :unique => true
+  add_index "cubes", ["private_cube"], :name => "index_cubes_on_private_cube"
   add_index "cubes", ["tipe"], :name => "index_cubes_on_tipe"
   add_index "cubes", ["topic_id"], :name => "index_cubes_on_topic_id"
 
