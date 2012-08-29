@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120829210839) do
+ActiveRecord::Schema.define(:version => 20120829212257) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(:version => 20120829210839) do
     t.boolean  "official",     :default => false
     t.boolean  "featured",     :default => false
     t.integer  "topic_id"
-    t.boolean  "private_cube"
+    t.boolean  "private_cube", :default => false, :null => false
   end
 
   add_index "cubes", ["creator_id", "tipe"], :name => "index_cubes_on_creator_id_and_tipe"

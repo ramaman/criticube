@@ -250,8 +250,9 @@ class User < ActiveRecord::Base
 
   def cubes_to_quickpost
     Cube.includes(:roles, :reverse_followages).where{|c|
-      ((c.reverse_followages.follower_id == self.id) & (c.private_cube != true) ) | 
-      ((c.roles.owner_type == 'User') & (c.roles.owner_id == self.id))}.order('name ASC')
+      ((c.reverse_followages.follower_id == self.id) & (c.private_cube != true)) | 
+      ((c.roles.owner_type == 'User') & (c.roles.owner_id == self.id))
+      }.order('name ASC')
   end
 
   ## User actions
