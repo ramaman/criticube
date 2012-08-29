@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120822173338) do
+ActiveRecord::Schema.define(:version => 20120829102006) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -138,6 +138,33 @@ ActiveRecord::Schema.define(:version => 20120822173338) do
   add_index "followages", ["follower_id", "followed_id", "followed_type"], :name => "followage_combo", :unique => true
   add_index "followages", ["follower_id"], :name => "index_followages_on_follower_id"
 
+  create_table "links", :force => true do |t|
+    t.string   "title",                            :null => false
+    t.text     "url",                              :null => false
+    t.string   "website"
+    t.string   "language_code"
+    t.string   "special_case"
+    t.text     "description"
+    t.text     "keywords"
+    t.boolean  "internal"
+    t.text     "preview_origin"
+    t.string   "preview"
+    t.string   "slug"
+    t.integer  "creator_id"
+    t.boolean  "active",         :default => true
+    t.boolean  "delta",          :default => true, :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
+
+  add_index "links", ["creator_id"], :name => "index_links_on_creator_id"
+  add_index "links", ["language_code"], :name => "index_links_on_language_code"
+  add_index "links", ["slug"], :name => "index_links_on_slug", :unique => true
+  add_index "links", ["special_case"], :name => "index_links_on_special_case"
+  add_index "links", ["title"], :name => "index_links_on_title"
+  add_index "links", ["url"], :name => "index_links_on_url", :unique => true
+  add_index "links", ["website"], :name => "index_links_on_website"
+
   create_table "messages", :force => true do |t|
     t.integer  "sender_id",                       :null => false
     t.integer  "recipient_id",                    :null => false
@@ -197,6 +224,21 @@ ActiveRecord::Schema.define(:version => 20120822173338) do
   add_index "posts", ["tipe", "creator_id"], :name => "index_posts_on_tipe_and_creator_id"
   add_index "posts", ["tipe", "parent_id", "parent_type"], :name => "index_posts_on_tipe_and_parent_id_and_parent_type"
   add_index "posts", ["tipe"], :name => "index_posts_on_tipe"
+
+  create_table "references", :force => true do |t|
+    t.string   "referable_type"
+    t.integer  "referable_id"
+    t.string   "referred_type"
+    t.integer  "referred_id"
+    t.string   "tipe"
+    t.integer  "creator_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "references", ["referable_type", "referable_id"], :name => "index_references_on_referable_type_and_referable_id"
+  add_index "references", ["referred_type", "referred_id"], :name => "index_references_on_referred_type_and_referred_id"
+  add_index "references", ["tipe"], :name => "index_references_on_tipe"
 
   create_table "replies", :force => true do |t|
     t.string   "tipe"
