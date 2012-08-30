@@ -9,7 +9,7 @@
         = devise_error_messages!
         .control-group
           = f.fields_for :vanity do |v|
-            = v.label 'page_name', :class => 'control-label core'
+            = v.label 'page_name', :class => 'control-label '
             .controls{:style => "margin-bottom: 18px"}
               .input-prepend
                 %span.add-on.span3{:style => "width: 116px"}
@@ -18,25 +18,25 @@
               .help-block.minor
                 = "3 to 24 characters, cannot contain special characters"  
         .control-group
-          = f.label 'Email', :class => 'control-label core'
+          = f.label 'Email', :class => 'control-label '
           .controls
             = f.email_field :email, :class => 'span4'
         .control-group
-          = f.label :password, :class => 'control-label core'
+          = f.label :password, :class => 'control-label '
           .controls
             = f.password_field :password, :class => 'span4'
             .help-block.minor
               = "8 to 64 characters"              
         .control-group
-          = f.label :password_confirmation, :class => 'control-label core'
+          = f.label :password_confirmation, :class => 'control-label '
           .controls
             = f.password_field :password_confirmation, :class => 'span4'
         .control-group
-          = f.label 'First name', :class => 'control-label core'
+          = f.label 'First name', :class => 'control-label '
           .controls
             = f.text_field :first_name, :class => 'span4'
         .control-group
-          = f.label 'Last name', :class => 'control-label core'
+          = f.label 'Last name', :class => 'control-label '
           .controls
             = f.text_field :last_name, :class => 'span4'
         .control-group

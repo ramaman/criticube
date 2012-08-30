@@ -38,6 +38,11 @@
             - else  
               = f.input :topic, :as => :select, :collection => Topic.all, :class => 'core', :label => false
 
+        .control-group.form-inline
+          = f.label 'Restrict thought posting to managers', :class => 'control-label'
+          / = select_tag(:language, options_for_select(LANGUAGES)) 
+          = f.check_box :private_cube
+
         .control-group
           = f.submit "Update", :class => 'btn btn-large btn-primary'
           = link_to "Cancel", vanity_path(@cube), :class => 'btn btn-large'

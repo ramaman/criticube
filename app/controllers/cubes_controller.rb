@@ -108,7 +108,7 @@ class CubesController < ApplicationController
   private
 
   def cube_params
-    params[:cube].slice(:name, :description, :avatar)
+    params[:cube].slice(:name, :description, :avatar, :private_cube)
   end
 
   def manager_check

@@ -29,7 +29,6 @@
           .controls
             / = select_tag(:language, options_for_select(LANGUAGES)) 
             = f.select :language, LANGUAGES, :class => 'span2'
-
         .control-group
           %b
             = 'Description'
@@ -37,6 +36,10 @@
             = '(You can fill this later)'
           .controls
             = f.text_area :description, :class => 'span6 slim autoresize'
+        .control-group.form-inline
+          = f.label 'Restrict thought posting to managers', :class => 'control-label'
+          / = select_tag(:language, options_for_select(LANGUAGES)) 
+          = f.check_box :private_cube
         .control-group
           = f.submit 'Create', :class => 'btn btn-large btn-primary'
           = link_to 'Cancel', root_path, :class => 'btn btn-large'          

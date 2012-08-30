@@ -72,7 +72,7 @@ GEM
       rinku (~> 1.5.0)
     bcrypt-ruby (3.0.1)
     blankslate (2.1.2.4)
-    bootstrap-sass (2.0.4.0)
+    bootstrap-sass (2.0.4.1)
     bourbon (2.1.1)
       sass (>= 3.1)
     builder (3.0.0)
@@ -306,7 +306,7 @@ DEPENDENCIES
   addressable (~> 2.3.2)
   ancestry (~> 2.0.0)!
   auto_html (~> 1.5.3)
-  bootstrap-sass (~> 2.0.4.0)
+  bootstrap-sass (~> 2.0.4.1)
   cancan (~> 1.6.8)
   carrierwave (~> 0.6.2)
   client_side_validations (= 3.2.0.beta.4)
