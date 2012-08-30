@@ -544,6 +544,8 @@ class User < ActiveRecord::Base
   def follow_starter_cubes
     one = Cube.find('criticube_beginners') rescue nil
     self.follow!(one) if one
+    two = Cube.find('improvecriticube') rescue nil
+    self.follow!(two) if two
   end
 
   def send_welcome_email
