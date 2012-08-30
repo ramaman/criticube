@@ -183,7 +183,7 @@ class User < ActiveRecord::Base
 
   after_initialize :automake_vanity
   before_validation :save_page_name
-  after_create :follow_starter_cubes
+  after_create :follow_starter_cubes, :send_welcome_email
 
   mount_uploader :avatar, AvatarUploader
 
@@ -443,11 +443,6 @@ class User < ActiveRecord::Base
     (self.page_name = self.vanity.name) unless self.page_name == self.vanity.name
   end
 
-  def follow_starter_cubes
-    one = Cube.find('criticube_beginners') rescue nil
-    self.follow!(one) if one
-  end
-
   # Feed
 
   def dashboard_feed
@@ -545,6 +540,15 @@ class User < ActiveRecord::Base
   end
 
   # handle_asynchronously :solr_index  
+
+  def follow_starter_cubes
+    one = Cube.find('criticube_beginners') rescue nil
+    self.follow!(one) if one
+  end
+
+  def send_welcome_email
+    ActionMailer::Base::Main.delay.welcome(self)
+  end
 
 
 end
