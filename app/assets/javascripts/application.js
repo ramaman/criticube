@@ -22,6 +22,7 @@
 //= require lib/jquery.autoresize
 //= require lib/jquery.truncator
 //= require tinymce-jquery
+//= require_tree .
 //= require underscore
 //= require backbone
 //= require .//criticube
