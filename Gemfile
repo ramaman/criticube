@@ -25,6 +25,7 @@ gem "jbuilder", "~> 0.4.0"
 gem "tinymce-rails", "~> 3.5.5"
 gem "auto_html", "~> 1.5.3"
 gem "meta-tags", "~> 1.2.6", :require => 'meta_tags'
+gem "backbone-on-rails", "~> 0.9.2.1"
 
 # Database related
 gem 'pg'

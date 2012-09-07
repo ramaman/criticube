@@ -21,6 +21,17 @@
               - elsif user_signed_in? && (current_user == @post.creator)
                 %br/
                 = link_to 'Add description', edit_vanity_post_path(@post.parent, @post)
+
+            #reference_widget
+              %h4
+                = 'References'
+              %ul.references.items
+                %li.reference
+                  %b
+                    = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+                %li.reference
+                  = link_to 'Add reference', '#'                    
+
             .meta
               %span.vote_panel{:data => {"id" => @post.id, "tipe" => @post.class.to_s }}
                 = render :partial => '/shared/vote_panel', :locals => {:voteable => @post}
@@ -29,6 +40,8 @@
                 = friendly_datetime(@post.created_at)
               %span.right
                 = post_actions_reply_link(@post)
+
+
                 
       .row
         .span7.offset1
