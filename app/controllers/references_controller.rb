@@ -1,0 +1,3 @@
+
+class ReferencesController < ApplicationController
+end
