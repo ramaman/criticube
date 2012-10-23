@@ -8,3 +8,6 @@
   = " • "
 %span.quiet
   = "#{friendly_datetime_fixed(objekt.updated_at)}"
+%span.right
+  = image_tag("activity_icons/#{action}_blue_16.png")
+  = image_tag("activity_icons/#{objekt.class.to_s.downcase}_grey_16.png")

@@ -14,7 +14,7 @@
           - else   
             = link_to activity.primary_objekt.name, vanity_path(activity.primary_objekt)
         .meta.minor
-          = render :partial => 'activities/activity_meta', :locals => {:objekt => activity.primary_objekt}
+          = render :partial => 'activities/activity_meta', :locals => {:action => activity.action, :objekt => activity.primary_objekt}
        
       - elsif activity.action == 'liked'    
         %p.header
@@ -29,11 +29,8 @@
             .content.truncate.boxed{:class => activity.primary_objekt.tipe}
               = htmlize(activity.primary_objekt.content)
             
-
         .meta.minor
-          = render :partial => 'activities/activity_meta', :locals => {:objekt => activity.primary_objekt}
-
-
+          = render :partial => 'activities/activity_meta', :locals => {:action => activity.action, :objekt => activity.primary_objekt}
       
       - elsif activity.action == 'created'    
         %p.header
@@ -57,7 +54,7 @@
               = htmlize(activity.primary_objekt.content)
 
             .meta.minor
-              = render :partial => 'activities/activity_meta', :locals => {:objekt => activity.secondary_objekt}        
+              = render :partial => 'activities/activity_meta', :locals => {:action => activity.action, :objekt => activity.primary_objekt}        
               
           - elsif activity.primary_objekt_type == 'Post'
             = link_to activity.primary_objekt.name, vanity_post_path(activity.secondary_objekt, activity.primary_objekt), :class => 'core'
@@ -65,14 +62,13 @@
               .content.truncate
                 = htmlize(activity.primary_objekt.content)        
             .meta.minor
-              = render :partial => 'activities/activity_meta', :locals => {:objekt => activity.primary_objekt}          
-             
+              = render :partial => 'activities/activity_meta', :locals => {:action => activity.action, :objekt => activity.primary_objekt}             
+
           - elsif activity.primary_objekt_type == 'Cube'            
             = link_to activity.primary_objekt.name, vanity_path(activity.primary_objekt), :class => 'core'
             - if activity.primary_objekt.description && !activity.primary_objekt.description.blank?
               .content.truncate
                 = htmlize(activity.primary_objekt.description)        
             .meta.minor
-              = render :partial => 'activities/activity_meta', :locals => {:objekt => activity.primary_objekt}
-
+              = render :partial => 'activities/activity_meta', :locals => {:action => activity.action, :objekt => activity.primary_objekt}
       %hr 
