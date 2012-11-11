@@ -4,4 +4,8 @@ class PagesController < ApplicationController
     respond_to :html
   end
 
+  def privacy
+    respond_to :html
+  end
+
 end

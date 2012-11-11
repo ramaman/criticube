@@ -4,6 +4,9 @@
     %span{:style => (@special_page ? 'color:#FFF' : '')}
       = ' | '  
     = link_to 'Contact', contact_path, :class => 'blend', :style => (@special_page ? 'color:#FFF' : '')
+    %span{:style => (@special_page ? 'color:#FFF' : '')}
+      = ' | '  
+    = link_to 'Privacy', privacy_path, :class => 'blend', :style => (@special_page ? 'color:#FFF' : '')
 
     .pull-right
       = render :partial => '/shared/social_bar'
